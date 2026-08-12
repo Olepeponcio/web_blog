@@ -22,8 +22,8 @@ una alternativa mejor.
 
 ### Objetivo
 
-Repasar los fundamentos de Figma y convertir la narrativa de la epístola digital
-en un primer mockup exploratorio.
+Repasar los fundamentos de Figma, convertir la narrativa de la epístola digital
+en un primer mockup exploratorio e implementar su flujo inicial en la web.
 
 ### Contenido
 
@@ -33,16 +33,92 @@ en un primer mockup exploratorio.
 - Análisis de referencias en Awwwards y CSS Design Awards.
 - Exploración de papel, tinta, caligrafía, márgenes y anotaciones.
 - Mockup inicial de escritorio.
+- Portada representada como el anverso de un sobre cerrado.
+- Sello de cera utilizado como control de acceso a la narrativa.
+- Estados inicial, abierto y navegable.
+- Eventos mediante puntero, teclado y entrada táctil.
+- Recorrido continuo mediante scroll por todas las secciones.
+- Primera adaptación responsive de cada sección.
+- Implementación mediante HTML, CSS y JavaScript cuando proceda.
+
+### Proceso de eventos
+
+```text
+ESTADO INICIAL
+    → header con forma de sobre cerrado
+    → sello intacto
+    → scroll narrativo deshabilitado
+    → navegación lateral deshabilitada
+
+ACTIVACIÓN DEL SELLO
+    → transición al sello roto
+    → apertura de la narrativa
+    → scroll habilitado
+    → navegación lateral habilitada
+
+RECORRIDO
+    → acceso continuo a todas las secciones
+```
 
 ### Resultado esperado
 
-Un mockup de baja o media fidelidad que represente el recorrido:
+Un prototipo interactivo en Figma y una implementación web funcional que
+representen el recorrido:
 
 **Origen → Memoria → Presente → Futuro → Destinatario → Respuesta**
 
 ### Criterio de cierre
 
-La composición permite comprender la narrativa sin depender de animaciones.
+El flujo diseñado en Figma puede recorrerse en la implementación web. El sello
+responde mediante puntero, teclado y entrada táctil; su activación habilita el
+scroll y permite acceder a todas las secciones. Cada sección dispone de una
+primera adaptación responsive, aunque su composición visual permanezca mutable.
+
+### Lista de tareas
+
+#### Recursos y composición
+
+- [ ] Crear una imagen del sello intacto.
+- [ ] Crear una imagen del sello roto.
+- [ ] Representar el anverso del sobre mediante el `header`.
+- [ ] Definir la posición de los textos de la portada.
+- [ ] Situar el sello en el borde inferior y centrado.
+- [ ] Representar cada punto narrativo mediante una `section` independiente.
+
+#### Estado inicial
+
+- [ ] Mostrar el sello intacto.
+- [ ] Deshabilitar inicialmente el scroll narrativo.
+- [ ] Ocultar o deshabilitar inicialmente la navegación lateral.
+
+#### Activación mediante puntero
+
+- [ ] Comunicar que el sello es interactivo al situar el cursor sobre él.
+- [ ] Mostrar un halo tenue alrededor del sello.
+- [ ] Cambiar del sello intacto al roto al hacer clic.
+- [ ] Habilitar el scroll y la navegación lateral.
+
+#### Activación mediante teclado
+
+- [ ] Permitir enfocar el sello.
+- [ ] Activar la apertura mediante `Enter` o la barra espaciadora.
+- [ ] Mostrar un indicador de foco visible.
+
+#### Activación táctil
+
+- [ ] Permitir la apertura mediante toque.
+- [ ] Comunicar la interacción sin depender de `hover`.
+
+#### Responsive e implementación
+
+- [ ] Aplicar la convención `mobile-first` desde cada sección.
+- [ ] Usar composición y medidas fluidas.
+- [ ] Definir breakpoints según las necesidades del contenido.
+- [ ] Validar individualmente la adaptación de cada `section`.
+- [ ] Completar el flujo interactivo en Figma.
+- [ ] Implementar el modelo mediante HTML y CSS.
+- [ ] Incorporar JavaScript cuando lo requieran los estados y eventos.
+- [ ] Comprobar el recorrido completo mediante scroll en la implementación web.
 
 ---
 

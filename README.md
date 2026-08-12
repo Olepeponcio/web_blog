@@ -82,12 +82,12 @@ El código, los nombres de archivos y directorios, los comentarios, la documenta
 
 El diseño se entiende como un marco mutable. Los documentos recogen el concepto actual y sirven como referencia durante su investigación, validación e implementación.
 
-| Documento                                                                                        | Contenido                                                             |
-| :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| [Narrativa de diseño — Epístola digital](design/wireframes/design-narrative--digital-epistle.md) | Concepto, lenguaje visual y comportamiento narrativo del scroll.      |
-| [Narrativa web — Carta al futuro](design/wireframes/design-narrative--text-sections.md)          | Recorrido y contenido textual de las secciones.                       |
-| [Recursos por sección](design/wireframes/brainstorming--resources-by-section.md)                 | Recursos visuales, interactivos y técnicos considerados.              |
-| [Hitos del proyecto](docs/project-milestones.md)                                                 | Flujo progresivo de investigación, diseño, implementación y revisión. |
+| Documento                                                                             | Contenido                                                             |
+| :------------------------------------------------------------------------------------ | :-------------------------------------------------------------------- |
+| [Narrativa de diseño — Epístola digital](docs/design-narrative--digital-epistle.md)   | Concepto, lenguaje visual y comportamiento narrativo del scroll.      |
+| [Narrativa web — Carta al futuro](docs/wireframes/design-narrative--text-sections.md) | Recorrido y contenido textual de las secciones.                       |
+| [Recursos por sección](docs/wireframes/brainstorming--resources-by-section.md)        | Recursos visuales, interactivos y técnicos considerados.              |
+| [Hitos del proyecto](docs/project-milestones.md)                                      | Flujo progresivo de investigación, diseño, implementación y revisión. |
 
 ## Comandos disponibles
 

@@ -4,6 +4,8 @@
 
 Aplicar recursos visuales e interactivos sencillos que refuercen la narrativa de la carta sin convertir el proyecto en una implementación técnicamente compleja.
 
+Este documento reúne ideas exploratorias. Su contenido no constituye una fuente de verdad ni implica que todos los recursos deban incorporarse al diseño o a la implementación.
+
 Prioridades:
 
 - HTML semántico.
