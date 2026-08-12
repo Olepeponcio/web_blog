@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+#README.md de gestión del flujo de trabajo
+AGENTS.md

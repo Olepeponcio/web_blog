@@ -80,8 +80,8 @@ Por defecto, Codex debe explicar la solución mediante:
 
 - Descripción breve.
 - Pasos conceptuales.
-	-sobre los pasos conceptules: codex debe modularlos, no extender una lista de recomendaciones. Tratar cada elemento y acceder al siguiente del marco establecido
-	mediante SIGUIENTE PASO hasta terminar el marco de recomendacion actual.
+  -sobre los pasos conceptules: codex debe modularlos, no extender una lista de recomendaciones. Tratar cada elemento y acceder al siguiente del marco establecido: por ejemplo, indicas una serie de comandos por terminal y continuas un hilo de trabajo, el primer comando arroja un error y se ramifica el hilo de trabajo, los sucesivos pasos se podrían verse afectados. Por eso es importante la modulación. Aligeremos el proceso de trabajo sintetizando las respuestas modulares.
+  mediante SIGUIENTE PASO hasta terminar el marco de recomendacion actual.
 - Pseudocódigo.
 - Ejemplos abstractos sin modificar archivos.
 
@@ -100,7 +100,7 @@ El pseudocódigo debe ser independiente del lenguaje cuando sea posible.
 
 ## 6. Código orientativo
 
-Codex no debe mostrar un bloque de código completo de forma automática.
+Codex mostrará codigo en el lenguaje correspondiente para facilitar el flujo de trabajo al usuario. Tratar de evitar completar grandes grupos de bloques de codigo y permitir al usuario aprender con una respuesta más sintetizada por parte de Codex.
 
 Después de responder, debe preguntar:
 
@@ -233,27 +233,30 @@ Cuando el usuario solicite crear, modificar o proponer un recurso como `.svg`, `
 6. Si la solicitud solo requiere un ejemplo, una plantilla o contenido orientativo, Codex responderá en el chat sin crear ningún archivo.
 
 ## 13. Jerarquía de hilos (chats) del proyecto
+
 -El usuario irá creando distintos chats en base a una temática, marco o dominio concreto generalista.
--Para cada consulta existiran saltos entre  chats según convenga. Codex debe respetar la jerarquia y tomar información
-si la respuesta lo requiere de otros chats del proyecto. 
+-Para cada consulta existiran saltos entre chats según convenga. Codex debe respetar la jerarquia y tomar información
+si la respuesta lo requiere de otros chats del proyecto.
 -los chats se definiran pro primera vez siguiendo esta convencion: Hilo: <marco general del hilo>
 
-## 14. Uso de fuentes 
+## 14. Uso de fuentes
+
 -Codex se nutrirá principalmente
-	-Información recogida en los chats en base a respuestas
-	-Fuentes externas fidedignas que ayuden a crear un flujo de trabajo correcto. 
-	-Fuente documental del proyecto. 
-	
+-Información recogida en los chats en base a respuestas
+-Fuentes externas fidedignas que ayuden a crear un flujo de trabajo correcto.
+-Fuente documental del proyecto.
+
 ## 15. Creacion y edicion documentacion del proyecto.
+
 Se creará un README.md en la raiz del proyecto que documentará los progresos sobre el flujo de trabajo. Utilizar una estructura
 que no extienda los párrafos, que sintetice la información fundamental y genere un lenguaje llano, comprensible para el lector.
 Se podrán crear readmes temáticos en el directorio docs/ que serán enlazados desde la documental principal.
 
-## 16. Repositorio git y control de versiones. 
-Usaremos la convención MAYOR.MINOR.PATCH 
-y principlamente dos ramas principales: main y develop. 
-main será la captora de las diferentes versiones del proyecto.
-Develop puede ramificarse según marco de trabajo. Pero la premisa son dos ramas principales, develop y main. 
+## 16. Repositorio git y control de versiones.
 
+Usaremos la convención MAYOR.MINOR.PATCH
+y principlamente dos ramas principales: main y develop.
+main será la captora de las diferentes versiones del proyecto.
+Develop puede ramificarse según marco de trabajo. Pero la premisa son dos ramas principales, develop y main.
 
 > Primero explicar. Después preguntar. Solo entonces implementar.
