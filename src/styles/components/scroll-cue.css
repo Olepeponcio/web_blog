@@ -1,0 +1,45 @@
+.scroll-cue {
+  position: fixed;
+  z-index: 10;
+  inset-block-end: 1.5rem;
+  inset-inline-start: 50%;
+  inline-size: 1.25rem;
+  block-size: 2.5rem;
+  border: 0.125rem solid var(--color-ink);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.scroll-cue::before {
+  position: absolute;
+  inset-block-start: 0.4rem;
+  inset-inline-start: 50%;
+  inline-size: 0.2rem;
+  block-size: 0.45rem;
+  border-radius: 999px;
+  background-color: var(--color-ink);
+  content: "";
+  transform: translateX(-50%);
+  animation: scroll-cue-wheel 1.4s ease-in-out infinite;
+}
+
+.scroll-cue[hidden] {
+  display: none;
+}
+
+@keyframes scroll-cue-wheel {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0.85rem);
+  }
+}

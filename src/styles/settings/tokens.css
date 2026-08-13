@@ -1,0 +1,8 @@
+:root {
+  --color-paper: #d4cdbd;
+  --color-ink: #191714;
+  --page-inline-size: 72rem;
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --duration-seal-break: 700ms;
+  --duration-opening-scroll: 1400ms;
+}

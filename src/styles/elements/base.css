@@ -1,0 +1,12 @@
+html {
+  min-block-size: 100%;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  min-block-size: 100%;
+  background-color: var(--color-paper);
+  background-image: url("../../assets/images/global/img__texture_background.png");
+  background-repeat: repeat;
+}

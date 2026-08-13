@@ -3,41 +3,284 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Título del documento</title>
+    <meta
+      name="description"
+      content="Una epístola digital dirigida al futuro."
+    />
+    <title>Carta al futuro</title>
+    <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
-  <body>
-    <body class="page">
-      <header class="site-header">
-        <div class="site-header__content">
-          <!-- Contenido pendiente -->
+
+  <body class="page" data-page-state="sealed">
+    <header class="cover" id="cover">
+      <div class="cover__envelope" data-envelope>
+        <div class="cover__flap">
+          <img
+            class="cover__envelope-image"
+            src="/src/assets/images/01-cover/img__envelop.png"
+            alt=""
+          />
+
+          <button
+            class="cover__seal"
+            type="button"
+            data-seal
+            disabled
+            aria-label="Abrir la carta"
+          >
+            <img
+              class="cover__seal-image"
+              src="/src/assets/images/01-cover/img__wax_seal.png"
+              data-seal-image
+              data-sealed-src="/src/assets/images/01-cover/img__wax_seal.png"
+              data-opened-src="/src/assets/images/01-cover/img__wax_seal_broken.png"
+              alt=""
+            />
+          </button>
         </div>
-      </header>
 
-      <main class="narrative">
-        <section class="narrative-section" id="section-1">
-          <div class="narrative-section__content">
-            <!-- Composición y componentes pendientes -->
-          </div>
-        </section>
-
-        <section class="narrative-section" id="section-2">
-          <div class="narrative-section__content">
-            <!-- Composición y componentes pendientes -->
-          </div>
-        </section>
-
-        <section class="narrative-section" id="section-3">
-          <div class="narrative-section__content">
-            <!-- Composición y componentes pendientes -->
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="site-footer__content">
-          <!-- Contenido pendiente -->
+        <div
+          class="cover__letter"
+          data-opening-text
+          aria-live="polite"
+          hidden
+        >
+          <p class="cover__place-date" data-reveal-text>Madrid, 2026</p>
+          <h1 class="cover__recipient" data-reveal-text>
+            A quien encuentre estas palabras:
+          </h1>
+          <p data-reveal-text>No sé cuándo llegará esta carta a tus manos.</p>
+          <p data-reveal-text>
+            Quizá mañana.<br />
+            Quizá dentro de muchos años.
+          </p>
+          <p data-reveal-text>
+            Solo sé que fue escrita en un momento en el que todo parecía avanzar
+            demasiado deprisa y, aun así, seguíamos buscando algo que
+            permaneciera.
+          </p>
+          <p class="cover__opening-closing" data-reveal-text data-reveal-final>
+            Por eso decidí escribir.
+          </p>
         </div>
-      </footer>
-    </body>
+
+        <span
+          class="cover__drag-indicator"
+          data-drag-indicator
+          aria-hidden="true"
+        ></span>
+      </div>
+    </header>
+
+    <main class="narrative" id="narrative">
+      <section class="narrative-section" id="origin">
+        <div class="narrative-section__content">
+          <p class="narrative-section__eyebrow">Origen</p>
+          <h2>Por qué escribo</h2>
+
+          <p>Hubo un tiempo en que construir significaba añadir.</p>
+          <p>Más elementos.<br />Más ruido.<br />Más velocidad.</p>
+          <p>
+            Hasta que comprendimos que crear también podía consistir en retirar.
+          </p>
+          <p>
+            Eliminar lo innecesario.<br />Dejar espacio.<br />Escuchar lo que
+            queda cuando todo lo demás desaparece.
+          </p>
+          <p>
+            Esta historia comienza precisamente ahí: en la decisión de hacer
+            menos, pero hacerlo con intención.
+          </p>
+        </div>
+      </section>
+
+      <section class="narrative-section" id="memory">
+        <div class="narrative-section__content">
+          <p class="narrative-section__eyebrow">Memoria</p>
+          <h2>Lo que aprendimos</h2>
+
+          <p>
+            Antes de nosotros hubo otros que también dejaron constancia de su
+            tiempo.
+          </p>
+          <p>
+            Escribieron sobre papel.<br />Dibujaron en los márgenes.<br />Corrigieron
+            palabras.<br />Doblaron cartas que cruzaron ciudades, fronteras y
+            generaciones.
+          </p>
+          <p>Aquellos documentos no eran perfectos.</p>
+          <p>Tenían textura.<br />Tenían errores.<br />Tenían huellas.</p>
+          <p>Y precisamente por eso tenían identidad.</p>
+          <p>
+            De ellos aprendimos que una idea no necesita ser estridente para
+            permanecer.
+          </p>
+          <p>
+            A veces basta una página, unas pocas palabras y suficiente espacio
+            para que alguien quiera seguir leyendo.
+          </p>
+        </div>
+      </section>
+
+      <section class="narrative-section" id="present">
+        <div class="narrative-section__content">
+          <p class="narrative-section__eyebrow">Presente</p>
+          <h2>Lo que estamos construyendo</h2>
+
+          <p>Hoy ya no escribimos únicamente sobre papel.</p>
+          <p>Construimos interfaces.<br />Sistemas.<br />Experiencias.</p>
+          <p>Pero la intención sigue siendo la misma:</p>
+          <p><strong>hacer comprensible lo complejo.</strong></p>
+          <p>Cada decisión responde a una pregunta sencilla:</p>
+          <p><strong>¿Es realmente necesario?</strong></p>
+          <p>
+            Si la respuesta es no, desaparece.<br />Si la respuesta es sí, debe
+            tener un propósito claro.
+          </p>
+          <p>Así se construye esta página.</p>
+          <p>
+            No como una colección de componentes, sino como una secuencia de
+            ideas.
+          </p>
+          <p>
+            No como una pantalla que exige atención, sino como un espacio que
+            invita a avanzar.
+          </p>
+        </div>
+      </section>
+
+      <section class="narrative-section" id="future">
+        <div class="narrative-section__content">
+          <p class="narrative-section__eyebrow">Futuro</p>
+          <h2>Lo que todavía no existe</h2>
+
+          <p>El futuro nunca llega completamente terminado.</p>
+          <p>Se construye con pequeñas decisiones tomadas en el presente.</p>
+          <p>
+            Una línea de código.<br />Una idea descartada.<br />Una conversación.<br />Una
+            pregunta que todavía no tiene respuesta.
+          </p>
+          <p>Quizá dentro de algunos años esta página parezca antigua.</p>
+          <p>Eso significará que seguimos avanzando.</p>
+          <p>Pero hay algo que debería permanecer:</p>
+          <p>
+            la voluntad de construir tecnología que no compita con las
+            personas, sino que trabaje con ellas.
+          </p>
+          <p>
+            Herramientas más claras.<br />Interfaces más humanas.<br />Sistemas
+            que sepan desaparecer cuando ya no son necesarios.
+          </p>
+          <p>Ese es el futuro al que enviamos esta carta.</p>
+        </div>
+      </section>
+
+      <section class="narrative-section" id="recipient">
+        <div class="narrative-section__content">
+          <p class="narrative-section__eyebrow">Destinatario</p>
+          <h2>Ahora te corresponde a ti</h2>
+
+          <p>Si has llegado hasta aquí, esta carta ya tiene destinatario.</p>
+          <p>
+            Hasta este momento solo has recorrido palabras escritas por otra
+            persona.
+          </p>
+          <p>Ahora puedes responder.</p>
+          <p>
+            No necesitas escribir una carta completa.<br />Puede ser una idea.<br />Una
+            pregunta.<br />Una propuesta.<br />O simplemente unas pocas líneas.
+          </p>
+        </div>
+      </section>
+
+      <section class="narrative-section" id="response">
+        <div class="narrative-section__content">
+          <p class="narrative-section__eyebrow">Respuesta</p>
+          <h2>Tu respuesta</h2>
+
+          <form class="response-form">
+            <div class="response-form__field">
+              <label for="name">Nombre</label>
+              <span id="name-hint">¿Quién escribe?</span>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                aria-describedby="name-hint"
+              />
+            </div>
+
+            <div class="response-form__field">
+              <label for="email">Correo electrónico</label>
+              <span id="email-hint">¿Dónde puedo responderte?</span>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                aria-describedby="email-hint"
+              />
+            </div>
+
+            <div class="response-form__field">
+              <label for="subject">Asunto</label>
+              <span id="subject-hint">¿Qué quieres contarme?</span>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                aria-describedby="subject-hint"
+              />
+            </div>
+
+            <div class="response-form__field">
+              <label for="message">Mensaje</label>
+              <span id="message-hint">Escribe aquí tu respuesta.</span>
+              <textarea
+                id="message"
+                name="message"
+                rows="10"
+                aria-describedby="message-hint"
+              ></textarea>
+            </div>
+
+            <button class="response-form__submit" type="submit">
+              Enviar respuesta
+            </button>
+          </form>
+
+          <p>
+            Porque toda carta necesita dos cosas: alguien dispuesto a escribirla
+            y alguien dispuesto a recibirla.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__content">
+        <h2>Post scriptum</h2>
+        <p>Gracias por haber llegado hasta el final.</p>
+        <p>
+          Las cartas antiguas terminaban con una firma.<br />Esta no.<br />Prefiere
+          dejar un espacio en blanco.
+        </p>
+        <p>
+          Para la siguiente idea.<br />Para la siguiente conversación.<br />Para
+          quien quiera continuarla.
+        </p>
+        <p><strong>P. D.</strong> Toda historia comienza con alguien dispuesto a responder.</p>
+      </div>
+    </footer>
+
+    <span
+      class="scroll-cue"
+      data-scroll-cue
+      aria-hidden="true"
+      hidden
+    ></span>
+
+    <script type="module" src="/src/scripts/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,203 @@
+.cover {
+  position: relative;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cover__envelope {
+  --envelope-visible-edge: clamp(3.5rem, 10vh, 7rem);
+  --envelope-offset-y: calc(-100% + var(--envelope-visible-edge));
+
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  inline-size: min(calc(100% - (2 * var(--page-gutter))), var(--page-inline-size));
+  transform: translate(-50%, var(--envelope-offset-y));
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+}
+
+.cover__envelope:active,
+[data-page-state="dragging"] .cover__envelope {
+  cursor: grabbing;
+}
+
+[data-page-state="deployed"] .cover__envelope,
+[data-page-state="seal-ready"] .cover__envelope,
+[data-page-state="writing"] .cover__envelope,
+[data-page-state="open"] .cover__envelope {
+  --envelope-offset-y: 0px;
+
+  cursor: default;
+}
+
+.cover__flap {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.cover__envelope-image {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.cover__seal {
+  position: absolute;
+  inset-block-start: 54%;
+  inset-inline-start: 50%;
+  inline-size: clamp(3rem, 12%, 7.5rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+}
+
+.cover__seal-image {
+  inline-size: 100%;
+  filter: drop-shadow(0 0.2rem 0.2rem rgb(25 23 20 / 35%));
+}
+
+.cover__seal--breaking .cover__seal-image {
+  animation: seal-break var(--duration-seal-break) ease-in-out both;
+}
+
+.cover__seal:disabled {
+  cursor: default;
+}
+
+.cover__seal:not(:disabled) {
+  cursor: pointer;
+}
+
+.cover__seal:not(:disabled)::before {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  box-shadow: 0 0 1.25rem rgb(128 0 0 / 35%);
+  content: "";
+}
+
+.cover__letter {
+  position: relative;
+  z-index: 1;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  padding: clamp(2.5rem, 8vw, 6rem) var(--page-gutter);
+  background-color: var(--color-paper);
+  background-image: url("../../assets/images/global/img__texture_background.png");
+  font-family: "Snell Roundhand", "Segoe Script", cursive;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.7;
+}
+
+.cover__letter > * {
+  max-inline-size: 48rem;
+}
+
+.cover__letter > * + * {
+  margin-block-start: clamp(1.5rem, 4vw, 3rem);
+}
+
+.cover__recipient {
+  font: inherit;
+}
+
+.cover__opening-closing {
+  margin-block-start: clamp(2rem, 6vw, 4rem);
+}
+
+.cover__drag-indicator {
+  position: absolute;
+  z-index: 3;
+  inset-block-end: 0.75rem;
+  inset-inline-start: 50%;
+  inline-size: 1.5rem;
+  block-size: 2rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 180ms ease-out;
+}
+
+.cover__drag-indicator::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  inline-size: 0.125rem;
+  block-size: 1.65rem;
+  border-radius: 999px;
+  background-color: var(--color-ink);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.cover__drag-indicator::after {
+  position: absolute;
+  inset-block-end: 0.1rem;
+  inset-inline-start: 50%;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-inline-end: 0.125rem solid var(--color-ink);
+  border-block-end: 0.125rem solid var(--color-ink);
+  content: "";
+  transform: translateX(-50%) rotate(45deg);
+}
+
+[data-page-state="deployed"] .cover__drag-indicator,
+[data-page-state="seal-ready"] .cover__drag-indicator,
+[data-page-state="writing"] .cover__drag-indicator,
+[data-page-state="open"] .cover__drag-indicator {
+  opacity: 0;
+}
+
+[data-page-state="sealed"] .cover__seal,
+[data-page-state="dragging"] .cover__seal,
+[data-page-state="deployed"] .cover__seal,
+[data-page-state="writing"] .cover__seal,
+[data-page-state="open"] .cover__seal {
+  pointer-events: none;
+}
+
+[data-page-state="writing"] .cover__letter,
+[data-page-state="open"] .cover__letter {
+  user-select: text;
+}
+
+@keyframes seal-break {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+
+  42% {
+    opacity: 0.35;
+    transform: scale(0.78) rotate(-7deg);
+  }
+
+  58% {
+    opacity: 0.55;
+    transform: scale(1.12) rotate(5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@media (width <= 48rem) {
+  .cover__envelope {
+    --envelope-visible-edge: clamp(7rem, 18svh, 10rem);
+
+    inline-size: 100%;
+  }
+
+  .cover__seal {
+    inline-size: clamp(3.5rem, 16%, 5rem);
+  }
+}

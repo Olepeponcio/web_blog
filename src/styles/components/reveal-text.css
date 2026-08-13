@@ -1,0 +1,13 @@
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.12em);
+  transition:
+    opacity 140ms ease-out,
+    transform 140ms ease-out;
+}
+
+.reveal-word--visible {
+  opacity: 1;
+  transform: translateY(0);
+}

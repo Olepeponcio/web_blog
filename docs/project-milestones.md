@@ -34,80 +34,81 @@ en un primer mockup exploratorio e implementar su flujo inicial en la web.
 - Exploración de papel, tinta, caligrafía, márgenes y anotaciones.
 - Mockup inicial de escritorio.
 - Portada representada como el anverso de un sobre cerrado.
+- Portada dividida entre la solapa y el cuerpo de la carta.
+- Extracción del sobre mediante arrastre vertical.
 - Sello de cera utilizado como control de acceso a la narrativa.
+- Texto de apertura oculto hasta la activación del sello.
+- Desvelado progresivo del texto palabra por palabra.
 - Estados inicial, abierto y navegable.
-- Eventos mediante puntero, teclado y entrada táctil.
+- Interacción inicial mediante ratón.
 - Recorrido continuo mediante scroll por todas las secciones.
 - Primera adaptación responsive de cada sección.
 - Implementación mediante HTML, CSS y JavaScript cuando proceda.
 
-### Proceso de eventos
-
-```text
-ESTADO INICIAL
-    → header con forma de sobre cerrado
-    → sello intacto
-    → scroll narrativo deshabilitado
-    → navegación lateral deshabilitada
-
-ACTIVACIÓN DEL SELLO
-    → transición al sello roto
-    → apertura de la narrativa
-    → scroll habilitado
-    → navegación lateral habilitada
-
-RECORRIDO
-    → acceso continuo a todas las secciones
-```
+La definición técnica del comportamiento se encuentra en
+[`design-narrative--digital-epistle.md`](design-narrative--digital-epistle.md#comportamiento-técnico-de-la-apertura).
 
 ### Resultado esperado
 
 Un prototipo interactivo en Figma y una implementación web funcional que
-representen el recorrido:
+representen la apertura de la carta y el recorrido:
 
-**Origen → Memoria → Presente → Futuro → Destinatario → Respuesta**
+**Sobre → Sello → Texto de apertura → Origen → Memoria → Presente → Futuro →
+Destinatario → Respuesta**
 
 ### Criterio de cierre
 
-El flujo diseñado en Figma puede recorrerse en la implementación web. El sello
-responde mediante puntero, teclado y entrada táctil; su activación habilita el
-scroll y permite acceder a todas las secciones. Cada sección dispone de una
-primera adaptación responsive, aunque su composición visual permanezca mutable.
+El flujo diseñado en Figma puede recorrerse en la implementación web. El sobre
+puede extraerse completamente mediante el ratón. Al activar el sello, este cambia
+a su estado roto y el texto de apertura se desvela palabra por palabra hasta
+terminar con «Por eso decidí escribir.». Después se habilitan el scroll y la
+lectura para acceder a todas las secciones. Cada sección dispone de una primera
+adaptación responsive, aunque su composición visual permanezca mutable.
 
 ### Lista de tareas
 
 #### Recursos y composición
 
-- [ ] Crear una imagen del sello intacto.
-- [ ] Crear una imagen del sello roto.
+- [x] Incorporar la imagen del sobre.
+- [x] Incorporar la imagen del sello intacto.
+- [x] Incorporar la imagen del sello roto.
 - [ ] Representar el anverso del sobre mediante el `header`.
+- [ ] Diferenciar la solapa y el cuerpo de la carta.
 - [ ] Definir la posición de los textos de la portada.
 - [ ] Situar el sello en el borde inferior y centrado.
+- [ ] Incorporar el texto completo de apertura en el cuerpo de la carta.
 - [ ] Representar cada punto narrativo mediante una `section` independiente.
 
 #### Estado inicial
 
+- [ ] Mostrar únicamente el fondo de la sección `cover`.
+- [ ] Situar el sobre parcialmente oculto sobre el límite superior.
 - [ ] Mostrar el sello intacto.
+- [ ] Mantener oculto el texto de apertura.
 - [ ] Deshabilitar inicialmente el scroll narrativo.
-- [ ] Ocultar o deshabilitar inicialmente la navegación lateral.
 
-#### Activación mediante puntero
+#### Despliegue mediante ratón
 
-- [ ] Comunicar que el sello es interactivo al situar el cursor sobre él.
+- [ ] Mostrar `grab` cuando el sobre pueda arrastrarse.
+- [ ] Mostrar `grabbing` durante el arrastre.
+- [ ] Limitar el movimiento al eje vertical y al recorrido permitido.
+- [ ] Conservar la posición alcanzada cuando se suelte el sobre.
+- [ ] Permitir reanudar el arrastre desde la posición conservada.
+- [ ] Inmovilizar el sobre cuando quede completamente visible.
+- [ ] Habilitar el sello únicamente después de completar el despliegue.
+
+#### Activación del sello
+
+- [ ] Comunicar que el sello es interactivo.
 - [ ] Mostrar un halo tenue alrededor del sello.
 - [ ] Cambiar del sello intacto al roto al hacer clic.
-- [ ] Habilitar el scroll y la navegación lateral.
-
-#### Activación mediante teclado
-
-- [ ] Permitir enfocar el sello.
-- [ ] Activar la apertura mediante `Enter` o la barra espaciadora.
-- [ ] Mostrar un indicador de foco visible.
-
-#### Activación táctil
-
-- [ ] Permitir la apertura mediante toque.
-- [ ] Comunicar la interacción sin depender de `hover`.
+- [ ] Desplazar automáticamente la vista hasta el texto de apertura.
+- [ ] Iniciar el desvelado del texto de apertura palabra por palabra.
+- [ ] Conservar los párrafos y su orden de lectura durante el desvelado.
+- [ ] Terminar el desvelado con «Por eso decidí escribir.».
+- [ ] Habilitar el scroll narrativo al finalizar el texto.
+- [ ] Mostrar temporalmente una indicación animada de desplazamiento.
+- [ ] Ocultar la indicación cuando el usuario inicie el scroll.
 
 #### Responsive e implementación
 
@@ -119,6 +120,12 @@ primera adaptación responsive, aunque su composición visual permanezca mutable
 - [ ] Implementar el modelo mediante HTML y CSS.
 - [ ] Incorporar JavaScript cuando lo requieran los estados y eventos.
 - [ ] Comprobar el recorrido completo mediante scroll en la implementación web.
+
+#### Requisitos posteriores
+
+- [ ] Adaptar la interacción para teclado.
+- [ ] Adaptar la interacción para entrada táctil.
+- [ ] Definir la alternativa para `prefers-reduced-motion`.
 
 ---
 

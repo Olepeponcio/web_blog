@@ -43,13 +43,18 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 ```text
 front-end--web-blog/
 ├── design/
+│   ├── mockups/
 │   ├── references/
-│   └── wireframes/
+│   └── ui/
 ├── docs/
+│   ├── brainstorming--resources-by-section.md
+│   ├── design-narrative--digital-epistle.md
+│   ├── design-narrative--text-sections.md
 │   └── project-milestones.md
 ├── src/
-│   └── scripts/
-│       └── main.js
+│   ├── assets/images/
+│   ├── scripts/
+│   └── styles/
 ├── index.html
 ├── package.json
 ├── pnpm-lock.yaml
@@ -84,10 +89,10 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 
 | Documento                                                                             | Contenido                                                             |
 | :------------------------------------------------------------------------------------ | :-------------------------------------------------------------------- |
-| [Narrativa de diseño — Epístola digital](docs/design-narrative--digital-epistle.md)   | Concepto, lenguaje visual y comportamiento narrativo del scroll.      |
-| [Narrativa web — Carta al futuro](docs/wireframes/design-narrative--text-sections.md) | Recorrido y contenido textual de las secciones.                       |
-| [Recursos por sección](docs/wireframes/brainstorming--resources-by-section.md)        | Recursos visuales, interactivos y técnicos considerados.              |
-| [Hitos del proyecto](docs/project-milestones.md)                                      | Flujo progresivo de investigación, diseño, implementación y revisión. |
+| [Narrativa de diseño — Epístola digital](docs/design-narrative--digital-epistle.md) | Fuente de verdad conceptual y técnica de la experiencia.               |
+| [Narrativa web — Carta al futuro](docs/design-narrative--text-sections.md)          | Recorrido y contenido textual de las secciones.                        |
+| [Recursos por sección](docs/brainstorming--resources-by-section.md)                 | Ideas visuales, interactivas y técnicas no vinculantes.                 |
+| [Hitos del proyecto](docs/project-milestones.md)                                    | Planificación, tareas y criterios de cierre.                            |
 
 ## Comandos disponibles
 
@@ -113,3 +118,4 @@ El proyecto seguirá versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop
 8. Identificación de recursos visuales, interactivos y técnicos por sección.
 9. Organización del flujo de trabajo en siete hitos progresivos.
 10. Adopción de una convención responsive híbrida y de nomenclatura técnica en inglés.
+11. Definición técnica de la apertura mediante arrastre del sobre y activación posterior del sello.

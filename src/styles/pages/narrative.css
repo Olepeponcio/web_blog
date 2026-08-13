@@ -1,0 +1,38 @@
+body[data-page-state="sealed"],
+body[data-page-state="dragging"],
+body[data-page-state="deployed"],
+body[data-page-state="seal-ready"],
+body[data-page-state="writing"] {
+  block-size: 100vh;
+  overflow: hidden;
+}
+
+body[data-page-state="open"] {
+  block-size: auto;
+  overflow: visible;
+}
+
+[data-page-state="writing"] .cover,
+[data-page-state="open"] .cover {
+  min-block-size: auto;
+  overflow: visible;
+}
+
+[data-page-state="writing"] .cover__envelope,
+[data-page-state="open"] .cover__envelope {
+  position: relative;
+  inset-inline-start: auto;
+  inline-size: 100%;
+  margin-inline: 0;
+  transform: none;
+}
+
+.narrative,
+.site-footer {
+  visibility: hidden;
+}
+
+[data-page-state="open"] .narrative,
+[data-page-state="open"] .site-footer {
+  visibility: visible;
+}
