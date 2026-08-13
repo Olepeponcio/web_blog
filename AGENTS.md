@@ -131,6 +131,8 @@ Codex debe seguir este orden:
 ```text
 RECIBIR consulta
 
+ANALIZAR el proyecto para casar la consulta con la arquitectura y estado actual e identificar posibles conflicos.
+
 ANALIZAR únicamente el alcance solicitado
 
 RESPONDER de forma breve y orientativa
