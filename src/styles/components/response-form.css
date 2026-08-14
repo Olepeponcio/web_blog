@@ -1,0 +1,56 @@
+.response-form {
+  display: grid;
+  gap: 1.5rem;
+  margin-block-start: clamp(2rem, 6vw, 4rem);
+}
+
+.response-form__field {
+  display: grid;
+  gap: 0.4rem;
+  min-inline-size: 0;
+}
+
+.response-form__field label {
+  font-weight: 700;
+}
+
+.response-form__field span {
+  font-size: 0.875rem;
+}
+
+.response-form__field input,
+.response-form__field textarea {
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding: 0.75rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 0;
+  background-color: transparent;
+  color: inherit;
+}
+
+.response-form__field textarea {
+  min-block-size: 12rem;
+  resize: vertical;
+}
+
+.response-form__submit {
+  justify-self: start;
+  min-block-size: 2.75rem;
+  padding-inline: 1.25rem;
+  border: 0.0625rem solid currentColor;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (width >= 48rem) {
+  .response-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .response-form__field:has(textarea),
+  .response-form__submit {
+    grid-column: 1 / -1;
+  }
+}

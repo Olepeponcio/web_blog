@@ -93,6 +93,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | [Narrativa web — Carta al futuro](docs/design-narrative--text-sections.md)          | Recorrido y contenido textual de las secciones.                        |
 | [Recursos por sección](docs/brainstorming--resources-by-section.md)                 | Ideas visuales, interactivas y técnicas no vinculantes.                 |
 | [Hitos del proyecto](docs/project-milestones.md)                                    | Planificación, tareas y criterios de cierre.                            |
+| [Pruebas del HITO 1](docs/testing--milestone-1.md)                                  | Matriz manual y automatizable para validar el primer hito.              |
 
 ## Comandos disponibles
 

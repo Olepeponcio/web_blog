@@ -41,6 +41,11 @@
   background-color: transparent;
 }
 
+[data-page-state="writing"] .cover__flap,
+[data-page-state="open"] .cover__flap {
+  visibility: hidden;
+}
+
 .cover__envelope-image {
   inline-size: 100%;
   block-size: auto;
@@ -88,8 +93,7 @@
   min-block-size: 100vh;
   min-block-size: 100svh;
   padding: clamp(2.5rem, 8vw, 6rem) var(--page-gutter);
-  background-color: var(--color-paper);
-  background-image: url("../../assets/images/global/img__texture_background.png");
+  background: transparent;
   font-family: "Snell Roundhand", "Segoe Script", cursive;
   font-size: clamp(1rem, 1.5vw, 1.35rem);
   line-height: 1.7;

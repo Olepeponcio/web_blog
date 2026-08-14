@@ -10,6 +10,9 @@ node_modules/
 dist/
 build/
 
+# Resultados temporales de Playwright
+test-results/
+
 # Caché
 .cache/
 .tmp/

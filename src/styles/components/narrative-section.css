@@ -1,0 +1,42 @@
+.narrative-section {
+  display: grid;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  padding: clamp(3rem, 10vw, 7rem) var(--page-gutter);
+  align-items: center;
+}
+
+.narrative-section__content {
+  inline-size: min(100%, 48rem);
+  margin-inline: auto;
+}
+
+.narrative-section__content > * {
+  overflow-wrap: break-word;
+}
+
+.narrative-section__content > * + * {
+  margin-block-start: 1.25rem;
+}
+
+.narrative-section__content h2 {
+  font-size: clamp(1.75rem, 6vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.narrative-section__content p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.narrative-section__eyebrow {
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (width >= 48rem) {
+  .narrative-section__content > * + * {
+    margin-block-start: 1.5rem;
+  }
+}
