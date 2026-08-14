@@ -92,7 +92,8 @@
   z-index: 1;
   min-block-size: 100vh;
   min-block-size: 100svh;
-  padding: clamp(2.5rem, 8vw, 6rem) var(--page-gutter);
+  padding-block: clamp(2.5rem, 8vw, 6rem);
+  padding-inline: clamp(1.5rem, 8vw, 7rem);
   background: transparent;
   font-family: "Snell Roundhand", "Segoe Script", cursive;
   font-size: clamp(1rem, 1.5vw, 1.35rem);
@@ -100,7 +101,8 @@
 }
 
 .cover__letter > * {
-  max-inline-size: 48rem;
+  inline-size: min(100%, 48rem);
+  margin-inline: auto;
 }
 
 .cover__letter > * + * {

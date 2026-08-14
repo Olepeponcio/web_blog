@@ -1,4 +1,4 @@
-import { wait } from "../shared/motion.js";
+import { getMotionDuration, wait } from "../shared/motion.js";
 
 const collectRevealWords = (openingText) => {
   const words = [];
@@ -45,9 +45,11 @@ export const prepareOpeningText = (openingText) => {
 };
 
 export const revealOpeningWords = async (openingText, words) => {
+  const interval = getMotionDuration("--duration-word-reveal-step");
+
   for (const word of words) {
     word.classList.add("reveal-word--visible");
-    await wait(75);
+    await wait(interval);
   }
 
   openingText.setAttribute("aria-busy", "false");

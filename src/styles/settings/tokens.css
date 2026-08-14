@@ -5,4 +5,5 @@
   --page-gutter: clamp(1rem, 4vw, 3rem);
   --duration-seal-break: 700ms;
   --duration-opening-scroll: 1400ms;
+  --duration-word-reveal-step: 90ms;
 }

@@ -125,6 +125,145 @@ Cada punto clave de la narrativa constituye un contenedor o una `section`
 independiente. Su diseño interno permanece mutable, pero su presencia garantiza
 un recorrido completo y una evolución localizada del responsive.
 
+#### Interacción de Origen
+
+Cuando la sección `origin` queda centrada en el viewport, el scroll se bloquea
+y comienza una interacción basada en un bote de tinta.
+
+La secuencia narrativa es:
+
+```text
+CENTRAR origin
+    → bloquear scroll
+    → mostrar bote cerrado
+
+ACTIVAR bote
+    → sustituir por bote abierto
+    → expulsar el corcho fuera del viewport
+
+ACTIVAR bote abierto
+    → unir bote al puntero
+    → habilitar revelado por radio de acción
+
+REVELAR todo el texto
+    → desactivar bote-puntero
+    → mostrar flecha de continuación
+
+ACTIVAR flecha
+    → autoscroll hasta memory
+```
+
+##### Recursos de Origen
+
+```text
+src/assets/images/02-origin/
+├── img__jar.png
+├── img__jar_2.png
+└── img__cork.png
+```
+
+- `img__jar.png` representa el bote cerrado.
+- `img__jar_2.png` representa el bote abierto.
+- `img__cork.png` se utiliza durante la animación de expulsión.
+
+El recurso definitivo de la flecha permanece pendiente de creación o selección.
+
+##### Estados de Origen
+
+| Estado | Comportamiento |
+| :-- | :-- |
+| `idle` | La sección todavía forma parte del scroll libre. |
+| `locked` | `origin` está centrada y el scroll queda bloqueado. |
+| `uncorking` | El bote se abre y el corcho ejecuta su trayectoria. |
+| `ink-ready` | El bote abierto espera la segunda activación. |
+| `ink-cursor` | El bote sigue al puntero y permite aplicar tinta. |
+| `revealing` | Una o varias palabras completan su animación. |
+| `complete` | Todo el texto es visible y la flecha está habilitada. |
+| `leaving` | Se ejecuta el autoscroll hacia `memory`. |
+
+##### Entrada y bloqueo
+
+La sección se detecta mediante `IntersectionObserver`. Cuando alcanza suficiente
+presencia, se completa su alineación con un autoscroll corto. El bloqueo se aplica
+solo después de que `origin` quede centrada, evitando detener el recorrido con la
+sección parcialmente visible.
+
+##### Apertura del bote
+
+El primer clic sobre el bote cerrado:
+
+1. impide activaciones repetidas;
+2. muestra el bote abierto;
+3. sitúa el corcho sobre la boca del bote;
+4. impulsa el corcho hacia arriba;
+5. describe un arco lateral descendente;
+6. termina por debajo del límite inferior del viewport;
+7. habilita el segundo clic sobre el bote.
+
+El corcho utiliza posicionamiento fijo durante la animación para que su recorrido
+dependa del viewport y no altere la composición de la sección.
+
+##### Bote unido al puntero
+
+Después del segundo clic, una representación del bote abierto utiliza
+`position: fixed` y sigue las coordenadas del puntero. Debe tener
+`pointer-events: none` para no impedir la detección del texto.
+
+El punto de aplicación o *hotspot* se sitúa cerca de la boca del bote. Este punto,
+y no necesariamente el centro de la imagen, determina el centro del radio de
+acción.
+
+##### Revelado por radio de acción
+
+Cada palabra del texto se representa mediante un elemento identificable. Las
+palabras permanecen en el flujo documental aunque todavía no sean visibles, para
+conservar espacios, saltos de línea y zonas de interacción.
+
+Cada clic genera un área circular alrededor del *hotspot*. Se comparan todas las
+palabras ocultas con ese círculo:
+
+```text
+PARA cada palabra oculta:
+    OBTENER su rectángulo visible
+    CALCULAR el punto del rectángulo más próximo al centro del círculo
+
+    SI la distancia hasta ese punto es menor o igual al radio:
+        REVELAR la palabra completa
+```
+
+Un clic puede revelar varias palabras. Si el radio toca una palabra de forma
+parcial, se revela la palabra completa. No se divide el texto por letras, porque
+eso complicaría innecesariamente el DOM, los signos, los espacios y la
+accesibilidad.
+
+El radio debe poder ajustarse mediante un token como `--ink-reveal-radius` sin
+modificar la lógica JavaScript.
+
+##### Condición de finalización
+
+Las palabras reveladas se registran una sola vez mediante un `Set`. Una palabra
+solo cuenta como visible cuando termina su animación.
+
+```text
+texto completo =
+    existen palabras
+    Y revealedWords.size === totalWords
+    Y no quedan animaciones de revelado activas
+```
+
+Solo cuando se cumplen las tres condiciones:
+
+- el bote deja de seguir al puntero;
+- se restaura el cursor normal;
+- el estado cambia a `complete`;
+- aparece y se habilita la flecha de continuación.
+
+##### Salida de Origen
+
+La flecha reutiliza el autoscroll de la apertura para desplazar la vista hasta
+`#memory`. Durante esa transición el estado es `leaving`; al finalizar, el scroll
+general de la narrativa vuelve a quedar disponible.
+
 ---
 
 ## Comportamiento técnico de la apertura
@@ -167,17 +306,15 @@ AL iniciar el usuario el scroll:
 
 ### Estados
 
-1. **Parcialmente oculto:** muestra una pista visual desde el borde superior.
-2. **Agarrable:** utiliza el cursor `grab`.
-3. **En arrastre:** utiliza `grabbing` y sigue el desplazamiento vertical.
-4. **Parcialmente desplegado:** conserva la posición alcanzada al soltarlo.
-5. **Completamente desplegado:** queda inmóvil en su posición final.
-6. **Sello disponible:** permite iniciar la apertura de la carta.
-7. **Carta abierta:** el sello aparece roto y comienza el desvelado del texto.
-8. **Texto en escritura:** la vista se sitúa sobre el texto y las palabras
-   aparecen progresivamente en su orden de lectura, con el scroll bloqueado.
-9. **Narrativa accesible:** el texto termina con «Por eso decidí escribir.» y el
-   scroll narrativo queda habilitado junto a una indicación gráfica temporal.
+Los estados funcionales se registran en `data-page-state`:
+
+| Estado | Comportamiento |
+| :-- | :-- |
+| `sealed` | Sobre parcialmente oculto, agarrable y con scroll bloqueado. |
+| `dragging` | Arrastre vertical activo mediante `grabbing`. |
+| `seal-ready` | Sobre desplegado e inmóvil; sello habilitado. |
+| `writing` | Sello roto, autoscroll y texto en revelado progresivo. |
+| `open` | Escritura finalizada, scroll habilitado e indicador visible. |
 
 ### Recorrido y límites
 
@@ -206,6 +343,33 @@ posterior de accesibilidad y calidad.
 En resoluciones estrechas, la porción inicialmente visible del sobre aumenta
 para que la portada continúe siendo reconocible y accionable. Este ajuste de
 composición no implica todavía compatibilidad con entrada táctil.
+
+### Arquitectura implementada
+
+| Módulo | Responsabilidad |
+| :-- | :-- |
+| `src/scripts/cover/cover.js` | Coordina estados y secuencia completa. |
+| `src/scripts/cover/envelope-drag.js` | Controla arrastre, límites y despliegue. |
+| `src/scripts/cover/seal-opening.js` | Precarga y transición del sello roto. |
+| `src/scripts/cover/text-reveal.js` | Prepara y revela el texto palabra por palabra. |
+| `src/scripts/shared/math.js` | Limita valores numéricos mediante `clamp`. |
+| `src/scripts/shared/motion.js` | Centraliza tiempos, esperas y autoscroll. |
+
+Las duraciones se definen como tokens CSS en
+`src/styles/settings/tokens.css`:
+
+- `--duration-seal-break`;
+- `--duration-opening-scroll`;
+- `--duration-word-reveal-step`.
+
+El texto de apertura utiliza un ancho máximo y centrado horizontal para mantener
+una composición estable en resoluciones amplias.
+
+### Validación
+
+La implementación se valida mediante Playwright y revisión manual. La matriz,
+los viewports y el último resultado están registrados en
+[`testing--milestone-1.md`](testing--milestone-1.md).
 
 ### 4. Interacción
 

@@ -20,6 +20,8 @@ una alternativa mejor.
 
 ## Hito 1 — Investigación visual y fundamentos de Figma
 
+**Estado:** cerrado en su alcance inicial.
+
 ### Objetivo
 
 Repasar los fundamentos de Figma, convertir la narrativa de la epístola digital
@@ -72,54 +74,54 @@ adaptación responsive, aunque su composición visual permanezca mutable.
 - [x] Incorporar la imagen del sobre.
 - [x] Incorporar la imagen del sello intacto.
 - [x] Incorporar la imagen del sello roto.
-- [ ] Representar el anverso del sobre mediante el `header`.
-- [ ] Diferenciar la solapa y el cuerpo de la carta.
-- [ ] Definir la posición de los textos de la portada.
-- [ ] Situar el sello en el borde inferior y centrado.
-- [ ] Incorporar el texto completo de apertura en el cuerpo de la carta.
-- [ ] Representar cada punto narrativo mediante una `section` independiente.
+- [x] Representar el anverso del sobre mediante el `header`.
+- [x] Diferenciar la solapa y el cuerpo de la carta.
+- [x] Definir la posición de los textos de la portada.
+- [x] Situar el sello en el borde inferior y centrado.
+- [x] Incorporar el texto completo de apertura en el cuerpo de la carta.
+- [x] Representar cada punto narrativo mediante una `section` independiente.
 
 #### Estado inicial
 
-- [ ] Mostrar únicamente el fondo de la sección `cover`.
-- [ ] Situar el sobre parcialmente oculto sobre el límite superior.
-- [ ] Mostrar el sello intacto.
-- [ ] Mantener oculto el texto de apertura.
-- [ ] Deshabilitar inicialmente el scroll narrativo.
+- [x] Mostrar únicamente el fondo de la sección `cover`.
+- [x] Situar el sobre parcialmente oculto sobre el límite superior.
+- [x] Mostrar el sello intacto.
+- [x] Mantener oculto el texto de apertura.
+- [x] Deshabilitar inicialmente el scroll narrativo.
 
 #### Despliegue mediante ratón
 
-- [ ] Mostrar `grab` cuando el sobre pueda arrastrarse.
-- [ ] Mostrar `grabbing` durante el arrastre.
-- [ ] Limitar el movimiento al eje vertical y al recorrido permitido.
-- [ ] Conservar la posición alcanzada cuando se suelte el sobre.
-- [ ] Permitir reanudar el arrastre desde la posición conservada.
-- [ ] Inmovilizar el sobre cuando quede completamente visible.
-- [ ] Habilitar el sello únicamente después de completar el despliegue.
+- [x] Mostrar `grab` cuando el sobre pueda arrastrarse.
+- [x] Mostrar `grabbing` durante el arrastre.
+- [x] Limitar el movimiento al eje vertical y al recorrido permitido.
+- [x] Conservar la posición alcanzada cuando se suelte el sobre.
+- [x] Permitir reanudar el arrastre desde la posición conservada.
+- [x] Inmovilizar el sobre cuando quede completamente visible.
+- [x] Habilitar el sello únicamente después de completar el despliegue.
 
 #### Activación del sello
 
-- [ ] Comunicar que el sello es interactivo.
-- [ ] Mostrar un halo tenue alrededor del sello.
-- [ ] Cambiar del sello intacto al roto al hacer clic.
-- [ ] Desplazar automáticamente la vista hasta el texto de apertura.
-- [ ] Iniciar el desvelado del texto de apertura palabra por palabra.
-- [ ] Conservar los párrafos y su orden de lectura durante el desvelado.
-- [ ] Terminar el desvelado con «Por eso decidí escribir.».
-- [ ] Habilitar el scroll narrativo al finalizar el texto.
-- [ ] Mostrar temporalmente una indicación animada de desplazamiento.
-- [ ] Ocultar la indicación cuando el usuario inicie el scroll.
+- [x] Comunicar que el sello es interactivo.
+- [x] Mostrar un halo tenue alrededor del sello.
+- [x] Cambiar del sello intacto al roto al hacer clic.
+- [x] Desplazar automáticamente la vista hasta el texto de apertura.
+- [x] Iniciar el desvelado del texto de apertura palabra por palabra.
+- [x] Conservar los párrafos y su orden de lectura durante el desvelado.
+- [x] Terminar el desvelado con «Por eso decidí escribir.».
+- [x] Habilitar el scroll narrativo al finalizar el texto.
+- [x] Mostrar temporalmente una indicación animada de desplazamiento.
+- [x] Ocultar la indicación cuando el usuario inicie el scroll.
 
 #### Responsive e implementación
 
-- [ ] Aplicar la convención `mobile-first` desde cada sección.
-- [ ] Usar composición y medidas fluidas.
-- [ ] Definir breakpoints según las necesidades del contenido.
-- [ ] Validar individualmente la adaptación de cada `section`.
-- [ ] Completar el flujo interactivo en Figma.
-- [ ] Implementar el modelo mediante HTML y CSS.
-- [ ] Incorporar JavaScript cuando lo requieran los estados y eventos.
-- [ ] Comprobar el recorrido completo mediante scroll en la implementación web.
+- [x] Aplicar la convención `mobile-first` desde cada sección.
+- [x] Usar composición y medidas fluidas.
+- [x] Definir breakpoints según las necesidades del contenido.
+- [x] Validar individualmente la adaptación de cada `section`.
+- [x] Completar el flujo interactivo en Figma.
+- [x] Implementar el modelo mediante HTML y CSS.
+- [x] Incorporar JavaScript cuando lo requieran los estados y eventos.
+- [x] Comprobar el recorrido completo mediante scroll en la implementación web.
 
 #### Requisitos posteriores
 
@@ -127,32 +129,112 @@ adaptación responsive, aunque su composición visual permanezca mutable.
 - [ ] Adaptar la interacción para entrada táctil.
 - [ ] Definir la alternativa para `prefers-reduced-motion`.
 
+### Validación
+
+El cierre se apoya en [`testing--milestone-1.md`](testing--milestone-1.md):
+
+- 181 pruebas automatizadas aprobadas;
+- 4 omisiones intencionadas;
+- pruebas manuales `M01–M10` aprobadas;
+- ausencia de fallos críticos en los cinco viewports definidos.
+
 ---
 
-## Hito 2 — Sistema visual y diseño responsive
+## Hito 2 — Origen e interacción con tinta
 
 ### Objetivo
 
-Transformar el mockup inicial en un sistema visual coherente y adaptable.
+Diseñar e implementar la sección `origin` como una interacción narrativa basada
+en la apertura de un bote de tinta y el revelado progresivo del texto.
 
 ### Contenido
 
-- Tipografía expresiva y tipografía funcional.
-- Paleta basada principalmente en blanco y negro.
-- Textura de papel y recursos editoriales.
-- Escalas de espaciado y tamaños tipográficos.
-- Componentes y variantes reutilizables en Figma.
-- Adaptación a móvil, tableta y escritorio.
-- Contraste y legibilidad iniciales.
+- Centrado y bloqueo controlado de la sección `origin`.
+- Bote cerrado como primer control interactivo.
+- Sustitución por el bote abierto.
+- Expulsión del corcho mediante una trayectoria en arco.
+- Bote abierto unido al puntero mediante un *hotspot*.
+- Radio de acción configurable para revelar palabras.
+- Revelado completo de las palabras tocadas parcial o totalmente.
+- Condición lógica de finalización independiente de la apariencia CSS.
+- Flecha de continuación y autoscroll hacia `memory`.
+- Primera adaptación responsive de la interacción.
+
+La definición técnica se encuentra en
+[`design-narrative--digital-epistle.md`](design-narrative--digital-epistle.md#interacción-de-origen).
 
 ### Resultado esperado
 
-Prototipo visual responsive y conjunto mínimo de decisiones reutilizables.
+Un prototipo interactivo en Figma y una implementación web funcional donde el
+usuario abre el bote, utiliza la tinta para revelar todo el texto y continúa hacia
+la siguiente sección.
 
 ### Criterio de cierre
 
-Las principales secciones funcionan en diferentes tamaños de pantalla sin perder
-legibilidad ni identidad.
+La sección solo habilita la flecha cuando todas las palabras han terminado su
+animación de revelado. El usuario puede completar la interacción, alcanzar
+`memory` y repetir el flujo en los viewports definidos sin desbordamientos ni
+bloqueos permanentes.
+
+### Lista de tareas
+
+#### Diseño y recursos
+
+- [x] Incorporar la imagen del bote cerrado.
+- [x] Incorporar la imagen del bote abierto.
+- [x] Incorporar la imagen del corcho.
+- [ ] Crear o seleccionar la flecha minimalista de continuación.
+- [ ] Completar el prototipo de la interacción en Figma.
+
+#### Entrada en Origen
+
+- [ ] Detectar la presencia suficiente de `origin`.
+- [ ] Completar el centrado mediante autoscroll.
+- [ ] Bloquear el scroll únicamente después del centrado.
+- [ ] Mostrar el bote cerrado como control disponible.
+
+#### Apertura del bote
+
+- [ ] Comunicar la interacción mediante el cursor.
+- [ ] Sustituir el bote cerrado por el abierto al hacer clic.
+- [ ] Animar el corcho desde la boca del bote.
+- [ ] Generar un arco descendente hasta salir del viewport.
+- [ ] Evitar activaciones repetidas durante la animación.
+- [ ] Habilitar el segundo clic cuando termine la trayectoria.
+
+#### Bote-puntero
+
+- [ ] Unir visualmente el bote abierto al puntero.
+- [ ] Definir el *hotspot* en la boca del bote.
+- [ ] Aplicar `pointer-events: none` al objeto flotante.
+- [ ] Mostrar visualmente el radio de acción cuando resulte útil.
+
+#### Revelado del texto
+
+- [ ] Dividir el texto en palabras identificables sin alterar su estructura.
+- [ ] Mantener las palabras ocultas dentro del flujo documental.
+- [ ] Detectar la intersección entre el círculo y cada palabra.
+- [ ] Revelar todas las palabras tocadas por el radio.
+- [ ] Revelar la palabra completa ante una intersección parcial.
+- [ ] Evitar contabilizar varias veces una misma palabra.
+- [ ] Registrar como visible cada palabra al terminar su animación.
+- [ ] Definir `--ink-reveal-radius` como token configurable.
+
+#### Finalización y salida
+
+- [ ] Comprobar que `revealedWords.size === totalWords`.
+- [ ] Comprobar que no quedan animaciones activas.
+- [ ] Desactivar el bote-puntero y restaurar el cursor.
+- [ ] Mostrar y habilitar la flecha únicamente al completar el texto.
+- [ ] Reutilizar el autoscroll para desplazarse hasta `memory`.
+- [ ] Restaurar el scroll narrativo al finalizar la transición.
+
+#### Responsive y validación
+
+- [ ] Aplicar el enfoque `mobile-first`.
+- [ ] Validar posiciones, trayectoria, radio y texto por viewport.
+- [ ] Evitar scroll horizontal y bloqueos permanentes.
+- [ ] Diseñar pruebas automatizadas y manuales para el hito 2.
 
 ---
 
