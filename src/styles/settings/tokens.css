@@ -1,9 +1,16 @@
 :root {
   --color-paper: #d4cdbd;
   --color-ink: #191714;
+  --font-family-handwriting: "Snell Roundhand", "Segoe Script", cursive;
   --page-inline-size: 72rem;
   --page-gutter: clamp(1rem, 4vw, 3rem);
   --duration-seal-break: 700ms;
   --duration-opening-scroll: 1400ms;
   --duration-word-reveal-step: 90ms;
+  --duration-origin-cork: 1500ms;
+  --duration-origin-word: 240ms;
+  --duration-origin-centering: 1200ms;
+  --duration-origin-exit-scroll: 1200ms;
+  --ink-reveal-radius: 2.75rem;
+  --origin-jar-size: clamp(6rem, 22vw, 10rem);
 }

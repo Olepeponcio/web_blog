@@ -157,14 +157,14 @@ ACTIVAR flecha
 
 ```text
 src/assets/images/02-origin/
-├── img__jar.png
-├── img__jar_2.png
-└── img__cork.png
+├── img__ink-jar--closed.png
+├── img__ink-jar--open.png
+└── img__ink-jar--cork.png
 ```
 
-- `img__jar.png` representa el bote cerrado.
-- `img__jar_2.png` representa el bote abierto.
-- `img__cork.png` se utiliza durante la animación de expulsión.
+- `img__ink-jar--closed.png` representa el bote cerrado.
+- `img__ink-jar--open.png` representa el bote abierto.
+- `img__ink-jar--cork.png` se utiliza durante la animación de expulsión.
 
 El recurso definitivo de la flecha permanece pendiente de creación o selección.
 

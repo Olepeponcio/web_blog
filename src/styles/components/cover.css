@@ -95,7 +95,7 @@
   padding-block: clamp(2.5rem, 8vw, 6rem);
   padding-inline: clamp(1.5rem, 8vw, 7rem);
   background: transparent;
-  font-family: "Snell Roundhand", "Segoe Script", cursive;
+  font-family: var(--font-family-handwriting);
   font-size: clamp(1rem, 1.5vw, 1.35rem);
   line-height: 1.7;
 }

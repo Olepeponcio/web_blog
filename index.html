@@ -85,24 +85,81 @@
     </header>
 
     <main class="narrative" id="narrative">
-      <section class="narrative-section" id="origin">
+      <section
+        class="narrative-section origin"
+        id="origin"
+        data-origin
+        data-origin-state="idle"
+      >
         <div class="narrative-section__content">
           <p class="narrative-section__eyebrow">Origen</p>
           <h2>Por qué escribo</h2>
 
-          <p>Hubo un tiempo en que construir significaba añadir.</p>
-          <p>Más elementos.<br />Más ruido.<br />Más velocidad.</p>
-          <p>
-            Hasta que comprendimos que crear también podía consistir en retirar.
-          </p>
-          <p>
-            Eliminar lo innecesario.<br />Dejar espacio.<br />Escuchar lo que
-            queda cuando todo lo demás desaparece.
-          </p>
-          <p>
-            Esta historia comienza precisamente ahí: en la decisión de hacer
-            menos, pero hacerlo con intención.
-          </p>
+          <div class="origin__text" data-origin-text>
+            <p>Hubo un tiempo en que construir significaba añadir.</p>
+            <p>Más elementos.<br />Más ruido.<br />Más velocidad.</p>
+            <p>
+              Hasta que comprendimos que crear también podía consistir en
+              retirar.
+            </p>
+            <p>
+              Eliminar lo innecesario.<br />Dejar espacio.<br />Escuchar lo que
+              queda cuando todo lo demás desaparece.
+            </p>
+            <p>
+              Esta historia comienza precisamente ahí: en la decisión de hacer
+              menos, pero hacerlo con intención.
+            </p>
+          </div>
+
+          <div class="origin__interaction" data-origin-interaction>
+            <button
+              class="origin__jar-trigger"
+              type="button"
+              data-origin-jar-trigger
+              aria-label="Abrir el bote de tinta"
+              disabled
+            >
+              <img
+                src="/src/assets/images/02-origin/img__ink-jar--closed.png"
+                data-opened-src="/src/assets/images/02-origin/img__ink-jar--open.png"
+                alt=""
+                data-origin-jar-closed
+              />
+            </button>
+
+            <img
+              class="origin__cork"
+              src="/src/assets/images/02-origin/img__ink-jar--cork.png"
+              alt=""
+              data-origin-cork
+              hidden
+            />
+
+            <div class="origin__floating-jar" data-origin-floating-jar hidden>
+              <img
+                src="/src/assets/images/02-origin/img__ink-jar--open.png"
+                alt=""
+                data-origin-jar-open
+              />
+              <span
+                class="origin__ink-hotspot"
+                data-origin-ink-hotspot
+                aria-hidden="true"
+              ></span>
+            </div>
+          </div>
+
+          <button
+            class="origin__continue"
+            type="button"
+            data-origin-continue
+            aria-label="Continuar hacia Memoria"
+            disabled
+            hidden
+          >
+            <span aria-hidden="true">↓</span>
+          </button>
         </div>
       </section>
 
