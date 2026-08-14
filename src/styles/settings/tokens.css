@@ -13,4 +13,8 @@
   --duration-origin-exit-scroll: 1200ms;
   --ink-reveal-radius: 2.75rem;
   --origin-jar-size: clamp(6rem, 22vw, 10rem);
+  --duration-memory-centering: 1200ms;
+  --duration-memory-entry: 700ms;
+  --memory-scene-max-width: 90rem;
+  --memory-viewport-gap: clamp(1rem, 3vw, 2.5rem);
 }

@@ -163,31 +163,63 @@
         </div>
       </section>
 
-      <section class="narrative-section" id="memory">
-        <div class="narrative-section__content">
-          <p class="narrative-section__eyebrow">Memoria</p>
-          <h2>Lo que aprendimos</h2>
+      <section
+        class="narrative-section memory"
+        id="memory"
+        data-memory
+        data-memory-state="idle"
+      >
+        <div class="memory__content">
+          <header class="memory__heading">
+            <p class="narrative-section__eyebrow">Memoria</p>
+            <h2>Lo que aprendimos</h2>
+          </header>
 
-          <p>
+          <div class="memory__scene" data-memory-scene>
+            <img
+              class="memory__board"
+              src="/src/assets/images/03-memory/img__board_1.png"
+              data-active-src="/src/assets/images/03-memory/img__board_2.png"
+              data-memory-board
+              alt="Escritorio con un tablero de corcho cubierto de recuerdos"
+            />
+
+            <button
+              class="memory__postcard"
+              type="button"
+              data-memory-postcard
+              aria-label="Postal fijada al tablero"
+              disabled
+            >
+              <img
+                src="/src/assets/images/03-memory/img__postal_front.png"
+                alt="Anverso de una postal sobre la evolución de la comunicación"
+              />
+            </button>
+          </div>
+
+          <div class="memory__narrative">
+            <p>
             Antes de nosotros hubo otros que también dejaron constancia de su
             tiempo.
-          </p>
-          <p>
+            </p>
+            <p>
             Escribieron sobre papel.<br />Dibujaron en los márgenes.<br />Corrigieron
             palabras.<br />Doblaron cartas que cruzaron ciudades, fronteras y
             generaciones.
-          </p>
-          <p>Aquellos documentos no eran perfectos.</p>
-          <p>Tenían textura.<br />Tenían errores.<br />Tenían huellas.</p>
-          <p>Y precisamente por eso tenían identidad.</p>
-          <p>
+            </p>
+            <p>Aquellos documentos no eran perfectos.</p>
+            <p>Tenían textura.<br />Tenían errores.<br />Tenían huellas.</p>
+            <p>Y precisamente por eso tenían identidad.</p>
+            <p>
             De ellos aprendimos que una idea no necesita ser estridente para
             permanecer.
-          </p>
-          <p>
+            </p>
+            <p>
             A veces basta una página, unas pocas palabras y suficiente espacio
             para que alguien quiera seguir leyendo.
-          </p>
+            </p>
+          </div>
         </div>
       </section>
 

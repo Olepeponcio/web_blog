@@ -17,6 +17,10 @@ body[data-origin-scroll-locked="true"] {
   overflow: hidden;
 }
 
+body[data-memory-scroll-locked="true"] {
+  overflow: hidden;
+}
+
 [data-page-state="writing"] .cover,
 [data-page-state="open"] .cover {
   min-block-size: auto;

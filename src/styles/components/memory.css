@@ -1,0 +1,97 @@
+.memory {
+  position: relative;
+  display: grid;
+  min-block-size: 100svh;
+  padding: var(--memory-viewport-gap);
+  overflow: clip;
+}
+
+.memory__content {
+  display: grid;
+  inline-size: 100%;
+  min-inline-size: 0;
+  place-items: center;
+}
+
+.memory__heading,
+.memory__narrative {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.memory__scene {
+  position: relative;
+  inline-size: min(
+    100%,
+    var(--memory-scene-max-width),
+    calc((100svh - 2 * var(--memory-viewport-gap)) * 1.365333)
+  );
+  max-block-size: calc(100svh - 2 * var(--memory-viewport-gap));
+  aspect-ratio: 512 / 375;
+  overflow: hidden;
+  opacity: 0;
+  filter: blur(0.35rem);
+  transform: translateY(2rem) scale(0.98);
+}
+
+[data-memory-state="entering"] .memory__scene {
+  animation: memory-scene-entry var(--duration-memory-entry)
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-memory-state="locked"] .memory__scene,
+[data-memory-state="board-ready"] .memory__scene {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.memory__board {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.memory__postcard {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 43%;
+  inset-inline-start: 55%;
+  inline-size: clamp(5rem, 21%, 18rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: rotate(4deg);
+  transform-origin: 50% 8%;
+}
+
+.memory__postcard img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+@keyframes memory-scene-entry {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-memory-state="entering"] .memory__scene {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}

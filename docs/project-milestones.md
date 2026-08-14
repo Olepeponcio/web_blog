@@ -238,29 +238,102 @@ bloqueos permanentes.
 
 ---
 
-## Hito 3 — Arquitectura semántica y contenido
+## Hito 3 — Memoria y postal interactiva
 
 ### Objetivo
 
-Traducir el diseño a una estructura HTML comprensible, accesible y mantenible.
+Diseñar e implementar la sección `memory` como una escena persistente donde el
+usuario descubre un interruptor, activa un instrumento y libera una postal para
+leer su reverso.
 
 ### Contenido
 
-- Jerarquía de encabezados.
-- Secciones narrativas y landmarks.
-- Orden de lectura sin estilos.
-- Integración semántica del formulario.
-- Organización de recursos y archivos.
-- Formalización de convenciones HTML, CSS y JavaScript.
+- Escena de escritorio y corkboard mediante dos estados visuales.
+- Postal independiente fijada a la derecha de «THINGS TO DO».
+- Hotspot invisible sobre el interruptor de la lámpara.
+- Chispas intermitentes como invitación a interactuar.
+- Cambio entre `img__board_1.png` e `img__board_2.png`.
+- Halo verde intermitente sobre el instrumento.
+- Desprendimiento, caída y ascenso de la postal.
+- Giro de la postal entre anverso y reverso.
+- Persistencia de la escena completada hasta recargar la página.
+- Primera adaptación responsive de la interacción.
+
+La definición técnica se encuentra en
+[`design-narrative--digital-epistle.md`](design-narrative--digital-epistle.md#interacción-de-memoria).
 
 ### Resultado esperado
 
-Una estructura HTML completa que pueda leerse y entenderse sin CSS ni JavaScript.
+Un prototipo interactivo en Figma y una implementación web funcional donde el
+usuario enciende la escena, activa el instrumento, libera la postal y muestra su
+reverso.
 
 ### Criterio de cierre
 
-El documento conserva su sentido, jerarquía y recorrido narrativo usando solamente
-HTML.
+La postal completa su movimiento sin saltos, gira hasta mostrar el reverso y
+permanece en ese estado. Solo entonces se habilitan el scroll y la barra lateral.
+La interacción puede completarse en los viewports definidos sin desbordamientos
+ni superposición sobre secciones posteriores.
+
+### Lista de tareas
+
+#### Diseño y recursos
+
+- [x] Incorporar las dos imágenes del tablero.
+- [x] Incorporar el anverso y el reverso de la postal.
+- [ ] Completar el prototipo de la escena en Figma.
+- [ ] Posicionar la postal junto a «THINGS TO DO».
+- [ ] Ajustar rotación y escala a la composición del corkboard.
+
+#### Entrada en Memoria
+
+- [ ] Detectar y centrar la sección `memory`.
+- [ ] Bloquear scroll y barra lateral después del centrado.
+- [ ] Mostrar `img__board_1.png` como escena inicial.
+- [ ] Mantener la postal fijada y el reverso oculto.
+
+#### Interruptor y chispas
+
+- [ ] Superponer un hotspot porcentual sobre el interruptor.
+- [ ] Comunicar la interacción mediante cursor y `hover`.
+- [ ] Generar una secuencia determinista de chispas.
+- [ ] Aplicar `pointer-events: none` a las partículas.
+- [ ] Detener definitivamente las chispas al activar el interruptor.
+- [ ] Precargar y mostrar `img__board_2.png`.
+
+#### Instrumento
+
+- [ ] Superponer un hotspot porcentual sobre el instrumento.
+- [ ] Generar el parpadeo mediante un halo verde localizado.
+- [ ] Evitar alternar las imágenes completas para producir el parpadeo.
+- [ ] Detener el parpadeo y mantener la luz fija al hacer clic.
+- [ ] Deshabilitar activaciones repetidas.
+
+#### Movimiento de la postal
+
+- [ ] Medir la posición inicial con `getBoundingClientRect()`.
+- [ ] Desprender la postal de la chincheta.
+- [ ] Ejecutar una caída suave con rotación moderada.
+- [ ] Elevar, escalar y centrar la postal sobre la escena.
+- [ ] Aumentar su `z-index` durante el movimiento.
+- [ ] Bloquear clics hasta alcanzar `postal-ready`.
+
+#### Giro y finalización
+
+- [ ] Construir las caras frontal y posterior de la postal.
+- [ ] Aplicar `backface-visibility: hidden`.
+- [ ] Girar la postal `180deg` al hacer clic.
+- [ ] Confirmar el final de la animación y el reverso activo.
+- [ ] Anclar la postal dentro de `memory` conservando su posición.
+- [ ] Mantener el estado completado hasta recargar la página.
+- [ ] Habilitar scroll y barra lateral únicamente al completar el giro.
+
+#### Responsive y validación
+
+- [ ] Aplicar posicionamiento porcentual a hotspots y postal.
+- [ ] Validar escena, trayectoria, escala y giro por viewport.
+- [ ] Evitar scroll horizontal y superposición sobre otras secciones.
+- [ ] Diseñar pruebas automatizadas y manuales para el hito 3.
 
 ---
 

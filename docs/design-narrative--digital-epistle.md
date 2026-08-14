@@ -266,6 +266,139 @@ La flecha reutiliza el autoscroll de la apertura para desplazar la vista hasta
 `#memory`. Durante esa transición el estado es `leaving`; al finalizar, el scroll
 general de la narrativa vuelve a quedar disponible.
 
+#### Interacción de Memoria
+
+La sección `memory` representa un escritorio con un corkboard en la pared. La
+escena se carga mediante `img__board_1.png`; la postal aparece sujeta al tablero,
+a la derecha de la nota «THINGS TO DO», ligeramente rotada y escalada en
+proporción al resto de elementos.
+
+La postal es un elemento independiente de la imagen del tablero para permitir su
+desprendimiento, movimiento y giro.
+
+##### Secuencia
+
+```text
+CENTRAR memory
+    → bloquear scroll y barra lateral
+    → mostrar img__board_1.png
+    → mostrar postal fijada al corkboard
+    → iniciar chispas intermitentes en el interruptor
+
+ACTIVAR interruptor
+    → detener chispas
+    → cambiar a img__board_2.png
+    → iniciar parpadeo verde del instrumento
+
+ACTIVAR instrumento
+    → detener parpadeo
+    → mantener luz verde fija
+    → desprender postal
+    → ejecutar caída, giro parcial y ascenso
+    → centrar postal sobre la escena
+
+ACTIVAR postal
+    → girar 180°
+    → mostrar img__postal_back.png
+    → anclar postal dentro de memory
+    → conservar estado final
+    → habilitar scroll y barra lateral
+```
+
+##### Recursos de Memoria
+
+```text
+src/assets/images/03-memory/
+├── img__board_1.png
+├── img__board_2.png
+├── img__postal_front.png
+└── img__postal_back.png
+```
+
+Los demás recursos presentes en `03-memory` quedan fuera de esta interacción
+hasta que exista una decisión expresa sobre su uso.
+
+##### Estados de Memoria
+
+| Estado | Comportamiento |
+| :-- | :-- |
+| `idle` | La sección todavía pertenece al scroll general. |
+| `locked` | Escena centrada con scroll y barra lateral bloqueados. |
+| `board-ready` | Tablero iluminado, postal fijada y chispas activas. |
+| `signal` | Escena oscura y luz del instrumento parpadeando. |
+| `triggered` | Luz fija y postal liberada. |
+| `postal-moving` | Caída, giro parcial y ascenso de la postal. |
+| `postal-ready` | Postal centrada y accionable. |
+| `flipping` | Giro entre el anverso y el reverso. |
+| `complete` | Reverso visible y navegación desbloqueada. |
+
+##### Posicionamiento interactivo
+
+Los controles del interruptor y del instrumento son botones transparentes
+superpuestos a la escena. Sus posiciones se expresan mediante porcentajes
+relativos a la imagen para conservar la correspondencia al cambiar su tamaño.
+
+La postal también se posiciona inicialmente mediante porcentajes sobre el
+corkboard. El control visual debe conservar un área de interacción suficiente,
+cursor indicativo y una adaptación de foco posterior.
+
+##### Chispas del interruptor
+
+Una secuencia intermitente de chispas invita a descubrir el interruptor:
+
+- comienza cuando la escena alcanza `board-ready`;
+- aparece alrededor del hotspot durante `600ms–900ms`;
+- se repite cada `2.5s–4s` mediante una secuencia determinista;
+- utiliza pequeñas variaciones de opacidad, escala y desplazamiento;
+- tiene `pointer-events: none`;
+- aumenta sutilmente su intensidad durante `hover`;
+- se detiene definitivamente al activar el interruptor.
+
+##### Señal del instrumento
+
+Al activar el interruptor, la escena cambia de `img__board_1.png` a
+`img__board_2.png`. La segunda imagen debe precargarse para evitar cortes.
+
+El parpadeo se genera mediante un halo verde superpuesto a la posición de la luz,
+sin alternar repetidamente las dos imágenes del tablero. Al activar el
+instrumento, el halo deja de parpadear y permanece encendido.
+
+##### Movimiento de la postal
+
+La postal ejecuta tres fases:
+
+1. **Desprendimiento:** pierde la sujeción y se inclina ligeramente.
+2. **Caída:** desciende suavemente con una rotación moderada.
+3. **Recuperación:** gira parcialmente, asciende, aumenta de escala y termina
+   centrada sobre la escena con un `z-index` superior.
+
+Durante el movimiento puede utilizar `position: fixed`. La posición inicial se
+obtiene mediante `getBoundingClientRect()` para evitar saltos entre resoluciones.
+Los clics permanecen deshabilitados hasta terminar la animación.
+
+##### Giro y persistencia
+
+La postal dispone de dos caras superpuestas con `backface-visibility: hidden`:
+
+```text
+front → img__postal_front.png
+back  → img__postal_back.png
+```
+
+Al activarla, gira `180deg` sobre el eje Y. La sección solo se completa cuando la
+animación ha terminado, el reverso es la cara activa y se ha alcanzado el ángulo
+final.
+
+Después del giro, la postal deja de utilizar `position: fixed` y queda anclada
+dentro de `memory` conservando su posición visual. Así permanece volteada al
+regresar, pero sale del viewport junto con la sección y no invade las posteriores.
+
+##### Persistencia de estado
+
+Una sección descubierta o completada no se reinicia al salir del viewport ni al
+regresar mediante scroll. El estado solo vuelve a su valor inicial cuando se
+recarga la página.
+
 ---
 
 ## Comportamiento técnico de la apertura
