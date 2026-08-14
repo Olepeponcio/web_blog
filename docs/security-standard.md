@@ -53,9 +53,34 @@ Inventario realizado sobre el estado del proyecto del 14 de agosto de 2026.
 | Encabezados HTTP             | No definidos en el repositorio                                                       | Configurarlos y comprobarlos en el alojamiento de producción               |
 | Dependencias                 | Vite y Playwright como dependencias de desarrollo                                    | Revisar vulnerabilidades y mantener el archivo de bloqueo                  |
 | Pruebas                      | Pruebas E2E funcionales; no hay matriz específica de seguridad                       | Añadir casos negativos junto con cada superficie nueva                     |
+| Interacciones narrativas     | Origin y Memory usan eventos, atributos `data-*` y Web Animations API con datos locales | Mantener estados cerrados y evitar interpretar contenido no confiable    |
+| Recursos de secciones        | Imágenes de Cover, Origin y Memory servidas desde rutas locales                       | Optimizar formatos y eliminar recursos sin uso durante la auditoría final   |
+| Movimiento reducido          | Implementado en Origin y Memory                                                        | Extender el mismo criterio a cada sección futura                            |
 
 Este inventario describe el código visible y no acredita por sí solo la seguridad
 del futuro alojamiento, CDN o backend.
+
+## Revisión de exposición local
+
+Revisión realizada sobre el estado de `v3.0.0`:
+
+- no se detectan rutas absolutas en README ni en `docs/`;
+- no existen archivos `.env`, claves privadas o certificados versionados;
+- no se detectan credenciales, tokens, contraseñas ni claves API en texto;
+- no se detectan direcciones de correo en los archivos revisados;
+- no se utilizan `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `eval`,
+  `new Function` ni `document.write` en la aplicación;
+- no se observan cookies, almacenamiento web ni comunicaciones remotas desde
+  JavaScript;
+- los recursos narrativos se cargan desde rutas relativas del proyecto.
+
+Permanece como superficie externa Font Awesome mediante cdnjs. Continúa pendiente
+incorporar SRI o alojar el recurso localmente y definir una CSP compatible antes
+de publicar.
+
+La etiqueta Git es `v3.0.0`, mientras `package.json` declara `2.0.0`. No constituye
+por sí mismo una fuga de seguridad, pero debe corregirse como control de
+trazabilidad y cadena de suministro.
 
 ## Controles durante el desarrollo
 

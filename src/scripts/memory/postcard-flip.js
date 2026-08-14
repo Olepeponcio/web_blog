@@ -32,6 +32,7 @@ export const flipPostcard = async ({
   postcardCard.classList.add("memory__postcard-card--flipped");
   flip.cancel();
   postcard.setAttribute("aria-label", "Reverso de la postal");
+  postcard.setAttribute("aria-disabled", "true");
   delete page.dataset.memoryScrollLocked;
   memory.dataset.memoryState = "complete";
   memory.dispatchEvent(new CustomEvent("memory:complete"));

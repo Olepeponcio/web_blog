@@ -1,10 +1,23 @@
+@font-face {
+  font-family: "Bubblegum Sans";
+  src: url("../../assets/fonts/BubblegumSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.bubblegum-sans-regular {
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .origin {
   --origin-jar-size: clamp(5.25rem, 14svh, 8rem);
 
   position: relative;
   padding-block: clamp(1rem, 3svh, 2.5rem);
   overflow: clip;
-  font-family: var(--font-family-handwriting);
 }
 
 .origin .narrative-section__content {

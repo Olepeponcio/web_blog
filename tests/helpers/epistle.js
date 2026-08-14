@@ -18,6 +18,14 @@ export const selectors = {
   originHotspot: "[data-origin-ink-hotspot]",
   originContinue: "[data-origin-continue]",
   memory: "#memory",
+  memoryScene: "[data-memory-scene]",
+  memoryBoard: "[data-memory-board]",
+  memorySwitch: "[data-memory-switch]",
+  memorySparks: "[data-memory-sparks]",
+  memoryInstrument: "[data-memory-instrument]",
+  memoryInstrumentHalo: "[data-memory-instrument-halo]",
+  memoryPostcard: "[data-memory-postcard]",
+  memoryPostcardCard: "[data-memory-postcard-card]",
 };
 
 export const getEnvelopeOffset = (page) =>
@@ -113,6 +121,45 @@ export const revealOriginText = async (page) => {
 
   await expect(page.locator(selectors.origin)).toHaveAttribute(
     "data-origin-state",
+    "complete",
+    { timeout: 8_000 },
+  );
+};
+
+export const reachMemory = async (page) => {
+  await page.evaluate(() => {
+    document.body.dataset.pageState = "open";
+    document.querySelector("[data-origin]").dataset.originState = "completed";
+    document.querySelector("[data-memory]").scrollIntoView();
+  });
+
+  await expect(page.locator(selectors.memory)).toHaveAttribute(
+    "data-memory-state",
+    "board-ready",
+    { timeout: 8_000 },
+  );
+};
+
+export const prepareMemoryPostcard = async (page) => {
+  await reachMemory(page);
+  await page.locator(selectors.memorySwitch).click();
+  await expect(page.locator(selectors.memory)).toHaveAttribute(
+    "data-memory-state",
+    "signal",
+  );
+  await page.locator(selectors.memoryInstrument).click();
+  await expect(page.locator(selectors.memory)).toHaveAttribute(
+    "data-memory-state",
+    "postal-ready",
+    { timeout: 8_000 },
+  );
+};
+
+export const completeMemory = async (page) => {
+  await prepareMemoryPostcard(page);
+  await page.locator(selectors.memoryPostcard).click();
+  await expect(page.locator(selectors.memory)).toHaveAttribute(
+    "data-memory-state",
     "complete",
     { timeout: 8_000 },
   );

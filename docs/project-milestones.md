@@ -142,6 +142,8 @@ El cierre se apoya en [`testing--milestone-1.md`](testing--milestone-1.md):
 
 ## Hito 2 — Origen e interacción con tinta
 
+**Estado:** implementación y validación automatizada completadas; revisión manual pendiente.
+
 ### Objetivo
 
 Diseñar e implementar la sección `origin` como una interacción narrativa basada
@@ -232,13 +234,25 @@ bloqueos permanentes.
 #### Responsive y validación
 
 - [x] Aplicar el enfoque `mobile-first`.
-- [ ] Validar posiciones, trayectoria, radio y texto por viewport.
-- [ ] Evitar scroll horizontal y bloqueos permanentes.
+- [x] Validar posiciones, trayectoria, radio y texto por viewport.
+- [x] Evitar scroll horizontal y bloqueos permanentes.
 - [x] Diseñar pruebas automatizadas y manuales para el hito 2.
+
+### Validación
+
+La matriz se encuentra en [`testing--milestone-2.md`](testing--milestone-2.md).
+La ejecución general aprobó 254 casos, presentó dos fallos subpíxel en K03 y
+omitió cuatro casos intencionadamente. Después de aplicar una tolerancia de
+`0.5px`, la batería responsive específica aprobó sus 25 ejecuciones.
+
+Las comprobaciones manuales `M11–M16` permanecen pendientes.
 
 ---
 
 ## Hito 3 — Memoria y postal interactiva
+
+**Estado:** implementado; batería automatizada creada, con un defecto responsive
+pendiente y revisión manual sin completar.
 
 ### Objetivo
 
@@ -281,169 +295,89 @@ ni superposición sobre secciones posteriores.
 
 - [x] Incorporar las dos imágenes del tablero.
 - [x] Incorporar el anverso y el reverso de la postal.
-- [ ] Completar el prototipo de la escena en Figma.
-- [ ] Posicionar la postal junto a «THINGS TO DO».
-- [ ] Ajustar rotación y escala a la composición del corkboard.
+- [x] Completar el prototipo de la escena en Figma.
+- [x] Posicionar la postal junto a «THINGS TO DO».
+- [x] Ajustar rotación y escala a la composición del corkboard.
 
 #### Entrada en Memoria
 
-- [ ] Detectar y centrar la sección `memory`.
-- [ ] Bloquear scroll y barra lateral después del centrado.
-- [ ] Mostrar `img__board_1.png` como escena inicial.
-- [ ] Mantener la postal fijada y el reverso oculto.
+- [x] Detectar y centrar la sección `memory`.
+- [x] Bloquear scroll y barra lateral después del centrado.
+- [x] Mostrar `img__board_1.png` como escena inicial.
+- [x] Mantener la postal fijada y el reverso oculto.
 
 #### Interruptor y chispas
 
-- [ ] Superponer un hotspot porcentual sobre el interruptor.
-- [ ] Comunicar la interacción mediante cursor y `hover`.
-- [ ] Generar una secuencia determinista de chispas.
-- [ ] Aplicar `pointer-events: none` a las partículas.
-- [ ] Detener definitivamente las chispas al activar el interruptor.
-- [ ] Precargar y mostrar `img__board_2.png`.
+- [x] Superponer un hotspot porcentual sobre el interruptor.
+- [x] Comunicar la interacción mediante cursor y `hover`.
+- [x] Generar una secuencia determinista de chispas.
+- [x] Aplicar `pointer-events: none` a las partículas.
+- [x] Detener definitivamente las chispas al activar el interruptor.
+- [x] Precargar y mostrar `img__board_2.png`.
 
 #### Instrumento
 
-- [ ] Superponer un hotspot porcentual sobre el instrumento.
-- [ ] Generar el parpadeo mediante un halo verde localizado.
-- [ ] Evitar alternar las imágenes completas para producir el parpadeo.
-- [ ] Detener el parpadeo y mantener la luz fija al hacer clic.
-- [ ] Deshabilitar activaciones repetidas.
+- [x] Superponer un hotspot porcentual sobre el instrumento.
+- [x] Generar el parpadeo mediante un halo verde localizado.
+- [x] Evitar alternar las imágenes completas para producir el parpadeo.
+- [x] Detener el parpadeo y mantener la luz fija al hacer clic.
+- [x] Deshabilitar activaciones repetidas.
 
 #### Movimiento de la postal
 
-- [ ] Medir la posición inicial con `getBoundingClientRect()`.
-- [ ] Desprender la postal de la chincheta.
-- [ ] Ejecutar una caída suave con rotación moderada.
-- [ ] Elevar, escalar y centrar la postal sobre la escena.
-- [ ] Aumentar su `z-index` durante el movimiento.
-- [ ] Bloquear clics hasta alcanzar `postal-ready`.
+- [x] Medir la posición inicial con `getBoundingClientRect()`.
+- [x] Desprender y desplazar la postal hacia el centro.
+- [x] Aplicar rotación, contracción intermedia y expansión final.
+- [x] Escalar y centrar la postal sobre la escena.
+- [x] Aumentar su `z-index` durante el movimiento.
+- [x] Bloquear clics hasta alcanzar `postal-ready`.
 
 #### Giro y finalización
 
-- [ ] Construir las caras frontal y posterior de la postal.
-- [ ] Aplicar `backface-visibility: hidden`.
-- [ ] Girar la postal `180deg` al hacer clic.
-- [ ] Confirmar el final de la animación y el reverso activo.
-- [ ] Anclar la postal dentro de `memory` conservando su posición.
-- [ ] Mantener el estado completado hasta recargar la página.
-- [ ] Habilitar scroll y barra lateral únicamente al completar el giro.
+- [x] Construir las caras frontal y posterior de la postal.
+- [x] Aplicar `backface-visibility: hidden`.
+- [x] Girar la postal `180deg` al hacer clic.
+- [x] Confirmar el final de la animación y el reverso activo.
+- [x] Anclar la postal dentro de `memory` conservando su posición.
+- [x] Mantener el estado completado hasta recargar la página.
+- [x] Habilitar scroll y barra lateral únicamente al completar el giro.
+- [x] Reducir o eliminar las animaciones con `prefers-reduced-motion`.
 
 #### Responsive y validación
 
-- [ ] Aplicar posicionamiento porcentual a hotspots y postal.
-- [ ] Validar escena, trayectoria, escala y giro por viewport.
+- [x] Aplicar posicionamiento porcentual a hotspots y postal.
+- [ ] Validar escena, trayectoria, escala y giro por viewport: `R03` detecta
+  desbordamiento inferior del reverso en cuatro viewports.
 - [ ] Evitar scroll horizontal y superposición sobre otras secciones.
-- [ ] Diseñar pruebas automatizadas y manuales para el hito 3.
+- [x] Diseñar pruebas automatizadas y manuales para el hito 3.
+- [x] Implementar la batería automatizada del hito 3.
+
+La matriz y su primer registro de ejecución se encuentran en
+[`testing--milestone-3.md`](testing--milestone-3.md).
 
 ---
 
-## Hito 4 — Implementación visual con CSS
+## Hitos posteriores
 
-### Objetivo
+Los siguientes hitos se definirán progresivamente, uno por cada `section`. Las
+propuestas anteriores quedan retiradas para evitar condicionar secciones cuya
+lógica todavía no ha sido aprobada.
 
-Reproducir el lenguaje visual aprobado mediante CSS mantenible.
+Los recursos existentes en `src/assets/images/04-present/` se consideran material
+preparatorio y no una implementación del siguiente hito.
 
-### Contenido
+## Hito final — Depuración y auditoría
 
-- Retícula y composición editorial.
-- Tipografía, márgenes y espacio negativo.
-- Textura de papel optimizada.
-- Iniciales, líneas, notas y marcas documentales.
-- Diseño responsive.
-- Estados de interacción y foco.
-- Metodología BEM pragmática.
+Cuando todas las secciones estén implementadas se realizará un hito transversal:
 
-### Resultado esperado
-
-Versión estática responsive próxima al prototipo visual.
-
-### Criterio de cierre
-
-La página representa la epístola digital sin necesitar JavaScript para sostener
-su composición.
-
----
-
-## Hito 5 — Narrativa del scroll e interacción
-
-### Objetivo
-
-Añadir movimiento únicamente cuando refuerce la lectura.
-
-### Contenido
-
-- Fundamentos de `IntersectionObserver`.
-- Apariciones mediante `opacity` y `transform`.
-- Subrayados y revelados progresivos.
-- Uso moderado de elementos `sticky`.
-- Transición visual entre épocas narrativas.
-- Preferencia `prefers-reduced-motion`.
-- Evaluación del coste y utilidad de cada animación.
-
-### Resultado esperado
-
-Una experiencia de scroll fluida, discreta y coherente con el relato.
-
-### Criterio de cierre
-
-Las animaciones acompañan la lectura, no bloquean contenido y pueden reducirse
-por accesibilidad.
-
----
-
-## Hito 6 — Participación, accesibilidad y calidad
-
-### Objetivo
-
-Completar la experiencia del destinatario y comprobar su calidad técnica.
-
-### Contenido
-
-- Formulario entendido como respuesta a la carta.
-- Etiquetas, validación y mensajes de estado.
-- Navegación mediante teclado.
-- Contraste y foco visible.
-- Optimización de fuentes, imágenes y textura.
-- Pruebas responsive y entre navegadores.
-- Revisión de HTML, CSS y JavaScript.
-
-### Resultado esperado
-
-Una versión funcional, accesible y estable preparada para evaluación.
-
-### Criterio de cierre
-
-El recorrido y el formulario funcionan con teclado, mantienen la legibilidad y
-no presentan errores críticos.
-
----
-
-## Hito 7 — Documentación, portfolio y primera versión funcional
-
-### Objetivo
-
-Consolidar el proyecto como caso de estudio y preparar la publicación de su
-primera versión funcional.
-
-### Contenido
-
-- Documentación de decisiones y cambios de dirección.
-- Comparación entre mockup y resultado final.
-- Registro de aprendizajes y limitaciones.
-- Compilación de producción con Vite.
-- Revisión final de rendimiento y contenido.
-- Preparación y publicación de la primera versión funcional `0.1.0`.
-- Integración del trabajo consolidado en `main`.
-
-### Resultado esperado
-
-Primera versión funcional publicada y caso de estudio que explique la relación:
-
-**narrativa → diseño → interacción → código**
-
-### Criterio de cierre
-
-El proyecto puede presentarse, ejecutarse y comprenderse mediante su documentación.
+- depuración y eliminación de código o recursos sin uso;
+- auditoría funcional y responsive;
+- revisión de accesibilidad;
+- revisión de seguridad según OWASP ASVS 5.0 nivel 1;
+- auditoría de dependencias y recursos externos;
+- revisión de rendimiento y compilación;
+- sincronización de versión, etiqueta y manifiesto;
+- consolidación documental y preparación de publicación.
 
 ---
 

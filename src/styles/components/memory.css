@@ -256,15 +256,14 @@
   z-index: 6;
   inset-block-start: 50%;
   inset-inline-start: 50%;
-  inline-size: 58%;
+  inline-size: var(--postcard-centered-width, clamp(5rem, 21%, 18rem));
   transform: translate(-50%, -50%);
   transform-origin: center;
-  transition: inline-size var(--duration-memory-postcard-expand)
-    cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-memory-state="complete"] .memory__postcard--centered {
-  inline-size: 88%;
+  pointer-events: none;
+  cursor: default;
 }
 
 [data-memory-state="postal-ready"] .memory__postcard {
@@ -340,10 +339,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .memory__postcard--centered {
-    transition: none;
-  }
-
   [data-memory-state="entering"] .memory__scene {
     animation: none;
     opacity: 1;

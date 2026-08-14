@@ -65,4 +65,18 @@ test.describe("Recursos, enlaces y compilación", () => {
 
     expect(stdout).toContain("built in");
   });
+
+  test("T01 — los recursos locales de Memoria responden", async ({ request }) => {
+    const resources = [
+      "/src/assets/images/03-memory/img__board_1.png",
+      "/src/assets/images/03-memory/img__board_2.png",
+      "/src/assets/images/03-memory/img__postal_front.png",
+      "/src/assets/images/03-memory/img__postal_back_02.png",
+    ];
+
+    for (const resource of resources) {
+      const response = await request.get(resource);
+      expect(response.ok(), resource).toBe(true);
+    }
+  });
 });

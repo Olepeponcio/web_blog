@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { openOriginJar, reachOrigin, selectors } from "./helpers/epistle.js";
 
+const SUBPIXEL_TOLERANCE = 0.5;
+
 test.describe("HITO 2 — responsive", () => {
   test.beforeEach(async ({ page }) => page.goto("/"));
 
@@ -51,10 +53,14 @@ test.describe("HITO 2 — responsive", () => {
       const jar = await page.locator(selectors.originFloatingJar).boundingBox();
 
       expect(jar).not.toBeNull();
-      expect(jar.x).toBeGreaterThanOrEqual(0);
-      expect(jar.y).toBeGreaterThanOrEqual(0);
-      expect(jar.x + jar.width).toBeLessThanOrEqual(viewport.width);
-      expect(jar.y + jar.height).toBeLessThanOrEqual(viewport.height);
+      expect(jar.x).toBeGreaterThanOrEqual(-SUBPIXEL_TOLERANCE);
+      expect(jar.y).toBeGreaterThanOrEqual(-SUBPIXEL_TOLERANCE);
+      expect(jar.x + jar.width).toBeLessThanOrEqual(
+        viewport.width + SUBPIXEL_TOLERANCE,
+      );
+      expect(jar.y + jar.height).toBeLessThanOrEqual(
+        viewport.height + SUBPIXEL_TOLERANCE,
+      );
     }
   });
 

@@ -1,6 +1,6 @@
 import { getMotionDuration } from "../shared/motion.js";
 
-const FINAL_WIDTH_RATIO = 0.58;
+const SCENE_COVERAGE_RATIO = 0.86;
 
 const getDuration = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -10,14 +10,20 @@ const getDuration = () =>
 export const movePostcard = async ({ memory, scene, postcard }) => {
   const start = postcard.getBoundingClientRect();
   const sceneBounds = scene.getBoundingClientRect();
-  const finalWidth = sceneBounds.width * FINAL_WIDTH_RATIO;
+  const postcardAspectRatio = start.width / start.height;
+  const maximumWidth = sceneBounds.width * SCENE_COVERAGE_RATIO;
+  const maximumHeight = sceneBounds.height * SCENE_COVERAGE_RATIO;
+  const finalWidth = Math.max(
+    start.width,
+    Math.min(maximumWidth, maximumHeight * postcardAspectRatio),
+  );
+  const scale = finalWidth / start.width;
   const startCenterX = start.left + start.width / 2;
   const startCenterY = start.top + start.height / 2;
   const targetCenterX = sceneBounds.left + sceneBounds.width / 2;
   const targetCenterY = sceneBounds.top + sceneBounds.height / 2;
   const movementX = targetCenterX - startCenterX;
   const movementY = targetCenterY - startCenterY;
-  const scale = finalWidth / start.width;
 
   memory.dataset.memoryState = "postal-moving";
   postcard.disabled = true;
@@ -25,18 +31,11 @@ export const movePostcard = async ({ memory, scene, postcard }) => {
   postcard.style.setProperty("inset-inline-start", `${start.left}px`);
   postcard.style.setProperty("inset-block-start", `${start.top}px`);
   postcard.style.setProperty("inline-size", `${start.width}px`);
+  postcard.style.setProperty("--postcard-centered-width", `${finalWidth}px`);
 
   const movement = postcard.animate(
     [
       { transform: "translate(0, 0) rotate(4deg) scale(1)" },
-      {
-        offset: 0.56,
-        transform: `translate(${movementX}px, ${movementY}px) rotate(0deg) scale(1)`,
-      },
-      {
-        offset: 0.72,
-        transform: `translate(${movementX}px, ${movementY}px) rotate(0deg) scale(0.82)`,
-      },
       {
         transform: `translate(${movementX}px, ${movementY}px) rotate(0deg) scale(${scale})`,
       },

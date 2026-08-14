@@ -49,3 +49,28 @@ Primera ejecución automatizada realizada el 14 de agosto de 2026.
 
 El HITO 2 no se considera validado hasta corregir ambos comportamientos y repetir
 la batería completa.
+
+## Validación posterior
+
+En una ejecución general posterior:
+
+- 254 pruebas finalizaron correctamente;
+- 4 pruebas se omitieron intencionadamente;
+- K03 falló en dos viewports por una diferencia subpíxel de
+  `-0.0000004768px` respecto al borde superior.
+
+La interfaz no presentaba un desbordamiento perceptible. La aserción de K03 se
+ajustó con una tolerancia de `0.5px` en los cuatro bordes, manteniendo la detección
+de desbordamientos reales.
+
+La ejecución específica de `origin-responsive.spec.js` terminó con:
+
+```text
+25 aprobadas
+0 fallidas
+0 omitidas
+```
+
+La validación automatizada del HITO 2 queda completada. Las pruebas manuales
+`M11–M16` permanecen pendientes y deben registrarse antes de declarar el cierre
+integral del hito.

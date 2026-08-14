@@ -299,7 +299,7 @@ ACTIVAR instrumento
 
 ACTIVAR postal
     → girar 180°
-    → mostrar img__postal_back.png
+    → mostrar img__postal_back_02.png
     → anclar postal dentro de memory
     → conservar estado final
     → habilitar scroll y barra lateral
@@ -312,7 +312,7 @@ src/assets/images/03-memory/
 ├── img__board_1.png
 ├── img__board_2.png
 ├── img__postal_front.png
-└── img__postal_back.png
+└── img__postal_back_02.png
 ```
 
 Los demás recursos presentes en `03-memory` quedan fuera de esta interacción
@@ -323,6 +323,8 @@ hasta que exista una decisión expresa sobre su uso.
 | Estado | Comportamiento |
 | :-- | :-- |
 | `idle` | La sección todavía pertenece al scroll general. |
+| `centering` | Se ejecuta el autoscroll de alineación. |
+| `entering` | La escena completa su entrada visual. |
 | `locked` | Escena centrada con scroll y barra lateral bloqueados. |
 | `board-ready` | Tablero iluminado, postal fijada y chispas activas. |
 | `signal` | Escena oscura y luz del instrumento parpadeando. |
@@ -365,12 +367,13 @@ instrumento, el halo deja de parpadear y permanece encendido.
 
 ##### Movimiento de la postal
 
-La postal ejecuta tres fases:
+La postal ejecuta dos fases:
 
 1. **Desprendimiento:** pierde la sujeción y se inclina ligeramente.
-2. **Caída:** desciende suavemente con una rotación moderada.
-3. **Recuperación:** gira parcialmente, asciende, aumenta de escala y termina
-   centrada sobre la escena con un `z-index` superior.
+2. **Centrado:** se desplaza hacia el centro y elimina progresivamente su rotación.
+
+El centrado conserva la escala inicial de la postal. No existe contracción ni
+expansión posterior, para mantener estable la jerarquía visual.
 
 Durante el movimiento puede utilizar `position: fixed`. La posición inicial se
 obtiene mediante `getBoundingClientRect()` para evitar saltos entre resoluciones.
@@ -382,22 +385,38 @@ La postal dispone de dos caras superpuestas con `backface-visibility: hidden`:
 
 ```text
 front → img__postal_front.png
-back  → img__postal_back.png
+back  → img__postal_back_02.png
 ```
 
 Al activarla, gira `180deg` sobre el eje Y. La sección solo se completa cuando la
 animación ha terminado, el reverso es la cara activa y se ha alcanzado el ángulo
 final.
 
-Después del giro, la postal deja de utilizar `position: fixed` y queda anclada
-dentro de `memory` conservando su posición visual. Así permanece volteada al
-regresar, pero sale del viewport junto con la sección y no invade las posteriores.
+Después del giro, la postal queda anclada dentro de `memory`, conserva su escala
+y muestra el reverso. Al regresar a la sección permanece visible, deshabilitada
+y sin nuevas interacciones; sale del viewport junto con la sección y no invade
+las posteriores.
 
 ##### Persistencia de estado
 
 Una sección descubierta o completada no se reinicia al salir del viewport ni al
 regresar mediante scroll. El estado solo vuelve a su valor inicial cuando se
 recarga la página.
+
+##### Arquitectura implementada
+
+| Módulo | Responsabilidad |
+| :-- | :-- |
+| `src/scripts/memory/memory.js` | Localiza elementos y coordina los módulos. |
+| `src/scripts/memory/memory-entry.js` | Detecta, centra, anima y bloquea la sección. |
+| `src/scripts/memory/memory-controls.js` | Gestiona interruptor, tablero e instrumento. |
+| `src/scripts/memory/postcard.js` | Coordina los eventos propios de la postal. |
+| `src/scripts/memory/postcard-motion.js` | Mide y anima el movimiento hasta el centro. |
+| `src/scripts/memory/postcard-flip.js` | Gira la postal y completa la sección. |
+
+Las duraciones se centralizan mediante tokens CSS. El movimiento y el giro se
+reducen a duración cero cuando `prefers-reduced-motion: reduce` está activo; las
+chispas y el parpadeo dejan de animarse.
 
 ---
 

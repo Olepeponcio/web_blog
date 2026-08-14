@@ -4,9 +4,9 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 ## Estado del proyecto
 
-La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. El hito 1 está implementado y validado. El hito 2 incorpora la interacción de Origen; su primera batería ha detectado ajustes pendientes de encuadre responsive y alineación al entrar en `memory`.
+La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. El hito 1 está validado, el hito 2 ha completado su validación automatizada y el hito 3 está implementado pendiente de una batería específica.
 
-La versión actual del proyecto es `2.0.0`, correspondiente a la etiqueta `v2.0.0`.
+La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada del HITO 3 está implementada y ha detectado un desbordamiento responsive pendiente.
 
 ## Registro técnico
 
@@ -19,26 +19,28 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Herramienta   | Vite                  | `^8.2.1`                            | Configurado  |
 | Gestor        | pnpm                  | `11.21.0`                           | Configurado  |
 | Herramienta   | Figma                 | Diseño y prototipado                |  Utilizado   |
-| Herramienta   | Playwright            | Pruebas E2E en cinco viewports      |   Validado   |
+| Herramienta   | Playwright            | Pruebas E2E en cinco viewports      | Implementado |
 | API web       | Intersection Observer | Entrada controlada en `origin`       | Implementado |
 | API web       | Constraint Validation | Validación semántica del formulario | Planificado  |
-| Accesibilidad | Reduced Motion        | Respeto de `prefers-reduced-motion` | Planificado  |
+| Accesibilidad | Reduced Motion        | Aplicado en Origin y Memory         | Implementado |
 | Convención    | Directorios           | Organización por responsabilidad    |   Aplicado   |
 | Convención    | HTML                  | Marcado semántico                   |   Aplicado   |
 | Convención    | CSS                   | BEM pragmático + `kebab-case`       |   Aplicado   |
 | Convención    | JavaScript            | Nombres semánticos + ES Modules     |   Aplicado   |
 | Convención    | Responsive            | Enfoque híbrido                     |   Adoptado   |
 | Convención    | Nomenclatura          | Inglés técnico                      |   Adoptado   |
-| Versionado    | Proyecto              | `2.0.0` / etiqueta `v2.0.0`         |  Alineado    |
+| Versionado    | Proyecto              | manifiesto `2.0.0` / etiqueta `v3.0.0` | Revisar   |
 | Git           | Ramas principales     | `main` + `develop`                  |  constante   |
 
 ### Observaciones del registro
 
 - El flujo funcional del hito 1 está implementado mediante HTML, CSS y JavaScript modular.
 - El hito 2 implementa la apertura del bote, el revelado con tinta y la salida hacia `memory`.
+- El hito 3 implementa la escena de Memoria, sus controles y la postal interactiva.
 - La arquitectura por responsabilidad y las convenciones del proyecto ya están aplicadas.
 - Vite se utiliza para desarrollo, compilación y previsualización.
 - Playwright valida carga, arrastre, apertura, escritura, recorrido, responsive y recursos.
+- El estándar de seguridad adopta OWASP ASVS 5.0 nivel 1 como referencia mínima.
 - El flujo Git utiliza `develop` para el trabajo en curso y `main` para las versiones consolidadas.
 
 ## Estructura actual
@@ -54,11 +56,14 @@ front-end--web-blog/
 │   ├── design-narrative--digital-epistle.md
 │   ├── design-narrative--text-sections.md
 │   ├── project-milestones.md
+│   ├── security-standard.md
 │   ├── testing--milestone-1.md
-│   └── testing--milestone-2.md
+│   ├── testing--milestone-2.md
+│   └── testing--milestone-3.md
 ├── src/
 │   ├── assets/
 │   ├── scripts/cover/
+│   ├── scripts/memory/
 │   ├── scripts/origin/
 │   ├── scripts/shared/
 │   └── styles/
@@ -104,6 +109,8 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | [Hitos del proyecto](docs/project-milestones.md)                                    | Planificación, tareas y criterios de cierre.               |
 | [Pruebas del HITO 1](docs/testing--milestone-1.md)                                  | Matriz manual y automatizable para validar el primer hito. |
 | [Pruebas del HITO 2](docs/testing--milestone-2.md)                                  | Matriz manual y automatizada de la interacción de Origen.  |
+| [Pruebas del HITO 3](docs/testing--milestone-3.md)                                  | Matriz pendiente de validación para la sección Memoria.    |
+| [Estándar de seguridad](docs/security-standard.md)                                  | Controles OWASP, inventario y riesgos pendientes.          |
 
 ## Comandos disponibles
 
@@ -116,7 +123,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 
 ## Control de versiones
 
-El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` concentra el trabajo en curso y `main` recoge las versiones consolidadas. `package.json` y la etiqueta publicada se mantienen alineados en `2.0.0`.
+El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` concentra el trabajo en curso y `main` recoge las versiones consolidadas. La etiqueta publicada es `v3.0.0`; queda pendiente actualizar el valor `2.0.0` de `package.json`.
 
 ## Trabajo realizado
 
@@ -137,3 +144,8 @@ El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` c
 15. Automatización E2E con Playwright: 181 pruebas aprobadas y 4 omitidas intencionadamente.
 16. Cierre del hito 1 dentro de su alcance inicial para ratón.
 17. Implementación modular del hito 2: entrada en Origen, apertura del bote, tinta interactiva y continuación hacia `memory`.
+18. Validación automatizada del hito 2 en los cinco viewports; corregida la tolerancia subpíxel de K03.
+19. Incorporación del estándar de seguridad OWASP ASVS 5.0 nivel 1.
+20. Implementación modular del hito 3: entrada en Memoria, controles, efectos y postal interactiva.
+21. Aplicación de `prefers-reduced-motion` en Origin y Memory.
+22. Preparación de recursos visuales para la futura sección `present`, todavía sin lógica aprobada.
