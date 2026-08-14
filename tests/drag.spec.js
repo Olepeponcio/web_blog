@@ -42,6 +42,29 @@ test.describe("Arrastre del sobre", () => {
     await page.goto("/");
   });
 
+  test("muestra el remitente y escribe bloques binarios entre corchetes", async ({
+    page,
+  }) => {
+    const sender = page.locator(".cover__sender");
+    const binaryPostcode = sender.locator("[data-binary-postcode]");
+
+    await expect(sender).toContainText("José Lobato");
+    await expect(sender).toContainText("Calle de la escueta epístola");
+    await expect(sender).toContainText("CP");
+    await expect(sender).toContainText("(Hado)");
+    await expect(sender).toContainText("Camino");
+
+    await beginDrag(page);
+    await expect(binaryPostcode).toHaveText(/^\[0+\]$/);
+    await expect(binaryPostcode).toHaveText("[01001101]", {
+      timeout: 2_000,
+    });
+    await expect(binaryPostcode).toHaveText(/^\[0+\]$/, {
+      timeout: 2_000,
+    });
+    await page.mouse.up();
+  });
+
   test("B01 — el botón izquierdo inicia el arrastre", async ({ page }) => {
     await beginDrag(page);
 

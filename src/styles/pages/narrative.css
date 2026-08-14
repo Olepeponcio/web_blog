@@ -13,7 +13,6 @@ body[data-page-state="open"] {
 }
 
 body[data-origin-scroll-locked="true"] {
-  block-size: 100vh;
   overflow: hidden;
 }
 

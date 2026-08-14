@@ -16,4 +16,19 @@ test.describe("HITO 2 — entrada en Origen", () => {
     await expect(page.locator(selectors.originJar)).toBeEnabled();
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   });
+
+  test("G03 — revela Origen antes de escribir el título", async ({ page }) => {
+    await page.evaluate(() => {
+      document.body.dataset.pageState = "open";
+      document.querySelector("[data-origin]").scrollIntoView();
+    });
+
+    await expect(page.locator(selectors.originEyebrow)).toHaveClass(
+      /origin__eyebrow--visible/,
+    );
+    await expect(page.locator(selectors.originHeading)).toHaveText(
+      "Por qué escribo",
+      { timeout: 8_000 },
+    );
+  });
 });

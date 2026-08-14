@@ -8,6 +8,8 @@ export const selectors = {
   seal: "[data-seal]",
   sealImage: "[data-seal-image]",
   origin: "[data-origin]",
+  originEyebrow: "[data-origin-eyebrow]",
+  originHeading: "[data-origin-heading]",
   originText: "[data-origin-text]",
   originJar: "[data-origin-jar-trigger]",
   originJarImage: "[data-origin-jar-closed]",

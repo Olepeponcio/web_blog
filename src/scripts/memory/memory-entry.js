@@ -2,6 +2,15 @@ import { scrollToElement, waitForNextFrame } from "../shared/motion.js";
 
 const REQUIRED_VISIBILITY = 0.6;
 const WAIT_FOR_ORIGIN_MS = 50;
+const LOCKED_MEMORY_STATES = new Set([
+  "locked",
+  "board-ready",
+  "signal",
+  "triggered",
+  "postal-moving",
+  "postal-ready",
+  "flipping",
+]);
 
 export const createMemoryEntry = ({ page, memory, origin, scene, board }) => {
   let observer;
@@ -11,7 +20,7 @@ export const createMemoryEntry = ({ page, memory, origin, scene, board }) => {
   const keepMemoryInFrame = () => {
     const state = memory.dataset.memoryState;
 
-    if (state !== "locked" && state !== "board-ready") return;
+    if (!LOCKED_MEMORY_STATES.has(state)) return;
 
     window.cancelAnimationFrame(resizeFrame);
     resizeFrame = window.requestAnimationFrame(() => {

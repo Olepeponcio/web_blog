@@ -7,6 +7,8 @@ import { createOriginExit } from "./origin-exit.js";
 const getOriginElements = () => ({
   page: document.body,
   origin: document.querySelector("[data-origin]"),
+  originEyebrow: document.querySelector("[data-origin-eyebrow]"),
+  originHeading: document.querySelector("[data-origin-heading]"),
   jarTrigger: document.querySelector("[data-origin-jar-trigger]"),
   jarImage: document.querySelector("[data-origin-jar-closed]"),
   cork: document.querySelector("[data-origin-cork]"),

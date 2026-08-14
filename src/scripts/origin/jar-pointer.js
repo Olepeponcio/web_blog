@@ -12,9 +12,20 @@ export const createJarPointer = ({
     if (!isActive) return;
 
     const originBounds = origin.getBoundingClientRect();
-    const minimumY = Math.max(originBounds.top, 0);
-    const maximumY = Math.min(originBounds.bottom, window.innerHeight);
-    const x = clamp(event.clientX, originBounds.left, originBounds.right);
+    const jarBounds = floatingJar.getBoundingClientRect();
+    const halfJarWidth = jarBounds.width / 2;
+    const pointerOffsetY = jarBounds.height * 0.05;
+    const minimumX = Math.max(originBounds.left, halfJarWidth);
+    const maximumX = Math.min(
+      originBounds.right,
+      window.innerWidth - halfJarWidth,
+    );
+    const minimumY = Math.max(originBounds.top, pointerOffsetY);
+    const maximumY = Math.min(
+      originBounds.bottom,
+      window.innerHeight - jarBounds.height + pointerOffsetY,
+    );
+    const x = clamp(event.clientX, minimumX, maximumX);
     const y = clamp(event.clientY, minimumY, maximumY);
 
     floatingJar.style.setProperty("--origin-pointer-x", `${x}px`);

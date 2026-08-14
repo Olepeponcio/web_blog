@@ -33,6 +33,17 @@
             alt=""
           />
 
+          <address class="cover__sender" aria-label="Datos del remitente">
+            <span>José Lobato</span>
+            <span>Calle de la escueta epístola</span>
+            <span class="cover__sender-location">
+              <span>CP</span>
+              <span data-binary-postcode>01001101</span>
+              <span>(Hado)</span>
+            </span>
+            <span>Camino</span>
+          </address>
+
           <button
             class="cover__seal"
             type="button"
@@ -92,8 +103,10 @@
         data-origin-state="idle"
       >
         <div class="narrative-section__content">
-          <p class="narrative-section__eyebrow">Origen</p>
-          <h2>Por qué escribo</h2>
+          <p class="narrative-section__eyebrow" data-origin-eyebrow>Origen</p>
+          <h2 data-origin-heading data-origin-heading-text="Por qué escribo">
+            Por qué escribo
+          </h2>
 
           <div class="origin__text" data-origin-text>
             <p>Hubo un tiempo en que construir significaba añadir.</p>
@@ -179,10 +192,41 @@
             <img
               class="memory__board"
               src="/src/assets/images/03-memory/img__board_1.png"
-              data-active-src="/src/assets/images/03-memory/img__board_2.png"
               data-memory-board
               alt="Escritorio con un tablero de corcho cubierto de recuerdos"
             />
+
+            <button
+              class="memory__hotspot memory__hotspot--switch"
+              type="button"
+              data-memory-switch
+              aria-label="Encender la escena"
+              disabled
+            ></button>
+
+            <span
+              class="memory__sparks"
+              data-memory-sparks
+              aria-hidden="true"
+            >
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+
+            <span class="memory__note" aria-hidden="true">Memory</span>
+
+            <button
+              class="memory__hotspot memory__hotspot--instrument"
+              type="button"
+              data-memory-instrument
+              aria-label="Activar el instrumento luminoso"
+              disabled
+            ></button>
+
+            <span
+              class="memory__instrument-halo"
+              data-memory-instrument-halo
+              aria-hidden="true"
+            ></span>
 
             <button
               class="memory__postcard"
@@ -191,10 +235,18 @@
               aria-label="Postal fijada al tablero"
               disabled
             >
-              <img
-                src="/src/assets/images/03-memory/img__postal_front.png"
-                alt="Anverso de una postal sobre la evolución de la comunicación"
-              />
+              <span class="memory__postcard-card" data-memory-postcard-card>
+                <img
+                  class="memory__postcard-face memory__postcard-face--front"
+                  src="/src/assets/images/03-memory/img__postal_front.png"
+                  alt="Anverso de una postal sobre la evolución de la comunicación"
+                />
+                <img
+                  class="memory__postcard-face memory__postcard-face--back"
+                  src="/src/assets/images/03-memory/img__postal_back_02.png"
+                  alt="Reverso de la postal"
+                />
+              </span>
             </button>
           </div>
 

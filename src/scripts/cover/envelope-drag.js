@@ -6,11 +6,74 @@ export const createEnvelopeDrag = ({
   onStateChange,
   onComplete,
 }) => {
+  const binaryPostcode = envelope.querySelector("[data-binary-postcode]");
+  const binarySequence = [
+    "01001101",
+    "01100001",
+    "01101011",
+    "01110100",
+    "01110101",
+    "01100010",
+  ];
+  const BINARY_CHARACTER_DELAY = 140;
+  const BINARY_COMPLETE_DELAY = 650;
+  const BINARY_EMPTY_DELAY = 180;
   let currentOffset = 0;
   let dragStartY = 0;
   let dragStartOffset = 0;
   let isDragging = false;
   let isDeployed = false;
+  let binarySequenceIndex = 0;
+  let binaryCharacterIndex = 0;
+  let binaryTimer;
+
+  const isBinaryAnimationActive = () =>
+    ["dragging", "deployed", "seal-ready"].includes(
+      document.body.dataset.pageState,
+    );
+
+  const stopBinaryAnimation = () => {
+    window.clearTimeout(binaryTimer);
+    binaryTimer = undefined;
+  };
+
+  const writeNextBinaryCharacter = () => {
+    if (!binaryPostcode || !isBinaryAnimationActive()) {
+      stopBinaryAnimation();
+      return;
+    }
+
+    const binaryBlock = binarySequence[binarySequenceIndex];
+    binaryCharacterIndex += 1;
+    binaryPostcode.textContent = `[${binaryBlock.slice(0, binaryCharacterIndex)}]`;
+
+    if (binaryCharacterIndex < binaryBlock.length) {
+      binaryTimer = window.setTimeout(
+        writeNextBinaryCharacter,
+        BINARY_CHARACTER_DELAY,
+      );
+      return;
+    }
+
+    binaryTimer = window.setTimeout(() => {
+      binaryPostcode.textContent = "[]";
+      binaryCharacterIndex = 0;
+      binarySequenceIndex =
+        (binarySequenceIndex + 1) % binarySequence.length;
+      binaryTimer = window.setTimeout(
+        writeNextBinaryCharacter,
+        BINARY_EMPTY_DELAY,
+      );
+    }, BINARY_COMPLETE_DELAY);
+  };
+
+  const startBinaryAnimation = () => {
+    if (!binaryPostcode || binaryTimer) return;
+
+    binaryPostcode.textContent = "[]";
+    binaryCharacterIndex = 0;
+    writeNextBinaryCharacter();
+  };
 
   const getVisibleEdge = () => {
     const rootFontSize = Number.parseFloat(
@@ -51,6 +114,7 @@ export const createEnvelopeDrag = ({
     dragStartY = event.clientY;
     dragStartOffset = currentOffset;
     onStateChange("dragging");
+    startBinaryAnimation();
   };
 
   const continueDrag = (event) => {
@@ -67,6 +131,7 @@ export const createEnvelopeDrag = ({
 
     isDragging = false;
     onStateChange("sealed");
+    stopBinaryAnimation();
   };
 
   const syncInitialPosition = () => {
@@ -76,6 +141,7 @@ export const createEnvelopeDrag = ({
   };
 
   const initialize = () => {
+    if (binaryPostcode) binaryPostcode.textContent = "[]";
     syncInitialPosition();
     envelope.addEventListener("mousedown", beginDrag);
     window.addEventListener("mousemove", continueDrag);
