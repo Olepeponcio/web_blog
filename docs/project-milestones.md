@@ -183,58 +183,58 @@ bloqueos permanentes.
 - [x] Incorporar la imagen del bote cerrado.
 - [x] Incorporar la imagen del bote abierto.
 - [x] Incorporar la imagen del corcho.
-- [ ] Crear o seleccionar la flecha minimalista de continuación.
-- [ ] Completar el prototipo de la interacción en Figma.
+- [x] Crear o seleccionar la flecha minimalista de continuación.
+- [x] Completar el prototipo de la interacción en Figma.
 
 #### Entrada en Origen
 
-- [ ] Detectar la presencia suficiente de `origin`.
-- [ ] Completar el centrado mediante autoscroll.
-- [ ] Bloquear el scroll únicamente después del centrado.
-- [ ] Mostrar el bote cerrado como control disponible.
+- [x] Detectar la presencia suficiente de `origin`.
+- [x] Completar el centrado mediante autoscroll.
+- [x] Bloquear el scroll únicamente después del centrado.
+- [x] Mostrar el bote cerrado como control disponible.
 
 #### Apertura del bote
 
-- [ ] Comunicar la interacción mediante el cursor.
-- [ ] Sustituir el bote cerrado por el abierto al hacer clic.
-- [ ] Animar el corcho desde la boca del bote.
-- [ ] Generar un arco descendente hasta salir del viewport.
-- [ ] Evitar activaciones repetidas durante la animación.
-- [ ] Habilitar el segundo clic cuando termine la trayectoria.
+- [x] Comunicar la interacción mediante el cursor.
+- [x] Sustituir el bote cerrado por el abierto al hacer clic.
+- [x] Animar el corcho desde la boca del bote.
+- [x] Generar un arco descendente hasta salir del viewport.
+- [x] Evitar activaciones repetidas durante la animación.
+- [x] Habilitar el segundo clic cuando termine la trayectoria.
 
 #### Bote-puntero
 
-- [ ] Unir visualmente el bote abierto al puntero.
-- [ ] Definir el *hotspot* en la boca del bote.
-- [ ] Aplicar `pointer-events: none` al objeto flotante.
-- [ ] Mostrar visualmente el radio de acción cuando resulte útil.
+- [x] Unir visualmente el bote abierto al puntero.
+- [x] Definir el *hotspot* en la boca del bote.
+- [x] Aplicar `pointer-events: none` al objeto flotante.
+- [x] Mostrar visualmente el radio de acción cuando resulte útil.
 
 #### Revelado del texto
 
-- [ ] Dividir el texto en palabras identificables sin alterar su estructura.
-- [ ] Mantener las palabras ocultas dentro del flujo documental.
-- [ ] Detectar la intersección entre el círculo y cada palabra.
-- [ ] Revelar todas las palabras tocadas por el radio.
-- [ ] Revelar la palabra completa ante una intersección parcial.
-- [ ] Evitar contabilizar varias veces una misma palabra.
-- [ ] Registrar como visible cada palabra al terminar su animación.
-- [ ] Definir `--ink-reveal-radius` como token configurable.
+- [x] Dividir el texto en palabras identificables sin alterar su estructura.
+- [x] Mantener las palabras ocultas dentro del flujo documental.
+- [x] Detectar la intersección entre el círculo y cada palabra.
+- [x] Revelar todas las palabras tocadas por el radio.
+- [x] Revelar la palabra completa ante una intersección parcial.
+- [x] Evitar contabilizar varias veces una misma palabra.
+- [x] Registrar como visible cada palabra al terminar su animación.
+- [x] Definir `--ink-reveal-radius` como token configurable.
 
 #### Finalización y salida
 
-- [ ] Comprobar que `revealedWords.size === totalWords`.
-- [ ] Comprobar que no quedan animaciones activas.
-- [ ] Desactivar el bote-puntero y restaurar el cursor.
-- [ ] Mostrar y habilitar la flecha únicamente al completar el texto.
-- [ ] Reutilizar el autoscroll para desplazarse hasta `memory`.
-- [ ] Restaurar el scroll narrativo al finalizar la transición.
+- [x] Comprobar que `revealedWords.size === totalWords`.
+- [x] Comprobar que no quedan animaciones activas.
+- [x] Desactivar el bote-puntero y restaurar el cursor.
+- [x] Mostrar y habilitar la flecha únicamente al completar el texto.
+- [x] Reutilizar el autoscroll para desplazarse hasta `memory`.
+- [x] Restaurar el scroll narrativo al finalizar la transición.
 
 #### Responsive y validación
 
-- [ ] Aplicar el enfoque `mobile-first`.
+- [x] Aplicar el enfoque `mobile-first`.
 - [ ] Validar posiciones, trayectoria, radio y texto por viewport.
 - [ ] Evitar scroll horizontal y bloqueos permanentes.
-- [ ] Diseñar pruebas automatizadas y manuales para el hito 2.
+- [x] Diseñar pruebas automatizadas y manuales para el hito 2.
 
 ---
 

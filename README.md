@@ -4,9 +4,9 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 ## Estado del proyecto
 
-La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. El hito 1 está implementado y validado: la epístola puede abrirse, recorrerse y adaptarse a los viewports definidos.
+La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. El hito 1 está implementado y validado. El hito 2 incorpora la interacción de Origen; su primera batería ha detectado ajustes pendientes de encuadre responsive y alineación al entrar en `memory`.
 
-Existe una discrepancia de versionado pendiente de resolver: `package.json` declara `0.0.0`, mientras el commit actual está etiquetado como `v1.0.0`.
+La versión actual del proyecto es `2.0.0`, correspondiente a la etiqueta `v2.0.0`.
 
 ## Registro técnico
 
@@ -20,7 +20,7 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Gestor        | pnpm                  | `11.21.0`                           | Configurado  |
 | Herramienta   | Figma                 | Diseño y prototipado                |  Utilizado   |
 | Herramienta   | Playwright            | Pruebas E2E en cinco viewports      |   Validado   |
-| API web       | Intersection Observer | Interacciones vinculadas al scroll  | Planificado  |
+| API web       | Intersection Observer | Entrada controlada en `origin`       | Implementado |
 | API web       | Constraint Validation | Validación semántica del formulario | Planificado  |
 | Accesibilidad | Reduced Motion        | Respeto de `prefers-reduced-motion` | Planificado  |
 | Convención    | Directorios           | Organización por responsabilidad    |   Aplicado   |
@@ -29,12 +29,13 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Convención    | JavaScript            | Nombres semánticos + ES Modules     |   Aplicado   |
 | Convención    | Responsive            | Enfoque híbrido                     |   Adoptado   |
 | Convención    | Nomenclatura          | Inglés técnico                      |   Adoptado   |
-| Versionado    | Proyecto              | `0.0.0` / etiqueta `v1.0.0`         |   Revisar    |
+| Versionado    | Proyecto              | `2.0.0` / etiqueta `v2.0.0`         |  Alineado    |
 | Git           | Ramas principales     | `main` + `develop`                  |  constante   |
 
 ### Observaciones del registro
 
 - El flujo funcional del hito 1 está implementado mediante HTML, CSS y JavaScript modular.
+- El hito 2 implementa la apertura del bote, el revelado con tinta y la salida hacia `memory`.
 - La arquitectura por responsabilidad y las convenciones del proyecto ya están aplicadas.
 - Vite se utiliza para desarrollo, compilación y previsualización.
 - Playwright valida carga, arrastre, apertura, escritura, recorrido, responsive y recursos.
@@ -53,10 +54,12 @@ front-end--web-blog/
 │   ├── design-narrative--digital-epistle.md
 │   ├── design-narrative--text-sections.md
 │   ├── project-milestones.md
-│   └── testing--milestone-1.md
+│   ├── testing--milestone-1.md
+│   └── testing--milestone-2.md
 ├── src/
 │   ├── assets/
 │   ├── scripts/cover/
+│   ├── scripts/origin/
 │   ├── scripts/shared/
 │   └── styles/
 ├── tests/
@@ -100,6 +103,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | [Recursos por sección](docs/brainstorming--resources-by-section.md)                 | Ideas visuales, interactivas y técnicas no vinculantes.    |
 | [Hitos del proyecto](docs/project-milestones.md)                                    | Planificación, tareas y criterios de cierre.               |
 | [Pruebas del HITO 1](docs/testing--milestone-1.md)                                  | Matriz manual y automatizable para validar el primer hito. |
+| [Pruebas del HITO 2](docs/testing--milestone-2.md)                                  | Matriz manual y automatizada de la interacción de Origen.  |
 
 ## Comandos disponibles
 
@@ -112,7 +116,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 
 ## Control de versiones
 
-El proyecto seguirá versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` concentrará el trabajo en curso y `main` recogerá las versiones consolidadas. La diferencia entre `0.0.0` y la etiqueta `v1.0.0` debe resolverse antes de publicar la siguiente versión.
+El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` concentra el trabajo en curso y `main` recoge las versiones consolidadas. `package.json` y la etiqueta publicada se mantienen alineados en `2.0.0`.
 
 ## Trabajo realizado
 
@@ -132,3 +136,4 @@ El proyecto seguirá versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop
 14. Aplicación de estilos por capas, componentes y diseño responsive.
 15. Automatización E2E con Playwright: 181 pruebas aprobadas y 4 omitidas intencionadamente.
 16. Cierre del hito 1 dentro de su alcance inicial para ratón.
+17. Implementación modular del hito 2: entrada en Origen, apertura del bote, tinta interactiva y continuación hacia `memory`.

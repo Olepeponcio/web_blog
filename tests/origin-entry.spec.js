@@ -1,0 +1,19 @@
+import { expect, test } from "@playwright/test";
+import { reachOrigin, selectors } from "./helpers/epistle.js";
+
+test.describe("HITO 2 — entrada en Origen", () => {
+  test.beforeEach(async ({ page }) => page.goto("/"));
+
+  test("G01 — comienza inactivo y con el bote deshabilitado", async ({ page }) => {
+    await expect(page.locator(selectors.origin)).toHaveAttribute("data-origin-state", "idle");
+    await expect(page.locator(selectors.originJar)).toBeDisabled();
+    await expect(page.locator(selectors.originContinue)).toBeHidden();
+  });
+
+  test("G02 — centra Origen antes de bloquear y habilitar el bote", async ({ page }) => {
+    await reachOrigin(page);
+    await expect(page.locator(selectors.body)).toHaveAttribute("data-origin-scroll-locked", "true");
+    await expect(page.locator(selectors.originJar)).toBeEnabled();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  });
+});

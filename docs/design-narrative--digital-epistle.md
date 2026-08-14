@@ -166,20 +166,21 @@ src/assets/images/02-origin/
 - `img__ink-jar--open.png` representa el bote abierto.
 - `img__ink-jar--cork.png` se utiliza durante la animación de expulsión.
 
-El recurso definitivo de la flecha permanece pendiente de creación o selección.
+La continuación se representa mediante un botón con flecha tipográfica minimalista.
 
 ##### Estados de Origen
 
 | Estado | Comportamiento |
 | :-- | :-- |
 | `idle` | La sección todavía forma parte del scroll libre. |
-| `locked` | `origin` está centrada y el scroll queda bloqueado. |
-| `uncorking` | El bote se abre y el corcho ejecuta su trayectoria. |
-| `ink-ready` | El bote abierto espera la segunda activación. |
-| `ink-cursor` | El bote sigue al puntero y permite aplicar tinta. |
-| `revealing` | Una o varias palabras completan su animación. |
+| `centering` | Se ejecuta el autoscroll de alineación. |
+| `ready` | `origin` está centrada, el scroll bloqueado y el bote disponible. |
+| `opening` | El bote se abre y el corcho ejecuta su trayectoria. |
+| `opened-ready` | El bote abierto espera la segunda activación. |
+| `active` | El bote sigue al puntero y permite aplicar tinta. |
 | `complete` | Todo el texto es visible y la flecha está habilitada. |
 | `leaving` | Se ejecuta el autoscroll hacia `memory`. |
+| `completed` | La transición terminó y el scroll narrativo está restaurado. |
 
 ##### Entrada y bloqueo
 
@@ -200,8 +201,9 @@ El primer clic sobre el bote cerrado:
 6. termina por debajo del límite inferior del viewport;
 7. habilita el segundo clic sobre el bote.
 
-El corcho utiliza posicionamiento fijo durante la animación para que su recorrido
-dependa del viewport y no altere la composición de la sección.
+El corcho utiliza posicionamiento absoluto dentro de la sección. Su trayectoria
+se calcula en cada frame con gravedad, deriva lateral y rotación para mantener un
+arco responsive sin alterar el flujo documental.
 
 ##### Bote unido al puntero
 
@@ -219,8 +221,8 @@ Cada palabra del texto se representa mediante un elemento identificable. Las
 palabras permanecen en el flujo documental aunque todavía no sean visibles, para
 conservar espacios, saltos de línea y zonas de interacción.
 
-Cada clic genera un área circular alrededor del *hotspot*. Se comparan todas las
-palabras ocultas con ese círculo:
+El movimiento del puntero desplaza continuamente un área circular alrededor del
+*hotspot*. En cada actualización se comparan las palabras ocultas con ese círculo:
 
 ```text
 PARA cada palabra oculta:
@@ -231,7 +233,7 @@ PARA cada palabra oculta:
         REVELAR la palabra completa
 ```
 
-Un clic puede revelar varias palabras. Si el radio toca una palabra de forma
+Un desplazamiento puede revelar varias palabras. Si el radio toca una palabra de forma
 parcial, se revela la palabra completa. No se divide el texto por letras, porque
 eso complicaría innecesariamente el DOM, los signos, los espacios y la
 accesibilidad.

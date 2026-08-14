@@ -7,6 +7,15 @@ export const selectors = {
   scrollCue: "[data-scroll-cue]",
   seal: "[data-seal]",
   sealImage: "[data-seal-image]",
+  origin: "[data-origin]",
+  originText: "[data-origin-text]",
+  originJar: "[data-origin-jar-trigger]",
+  originJarImage: "[data-origin-jar-closed]",
+  originCork: "[data-origin-cork]",
+  originFloatingJar: "[data-origin-floating-jar]",
+  originHotspot: "[data-origin-ink-hotspot]",
+  originContinue: "[data-origin-continue]",
+  memory: "#memory",
 };
 
 export const getEnvelopeOffset = (page) =>
@@ -55,5 +64,54 @@ export const openEpistle = async (page) => {
     "data-page-state",
     "open",
     { timeout: 15_000 },
+  );
+};
+
+export const reachOrigin = async (page) => {
+  await page.evaluate(() => {
+    document.body.dataset.pageState = "open";
+    document.querySelector("[data-origin]").scrollIntoView();
+  });
+
+  await expect(page.locator(selectors.origin)).toHaveAttribute(
+    "data-origin-state",
+    "ready",
+    { timeout: 8_000 },
+  );
+};
+
+export const openOriginJar = async (page) => {
+  await reachOrigin(page);
+  await page.locator(selectors.originJar).click();
+  await expect(page.locator(selectors.origin)).toHaveAttribute(
+    "data-origin-state",
+    "opened-ready",
+    { timeout: 8_000 },
+  );
+};
+
+export const activateOriginInk = async (page) => {
+  await openOriginJar(page);
+  await page.locator(selectors.originJar).click();
+  await expect(page.locator(selectors.origin)).toHaveAttribute(
+    "data-origin-state",
+    "active",
+  );
+};
+
+export const revealOriginText = async (page) => {
+  await activateOriginInk(page);
+  const words = page.locator(".origin-word");
+
+  for (let index = 0; index < (await words.count()); index += 1) {
+    const box = await words.nth(index).boundingBox();
+    expect(box).not.toBeNull();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  }
+
+  await expect(page.locator(selectors.origin)).toHaveAttribute(
+    "data-origin-state",
+    "complete",
+    { timeout: 8_000 },
   );
 };
