@@ -2,6 +2,8 @@ import { initializeCover } from "./cover/cover.js";
 import { initializeOrigin } from "./origin/origin.js";
 import { initializeMemory } from "./memory/memory.js";
 import { initializePresent } from "./present/present.js";
+import { initializeContextualHelp } from "./shared/contextual-help.js";
+import { initializeHelpGuide } from "./shared/help-guide.js";
 import { initializeScrollCue } from "./shared/scroll-cue.js";
 
 const sectionInitializers = {
@@ -23,6 +25,8 @@ const initializeApp = async () => {
   });
 
   initializeScrollCue();
+  initializeContextualHelp();
+  initializeHelpGuide();
   debugSession?.focus();
 };
 

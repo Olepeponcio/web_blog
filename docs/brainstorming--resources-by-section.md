@@ -118,17 +118,9 @@ Prioridades:
 
 ### Recursos visuales
 
-- Mucho espacio vacío.
-- Texto progresivamente más grande o más aislado.
-- Composición más abstracta.
-- Líneas o elementos que sugieran continuidad.
-- paneles estilo card para el texto de formato minimalista, con fondo con grado de transparencia. Estilo ciberpunk.
-- los paneles se estaran cargados cuando se entre en el vieport de la sección. en dispositivos pequeños los paneles están organizados de manera flex, en columna con cierto margen de distancia entre ellos.
-- seguidos por la animacion de la cinta. al final de la cinta habra una imagen de un bote de cristal, cuyo fondo será un wall invisible.
-- del borde superior de la cinta se hace spawn de las imagenes de objetos de manera random, inteminable mientras se permanezca en la seccion.
-  -los objetos caeran dentro de la botella que tendrá wall para evitar que los objetos salgan en sus margenes, unica entrada el cuello de la bote.
-  -los objetos deben tener física al igual que el bote de crista.
-  -En resoluciones superiores las tarjetas con el texto se posicionan a la izquierda y la cinta y a la derecha.
+- la escena entrada de scroll ya está cargada, unos paneles img**card con el texto cargado, parte del texto está posicionado dentro de img**card_canion. crear botón y posicionarlo en el hueco de canion, cuando el objeto boton es disparado, una secuencia de animacion se produce, un alo electríco plateado bordea el objeto img\*\*card_canion y éste dispara por su boca en dirección a la derecha, una rafaga de objetos: img\_\_ [objetos del directorio: img__compass, img__hammer, img__book, etc]. las imagenes lanzadas tienen físicas, hacen un arco ascendente y luego uno descendente para caer sin sobrepasar el límite inferior del viewport que emula a un wall.
+
+textos de img**cards, img**card_canion:
 
 ### Recursos interactivos
 

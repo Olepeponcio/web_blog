@@ -58,7 +58,10 @@
 @media (width <= 48rem) {
   .accessibility-toolbar {
     inset-block-start: auto;
-    inset-block-end: max(1rem, env(safe-area-inset-bottom));
+    inset-block-end: calc(
+      max(1.5rem, env(safe-area-inset-bottom)) +
+        clamp(3.2rem, 4.4vw, 4rem) + 0.75rem
+    );
     inset-inline-start: 50%;
     flex-direction: row;
     transform: translateX(-50%);

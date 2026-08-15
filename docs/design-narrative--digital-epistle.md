@@ -413,6 +413,8 @@ La sección `future` existe como bloque editorial. Sus imágenes están disponib
 pero no están integradas en una interacción ni existe un módulo JavaScript
 específico.
 
+desarrollo narrativo
+
 ### Recursos disponibles
 
 - [`img__block_01.png`](../src/assets/images/05-future/img__block_01.png)

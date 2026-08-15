@@ -28,4 +28,21 @@
   --color-contextual-help-surface: #fff8dc;
   --color-contextual-help-border: #191714;
   --color-contextual-help-text: #191714;
+  --textura-papel-grueso:
+    radial-gradient(
+      circle at 20% 30%,
+      rgb(255 255 255 / 35%) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 70% 65%,
+      rgb(120 100 60 / 1%) 0 1px,
+      transparent 2px
+    ),
+    linear-gradient(
+      115deg,
+      rgb(255 253 239),
+      rgb(244 238 210) 20%,
+      rgb(252 248 226)
+    );
 }

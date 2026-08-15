@@ -102,10 +102,16 @@ test.describe("Responsive estructural", () => {
     expect(box).not.toBeNull();
 
     if (viewport.width <= 768) {
+      const scrollCue = page.locator("[data-scroll-cue]");
+
+      await expect(scrollCue).toBeVisible();
+      const scrollCueBox = await scrollCue.boundingBox();
+
+      expect(scrollCueBox).not.toBeNull();
       expect(direction).toBe("row");
       expect(Math.abs(box.x + box.width / 2 - viewport.width / 2)).toBeLessThanOrEqual(1);
       expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
-      expect(viewport.height - (box.y + box.height)).toBeGreaterThanOrEqual(15);
+      expect(scrollCueBox.y - (box.y + box.height)).toBeGreaterThanOrEqual(11);
       return;
     }
 

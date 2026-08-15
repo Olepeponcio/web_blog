@@ -19,9 +19,9 @@
   border: 0.125rem solid var(--color-help-border);
   border-radius: 0.75rem;
   overflow: auto;
-  background-color: var(--color-help-surface);
-  box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%);
-  font-family: "Atkinson Hyperlegible", sans-serif;
+  background: var(--textura-papel-grueso);
+  box-shadow: 0 3rem 4rem rgb(0 0 0 / 35%);
+  font-family: 'Atkinson Hyperlegible', sans-serif;
   line-height: 1.5;
 }
 
@@ -76,13 +76,13 @@
   padding: 0.1em 0.35em;
   border: 0.0625rem solid currentColor;
   border-radius: 0.25rem;
-  font-family: "JetBrains Mono", monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-style: italic;
   font-weight: 550;
   white-space: nowrap;
 }
 
-body[data-help-guide-open="true"][data-page-state] {
+body[data-help-guide-open='true'][data-page-state] {
   overflow: hidden;
 }
 

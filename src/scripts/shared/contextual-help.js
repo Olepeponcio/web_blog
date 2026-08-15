@@ -219,7 +219,9 @@ export const initializeContextualHelp = () => {
 
   const syncAvailability = () => {
     const unavailable = hasConflictingInteraction();
-    toggle.disabled = unavailable;
+    if (toggle.disabled !== unavailable) {
+      toggle.disabled = unavailable;
+    }
     toggle.setAttribute("aria-disabled", String(unavailable));
     if (unavailable && active) setActive(false);
     if (!unavailable) requestRender();
