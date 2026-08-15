@@ -21,4 +21,11 @@
   --color-present-sun-inner-glow: rgb(255 239 170 / 55%);
   --color-present-message-background: rgb(12 18 28 /55%);
   --color-present-message-text: #fff5df;
+  --color-help-backdrop: rgb(15 23 42 / 82%);
+  --color-help-surface: #f7f3e8;
+  --color-help-border: #191714;
+  --color-help-focus: #ffd166;
+  --color-contextual-help-surface: #fff8dc;
+  --color-contextual-help-border: #191714;
+  --color-contextual-help-text: #191714;
 }

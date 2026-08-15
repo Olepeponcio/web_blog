@@ -1,0 +1,24 @@
+.contextual-help__tooltip {
+  position: fixed;
+  z-index: 1000;
+  inset: 0 auto auto 0;
+  inline-size: max-content;
+  max-inline-size: min(18rem, calc(100vw - 1rem));
+  padding: 0.55rem 0.7rem;
+  border: 0.1rem solid var(--color-contextual-help-border);
+  border-radius: 0.4rem;
+  background-color: var(--color-contextual-help-surface);
+  box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 28%);
+  color: var(--color-contextual-help-text);
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  font-weight: 400;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+@media (max-width: 34rem) {
+  .contextual-help__tooltip {
+    max-inline-size: min(14rem, calc(100vw - 1rem));
+  }
+}

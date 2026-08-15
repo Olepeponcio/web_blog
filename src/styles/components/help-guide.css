@@ -1,0 +1,104 @@
+.help-guide {
+  inline-size: min(46rem, calc(100% - 2rem));
+  max-block-size: calc(100svh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.help-guide::backdrop {
+  background-color: var(--color-help-backdrop);
+}
+
+.help-guide__panel {
+  max-block-size: calc(100svh - 2rem);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 0.125rem solid var(--color-help-border);
+  border-radius: 0.75rem;
+  overflow: auto;
+  background-color: var(--color-help-surface);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%);
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  line-height: 1.5;
+}
+
+.help-guide__title {
+  font-size: clamp(1.75rem, 1.35rem + 2vw, 2.75rem);
+  font-weight: 700;
+}
+
+.help-guide__title:focus {
+  outline: none;
+}
+
+.help-guide__intro {
+  margin-block-start: 0.5rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+}
+
+.help-guide__table-wrapper {
+  margin-block-start: 1.5rem;
+  overflow-x: auto;
+}
+
+.help-guide__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+}
+
+.help-guide__caption {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.help-guide__table th,
+.help-guide__table td {
+  padding: 0.75rem;
+  border-block-end: 0.0625rem solid var(--color-help-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.help-guide__table th {
+  font-weight: 700;
+}
+
+.help-guide__table kbd {
+  display: inline-block;
+  padding: 0.1em 0.35em;
+  border: 0.0625rem solid currentColor;
+  border-radius: 0.25rem;
+  font-family: "JetBrains Mono", monospace;
+  font-style: italic;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+body[data-help-guide-open="true"][data-page-state] {
+  overflow: hidden;
+}
+
+@media (max-width: 34rem) {
+  .help-guide {
+    inline-size: calc(100% - 1rem);
+    max-block-size: calc(100svh - 1rem);
+  }
+
+  .help-guide__panel {
+    max-block-size: calc(100svh - 1rem);
+    padding-block-start: 4.5rem;
+  }
+
+  .help-guide__table th,
+  .help-guide__table td {
+    padding: 0.6rem 0.45rem;
+  }
+}

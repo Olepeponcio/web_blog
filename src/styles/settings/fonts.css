@@ -15,3 +15,30 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../../assets/fonts/Atkinson_Hyperlegiblejetbrains_mono/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../../assets/fonts/Atkinson_Hyperlegiblejetbrains_mono/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../assets/fonts/font_jetbrains_mono/JetBrainsMono-Italic-VariableFont_wght.ttf")
+    format("truetype-variations");
+  font-weight: 100 800;
+  font-style: italic;
+  font-display: swap;
+}

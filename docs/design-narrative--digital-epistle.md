@@ -301,7 +301,12 @@ La validación está documentada en
 
 ## 4. PRESENT
 
-### Marco aprobado para el HITO 4
+### Estado implementado del HITO 4
+
+La implementación vigente se encuentra en `develop`. La versión `v3.0.2` de
+`main` registra el refactor responsive de esta sección y una prueba local fallida
+en smartphone; la comprobación manual posterior en dispositivo real permanece
+pendiente.
 
 La transición desde `memory` hacia `present` se controla mediante el scroll y es
 reversible. La etiqueta `Presente` precede al encabezado en negrita «Hoy ya no
@@ -339,11 +344,11 @@ La secuencia se pausa durante una interacción y se detiene fuera de la escena.
 Sus zonas activas permutan la imagen y muestran texto mientras mantienen `hover`,
 foco o activación táctil:
 
-| Zona | Imagen activa | Texto |
-| :-- | :-- | :-- |
-| `Always` | `img__road_sing_02.png` | «Así se construye esta página.» |
+| Zona      | Imagen activa           | Texto                                                                     |
+| :-------- | :---------------------- | :------------------------------------------------------------------------ |
+| `Always`  | `img__road_sing_02.png` | «Así se construye esta página.»                                           |
 | `Forward` | `img__road_sing_03.png` | «No como una colección de componentes, sino como una secuencia de ideas.» |
-| Sol | Sin permuta | «Un espacio que invita a avanzar.» |
+| Sol       | Sin permuta             | «Un espacio que invita a avanzar.»                                        |
 
 Los textos de `Always` y `Forward` se sitúan respectivamente en las zonas
 superior izquierda y superior derecha. El texto del sol se centra dentro de la
@@ -353,14 +358,14 @@ y presenta un halo pulsante como invitación visual.
 El scroll no se bloquea. Las interacciones no condicionan el avance hacia la
 siguiente sección y dispondrán de equivalencia para teclado y entrada táctil.
 
-### Estados previstos
+### Estados implementados
 
-| Estado | Responsabilidad |
-| :-- | :-- |
-| `idle` | Escena fuera del tramo activo. |
-| `writing` | Escritura o rebobinado del primer bloque. |
-| `drawing` | Revelado y escalado reversibles de la carretera. |
-| `interactive` | Señal y sol disponibles. |
+| Estado        | Responsabilidad                                  |
+| :------------ | :----------------------------------------------- |
+| `idle`        | Escena fuera del tramo activo.                   |
+| `writing`     | Escritura o rebobinado del primer bloque.        |
+| `drawing`     | Revelado y escalado reversibles de la carretera. |
+| `interactive` | Señal y sol disponibles.                         |
 
 El progreso común se divide en fases: escritura entre `0–0.30`, pausa narrativa
 entre `0.30–0.35` y carretera entre `0.35–0.80`. Desde ese punto, el escenario
@@ -387,11 +392,11 @@ escritura progresiva y mensajes interactivos.
 
 ### Módulos responsables
 
-| Ámbito | JavaScript | CSS |
-| :-- | :-- | :-- |
-| Coordinación | [`present.js`](../src/scripts/present/present.js) | [`present.css`](../src/styles/components/present.css) |
-| Escritura y carretera | [`present-progress.js`](../src/scripts/present/present-progress.js) | [`present.css`](../src/styles/components/present.css) |
-| Señal y sol | [`present-interactions.js`](../src/scripts/present/present-interactions.js) | [`present.css`](../src/styles/components/present.css) |
+| Ámbito                | JavaScript                                                                  | CSS                                                   |
+| :-------------------- | :-------------------------------------------------------------------------- | :---------------------------------------------------- |
+| Coordinación          | [`present.js`](../src/scripts/present/present.js)                           | [`present.css`](../src/styles/components/present.css) |
+| Escritura y carretera | [`present-progress.js`](../src/scripts/present/present-progress.js)         | [`present.css`](../src/styles/components/present.css) |
+| Señal y sol           | [`present-interactions.js`](../src/scripts/present/present-interactions.js) | [`present.css`](../src/styles/components/present.css) |
 
 La escritura conserva una copia semántica y una representación visual por
 caracteres. La carretera se muestra dentro de un SVG mediante una máscara cuyo
@@ -488,7 +493,7 @@ posee lógica JavaScript propia.
 | Fuentes locales               | [`fonts.css`](../src/styles/settings/fonts.css)                                                                     |
 | Base documental               | [`base.css`](../src/styles/elements/base.css)                                                                       |
 
-## Responsive y accesibilidad
+## Responsive
 
 El proyecto adopta un modelo híbrido:
 
@@ -499,6 +504,75 @@ El proyecto adopta un modelo híbrido:
 - container queries cuando un componente depende de su escena;
 - CSS como autoridad de geometría final;
 - JavaScript limitado a estados, eventos y valores transitorios.
+
+## Accesibilidad
+
+Seguimos las Pautas de Accesibilidad para el Contenido Web (WCAG) del W3C para
+que la experiencia pueda ser utilizada por el mayor número posible de personas,
+incluidas aquellas con discapacidad.
+
+### Tabla de principios
+
+| Principio    | Significado                                                                                    |
+| :----------- | :--------------------------------------------------------------------------------------------- |
+| Perceptible  | La información y los componentes deben presentarse de formas que las personas puedan percibir. |
+| Operable     | La interfaz y la navegación deben poder utilizarse mediante distintas modalidades de entrada.  |
+| Comprensible | La información y el funcionamiento de la interfaz deben resultar claros y predecibles.         |
+| Robusto      | El contenido debe ser compatible con distintos agentes de usuario y tecnologías de asistencia. |
+
+### Objetivo técnico y alcance legal
+
+El proyecto adopta WCAG 2.2 nivel AA como objetivo técnico de accesibilidad.
+
+> [!NOTE]
+> El Real Decreto 1112/2018 exige que la accesibilidad se considere de forma
+> integral durante el diseño, la gestión, el mantenimiento y la actualización
+> de los sitios incluidos en su ámbito de aplicación. Su mención no presupone
+> que este proyecto esté legalmente sujeto a dicha norma.
+
+### Recursos y definición de uso
+
+- **Atkinson Hyperlegible:** fuente principal de la guía, en peso regular para
+  explicaciones y negrita para encabezados. Fue diseñada por Braille Institute
+  para lectores con baja visión y diferencia caracteres mediante formas
+  inequívocas, contraformas abiertas y pares distinguibles. Su uso favorece la
+  legibilidad, pero no sustituye requisitos como contraste, tamaño, espaciado y
+  posibilidad de ampliación. Fuente:
+  [Braille Institute — Atkinson Hyperlegible](https://www.brailleinstitute.org/freefont/).
+- **JetBrains Mono Italic Variable:** fuente secundaria para representar teclas
+  y comandos. Su carácter monoespaciado separa visualmente la entrada del teclado
+  de su explicación; `monospace` queda como alternativa del sistema.
+- **`icon__keyboard_onscreen.svg`:** icono visible del control de apertura y cierre.
+  Se incluye como imagen decorativa dentro de botones nativos cuyo nombre
+  accesible describe la acción, por lo que no duplica información para lectores
+  de pantalla.
+- **Barra de accesibilidad:** agrupa la guía de teclado, el estado pendiente de
+  narración y el activador de ayudas contextuales. Se mantiene fija en el lateral
+  izquierdo en resoluciones amplias. Hasta `48rem` adopta una distribución
+  horizontal, centrada en la parte inferior y separada mediante el área segura
+  del dispositivo para favorecer el alcance táctil.
+- **`icon__ear_sound_disable.svg` e `icon__ear_sound.svg`:** representan los
+  estados futuro desactivado y activo de la narración. Solo el primero es visible;
+  el espacio se expone como función pendiente y no ejecuta audio.
+- **`icon__text_tools.svg`:** activa o desactiva explicaciones persistentes para
+  controles narrativos, imágenes informativas y recursos que cambian de estado.
+  El botón comunica el estado mediante `aria-pressed` y admite ratón, entrada
+  táctil y teclado.
+- **Ayudas contextuales:** complementan los nombres y alternativas existentes,
+  sin sustituir `alt`, `aria-label` ni `aria-describedby`. Solo se muestran para
+  elementos visibles y disponibles, se anclan mediante coordenadas del viewport,
+  se recalculan al desplazar o redimensionar y pueden cerrarse con el activador o
+  con `Escape`. El alcance sigue el
+  [tutorial de imágenes de W3C WAI](https://www.w3.org/WAI/tutorials/images/) y
+  el criterio
+  [WCAG 1.4.13 — Content on Hover or Focus](https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus).
+- **Diálogo HTML nativo:** la guía utiliza `<dialog>` modal para trasladar y
+  contener el foco, volver inoperable el documento posterior y admitir cierre
+  mediante `Escape`. Estas capacidades siguen la
+  [técnica H102 de W3C WAI](https://www.w3.org/WAI/WCAG22/Techniques/html/H102).
+- **Texto adaptable:** la composición admite ampliación y cambios de espaciado
+  sin depender de texto rasterizado, de acuerdo con el criterio
+  [WCAG 2.2 — Text Spacing](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing).
 
 Las interacciones implementadas contemplan teclado, Pointer Events y
 `prefers-reduced-motion`. Si una sección no cabe verticalmente, no debe mantener

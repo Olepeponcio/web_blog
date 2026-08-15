@@ -1,6 +1,6 @@
 {
   "name": "front-end--web-blog",
-  "version": "2.0.0",
+  "version": "3.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,10 @@
   },
   "type": "module",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
+    "eslint": "^10.8.1",
+    "globals": "^17.11.0",
     "vite": "^8.2.1"
   }
 }

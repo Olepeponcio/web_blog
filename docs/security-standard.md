@@ -62,7 +62,7 @@ del futuro alojamiento, CDN o backend.
 
 ## Revisión de exposición local
 
-Revisión realizada sobre el estado de `v3.0.0`:
+Revisión actualizada para la versión publicada `v3.0.2`:
 
 - no se detectan rutas absolutas en README ni en `docs/`;
 - no existen archivos `.env`, claves privadas o certificados versionados;
@@ -78,9 +78,9 @@ Permanece como superficie externa Font Awesome mediante cdnjs. Continúa pendien
 incorporar SRI o alojar el recurso localmente y definir una CSP compatible antes
 de publicar.
 
-La etiqueta Git es `v3.0.0`, mientras `package.json` declara `2.0.0`. No constituye
-por sí mismo una fuga de seguridad, pero debe corregirse como control de
-trazabilidad y cadena de suministro.
+La etiqueta Git canónica `v3.0.2` y el valor `3.0.2` de `package.json` están
+sincronizados. La etiqueta histórica `v.3.1.0` no sigue la convención acordada y
+no se utiliza como referencia de publicación ni de trazabilidad.
 
 ## Controles durante el desarrollo
 

@@ -5,6 +5,9 @@
 @import url("./components/cover.css");
 @import url("./components/reveal-text.css");
 @import url("./components/scroll-cue.css");
+@import url("./components/accessibility-toolbar.css");
+@import url("./components/help-guide.css");
+@import url("./components/contextual-help.css");
 @import url("./components/narrative-section.css");
 @import url("./components/origin.css");
 @import url("./components/memory.css");

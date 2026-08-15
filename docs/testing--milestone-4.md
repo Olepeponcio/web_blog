@@ -74,3 +74,10 @@ y el grupo de progreso se repitió con 25 de 25 casos superados.
 
 Las revisiones manuales `M25–M32` continúan pendientes antes del cierre completo
 del HITO 4.
+
+## Contexto de versión
+
+La versión `v3.0.2` publicada en `main` registra en su anotación un fallo durante
+la prueba local en smartphone. Los cambios responsive posteriores están en
+`develop`. Los cinco proyectos de Playwright validan viewports simulados, pero
+no sustituyen la comprobación manual pendiente en un dispositivo físico.

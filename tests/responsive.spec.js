@@ -88,4 +88,27 @@ test.describe("Responsive estructural", () => {
     expect(box.width).toBeLessThanOrEqual(expectedMaximum + 1);
     expect(box.width).toBeLessThan(viewport.width);
   });
+
+  test("F06 — la barra de accesibilidad se adapta al alcance táctil", async ({
+    page,
+  }) => {
+    const toolbar = page.locator(".accessibility-toolbar");
+    const box = await toolbar.boundingBox();
+    const viewport = page.viewportSize();
+    const direction = await toolbar.evaluate(
+      (element) => getComputedStyle(element).flexDirection,
+    );
+
+    expect(box).not.toBeNull();
+
+    if (viewport.width <= 768) {
+      expect(direction).toBe("row");
+      expect(Math.abs(box.x + box.width / 2 - viewport.width / 2)).toBeLessThanOrEqual(1);
+      expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+      expect(viewport.height - (box.y + box.height)).toBeGreaterThanOrEqual(15);
+      return;
+    }
+
+    expect(direction).toBe("column");
+  });
 });

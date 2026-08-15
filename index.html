@@ -24,10 +24,133 @@
   </head>
 
   <body class="page" data-page-state="sealed">
+    <aside class="accessibility-toolbar" aria-label="Recursos de accesibilidad">
+      <button
+        class="accessibility-toolbar__control"
+        type="button"
+        data-help-guide-open
+        aria-label="Abrir guía de navegación"
+        aria-controls="help-guide"
+        aria-expanded="false"
+        disabled
+      >
+        <img
+          src="/src/assets/icons/icon__keyboard_onscreen.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
+
+      <span
+        class="accessibility-toolbar__control accessibility-toolbar__control--pending"
+        role="img"
+        aria-label="Narración guiada, próximamente"
+        aria-disabled="true"
+      >
+        <img
+          src="/src/assets/icons/icon__ear_sound_disable.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          class="accessibility-toolbar__sound-active"
+          src="/src/assets/icons/icon__ear_sound.svg"
+          alt=""
+          aria-hidden="true"
+          hidden
+        />
+      </span>
+
+      <button
+        class="accessibility-toolbar__control"
+        type="button"
+        data-contextual-help-toggle
+        aria-label="Mostrar ayudas contextuales"
+        aria-pressed="false"
+        disabled
+      >
+        <img
+          src="/src/assets/icons/icon__text_tools.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
+    </aside>
+
+    <dialog
+      class="help-guide"
+      id="help-guide"
+      data-help-guide
+      aria-labelledby="help-guide-title"
+    >
+      <button
+        class="accessibility-toolbar__control help-guide__toggle--close"
+        type="button"
+        data-help-guide-close
+        aria-label="Cerrar guía de navegación"
+      >
+        <img
+          src="/src/assets/icons/icon__keyboard_onscreen.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
+
+      <div class="help-guide__panel">
+        <h2 class="help-guide__title" id="help-guide-title" tabindex="-1">
+          Guía de navegación
+        </h2>
+        <p class="help-guide__intro">
+          Utiliza estos comandos para recorrer e interactuar con la carta.
+        </p>
+
+        <div class="help-guide__table-wrapper">
+          <table class="help-guide__table">
+            <caption class="help-guide__caption">
+              Comandos disponibles mediante teclado
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Comando</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>Tab</kbd></td>
+                <td>Avanza al siguiente control interactivo.</td>
+              </tr>
+              <tr>
+                <td><kbd>Mayús</kbd> + <kbd>Tab</kbd></td>
+                <td>Retrocede al control interactivo anterior.</td>
+              </tr>
+              <tr>
+                <td><kbd>Intro</kbd> o <kbd>Espacio</kbd></td>
+                <td>Activa el control que tiene el foco.</td>
+              </tr>
+              <tr>
+                <td><kbd>↑</kbd> <kbd>↓</kbd></td>
+                <td>Desplaza la página verticalmente.</td>
+              </tr>
+              <tr>
+                <td><kbd>Inicio</kbd> o <kbd>Fin</kbd></td>
+                <td>Va al principio o al final de la página.</td>
+              </tr>
+              <tr>
+                <td><kbd>Esc</kbd></td>
+                <td>Cierra esta guía.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </dialog>
+
     <header class="cover" id="cover">
       <div
         class="cover__envelope"
         data-envelope
+        data-contextual-help="Arrastra el sobre hacia abajo o pulsa Intro o Espacio para desplegarlo."
         role="button"
         tabindex="0"
         aria-label="Desplegar el sobre"
@@ -54,6 +177,7 @@
             class="cover__seal"
             type="button"
             data-seal
+            data-contextual-help="Pulsa para romper el sello y abrir la carta."
             disabled
             aria-label="Abrir la carta"
           >
@@ -129,6 +253,7 @@
               class="origin__jar-trigger"
               type="button"
               data-origin-jar-trigger
+              data-contextual-help="Pulsa para abrir el bote de tinta. Después, vuelve a pulsar para revelar el texto."
               aria-label="Abrir el bote de tinta"
               disabled
             >
@@ -180,6 +305,7 @@
               class="memory__board"
               src="/src/assets/images/03-memory/img__board_1.webp"
               data-memory-board
+              data-contextual-help="Escena de escritorio con tablero, interruptor, bolígrafo y postal."
               alt="Escritorio con un tablero de corcho cubierto de recuerdos"
             />
 
@@ -187,6 +313,7 @@
               class="memory__hotspot memory__hotspot--switch"
               type="button"
               data-memory-switch
+              data-contextual-help="Pulsa Intro o Espacio para encender la escena."
               aria-label="Encender la escena"
               disabled
             ></button>
@@ -201,7 +328,8 @@
               class="memory__hotspot memory__hotspot--instrument"
               type="button"
               data-memory-instrument
-              aria-label="Activar el instrumento luminoso"
+              data-contextual-help="Pulsa Intro o Espacio para activar el bolígrafo luminoso."
+              aria-label="Activar el bolígrafo luminoso"
               disabled
             ></button>
 
@@ -215,6 +343,7 @@
               class="memory__postcard"
               type="button"
               data-memory-postcard
+              data-contextual-help="Pulsa para girar la postal y leer el reverso."
               aria-label="Postal fijada al tablero"
               disabled
             >
@@ -302,6 +431,7 @@
               <svg
                 class="present__road"
                 data-present-road
+                data-contextual-help="Carretera que avanza hacia el horizonte."
                 viewBox="0 0 1640 943"
                 role="img"
                 aria-label="Carretera que avanza hacia el horizonte"
@@ -333,12 +463,14 @@
                 <img
                   src="/src/assets/images/04-present/img__road_sing_01.png"
                   data-present-sign-image
+                  data-contextual-help="Señal con las direcciones Always y Forward."
                   alt="Señal con las direcciones Always y Forward"
                 />
                 <button
                   class="present__hotspot present__hotspot--always"
                   type="button"
                   data-present-trigger="always"
+                  data-contextual-help="Pulsa para descubrir cómo se construye esta página."
                   aria-label="Mostrar el principio Always"
                   disabled
                 ></button>
@@ -346,6 +478,7 @@
                   class="present__hotspot present__hotspot--forward"
                   type="button"
                   data-present-trigger="forward"
+                  data-contextual-help="Pulsa para mostrar la siguiente idea del recorrido."
                   aria-label="Mostrar el principio Forward"
                   disabled
                 ></button>
@@ -355,6 +488,7 @@
                 class="present__hotspot present__hotspot--sun"
                 type="button"
                 data-present-trigger="sun"
+                data-contextual-help="Pulsa para descubrir el propósito del camino."
                 aria-label="Mostrar el propósito del camino"
                 disabled
               ></button>
@@ -526,6 +660,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
+                data-contextual-help="Abre el perfil de LinkedIn en una pestaña nueva."
               >
                 <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
               </a>
@@ -534,6 +669,7 @@
               <span
                 class="site-footer__social-link site-footer__social-link--disabled"
                 aria-label="Instagram, enlace pendiente"
+                data-contextual-help="Enlace de Instagram todavía no disponible."
                 aria-disabled="true"
               >
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>

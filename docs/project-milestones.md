@@ -363,8 +363,8 @@ después de redimensionar y los recorridos por teclado.
 
 ## Hito 4 — Presente y carretera reversible
 
-**Estado:** implementación y validación automatizada completadas; revisión manual
-pendiente.
+**Estado:** implementación y validación automatizada completadas en `develop`;
+revisión manual general y comprobación en smartphone real pendientes.
 
 ### Objetivo
 
@@ -440,6 +440,10 @@ Retroceso
 
 La matriz se encuentra en
 [`testing--milestone-4.md`](testing--milestone-4.md).
+
+La etiqueta publicada `v3.0.2` registra una prueba local fallida en smartphone.
+Los refactors posteriores pertenecen a `develop`; el hito no se cerrará hasta
+repetir y documentar esa comprobación sobre un dispositivo real.
 
 ---
 

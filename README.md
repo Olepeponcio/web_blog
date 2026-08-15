@@ -4,9 +4,9 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 ## Estado del proyecto
 
-La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. Los hitos 1, 2, 3 y 4 están implementados y cuentan con validación automatizada. Las revisiones manuales de los hitos 2, 3 y 4 permanecen pendientes de registro.
+La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. Los hitos 1, 2, 3 y 4 están implementados y cuentan con validación automatizada en `develop`. Las revisiones manuales de los hitos 2, 3 y 4 permanecen pendientes de registro.
 
-La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada vigente recorre cinco viewports y debe repetirse después de cada cambio funcional.
+La versión consolidada más reciente en `main` es `v3.0.2` y el manifiesto está sincronizado en `3.0.2`. La anotación de la etiqueta registra el refactor responsive de `present` y una prueba local fallida en smartphone. `develop` incorpora cambios posteriores, pero la comprobación manual en un dispositivo real continúa pendiente. La batería automatizada vigente recorre cinco viewports y debe repetirse después de cada cambio funcional.
 
 ## Registro técnico
 
@@ -31,7 +31,7 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Convención    | JavaScript            | Nombres semánticos + ES Modules                |   Aplicado   |
 | Convención    | Responsive            | Enfoque híbrido                                |   Adoptado   |
 | Convención    | Nomenclatura          | Inglés técnico                                 |   Adoptado   |
-| Versionado    | Proyecto              | manifiesto `2.0.0` / etiqueta `v3.0.0`         |   Revisar    |
+| Versionado    | Proyecto              | manifiesto `3.0.2` / etiqueta `v3.0.2`         | Sincronizado |
 | Git           | Ramas principales     | `main` + `develop`                             |  constante   |
 
 ### Observaciones del registro
@@ -39,6 +39,7 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 - El flujo funcional del hito 1 está implementado mediante HTML, CSS y JavaScript modular.
 - El hito 2 implementa la apertura del bote, el revelado con tinta y la salida hacia `memory`.
 - El hito 3 implementa la escena de Memoria, sus controles y la postal interactiva.
+- El hito 4 implementa la escritura reversible, la carretera y las interacciones de `present`.
 - Los estados de cada sección están centralizados y las transiciones entre secciones utilizan eventos narrativos.
 - CSS conserva la autoridad sobre la geometría final; JavaScript calcula únicamente estados y animaciones transitorias.
 - La arquitectura por responsabilidad y las convenciones del proyecto ya están aplicadas.
@@ -182,7 +183,9 @@ parámetro.
 
 ## Control de versiones
 
-El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop`, y subramas, concentran el trabajo en curso y `main` recoge las versiones consolidadas.
+El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` y sus subramas concentran el trabajo en curso; `main` recoge las versiones consolidadas. La versión publicada vigente es `v3.0.2`.
+
+La etiqueta histórica `v.3.1.0` no se considera canónica porque no respeta el formato `vMAYOR.MINOR.PATCH`. Se conserva como antecedente y no sustituye a `v3.0.2`.
 
 ## Trabajo realizado
 
@@ -211,3 +214,5 @@ El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop`, 
 23. Conversión de los once recursos activos a WebP: reducción aproximada de 23 MB a 3,5 MB.
 24. Centralización de estados y eventos narrativos; adopción de Pointer Events y recorridos por teclado.
 25. Validación automatizada vigente sobre cinco viewports.
+26. Implementación del HITO 4: escritura reversible, carretera progresiva, señal y sol interactivos.
+27. Refactor responsive de `present` y validación automatizada; comprobación manual en smartphone pendiente.
