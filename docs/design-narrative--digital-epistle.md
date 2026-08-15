@@ -325,9 +325,12 @@ un dibujo progresivo iniciado en la esquina superior izquierda y escala hasta su
 tamaño final. El progreso depende del scroll: al retroceder, escala y revelado se
 invierten como una cinta rebobinada.
 
-Escritura y carretera ocupan dos recorridos verticales consecutivos. La sección
-mantiene el fondo transparente para conservar la textura global; la carretera no
-se reduce para crear separación, sino que aparece en un viewport posterior.
+Escritura y carretera comparten un único recorrido vertical y un escenario
+`sticky` de un viewport. El texto se revela primero, permanece fijado en su
+posición izquierda y acompaña después al dibujo de la carretera. Ambos avances
+dependen del mismo progreso de scroll, por lo que texto y Road rebobinan de forma
+determinista al retroceder. La sección mantiene el fondo transparente para
+conservar la textura global.
 
 Una señal se superpone junto al tramo de carretera más próximo al primer plano.
 Se sitúa a la derecha, entre los arbustos del primer plano. Mientras la escena es
@@ -358,6 +361,10 @@ siguiente sección y dispondrán de equivalencia para teclado y entrada táctil.
 | `writing` | Escritura o rebobinado del primer bloque. |
 | `drawing` | Revelado y escalado reversibles de la carretera. |
 | `interactive` | Señal y sol disponibles. |
+
+El progreso común se divide en fases: escritura entre `0–0.30`, pausa narrativa
+entre `0.30–0.35` y carretera entre `0.35–0.80`. Desde ese punto, el escenario
+permanece interactivo hasta abandonar su pista sticky.
 
 El progreso visual se deriva de la posición del scroll y no se conserva como
 una finalización permanente. Con `prefers-reduced-motion: reduce`, el contenido

@@ -27,8 +27,7 @@ export const selectors = {
   memoryPostcardCard: "[data-memory-postcard-card]",
   present: "[data-present]",
   presentWriting: "[data-present-writing]",
-  presentWritingRunway: "[data-present-writing-runway]",
-  presentRoadRunway: "[data-present-road-runway]",
+  presentSequenceRunway: "[data-present-sequence-runway]",
   presentRoadScene: "[data-present-road-scene]",
   presentRoad: "[data-present-road]",
   presentSign: "[data-present-sign]",
@@ -177,17 +176,13 @@ export const completeMemory = async (page) => {
   );
 };
 
-export const setPresentProgress = async (page, progress, phase = "writing") => {
-  await page.evaluate(({ nextProgress, nextPhase }) => {
-    const selector =
-      nextPhase === "road"
-        ? "[data-present-road-runway]"
-        : "[data-present-writing-runway]";
-    const runway = document.querySelector(selector);
+export const setPresentProgress = async (page, progress) => {
+  await page.evaluate((nextProgress) => {
+    const runway = document.querySelector("[data-present-sequence-runway]");
     const travel = runway.offsetHeight - window.innerHeight;
     const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
     window.scrollTo(0, runwayTop + travel * nextProgress);
-  }, { nextProgress: progress, nextPhase: phase });
+  }, progress);
   await page.waitForTimeout(50);
 };
 
@@ -199,5 +194,5 @@ export const reachPresent = async (page, progress = 0.9) => {
     delete document.body.dataset.originScrollLocked;
     delete document.body.dataset.memoryScrollLocked;
   });
-  await setPresentProgress(page, progress, "road");
+  await setPresentProgress(page, progress);
 };

@@ -69,6 +69,7 @@ front-end--web-blog/
 │   ├── assets/fonts/
 │   ├── assets/images/
 │   ├── scripts/cover/
+│   ├── scripts/debug/
 │   ├── scripts/origin/
 │   ├── scripts/memory/
 │   ├── scripts/present/
@@ -163,6 +164,21 @@ Vite constituye el entorno de ejecución del proyecto. `pnpm dev` transforma los
 módulos y recursos durante el desarrollo; `pnpm build` genera `dist/`; y
 `pnpm preview` sirve esa compilación para su revisión local. Las importaciones
 estáticas de imágenes desde JavaScript se resuelven dentro de este flujo.
+
+### Acceso directo de depuración
+
+Durante el desarrollo puede omitirse el recorrido narrativo anterior mediante
+el parámetro `debugSection`. El módulo objetivo conserva su inicialización real;
+las secciones anteriores no se inicializan.
+
+```text
+pnpm dev -- --open "/?debugSection=present"
+```
+
+Valores disponibles: `cover`, `origin`, `memory` y `present`. Sin parámetro se
+mantiene el recorrido completo. El acceso directo depende de
+`import.meta.env.DEV`, por lo que la compilación de producción ignora el
+parámetro.
 
 ## Control de versiones
 

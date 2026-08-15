@@ -4,8 +4,26 @@ import { initializeMemory } from "./memory/memory.js";
 import { initializePresent } from "./present/present.js";
 import { initializeScrollCue } from "./shared/scroll-cue.js";
 
-initializeCover();
-initializeOrigin();
-initializeMemory();
-initializePresent();
-initializeScrollCue();
+const sectionInitializers = {
+  cover: initializeCover,
+  origin: initializeOrigin,
+  memory: initializeMemory,
+  present: initializePresent,
+};
+
+const initializeApp = async () => {
+  const debugSession = import.meta.env.DEV
+    ? (await import("./debug/section-debug.js")).createSectionDebug()
+    : null;
+
+  debugSession?.prepare();
+
+  Object.entries(sectionInitializers).forEach(([sectionName, initialize]) => {
+    if (!debugSession || debugSession.shouldInitialize(sectionName)) initialize();
+  });
+
+  initializeScrollCue();
+  debugSession?.focus();
+};
+
+initializeApp();

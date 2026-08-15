@@ -2,8 +2,9 @@
 
 ## Propósito
 
-Validar la escritura reversible, el dibujo y escalado de la carretera y las
-interacciones de señal y sol sin bloquear el recorrido narrativo.
+Validar la escritura reversible, su permanencia sticky durante Road, el dibujo y
+escalado de la carretera y las interacciones de señal y sol sin bloquear el
+recorrido narrativo.
 
 La matriz automatizada está implementada y validada en los cinco viewports. Las
 pruebas manuales permanecen pendientes.
@@ -11,8 +12,8 @@ pruebas manuales permanecen pendientes.
 ## Alcance
 
 ```text
-Memory → escritura → carretera → señal y sol → siguiente sección
-          ↕ rebobinado mediante scroll
+Memory → escritura → texto sticky + carretera → señal y sol → siguiente sección
+          ↕ progreso y rebobinado compartidos mediante scroll
 ```
 
 ## Pruebas automatizables
@@ -21,7 +22,7 @@ Memory → escritura → carretera → señal y sol → siguiente sección
 | :-- | :-- | :-- |
 | U — Entrada | Transición desde `memory` | `present` comienza sin bloquear el scroll. |
 | V — Escritura | Orden de caracteres y saltos | El texto avanza de izquierda a derecha. |
-| W — Rebobinado | Cambio de dirección | Los caracteres retroceden de derecha a izquierda sin saltos. |
+| W — Sticky y rebobinado | Cambio de dirección | El texto acompaña a Road y ambos retroceden sin saltos. |
 | X — Carretera | Inicio, máscara, escala y límites | La carretera comienza después de la escritura y sigue el progreso. |
 | Y — Señal | Ciclo automático, reposo, `Always` y `Forward` | Alterna sin mensajes, pausa y restaura el ciclo correctamente. |
 | Z — Sol | Hotspot, halo y mensaje | La zona coincide con el sol y el texto aparece dentro de la carretera. |
@@ -49,6 +50,7 @@ El HITO 4 podrá cerrarse cuando:
 
 - avance y retroceso reproduzcan exactamente el progreso del scroll;
 - la carretera no comience antes de finalizar la escritura;
+- el texto permanezca fijado y visible mientras se dibuja la carretera;
 - no exista bloqueo permanente del scroll;
 - señal y sol funcionen con puntero, teclado y toque;
 - el contenido sea accesible con movimiento reducido;

@@ -1,6 +1,11 @@
 import { clamp } from "../shared/math.js";
 
-const ROAD_DRAWING_END = 0.75;
+const WRITING_END = 0.3;
+const ROAD_START = 0.35;
+const ROAD_END = 0.8;
+
+const getPhaseProgress = (progress, start, end) =>
+  clamp((progress - start) / (end - start), 0, 1);
 
 const collectCharacters = (container) => {
   const textNodes = [];
@@ -37,9 +42,8 @@ const getRunwayProgress = (runway) => {
 
 export const createPresentProgress = ({
   present,
-  writingRunway,
+  sequenceRunway,
   writing,
-  roadRunway,
 }) => {
   const characters = collectCharacters(writing);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -68,16 +72,25 @@ export const createPresentProgress = ({
 
   const render = () => {
     frame = undefined;
-    const writingState = getRunwayProgress(writingRunway);
-    const roadState = getRunwayProgress(roadRunway);
-    const writingProgress = writingState.progress;
-    const roadProgress = clamp(roadState.progress / ROAD_DRAWING_END, 0, 1);
+    const sequenceState = getRunwayProgress(sequenceRunway);
+    const writingProgress = getPhaseProgress(
+      sequenceState.progress,
+      0,
+      WRITING_END,
+    );
+    const roadProgress = getPhaseProgress(
+      sequenceState.progress,
+      ROAD_START,
+      ROAD_END,
+    );
     const isReduced = reducedMotion.matches;
     const visibleCount = isReduced
       ? characters.length
       : Math.ceil(writingProgress * characters.length);
-    const effectiveRoadProgress = isReduced && roadState.visible ? 1 : roadProgress;
-    const interactive = roadState.visible && (isReduced || roadProgress >= 1);
+    const effectiveRoadProgress =
+      isReduced && sequenceState.visible ? 1 : roadProgress;
+    const interactive =
+      sequenceState.visible && (isReduced || roadProgress >= 1);
 
     setVisibleCharacters(visibleCount);
     present.style.setProperty("--present-road-progress", effectiveRoadProgress);

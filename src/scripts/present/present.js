@@ -3,9 +3,8 @@ import { createPresentProgress } from "./present-progress.js";
 
 const getPresentElements = () => ({
   present: document.querySelector("[data-present]"),
-  writingRunway: document.querySelector("[data-present-writing-runway]"),
+  sequenceRunway: document.querySelector("[data-present-sequence-runway]"),
   writing: document.querySelector("[data-present-writing]"),
-  roadRunway: document.querySelector("[data-present-road-runway]"),
   roadScene: document.querySelector("[data-present-road-scene]"),
   sign: document.querySelector("[data-present-sign]"),
   signImage: document.querySelector("[data-present-sign-image]"),
@@ -18,9 +17,8 @@ export const initializePresent = () => {
 
   if (
     !elements.present ||
-    !elements.writingRunway ||
+    !elements.sequenceRunway ||
     !elements.writing ||
-    !elements.roadRunway ||
     !elements.roadScene ||
     !elements.sign ||
     !elements.signImage ||
