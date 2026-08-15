@@ -58,7 +58,7 @@ export const initializeOrigin = () => {
     jarPointer.activate(event);
   };
 
-  preloadOpenedJar(elements.jarImage);
+  preloadOpenedJar();
   wordReveal.initialize();
   originEntry.initialize();
   elements.jarTrigger.addEventListener("click", handleJarClick);

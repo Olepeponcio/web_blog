@@ -6,7 +6,7 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. Los hitos 1, 2 y 3 están implementados y cuentan con validación automatizada. Las revisiones manuales de los hitos 2 y 3 permanecen pendientes de registro.
 
-La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada vigente ejecuta 365 casos sobre cinco viewports; debe repetirse después de cada cambio funcional.
+La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada vigente recorre cinco viewports y debe repetirse después de cada cambio funcional.
 
 ## Registro técnico
 
@@ -78,11 +78,22 @@ front-end--web-blog/
 ├── index.html
 ├── package.json
 ├── playwright.config.js
+├── playwright.production.config.js
 ├── pnpm-lock.yaml
 └── README.md
 ```
 
 La estructura se organiza por responsabilidad y se amplía únicamente cuando aparece una necesidad concreta.
+
+### Gestión de recursos
+
+- HTML contiene recursos semánticos o necesarios desde la carga inicial.
+- CSS contiene fondos y recursos decorativos mediante rutas relativas.
+- JavaScript importa estáticamente los recursos que intercambia durante una interacción.
+- Los atributos `data-*` identifican comportamiento y estado; no almacenan rutas de archivos.
+- `src/assets/` conserva los recursos procesados y versionados por Vite.
+- `dist/` es un resultado temporal de compilación y permanece fuera del repositorio.
+- `public/` no se utilizará hasta que exista un recurso que requiera una URL fija.
 
 ## Convenciones de trabajo
 
@@ -133,7 +144,13 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | `pnpm build`    | Generar una compilación de producción   |
 | `pnpm preview`  | Previsualizar localmente la compilación |
 | `pnpm test:e2e` | Ejecutar la batería E2E con Playwright  |
+| `pnpm test:e2e:build` | Compilar y validar los recursos dinámicos sobre `dist/` |
 | `pnpm images:optimize -- <rutas PNG>` | Generar variantes WebP con las herramientas ya instaladas |
+
+Vite constituye el entorno de ejecución del proyecto. `pnpm dev` transforma los
+módulos y recursos durante el desarrollo; `pnpm build` genera `dist/`; y
+`pnpm preview` sirve esa compilación para su revisión local. Las importaciones
+estáticas de imágenes desde JavaScript se resuelven dentro de este flujo.
 
 ## Control de versiones
 
@@ -165,4 +182,4 @@ El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` c
 22. Preparación de recursos visuales para la futura sección `present`, todavía sin lógica aprobada.
 23. Conversión de los once recursos activos a WebP: reducción aproximada de 23 MB a 3,5 MB.
 24. Centralización de estados y eventos narrativos; adopción de Pointer Events y recorridos por teclado.
-25. Validación automatizada vigente: 365 casos recorridos sobre cinco viewports.
+25. Validación automatizada vigente sobre cinco viewports.

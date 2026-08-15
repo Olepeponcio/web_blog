@@ -1,8 +1,4 @@
-import { exec } from "node:child_process";
-import { promisify } from "node:util";
 import { expect, test } from "@playwright/test";
-
-const execAsync = promisify(exec);
 
 test.describe("Recursos, enlaces y compilación", () => {
   test("G01 — los recursos locales de portada responden", async ({ request }) => {
@@ -53,17 +49,6 @@ test.describe("Recursos, enlaces y compilación", () => {
 
     await expect(instagram).toHaveAttribute("aria-disabled", "true");
     await expect(instagram).not.toHaveAttribute("href", /.+/);
-  });
-
-  test("G05 — Vite genera la compilación sin errores", async ({}, testInfo) => {
-    test.skip(testInfo.project.name !== "desktop-lg", "Una ejecución es suficiente");
-
-    const { stdout } = await execAsync("pnpm build", {
-      cwd: process.cwd(),
-      timeout: 30_000,
-    });
-
-    expect(stdout).toContain("built in");
   });
 
   test("T01 — los recursos locales de Memoria responden", async ({ request }) => {

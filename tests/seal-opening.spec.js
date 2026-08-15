@@ -34,11 +34,12 @@ test.describe("Sello y apertura", () => {
   test("C03 — la transición termina con el sello roto", async ({ page }) => {
     await beginOpening(page);
     const sealImage = page.locator(selectors.sealImage);
-    const openedSource = await sealImage.getAttribute("data-opened-src");
 
-    await expect(sealImage).toHaveAttribute("src", openedSource, {
-      timeout: 3_000,
-    });
+    await expect(sealImage).toHaveAttribute(
+      "src",
+      /img__wax_seal_broken(?:-[\w-]+)?\.webp(?:\?.*)?$/,
+      { timeout: 3_000 },
+    );
   });
 
   test("C04 — una segunda pulsación no reinicia la secuencia", async ({ page }) => {

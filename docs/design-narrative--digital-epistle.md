@@ -344,6 +344,23 @@ posee lógica JavaScript propia.
 
 ## Arquitectura transversal
 
+### Gestión de recursos y compilación
+
+- HTML conserva imágenes semánticas e imágenes visibles desde la carga inicial.
+- CSS resuelve fondos y recursos estrictamente decorativos mediante rutas relativas.
+- JavaScript importa estáticamente los recursos que cambian durante una interacción;
+  Vite resuelve esas importaciones tanto en desarrollo como en la compilación.
+- Las rutas de recursos no se almacenan en atributos `data-*`, porque Vite no
+  transforma esos valores personalizados durante la compilación.
+- Cada sección declara sus recursos dinámicos en el módulo que gobierna la
+  interacción; no existe un registro global de imágenes.
+- `dist/` es un resultado regenerable y ningún módulo fuente enlaza directamente
+  con su contenido.
+- `public/` solo se creará si aparece un recurso que necesite conservar una URL
+  y un nombre fijos.
+- La batería de desarrollo no genera `dist/`; `pnpm test:e2e:build` compila y
+  valida separadamente los recursos dinámicos sobre `vite preview`.
+
 | Responsabilidad               | Módulo                                                                                                              |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------ |
 | Punto de entrada              | [`main.js`](../src/scripts/main.js)                                                                                 |

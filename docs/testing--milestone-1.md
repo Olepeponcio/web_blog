@@ -106,7 +106,6 @@ Playwright ejecutará el flujo en cada viewport y comprobará:
 | `G02` | Font Awesome externo | CSS y fuente de marcas se cargan             |
 | `G03` | LinkedIn             | El enlace coincide con la URL documentada    |
 | `G04` | Instagram            | Se presenta deshabilitado y sin enlace vacío |
-| `G05` | Compilación de Vite  | Finaliza sin errores                         |
 
 ## Pruebas manuales
 
@@ -149,11 +148,14 @@ La batería utiliza Playwright con:
 - pruebas agrupadas por carga, arrastre, sello, escritura, recorrido, responsive
   y recursos;
 - script `pnpm test:e2e`;
+- validación independiente de `dist/` mediante `pnpm test:e2e:build`;
 - capturas y trazas conservadas únicamente cuando existen fallos;
 - resultados temporales excluidos del control de versiones.
 
-`G05` se ejecuta una sola vez en `desktop-lg`, ya que la compilación no depende
-del viewport. Las cuatro omisiones restantes son, por tanto, intencionales.
+La compilación no se ejecuta dentro de la batería paralela. Las comprobaciones
+de desarrollo utilizan el servidor de Vite, mientras que la validación de
+recursos empaquetados se mantiene en un flujo independiente sobre `dist/` y
+`vite preview`.
 
 ## Estado de las pruebas manuales
 

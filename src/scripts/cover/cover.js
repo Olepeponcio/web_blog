@@ -62,7 +62,7 @@ export const initializeCover = () => {
     },
   });
 
-  preloadOpenedSeal(sealImage);
+  preloadOpenedSeal();
   envelopeDrag.initialize();
   seal.addEventListener("click", openSeal);
 };

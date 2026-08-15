@@ -52,7 +52,7 @@ test.describe("Carga inicial", () => {
     await expect(seal).toBeDisabled();
     await expect(sealImage).toHaveAttribute(
       "src",
-      await sealImage.getAttribute("data-sealed-src"),
+      /img__wax_seal(?:-[\w-]+)?\.webp(?:\?.*)?$/,
     );
   });
 });

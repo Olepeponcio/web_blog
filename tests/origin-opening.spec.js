@@ -11,7 +11,10 @@ test.describe("HITO 2 — apertura del bote", () => {
     await expect(page.locator(selectors.origin)).toHaveAttribute("data-origin-state", "opening");
     await expect(page.locator(selectors.originJar)).toBeDisabled();
     await expect(page.locator(selectors.originCork)).toBeVisible();
-    await expect(page.locator(selectors.originJarImage)).toHaveAttribute("src", /img__ink-jar--open\.webp$/);
+    await expect(page.locator(selectors.originJarImage)).toHaveAttribute(
+      "src",
+      /img__ink-jar--open(?:-[\w-]+)?\.webp(?:\?.*)?$/,
+    );
 
     await expect(page.locator(selectors.origin)).toHaveAttribute("data-origin-state", "opened-ready", { timeout: 8_000 });
     await expect(page.locator(selectors.originCork)).toBeHidden();
