@@ -4,8 +4,7 @@
   display: block;
   min-block-size: auto;
   padding: 0;
-  background: transparent;
-  color: #111;
+  color: var(--color-present-ink);
   font-family: var(--font-family-present);
 }
 
@@ -34,9 +33,13 @@
   margin-inline: auto;
 }
 
+.present__heading .narrative-section__eyebrow {
+  font-size: 1.2rem;
+}
+
 .present__label {
   margin-block-start: 0.35rem;
-  font-size: var(--font-size-caption);
+  font-size: var(2rem);
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.35;
@@ -84,9 +87,8 @@
   align-self: end;
   justify-self: center;
   min-block-size: 0;
-  block-size: 100%;
-  inline-size: auto;
-  max-inline-size: min(100%, 72rem);
+  block-size: auto;
+  inline-size: min(100%, 72rem);
   max-block-size: 100%;
   aspect-ratio: 1640 / 943;
   opacity: clamp(0, calc(var(--present-road-progress) * 1.35), 1);
@@ -116,8 +118,8 @@
   opacity: 0;
   transform: translateY(0.75rem);
   transition:
-    opacity 180ms ease,
-    transform 180ms ease;
+    opacity var(--duration-present-sign) ease,
+    transform var(--duration-present-sign) ease;
 }
 
 [data-present-state='interactive'] .present__sign {
@@ -145,7 +147,7 @@
 
 .present__hotspot:focus-visible {
   border-radius: 0.35rem;
-  outline: 0.16rem solid #ffd166;
+  outline: 0.16rem solid var(--color-present-accent);
   outline-offset: 0.15rem;
 }
 
@@ -173,13 +175,12 @@
 .present__hotspot--sun::before {
   position: absolute;
   inset: -28%;
-  border: 0.12rem solid rgb(255 209 102 / 78%);
+  border: 0.12rem solid var(--color-present-sun-border);
   border-radius: 50%;
-  box-shadow:
-    0 0 0.8rem rgb(255 209 102 / 72%),
-    inset 0 0 0.7rem rgb(255 239 170 / 55%);
+  box-shadow: var(--present-sun-halo-shadow);
   content: '';
-  animation: present-sun-halo 1.8s ease-in-out infinite;
+  animation: present-sun-halo var(--duration-present-sun-halo) ease-in-out
+    infinite;
   pointer-events: none;
 }
 
@@ -197,18 +198,19 @@
   max-inline-size: min(42%, 24rem);
   margin: 0;
   padding: 0.55rem 0.8rem;
-  border: 1px solid rgb(255 209 102 / 55%);
+  border: 1px solid var(--color-present-accent-border);
   border-radius: 0.35rem;
-  background: rgb(12 18 28 / 84%);
-  color: #fff5df;
+  box-shadow: 3px 2px 8px var(--color-present-box-shadow);
+  background: var(--color-present-message-background);
+  color: var(--color-present-message-text);
   font-size: clamp(0.75rem, 1.4vw, 1rem);
   line-height: 1.35;
   opacity: 0;
   pointer-events: none;
   transform: translateY(0.4rem);
   transition:
-    opacity 150ms ease,
-    transform 150ms ease;
+    opacity var(--duration-present-message) ease,
+    transform var(--duration-present-message) ease;
 }
 
 .present__message--visible {
@@ -217,8 +219,8 @@
 }
 
 .present__message--always {
-  inset-block-start: 4%;
-  inset-inline-start: 3%;
+  inset-block-start: 20%;
+  inset-inline-start: 20%;
 }
 
 .present__message--forward {
@@ -244,14 +246,6 @@
     padding-block-start: 1.25rem;
   }
 
-  .present__writing {
-    inline-size: 100%;
-  }
-
-  .present__road-scene {
-    max-inline-size: min(100%, 48rem);
-  }
-
   .present__sign {
     inset-inline-end: 7%;
     inline-size: clamp(4.5rem, 18%, 7rem);
@@ -260,6 +254,10 @@
   .present__message {
     max-inline-size: 46%;
     font-size: clamp(0.68rem, 2.7vw, 0.84rem);
+  }
+
+  .present__road-scene {
+    align-self: flex-start;
   }
 }
 
@@ -279,10 +277,6 @@
 @media (prefers-reduced-motion: reduce) {
   .present__character {
     opacity: 1;
-  }
-
-  .present__road-scene {
-    transition: none;
   }
 
   .present__sign,

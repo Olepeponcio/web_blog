@@ -12,4 +12,13 @@
   --color-memory-signal: rgb(115 255 75 / 22%);
   --color-memory-signal-glow: rgb(102 255 64 / 55%);
   --color-scroll-cue: #8f1d24;
+  --color-present-ink: #111;
+  --color-present-accent: #ffd166;
+  --color-present-accent-border: rgb(255 209 102 / 80%);
+  --color-present-box-shadow: rgb(255 209 102);
+  --color-present-sun-border: rgb(255 209 102 / 78%);
+  --color-present-sun-glow: rgb(255 209 102 / 72%);
+  --color-present-sun-inner-glow: rgb(255 239 170 / 55%);
+  --color-present-message-background: rgb(12 18 28 /55%);
+  --color-present-message-text: #fff5df;
 }

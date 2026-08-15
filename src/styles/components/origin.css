@@ -153,10 +153,6 @@
   .origin__interaction {
     min-block-size: var(--origin-jar-size);
   }
-
-  .origin__ink-hotspot {
-    opacity: 0;
-  }
 }
 
 @media (width >= 48rem) {
@@ -231,6 +227,6 @@
 @media (prefers-reduced-motion: reduce) {
   [data-origin-eyebrow] {
     transform: none;
-    transition-duration: 1ms;
+    transition-duration: var(--duration-reduced-motion);
   }
 }

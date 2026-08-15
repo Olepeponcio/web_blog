@@ -27,7 +27,6 @@
   cursor: grabbing;
 }
 
-[data-page-state="deployed"] .cover__envelope,
 [data-page-state="seal-ready"] .cover__envelope,
 [data-page-state="writing"] .cover__envelope,
 [data-page-state="open"] .cover__envelope {
@@ -40,7 +39,6 @@
   position: relative;
   z-index: 2;
   overflow: hidden;
-  background-color: transparent;
 }
 
 .cover__envelope-image {
@@ -129,7 +127,6 @@
   min-block-size: 100svh;
   padding-block: clamp(2.5rem, 8vw, 6rem);
   padding-inline: clamp(1.5rem, 8vw, 7rem);
-  background: transparent;
   font-family: var(--font-family-handwriting);
   font-size: clamp(1rem, calc(0.85rem + 0.5vw), 2rem);
   line-height: 1.7;
@@ -162,7 +159,7 @@
   transform: translateX(-50%);
   pointer-events: none;
   opacity: 1;
-  transition: opacity 180ms ease-out;
+  transition: opacity var(--duration-cover-drag-indicator) ease-out;
 }
 
 .cover__drag-indicator::before {
@@ -189,7 +186,6 @@
   transform: translateX(-50%) rotate(45deg);
 }
 
-[data-page-state="deployed"] .cover__drag-indicator,
 [data-page-state="seal-ready"] .cover__drag-indicator,
 [data-page-state="writing"] .cover__drag-indicator,
 [data-page-state="open"] .cover__drag-indicator {
@@ -198,7 +194,6 @@
 
 [data-page-state="sealed"] .cover__seal,
 [data-page-state="dragging"] .cover__seal,
-[data-page-state="deployed"] .cover__seal,
 [data-page-state="writing"] .cover__seal,
 [data-page-state="open"] .cover__seal {
   pointer-events: none;
@@ -235,7 +230,6 @@
   .cover__envelope {
     --envelope-visible-edge: clamp(7rem, 18svh, 10rem);
   }
-
 }
 
 @media (width >= 30rem) {
@@ -255,9 +249,5 @@
     inset-block-start: 25%;
     inline-size: min(72%, 30rem);
     font-size: clamp(1rem, calc(0.75rem + 1cqi), 2rem);
-  }
-
-  .cover__sender-location {
-    gap: 0.35em;
   }
 }

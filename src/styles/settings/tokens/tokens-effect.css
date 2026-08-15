@@ -3,6 +3,8 @@
   --memory-switch-cue-shadow:
     0 0 0.45rem var(--color-spark),
     0 0 1rem 0.2rem var(--color-spark-glow);
+  --memory-signal-shadow:
+    0 0 1rem 0.4rem var(--color-memory-signal-glow);
   --cover-envelope-shadow: 0 0.2rem 0.2rem rgb(25 23 20 / 35%);
   --cover-seal-glow: 0 0 1.25rem rgb(128 0 0 / 35%);
   --memory-note-shadow:
@@ -10,4 +12,7 @@
     inset 0.05rem 0.05rem 0.15rem rgb(255 255 220 / 55%);
   --memory-note-curl-shadow: rgb(38 22 8 / 38%);
   --memory-note-fold-shadow: -0.08rem -0.08rem 0.08rem rgb(64 39 10 / 28%);
+  --present-sun-halo-shadow:
+    0 0 0.8rem var(--color-present-sun-glow),
+    inset 0 0 0.7rem var(--color-present-sun-inner-glow);
 }

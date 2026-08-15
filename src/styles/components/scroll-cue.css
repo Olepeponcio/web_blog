@@ -21,7 +21,7 @@
   background-color: var(--color-scroll-cue);
   content: "";
   transform: translateX(-50%);
-  animation: scroll-cue-wheel 1.4s ease-in-out infinite;
+  animation: scroll-cue-wheel var(--duration-scroll-cue) ease-in-out infinite;
 }
 
 .scroll-cue[hidden] {

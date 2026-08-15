@@ -1,7 +1,10 @@
 :root {
   --duration-seal-break: 700ms;
+  --duration-cover-drag-indicator: 180ms;
   --duration-opening-scroll: 1400ms;
   --duration-word-reveal-step: 90ms;
+  --duration-reveal-word: 140ms;
+  --duration-scroll-cue: 1400ms;
   --duration-origin-eyebrow: 1000ms;
   --duration-origin-heading-character: 90ms;
   --duration-origin-cork: 1500ms;
@@ -13,9 +16,13 @@
   --duration-memory-entry: 700ms;
   --duration-memory-centering: 1200ms;
   --duration-memory-sparks: 3200ms;
+  --duration-memory-spark-stagger: 90ms;
   --duration-memory-switch-cue: 2200ms;
   --duration-memory-signal: 1200ms;
   --duration-memory-postcard-move: 1800ms;
   --duration-memory-postcard-flip: 900ms;
-  --duration-memory-postcard-expand: 500ms;
+  --duration-present-sign: 180ms;
+  --duration-present-sun-halo: 1800ms;
+  --duration-present-message: 150ms;
+  --duration-reduced-motion: 1ms;
 }

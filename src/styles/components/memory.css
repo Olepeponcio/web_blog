@@ -104,12 +104,15 @@
 .memory__instrument-halo {
   position: absolute;
   z-index: 3;
-  inset-block-start: 91.5%;
-  inset-inline-start: 92.5%;
   inline-size: max(2.75rem, 6%);
   aspect-ratio: 1;
   translate: -50% -50%;
   pointer-events: none;
+}
+
+.memory__sparks {
+  inset-block-start: 91.5%;
+  inset-inline-start: 92.5%;
 }
 
 .memory__sparks::before,
@@ -143,25 +146,25 @@
 .memory__sparks span:nth-child(2) {
   --spark-x: 0.9rem;
   --spark-y: -1rem;
-  animation-delay: 90ms;
+  animation-delay: var(--duration-memory-spark-stagger);
 }
 
 .memory__sparks span:nth-child(3) {
   --spark-x: 1.2rem;
   --spark-y: 0.45rem;
-  animation-delay: 180ms;
+  animation-delay: calc(var(--duration-memory-spark-stagger) * 2);
 }
 
 .memory__sparks span:nth-child(4) {
   --spark-x: -0.75rem;
   --spark-y: 1rem;
-  animation-delay: 270ms;
+  animation-delay: calc(var(--duration-memory-spark-stagger) * 3);
 }
 
 .memory__sparks span:nth-child(5) {
   --spark-x: 0.2rem;
   --spark-y: -1.25rem;
-  animation-delay: 360ms;
+  animation-delay: calc(var(--duration-memory-spark-stagger) * 4);
 }
 
 .memory__note {
@@ -239,7 +242,7 @@
   inset-inline-start: 12.5%;
   border-radius: 50%;
   background: var(--color-memory-signal);
-  box-shadow: 0 0 1rem 0.4rem var(--color-memory-signal-glow);
+  box-shadow: var(--memory-signal-shadow);
   opacity: 0;
 }
 

@@ -1,6 +1,5 @@
 body[data-page-state="sealed"],
 body[data-page-state="dragging"],
-body[data-page-state="deployed"],
 body[data-page-state="seal-ready"],
 body[data-page-state="writing"] {
   block-size: 100vh;
