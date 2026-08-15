@@ -64,4 +64,18 @@ test.describe("Recursos, enlaces y compilación", () => {
       expect(response.ok(), resource).toBe(true);
     }
   });
+
+  test("AD01 — los recursos locales de Presente responden", async ({ request }) => {
+    const resources = [
+      "/src/assets/images/04-present/img__road_02.png",
+      "/src/assets/images/04-present/img__road_sing_01.png",
+      "/src/assets/images/04-present/img__road_sing_02.png",
+      "/src/assets/images/04-present/img__road_sing_03.png",
+    ];
+
+    for (const resource of resources) {
+      const response = await request.get(resource);
+      expect(response.ok(), resource).toBe(true);
+    }
+  });
 });

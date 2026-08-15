@@ -4,7 +4,7 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 ## Estado del proyecto
 
-La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. Los hitos 1, 2 y 3 están implementados y cuentan con validación automatizada. Las revisiones manuales de los hitos 2 y 3 permanecen pendientes de registro.
+La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. Los hitos 1, 2, 3 y 4 están implementados y cuentan con validación automatizada. Las revisiones manuales de los hitos 2, 3 y 4 permanecen pendientes de registro.
 
 La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada vigente recorre cinco viewports y debe repetirse después de cada cambio funcional.
 
@@ -23,7 +23,7 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | API web       | Intersection Observer | Entrada controlada en `origin` y `memory`      | Implementado |
 | API web       | Pointer Events        | Arrastre compatible con ratón y entrada táctil | Implementado |
 | API web       | Constraint Validation | Validación semántica del formulario            | Planificado  |
-| Accesibilidad | Reduced Motion        | Aplicado en Origin y Memory                    | Implementado |
+| Accesibilidad | Reduced Motion        | Aplicado en Origin, Memory y Present           | Implementado |
 | Accesibilidad | Teclado               | Despliegue, bote y controles narrativos        | Implementado |
 | Convención    | Directorios           | Organización por responsabilidad               |   Aplicado   |
 | Convención    | HTML                  | Marcado semántico                              |   Aplicado   |
@@ -63,13 +63,15 @@ front-end--web-blog/
 │   ├── security-standard.md
 │   ├── testing--milestone-1.md
 │   ├── testing--milestone-2.md
-│   └── testing--milestone-3.md
+│   ├── testing--milestone-3.md
+│   └── testing--milestone-4.md
 ├── src/
 │   ├── assets/fonts/
 │   ├── assets/images/
 │   ├── scripts/cover/
 │   ├── scripts/origin/
 │   ├── scripts/memory/
+│   ├── scripts/present/
 │   ├── scripts/shared/
 │   └── styles/{settings,generic,elements,components,pages}/
 ├── scripts/
@@ -143,6 +145,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | [Pruebas del HITO 1](docs/testing--milestone-1.md)                                  | Matriz manual y automatizable para validar el primer hito.  |
 | [Pruebas del HITO 2](docs/testing--milestone-2.md)                                  | Matriz manual y automatizada de la interacción de Origen.   |
 | [Pruebas del HITO 3](docs/testing--milestone-3.md)                                  | Matriz automatizada y revisión manual pendiente de Memoria. |
+| [Pruebas del HITO 4](docs/testing--milestone-4.md)                                  | Matriz automatizada y revisión manual pendiente de Presente. |
 | [Estándar de seguridad](docs/security-standard.md)                                  | Controles OWASP, inventario y riesgos pendientes.           |
 
 ## Comandos disponibles

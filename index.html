@@ -268,30 +268,136 @@
         </div>
       </section>
 
-      <section class="narrative-section" id="present">
-        <div class="narrative-section__content">
-          <p class="narrative-section__eyebrow">Presente</p>
-          <h2>Lo que estamos construyendo</h2>
+      <section
+        class="narrative-section present"
+        id="present"
+        data-present
+        data-present-state="idle"
+      >
+        <div class="present__writing-runway" data-present-writing-runway>
+          <div class="present__writing-stage">
+            <header class="present__heading">
+              <p class="narrative-section__eyebrow">Presente</p>
+              <h2 class="present__label">
+                Hoy ya no escribimos únicamente sobre el papel
+              </h2>
+            </header>
 
-          <p>Hoy ya no escribimos únicamente sobre papel.</p>
-          <p>Construimos interfaces.<br />Sistemas.<br />Experiencias.</p>
-          <p>Pero la intención sigue siendo la misma:</p>
-          <p><strong>hacer comprensible lo complejo.</strong></p>
-          <p>Cada decisión responde a una pregunta sencilla:</p>
-          <p><strong>¿Es realmente necesario?</strong></p>
-          <p>
-            Si la respuesta es no, desaparece.<br />Si la respuesta es sí, debe
-            tener un propósito claro.
-          </p>
-          <p>Así se construye esta página.</p>
-          <p>
-            No como una colección de componentes, sino como una secuencia de
-            ideas.
-          </p>
-          <p>
-            No como una pantalla que exige atención, sino como un espacio que
-            invita a avanzar.
-          </p>
+            <div class="present__writing">
+              <div class="present__writing-semantic">
+                <p>Construimos interfaces.<br />Sistemas.<br />Experiencias.</p>
+                <p>Pero la intención sigue siendo la misma:</p>
+                <p>
+                  <strong>
+                    hacer comprensible lo complejo. Generar un propósito.
+                  </strong>
+                </p>
+              </div>
+
+              <div
+                class="present__writing-visual"
+                data-present-writing
+                aria-hidden="true"
+              >
+                <p>Construimos interfaces.<br />Sistemas.<br />Experiencias.</p>
+                <p>Pero la intención sigue siendo la misma:</p>
+                <p>
+                  <strong>
+                    hacer comprensible lo complejo. Generar un propósito.
+                  </strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="present__road-runway" data-present-road-runway>
+          <div class="present__road-stage">
+            <div class="present__road-scene" data-present-road-scene>
+              <svg
+                class="present__road"
+                data-present-road
+                viewBox="0 0 1640 943"
+                role="img"
+                aria-label="Carretera que avanza hacia el horizonte"
+              >
+                <defs>
+                  <mask id="present-road-brush">
+                    <rect width="1640" height="943" fill="black"></rect>
+                    <path
+                      class="present__brush-path"
+                      pathLength="1"
+                      d="M 0 55 H 1640 V 175 H 0 V 295 H 1640 V 415 H 0 V 535 H 1640 V 655 H 0 V 775 H 1640 V 895 H 0"
+                      fill="none"
+                      stroke="white"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="150"
+                    ></path>
+                  </mask>
+                </defs>
+                <image
+                  href="/src/assets/images/04-present/img__road_02.png"
+                  width="1640"
+                  height="943"
+                  mask="url(#present-road-brush)"
+                ></image>
+              </svg>
+
+              <div class="present__sign" data-present-sign>
+                <img
+                  src="/src/assets/images/04-present/img__road_sing_01.png"
+                  data-present-sign-image
+                  alt="Señal con las direcciones Always y Forward"
+                />
+                <button
+                  class="present__hotspot present__hotspot--always"
+                  type="button"
+                  data-present-trigger="always"
+                  aria-label="Mostrar el principio Always"
+                  disabled
+                ></button>
+                <button
+                  class="present__hotspot present__hotspot--forward"
+                  type="button"
+                  data-present-trigger="forward"
+                  aria-label="Mostrar el principio Forward"
+                  disabled
+                ></button>
+              </div>
+
+              <button
+                class="present__hotspot present__hotspot--sun"
+                type="button"
+                data-present-trigger="sun"
+                aria-label="Mostrar el propósito del camino"
+                disabled
+              ></button>
+
+              <p
+                class="present__message present__message--always"
+                data-present-message="always"
+                aria-live="polite"
+              >
+                Así se construye esta página.
+              </p>
+              <p
+                class="present__message present__message--forward"
+                data-present-message="forward"
+                aria-live="polite"
+              >
+                No como una colección de componentes, sino como una secuencia de
+                ideas.
+              </p>
+              <p
+                class="present__message present__message--sun"
+                data-present-message="sun"
+                aria-live="polite"
+              >
+                <strong>Un espacio que invita a avanzar.</strong>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

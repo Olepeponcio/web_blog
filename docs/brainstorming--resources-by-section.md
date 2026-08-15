@@ -122,6 +122,13 @@ Prioridades:
 - Texto progresivamente más grande o más aislado.
 - Composición más abstracta.
 - Líneas o elementos que sugieran continuidad.
+- paneles estilo card para el texto de formato minimalista, con fondo con grado de transparencia. Estilo ciberpunk.
+- los paneles se estaran cargados cuando se entre en el vieport de la sección. en dispositivos pequeños los paneles están organizados de manera flex, en columna con cierto margen de distancia entre ellos.
+- seguidos por la animacion de la cinta. al final de la cinta habra una imagen de un bote de cristal, cuyo fondo será un wall invisible.
+- del borde superior de la cinta se hace spawn de las imagenes de objetos de manera random, inteminable mientras se permanezca en la seccion.
+  -los objetos caeran dentro de la botella que tendrá wall para evitar que los objetos salgan en sus margenes, unica entrada el cuello de la bote.
+  -los objetos deben tener física al igual que el bote de crista.
+  -En resoluciones superiores las tarjetas con el texto se posicionan a la izquierda y la cinta y a la derecha.
 
 ### Recursos interactivos
 

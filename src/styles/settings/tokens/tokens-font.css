@@ -3,6 +3,8 @@
     "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
   --font-family-origin:
     "Bubblegum Sans", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-family-present:
+    "Stack Sans Notch", "Trebuchet MS", "Segoe UI", sans-serif;
   --font-family-code:
     "Cascadia Mono", Consolas, "Courier New", monospace;
   --font-size-caption: 0.875rem;

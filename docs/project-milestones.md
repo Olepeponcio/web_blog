@@ -361,14 +361,91 @@ después de redimensionar y los recorridos por teclado.
 
 ---
 
+## Hito 4 — Presente y carretera reversible
+
+**Estado:** implementación y validación automatizada completadas; revisión manual
+pendiente.
+
+### Objetivo
+
+Construir la transición entre `memory` y `present` como una secuencia controlada
+por el scroll. El avance escribe el texto y dibuja la carretera; el retroceso
+rebobina ambas fases.
+
+### Flujo funcional
+
+```text
+Memory
+  → escritura de izquierda a derecha
+  → dibujo y escalado de la carretera
+  → señal y sol interactivos
+
+Retroceso
+  → retirar interacciones
+  → invertir carretera
+  → borrar texto de derecha a izquierda
+  → Memory
+```
+
+### Alcance aprobado
+
+- Encabezado-etiqueta «Hoy ya no escribimos únicamente sobre el papel».
+- Escritura reversible desde «Construimos interfaces» por caracteres.
+- Texto completo conservado en el HTML para mantener su semántica.
+- Aparición posterior de `img__road_02.png` mediante dibujo progresivo y escala.
+- Progreso visual vinculado al scroll, sin bloqueo ni finalización persistente.
+- Señal base `img__road_sing_01.png` superpuesta junto al primer plano.
+- Permuta a `img__road_sing_02.png` sobre `Always`.
+- Permuta a `img__road_sing_03.png` sobre `Forward`.
+- Disparador adicional sobre el sol.
+- Mensajes disponibles mediante puntero, teclado y entrada táctil.
+- Adaptación responsive desde el inicio.
+- Alternativa funcional con `prefers-reduced-motion: reduce`.
+
+### Tareas
+
+#### Estructura y contenido
+
+- [x] Adaptar la `section#present` a la escena aprobada.
+- [x] Mantener el texto completo accesible en el documento.
+- [x] Incorporar carretera, señal, mensajes y hotspots semánticos.
+
+#### Progreso reversible
+
+- [x] Calcular un progreso normalizado a partir del scroll.
+- [x] Escribir el primer bloque de izquierda a derecha.
+- [x] Rebobinar sus caracteres de derecha a izquierda.
+- [x] Iniciar la carretera después de finalizar la escritura.
+- [x] Vincular máscara, escala y opacidad al mismo progreso reversible.
+- [x] Evitar saltos al cambiar la dirección del scroll.
+
+#### Interacciones
+
+- [x] Mantener `img__road_sing_01.png` como estado de reposo.
+- [x] Alternar automáticamente `01 → 02 → 01 → 03` mientras la escena sea visible.
+- [x] Pausar la permuta durante la interacción y detenerla fuera de la escena.
+- [x] Activar las variantes `Always` y `Forward` en sus zonas respectivas.
+- [x] Mostrar el mensaje del sol dentro de la carretera.
+- [x] Alinear el hotspot del sol y añadir un halo de atención.
+- [x] Retirar cada mensaje al abandonar o desactivar su zona.
+- [x] Añadir equivalencia para foco, teclado y toque.
+
+#### Responsive, accesibilidad y validación
+
+- [x] Mantener escena, señal, hotspots y textos dentro del viewport.
+- [x] Evitar desbordamiento horizontal y solapamiento con otras secciones.
+- [x] Implementar la alternativa de movimiento reducido.
+- [x] Diseñar la matriz automatizada y manual del HITO 4.
+- [x] Implementar y ejecutar la batería automatizada del HITO 4.
+
+La matriz se encuentra en
+[`testing--milestone-4.md`](testing--milestone-4.md).
+
+---
+
 ## Hitos posteriores
 
-Los siguientes hitos se definirán progresivamente, uno por cada `section`. Las
-propuestas anteriores quedan retiradas para evitar condicionar secciones cuya
-lógica todavía no ha sido aprobada.
-
-Los recursos existentes en `src/assets/images/04-present/` se consideran material
-preparatorio y no una implementación del siguiente hito.
+Los siguientes hitos se definirán progresivamente, uno por cada `section`.
 
 ## Hito final — Depuración y auditoría
 

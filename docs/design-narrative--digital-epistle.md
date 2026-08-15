@@ -301,25 +301,97 @@ La validación está documentada en
 
 ## 4. PRESENT
 
-### Estado actual
+### Marco aprobado para el HITO 4
 
-La sección `present` existe en el HTML y mantiene contenido editorial dentro del
-flujo normal. Sus recursos visuales están preparados, pero todavía no existe una
-interacción aprobada ni un módulo JavaScript propio.
+La transición desde `memory` hacia `present` se controla mediante el scroll y es
+reversible. La etiqueta `Presente` precede al encabezado en negrita «Hoy ya no
+escribimos únicamente sobre el papel». Al avanzar, la primera secuencia escribe
+de izquierda a derecha:
+
+> Construimos interfaces.
+> Sistemas.
+> Experiencias.
+>
+> Pero la intención sigue siendo la misma:
+>
+> hacer comprensible lo complejo. Generar un propósito.
+
+Al retroceder hacia `memory`, la escritura se rebobina de derecha a izquierda.
+La representación visual puede fragmentar el contenido por caracteres, pero el
+texto completo debe permanecer disponible semánticamente.
+
+Después de la escritura aparece la carretera. `img__road_02.png` se revela como
+un dibujo progresivo iniciado en la esquina superior izquierda y escala hasta su
+tamaño final. El progreso depende del scroll: al retroceder, escala y revelado se
+invierten como una cinta rebobinada.
+
+Escritura y carretera ocupan dos recorridos verticales consecutivos. La sección
+mantiene el fondo transparente para conservar la textura global; la carretera no
+se reduce para crear separación, sino que aparece en un viewport posterior.
+
+Una señal se superpone junto al tramo de carretera más próximo al primer plano.
+Se sitúa a la derecha, entre los arbustos del primer plano. Mientras la escena es
+visible alterna `01 → 02 → 01 → 03` para atraer la atención, sin mostrar mensajes.
+La secuencia se pausa durante una interacción y se detiene fuera de la escena.
+Sus zonas activas permutan la imagen y muestran texto mientras mantienen `hover`,
+foco o activación táctil:
+
+| Zona | Imagen activa | Texto |
+| :-- | :-- | :-- |
+| `Always` | `img__road_sing_02.png` | «Así se construye esta página.» |
+| `Forward` | `img__road_sing_03.png` | «No como una colección de componentes, sino como una secuencia de ideas.» |
+| Sol | Sin permuta | «Un espacio que invita a avanzar.» |
+
+Los textos de `Always` y `Forward` se sitúan respectivamente en las zonas
+superior izquierda y superior derecha. El texto del sol se centra dentro de la
+carretera y utiliza énfasis tipográfico. El hotspot coincide con el disco solar
+y presenta un halo pulsante como invitación visual.
+
+El scroll no se bloquea. Las interacciones no condicionan el avance hacia la
+siguiente sección y dispondrán de equivalencia para teclado y entrada táctil.
+
+### Estados previstos
+
+| Estado | Responsabilidad |
+| :-- | :-- |
+| `idle` | Escena fuera del tramo activo. |
+| `writing` | Escritura o rebobinado del primer bloque. |
+| `drawing` | Revelado y escalado reversibles de la carretera. |
+| `interactive` | Señal y sol disponibles. |
+
+El progreso visual se deriva de la posición del scroll y no se conserva como
+una finalización permanente. Con `prefers-reduced-motion: reduce`, el contenido
+completo queda disponible sin exigir escritura, escalado ni dibujo prolongados.
+La permuta automática y la pulsación del halo también se detienen.
 
 ### Recursos disponibles
 
+- [`img__road_02.png`](../src/assets/images/04-present/img__road_02.png)
 - [`img__road_sing_01.png`](../src/assets/images/04-present/img__road_sing_01.png)
 - [`img__road_sing_02.png`](../src/assets/images/04-present/img__road_sing_02.png)
 - [`img__road_sing_03.png`](../src/assets/images/04-present/img__road_sing_03.png)
 
+`img__road_02.png` es el recurso principal previsto. Se mantienen los nombres
+reales `sing` para no documentar rutas inexistentes.
+
+La sección utiliza la fuente variable `StackSansNotch-VariableFont_wght.ttf`,
+disponible en `src/assets/fonts/font__stack_sans_notch/`, para encabezado,
+escritura progresiva y mensajes interactivos.
+
 ### Módulos responsables
 
-| Ámbito            | JavaScript            | CSS                                                                       |
-| :---------------- | :-------------------- | :------------------------------------------------------------------------ |
-| Estructura actual | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Coordinación | [`present.js`](../src/scripts/present/present.js) | [`present.css`](../src/styles/components/present.css) |
+| Escritura y carretera | [`present-progress.js`](../src/scripts/present/present-progress.js) | [`present.css`](../src/styles/components/present.css) |
+| Señal y sol | [`present-interactions.js`](../src/scripts/present/present-interactions.js) | [`present.css`](../src/styles/components/present.css) |
 
-No se documentará una interacción hasta que sea diseñada y autorizada.
+La escritura conserva una copia semántica y una representación visual por
+caracteres. La carretera se muestra dentro de un SVG mediante una máscara cuyo
+trazo se vincula al mismo progreso reversible que su escala.
+
+La validación se documenta en
+[Pruebas del HITO 4](testing--milestone-4.md).
 
 ## 5. FUTURE
 

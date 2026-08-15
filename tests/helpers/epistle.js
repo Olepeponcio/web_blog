@@ -25,6 +25,17 @@ export const selectors = {
   memoryInstrumentHalo: "[data-memory-instrument-halo]",
   memoryPostcard: "[data-memory-postcard]",
   memoryPostcardCard: "[data-memory-postcard-card]",
+  present: "[data-present]",
+  presentWriting: "[data-present-writing]",
+  presentWritingRunway: "[data-present-writing-runway]",
+  presentRoadRunway: "[data-present-road-runway]",
+  presentRoadScene: "[data-present-road-scene]",
+  presentRoad: "[data-present-road]",
+  presentSign: "[data-present-sign]",
+  presentSignImage: "[data-present-sign-image]",
+  presentAlways: '[data-present-trigger="always"]',
+  presentForward: '[data-present-trigger="forward"]',
+  presentSun: '[data-present-trigger="sun"]',
 };
 
 export const getEnvelopeOffset = (page) =>
@@ -164,4 +175,29 @@ export const completeMemory = async (page) => {
     "complete",
     { timeout: 8_000 },
   );
+};
+
+export const setPresentProgress = async (page, progress, phase = "writing") => {
+  await page.evaluate(({ nextProgress, nextPhase }) => {
+    const selector =
+      nextPhase === "road"
+        ? "[data-present-road-runway]"
+        : "[data-present-writing-runway]";
+    const runway = document.querySelector(selector);
+    const travel = runway.offsetHeight - window.innerHeight;
+    const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, runwayTop + travel * nextProgress);
+  }, { nextProgress: progress, nextPhase: phase });
+  await page.waitForTimeout(50);
+};
+
+export const reachPresent = async (page, progress = 0.9) => {
+  await page.evaluate(() => {
+    document.body.dataset.pageState = "open";
+    document.querySelector("[data-origin]").dataset.originState = "completed";
+    document.querySelector("[data-memory]").dataset.memoryState = "complete";
+    delete document.body.dataset.originScrollLocked;
+    delete document.body.dataset.memoryScrollLocked;
+  });
+  await setPresentProgress(page, progress, "road");
 };

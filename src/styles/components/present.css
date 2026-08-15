@@ -1,0 +1,310 @@
+.present {
+  --present-road-progress: 0;
+  position: relative;
+  display: block;
+  min-block-size: auto;
+  padding: 0;
+  background: transparent;
+  color: #111;
+  font-family: var(--font-family-present);
+}
+
+.present__writing-runway {
+  position: relative;
+  min-block-size: 200svh;
+}
+
+.present__writing-stage,
+.present__road-stage {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100vh;
+  block-size: 100svh;
+  inline-size: 100%;
+  overflow: clip;
+}
+
+.present__writing-stage {
+  display: grid;
+  padding: clamp(1.25rem, 4vw, 3rem) var(--page-gutter);
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.present__heading {
+  position: relative;
+  z-index: 8;
+  inline-size: min(100%, 72rem);
+  margin-inline: auto;
+}
+
+.present__label {
+  margin-block-start: 0.35rem;
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+}
+
+.present__writing {
+  position: absolute;
+  z-index: 7;
+  inset-block-start: clamp(7rem, 18svh, 10rem);
+  inset-inline-start: max(var(--page-gutter), calc((100% - 72rem) / 2));
+  inline-size: min(88%, 39rem);
+  pointer-events: none;
+}
+
+.present__writing-semantic {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.present__writing-visual {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+.present__writing-visual > * + * {
+  margin-block-start: 0.7rem;
+}
+
+.present__character {
+  opacity: 0;
+}
+
+.present__character--visible {
+  opacity: 1;
+}
+
+.present__road-scene {
+  position: absolute;
+  z-index: 2;
+  inset-inline: 50% auto;
+  inset-block-end: clamp(0.75rem, 3svh, 2rem);
+  inline-size: min(94vw, 72rem);
+  aspect-ratio: 1640 / 943;
+  opacity: clamp(0, calc(var(--present-road-progress) * 1.35), 1);
+  transform: translateX(-50%)
+    scale(calc(0.72 + var(--present-road-progress) * 0.28));
+  transform-origin: center bottom;
+}
+
+.present__road-runway {
+  position: relative;
+  min-block-size: 300svh;
+  margin-block-start: -65svh;
+}
+
+.present__road-stage {
+  display: grid;
+  place-items: end center;
+  padding: clamp(0.75rem, 3svh, 2rem) var(--page-gutter);
+}
+
+.present__road {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.present__brush-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--present-road-progress));
+}
+
+.present__sign {
+  position: absolute;
+  z-index: 5;
+  inset-inline-end: 6%;
+  inset-block-end: 5%;
+  inline-size: clamp(5.5rem, 15%, 10rem);
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+[data-present-state="interactive"] .present__sign {
+  opacity: 1;
+  transform: none;
+}
+
+.present__sign img {
+  display: block;
+  inline-size: 100%;
+}
+
+.present__hotspot {
+  position: absolute;
+  z-index: 7;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.present__hotspot:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.present__hotspot:focus-visible {
+  border-radius: 0.35rem;
+  outline: 0.16rem solid #ffd166;
+  outline-offset: 0.15rem;
+}
+
+.present__hotspot--always {
+  inset-block-start: 8%;
+  inset-inline: 8% 8%;
+  block-size: 29%;
+}
+
+.present__hotspot--forward {
+  inset-block-start: 39%;
+  inset-inline: 8% 3%;
+  block-size: 29%;
+}
+
+.present__hotspot--sun {
+  inset-block-start: 29%;
+  inset-inline-start: 51%;
+  inline-size: 10%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.present__hotspot--sun::before {
+  position: absolute;
+  inset: -28%;
+  border: 0.12rem solid rgb(255 209 102 / 78%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0.8rem rgb(255 209 102 / 72%),
+    inset 0 0 0.7rem rgb(255 239 170 / 55%);
+  content: "";
+  animation: present-sun-halo 1.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+[data-present-interaction="sun"] .present__hotspot--sun::before {
+  animation-play-state: paused;
+}
+
+[data-present-state="interactive"] .present__hotspot--sun {
+  opacity: 1;
+}
+
+.present__message {
+  position: absolute;
+  z-index: 6;
+  max-inline-size: min(42%, 24rem);
+  margin: 0;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgb(255 209 102 / 55%);
+  border-radius: 0.35rem;
+  background: rgb(12 18 28 / 84%);
+  color: #fff5df;
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.4rem);
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+.present__message--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.present__message--always {
+  inset-block-start: 4%;
+  inset-inline-start: 3%;
+}
+
+.present__message--forward {
+  inset-block-start: 4%;
+  inset-inline-end: 3%;
+  text-align: end;
+}
+
+.present__message--sun {
+  inset-block-start: 53%;
+  inset-inline-start: 50%;
+  max-inline-size: 52%;
+  text-align: center;
+  transform: translate(-50%, 0.4rem);
+}
+
+.present__message--sun.present__message--visible {
+  transform: translate(-50%, 0);
+}
+
+@media (width < 48rem) {
+  .present__writing-stage {
+    padding-block-start: 1.25rem;
+  }
+
+  .present__writing {
+    inset-block-start: 6.5rem;
+    inline-size: calc(100% - var(--page-gutter) * 2);
+  }
+
+  .present__road-scene {
+    inset-block-end: 8svh;
+    inline-size: min(96vw, 48rem);
+  }
+
+  .present__sign {
+    inset-inline-end: 7%;
+    inline-size: clamp(4.5rem, 18%, 7rem);
+  }
+
+  .present__message {
+    max-inline-size: 46%;
+    font-size: clamp(0.68rem, 2.7vw, 0.84rem);
+  }
+}
+
+@keyframes present-sun-halo {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .present__character {
+    opacity: 1;
+  }
+
+  .present__road-scene {
+    transition: none;
+  }
+
+  .present__sign,
+  .present__message {
+    transition: none;
+  }
+
+  .present__hotspot--sun::before {
+    animation: none;
+    opacity: 0.8;
+  }
+}

@@ -70,9 +70,9 @@ A veces basta una página, unas pocas palabras y suficiente espacio para que alg
 
 ---
 
-## 4. Presente — Lo que estamos construyendo
+## 4. Presente
 
-Hoy ya no escribimos únicamente sobre papel.
+**Hoy ya no escribimos únicamente sobre el papel**
 
 Construimos interfaces.  
 Sistemas.  
@@ -80,19 +80,11 @@ Experiencias.
 
 Pero la intención sigue siendo la misma:
 
-hacer comprensible lo complejo.
-
-Cada decisión responde a una pregunta sencilla:
-
-**¿Es realmente necesario?**
-
-Si la respuesta es no, desaparece.
-
-Si la respuesta es sí, debe tener un propósito claro.
+hacer comprensible lo complejo. Generar un propósito.
 
 Así se construye esta página.
 
-~~No como una colección de componentes, sino como una secuencia de ideas.~~
+No como una colección de componentes, sino como una secuencia de ideas.
 
 No como una pantalla que exige atención, sino como un espacio que invita a avanzar.
 
