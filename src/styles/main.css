@@ -1,4 +1,4 @@
-@import url("./settings/tokens.css");
+@import url("./settings/tokens/index.css");
 @import url("./settings/fonts.css");
 @import url("./generic/reset.css");
 @import url("./elements/base.css");

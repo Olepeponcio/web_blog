@@ -1,5 +1,5 @@
 .origin {
-  font-family: "Bubblegum Sans", sans-serif;
+  font-family: var(--font-family-origin);
   font-weight: 400;
   font-style: normal;
 

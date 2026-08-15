@@ -80,7 +80,7 @@
   display: inline-block;
   inline-size: 10ch;
   overflow: hidden;
-  font-family: monospace;
+  font-family: var(--font-family-code);
   text-align: start;
   white-space: nowrap;
 }

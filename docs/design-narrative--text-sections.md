@@ -92,7 +92,7 @@ Si la respuesta es sí, debe tener un propósito claro.
 
 Así se construye esta página.
 
-No como una colección de componentes, sino como una secuencia de ideas.
+~~No como una colección de componentes, sino como una secuencia de ideas.~~
 
 No como una pantalla que exige atención, sino como un espacio que invita a avanzar.
 

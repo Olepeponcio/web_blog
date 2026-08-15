@@ -1,0 +1,9 @@
+:root {
+  --page-inline-size: 72rem;
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --ink-reveal-radius: 2.75rem;
+  --origin-jar-size: clamp(5.25rem, 14svh, 8rem);
+  --memory-scene-max-width: 90rem;
+  --memory-viewport-gap: clamp(1rem, 3vw, 2.5rem);
+  --memory-postcard-centered-width: 86%;
+}

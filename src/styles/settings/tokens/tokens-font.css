@@ -1,0 +1,8 @@
+:root {
+  --font-family-handwriting:
+    "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
+  --font-family-origin:
+    "Bubblegum Sans", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-family-code:
+    "Cascadia Mono", Consolas, "Courier New", monospace;
+}

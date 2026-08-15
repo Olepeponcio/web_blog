@@ -19,6 +19,23 @@ origen, memoria, presente y futuro.
 - Tipografía expresiva por sección y fuentes locales cuando están disponibles.
 - CSS controla la composición final; JavaScript coordina estados y movimiento.
 
+### Tipografía por sección
+
+Las familias se declaran en [`tokens-font.css`](../src/styles/settings/tokens/tokens-font.css)
+y las fuentes locales se registran mediante `@font-face` en
+[`fonts.css`](../src/styles/settings/fonts.css). Cada pila incluye alternativas
+del sistema para conservar legibilidad si la fuente principal no carga.
+
+| Sección o elemento       | Fuente principal       | Alternativas                           | Estado                    |
+| :----------------------- | :--------------------- | :------------------------------------- | :------------------------ |
+| Cover: remitente y carta | Snell Roundhand        | Segoe Script, Brush Script MT, cursiva | Aplicada                  |
+| Cover: secuencia binaria | Cascadia Mono          | Consolas, Courier New, monoespaciada   | Aplicada                  |
+| Origin                   | Bubblegum Sans         | Trebuchet MS, Segoe UI, sans-serif     | Aplicada localmente       |
+| Memory: pósit            | Snell Roundhand        | Segoe Script, Brush Script MT, cursiva | Aplicada                  |
+| Memory: postal           | Integrada en la imagen | No procede                             | No recibe CSS tipográfico |
+| Cabin Sketch             | —                      | —                                      | Disponible, no aplicada   |
+| Stack Sans Notch         | —                      | —                                      | Disponible, no aplicada   |
+
 ## Recorrido narrativo
 
 ```text
@@ -75,13 +92,13 @@ aumentan mediante reglas `min-width` en resoluciones amplias.
 
 ### Estados
 
-| Estado | Comportamiento |
-| :-- | :-- |
-| `sealed` | Sobre parcialmente oculto y scroll bloqueado. |
-| `dragging` | Desplazamiento vertical activo. |
-| `seal-ready` | Sobre desplegado y sello habilitado. |
-| `writing` | Sello roto, autoscroll y escritura progresiva. |
-| `open` | Carta abierta y recorrido general habilitado. |
+| Estado       | Comportamiento                                 |
+| :----------- | :--------------------------------------------- |
+| `sealed`     | Sobre parcialmente oculto y scroll bloqueado.  |
+| `dragging`   | Desplazamiento vertical activo.                |
+| `seal-ready` | Sobre desplegado y sello habilitado.           |
+| `writing`    | Sello roto, autoscroll y escritura progresiva. |
+| `open`       | Carta abierta y recorrido general habilitado.  |
 
 ### Recursos
 
@@ -91,13 +108,13 @@ aumentan mediante reglas `min-width` en resoluciones amplias.
 
 ### Módulos responsables
 
-| Interacción | JavaScript | CSS |
-| :-- | :-- | :-- |
+| Interacción            | JavaScript                                                                                 | CSS                                                                                                     |
+| :--------------------- | :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
 | Coordinación y estados | [`cover.js`](../src/scripts/cover/cover.js), [`states.js`](../src/scripts/cover/states.js) | [`cover.css`](../src/styles/components/cover.css), [`narrative.css`](../src/styles/pages/narrative.css) |
-| Despliegue y binario | [`envelope-drag.js`](../src/scripts/cover/envelope-drag.js) | [`cover.css`](../src/styles/components/cover.css) |
-| Rotura del sello | [`seal-opening.js`](../src/scripts/cover/seal-opening.js) | [`cover.css`](../src/styles/components/cover.css) |
-| Escritura inicial | [`text-reveal.js`](../src/scripts/cover/text-reveal.js) | [`reveal-text.css`](../src/styles/components/reveal-text.css) |
-| Indicador de scroll | [`cover.js`](../src/scripts/cover/cover.js) | [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
+| Despliegue y binario   | [`envelope-drag.js`](../src/scripts/cover/envelope-drag.js)                                | [`cover.css`](../src/styles/components/cover.css)                                                       |
+| Rotura del sello       | [`seal-opening.js`](../src/scripts/cover/seal-opening.js)                                  | [`cover.css`](../src/styles/components/cover.css)                                                       |
+| Escritura inicial      | [`text-reveal.js`](../src/scripts/cover/text-reveal.js)                                    | [`reveal-text.css`](../src/styles/components/reveal-text.css)                                           |
+| Indicador de scroll    | [`cover.js`](../src/scripts/cover/cover.js)                                                | [`scroll-cue.css`](../src/styles/components/scroll-cue.css)                                             |
 
 La validación está documentada en
 [Pruebas del HITO 1](testing--milestone-1.md).
@@ -141,16 +158,16 @@ evitar encerrar al usuario.
 
 ### Estados
 
-| Estado | Comportamiento |
-| :-- | :-- |
-| `idle` | Sección dentro del scroll general. |
-| `centering` | Alineación mediante autoscroll. |
-| `ready` | Sección preparada y bote habilitado. |
-| `opening` | Apertura del bote y vuelo del corcho. |
-| `opened-ready` | Espera de la segunda activación. |
-| `active` | Bote-puntero y revelado por tinta. |
-| `complete` | Estado transitorio al terminar el revelado. |
-| `completed` | Scroll restaurado, indicador visible y evento emitido. |
+| Estado         | Comportamiento                                         |
+| :------------- | :----------------------------------------------------- |
+| `idle`         | Sección dentro del scroll general.                     |
+| `centering`    | Alineación mediante autoscroll.                        |
+| `ready`        | Sección preparada y bote habilitado.                   |
+| `opening`      | Apertura del bote y vuelo del corcho.                  |
+| `opened-ready` | Espera de la segunda activación.                       |
+| `active`       | Bote-puntero y revelado por tinta.                     |
+| `complete`     | Estado transitorio al terminar el revelado.            |
+| `completed`    | Scroll restaurado, indicador visible y evento emitido. |
 
 ### Recursos
 
@@ -161,15 +178,15 @@ evitar encerrar al usuario.
 
 ### Módulos responsables
 
-| Interacción | JavaScript | CSS |
-| :-- | :-- | :-- |
-| Coordinación y estados | [`origin.js`](../src/scripts/origin/origin.js), [`states.js`](../src/scripts/origin/states.js) | [`origin.css`](../src/styles/components/origin.css), [`narrative.css`](../src/styles/pages/narrative.css) |
-| Entrada y título | [`origin-entry.js`](../src/scripts/origin/origin-entry.js) | [`origin.css`](../src/styles/components/origin.css) |
-| Apertura del bote | [`jar-opening.js`](../src/scripts/origin/jar-opening.js) | [`origin.css`](../src/styles/components/origin.css) |
-| Trayectoria del corcho | [`cork-flight.js`](../src/scripts/origin/cork-flight.js) | [`origin.css`](../src/styles/components/origin.css) |
-| Bote-puntero | [`jar-pointer.js`](../src/scripts/origin/jar-pointer.js) | [`origin.css`](../src/styles/components/origin.css) |
-| Revelado de palabras | [`word-reveal.js`](../src/scripts/origin/word-reveal.js) | [`origin.css`](../src/styles/components/origin.css) |
-| Finalización sin autoscroll | [`origin-exit.js`](../src/scripts/origin/origin-exit.js) | [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
+| Interacción                 | JavaScript                                                                                     | CSS                                                                                                       |
+| :-------------------------- | :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| Coordinación y estados      | [`origin.js`](../src/scripts/origin/origin.js), [`states.js`](../src/scripts/origin/states.js) | [`origin.css`](../src/styles/components/origin.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Entrada y título            | [`origin-entry.js`](../src/scripts/origin/origin-entry.js)                                     | [`origin.css`](../src/styles/components/origin.css)                                                       |
+| Apertura del bote           | [`jar-opening.js`](../src/scripts/origin/jar-opening.js)                                       | [`origin.css`](../src/styles/components/origin.css)                                                       |
+| Trayectoria del corcho      | [`cork-flight.js`](../src/scripts/origin/cork-flight.js)                                       | [`origin.css`](../src/styles/components/origin.css)                                                       |
+| Bote-puntero                | [`jar-pointer.js`](../src/scripts/origin/jar-pointer.js)                                       | [`origin.css`](../src/styles/components/origin.css)                                                       |
+| Revelado de palabras        | [`word-reveal.js`](../src/scripts/origin/word-reveal.js)                                       | [`origin.css`](../src/styles/components/origin.css)                                                       |
+| Finalización sin autoscroll | [`origin-exit.js`](../src/scripts/origin/origin-exit.js)                                       | [`scroll-cue.css`](../src/styles/components/scroll-cue.css)                                               |
 
 La validación está documentada en
 [Pruebas del HITO 2](testing--milestone-2.md).
@@ -213,18 +230,18 @@ en píxeles. Al redimensionar, la postal se adapta de nuevo a la escena.
 
 ### Estados
 
-| Estado | Comportamiento |
-| :-- | :-- |
-| `idle` | Espera de Origen y visibilidad suficiente. |
-| `entering` | Entrada visual de la escena. |
-| `board-ready` | Tablero inicial, postal y chispas. |
-| `centering` | Interruptor activado, centrado y bloqueo del scroll. |
-| `signal` | Segundo tablero e instrumento parpadeando. |
-| `triggered` | Instrumento activo y postal liberada. |
-| `postal-moving` | Movimiento y escalado transitorios. |
-| `postal-ready` | Postal centrada y accionable. |
-| `flipping` | Giro entre anverso y reverso. |
-| `complete` | Reverso persistente y scroll restaurado. |
+| Estado          | Comportamiento                                       |
+| :-------------- | :--------------------------------------------------- |
+| `idle`          | Espera de Origen y visibilidad suficiente.           |
+| `entering`      | Entrada visual de la escena.                         |
+| `board-ready`   | Tablero inicial, postal y chispas.                   |
+| `centering`     | Interruptor activado, centrado y bloqueo del scroll. |
+| `signal`        | Segundo tablero e instrumento parpadeando.           |
+| `triggered`     | Instrumento activo y postal liberada.                |
+| `postal-moving` | Movimiento y escalado transitorios.                  |
+| `postal-ready`  | Postal centrada y accionable.                        |
+| `flipping`      | Giro entre anverso y reverso.                        |
+| `complete`      | Reverso persistente y scroll restaurado.             |
 
 ### Recursos
 
@@ -238,14 +255,14 @@ pósit conserva su tratamiento visual independiente.
 
 ### Módulos responsables
 
-| Interacción | JavaScript | CSS |
-| :-- | :-- | :-- |
-| Coordinación y estados | [`memory.js`](../src/scripts/memory/memory.js), [`states.js`](../src/scripts/memory/states.js) | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
-| Entrada no bloqueante | [`memory-entry.js`](../src/scripts/memory/memory-entry.js) | [`memory.css`](../src/styles/components/memory.css) |
-| Interruptor, centrado e instrumento | [`memory-controls.js`](../src/scripts/memory/memory-controls.js) | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
-| Coordinación de postal | [`postcard.js`](../src/scripts/memory/postcard.js) | [`memory.css`](../src/styles/components/memory.css) |
-| Movimiento y escalado | [`postcard-motion.js`](../src/scripts/memory/postcard-motion.js) | [`memory.css`](../src/styles/components/memory.css) |
-| Giro y finalización | [`postcard-flip.js`](../src/scripts/memory/postcard-flip.js) | [`memory.css`](../src/styles/components/memory.css) |
+| Interacción                         | JavaScript                                                                                     | CSS                                                                                                       |
+| :---------------------------------- | :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| Coordinación y estados              | [`memory.js`](../src/scripts/memory/memory.js), [`states.js`](../src/scripts/memory/states.js) | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Entrada no bloqueante               | [`memory-entry.js`](../src/scripts/memory/memory-entry.js)                                     | [`memory.css`](../src/styles/components/memory.css)                                                       |
+| Interruptor, centrado e instrumento | [`memory-controls.js`](../src/scripts/memory/memory-controls.js)                               | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Coordinación de postal              | [`postcard.js`](../src/scripts/memory/postcard.js)                                             | [`memory.css`](../src/styles/components/memory.css)                                                       |
+| Movimiento y escalado               | [`postcard-motion.js`](../src/scripts/memory/postcard-motion.js)                               | [`memory.css`](../src/styles/components/memory.css)                                                       |
+| Giro y finalización                 | [`postcard-flip.js`](../src/scripts/memory/postcard-flip.js)                                   | [`memory.css`](../src/styles/components/memory.css)                                                       |
 
 La validación está documentada en
 [Pruebas del HITO 3](testing--milestone-3.md).
@@ -266,8 +283,8 @@ interacción aprobada ni un módulo JavaScript propio.
 
 ### Módulos responsables
 
-| Ámbito | JavaScript | CSS |
-| :-- | :-- | :-- |
+| Ámbito            | JavaScript            | CSS                                                                       |
+| :---------------- | :-------------------- | :------------------------------------------------------------------------ |
 | Estructura actual | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
 
 No se documentará una interacción hasta que sea diseñada y autorizada.
@@ -289,8 +306,8 @@ específico.
 
 ### Módulos responsables
 
-| Ámbito | JavaScript | CSS |
-| :-- | :-- | :-- |
+| Ámbito            | JavaScript            | CSS                                                                       |
+| :---------------- | :-------------------- | :------------------------------------------------------------------------ |
 | Estructura actual | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
 
 ## 6. DESTINATARIO + FORMULARIO
@@ -306,10 +323,10 @@ una decisión funcional y de privacidad independiente.
 
 ### Módulos responsables
 
-| Ámbito | JavaScript | CSS |
-| :-- | :-- | :-- |
-| Destinatario | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
-| Formulario | Sin módulo específico; validación HTML nativa | [`response-form.css`](../src/styles/components/response-form.css) |
+| Ámbito       | JavaScript                                    | CSS                                                                       |
+| :----------- | :-------------------------------------------- | :------------------------------------------------------------------------ |
+| Destinatario | Sin módulo específico                         | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
+| Formulario   | Sin módulo específico; validación HTML nativa | [`response-form.css`](../src/styles/components/response-form.css)         |
 
 ## 7. CIERRE — POST SCRIPTUM
 
@@ -321,22 +338,27 @@ posee lógica JavaScript propia.
 
 ### Módulos responsables
 
-| Ámbito | JavaScript | CSS |
-| :-- | :-- | :-- |
+| Ámbito                    | JavaScript            | CSS                                                           |
+| :------------------------ | :-------------------- | :------------------------------------------------------------ |
 | Cierre y enlaces sociales | Sin módulo específico | [`site-footer.css`](../src/styles/components/site-footer.css) |
 
 ## Arquitectura transversal
 
-| Responsabilidad | Módulo |
-| :-- | :-- |
-| Punto de entrada | [`main.js`](../src/scripts/main.js) |
-| Eventos entre secciones | [`narrative-events.js`](../src/scripts/shared/narrative-events.js) |
-| Indicador reutilizable | [`scroll-cue.js`](../src/scripts/shared/scroll-cue.js), [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
-| Autoscroll, esperas y tiempos | [`motion.js`](../src/scripts/shared/motion.js) |
-| Operaciones matemáticas | [`math.js`](../src/scripts/shared/math.js) |
-| Tokens de diseño y movimiento | [`tokens.css`](../src/styles/settings/tokens.css) |
-| Fuentes locales | [`fonts.css`](../src/styles/settings/fonts.css) |
-| Base documental | [`base.css`](../src/styles/elements/base.css) |
+| Responsabilidad               | Módulo                                                                                                              |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| Punto de entrada              | [`main.js`](../src/scripts/main.js)                                                                                 |
+| Eventos entre secciones       | [`narrative-events.js`](../src/scripts/shared/narrative-events.js)                                                  |
+| Indicador reutilizable        | [`scroll-cue.js`](../src/scripts/shared/scroll-cue.js), [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
+| Autoscroll, esperas y tiempos | [`motion.js`](../src/scripts/shared/motion.js)                                                                      |
+| Operaciones matemáticas       | [`math.js`](../src/scripts/shared/math.js)                                                                          |
+| Entrada de tokens             | [`tokens/index.css`](../src/styles/settings/tokens/index.css)                                                       |
+| Color                         | [`tokens-color.css`](../src/styles/settings/tokens/tokens-color.css)                                                |
+| Tipografía                    | [`tokens-font.css`](../src/styles/settings/tokens/tokens-font.css)                                                  |
+| Tiempos                       | [`tokens-time.css`](../src/styles/settings/tokens/tokens-time.css)                                                  |
+| Geometría responsive          | [`tokens-layout.css`](../src/styles/settings/tokens/tokens-layout.css)                                              |
+| Sombras y efectos             | [`tokens-effect.css`](../src/styles/settings/tokens/tokens-effect.css)                                              |
+| Fuentes locales               | [`fonts.css`](../src/styles/settings/fonts.css)                                                                     |
+| Base documental               | [`base.css`](../src/styles/elements/base.css)                                                                       |
 
 ## Responsive y accesibilidad
 

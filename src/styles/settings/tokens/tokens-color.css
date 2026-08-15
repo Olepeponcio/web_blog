@@ -1,0 +1,15 @@
+:root {
+  --color-paper: #d4cdbd;
+  --color-ink: #191714;
+  --color-copper-gold: #b77a3d;
+  --color-spark: #f1b85b;
+  --color-spark-glow: #e79432;
+  --color-note-paper-start: rgb(255 236 139 / 96%);
+  --color-note-paper-end: rgb(213 178 73 / 96%);
+  --color-note-ink: #21180d;
+  --color-note-fold-dark: #b99538;
+  --color-note-fold-light: #f7df82;
+  --color-memory-signal: rgb(115 255 75 / 22%);
+  --color-memory-signal-glow: rgb(102 255 64 / 55%);
+  --color-scroll-cue: #8f1d24;
+}
