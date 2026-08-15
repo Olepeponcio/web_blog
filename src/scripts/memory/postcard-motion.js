@@ -6,7 +6,7 @@ const getDuration = () =>
     ? 0
     : getMotionDuration("--duration-memory-postcard-move");
 
-export const movePostcard = async ({ memory, scene, postcard }) => {
+export const movePostcard = async ({ memory, postcard }) => {
   const start = postcard.getBoundingClientRect();
   postcard.classList.add("memory__postcard--centered");
   const target = postcard.getBoundingClientRect();

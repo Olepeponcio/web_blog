@@ -58,6 +58,7 @@ front-end--web-blog/
 │   └── ui/
 ├── docs/
 │   ├── brainstorming--resources-by-section.md
+│   ├── accessibility--wcag-2.2-level-a.md
 │   ├── design-narrative--digital-epistle.md
 │   ├── design-narrative--text-sections.md
 │   ├── project-milestones.md
@@ -140,6 +141,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 
 | Documento                                                                           | Contenido                                                   |
 | :---------------------------------------------------------------------------------- | :---------------------------------------------------------- |
+| [Auditoría WCAG 2.2 — Nivel A](docs/accessibility--wcag-2.2-level-a.md)              | Estado, evidencia y pruebas de accesibilidad pendientes.    |
 | [Narrativa de diseño — Epístola digital](docs/design-narrative--digital-epistle.md) | Fuente de verdad conceptual y técnica de la experiencia.    |
 | [Narrativa web — Carta al futuro](docs/design-narrative--text-sections.md)          | Recorrido y contenido textual de las secciones.             |
 | [Recursos por sección](docs/brainstorming--resources-by-section.md)                 | Ideas visuales, interactivas y técnicas no vinculantes.     |

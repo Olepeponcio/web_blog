@@ -24,7 +24,7 @@ test.describe("HITO 3 — accesibilidad y movimiento", () => {
     await reachMemory(page);
     await expect(page.getByRole("button", { name: "Encender la escena" })).toBeEnabled();
     await page.getByRole("button", { name: "Encender la escena" }).click();
-    await expect(page.getByRole("button", { name: "Activar el instrumento luminoso" })).toBeEnabled();
+    await expect(page.getByRole("button", { name: "Activar el bolígrafo luminoso" })).toBeEnabled();
   });
 
   test("S03 — el flujo principal puede accionarse mediante teclado", async ({ page }) => {
