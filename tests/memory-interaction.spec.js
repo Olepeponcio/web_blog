@@ -26,6 +26,28 @@ test.describe("HITO 3 — interacción de Memoria", () => {
     );
   });
 
+  test("L03 — destaca el interruptor solo mientras espera su activación", async ({ page }) => {
+    await reachMemory(page);
+    const sparks = page.locator(selectors.memorySparks);
+
+    await expect
+      .poll(() =>
+        sparks.evaluate(
+          (element) => getComputedStyle(element, "::before").animationName,
+        ),
+      )
+      .toBe("memory-switch-wave");
+
+    await page.locator(selectors.memorySwitch).click();
+    await expect
+      .poll(() =>
+        sparks.evaluate(
+          (element) => getComputedStyle(element, "::before").animationName,
+        ),
+      )
+      .toBe("none");
+  });
+
   test("M01 — el interruptor cambia el tablero y habilita el instrumento", async ({ page }) => {
     await reachMemory(page);
     await page.locator(selectors.memorySwitch).click();

@@ -40,4 +40,20 @@ test.describe("HITO 3 — accesibilidad y movimiento", () => {
 
     await expect(page.locator(selectors.memory)).toHaveAttribute("data-memory-state", "complete", { timeout: 8_000 });
   });
+
+  test("S04 — mantiene una señal estática con movimiento reducido", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await reachMemory(page);
+
+    const cueStyle = await page.locator(selectors.memorySparks).evaluate((element) => {
+      const style = getComputedStyle(element, "::before");
+      return {
+        animationName: style.animationName,
+        opacity: Number(style.opacity),
+      };
+    });
+
+    expect(cueStyle.animationName).toBe("none");
+    expect(cueStyle.opacity).toBeGreaterThan(0);
+  });
 });

@@ -63,14 +63,16 @@ export const createOriginEntry = ({
     observer.unobserve(origin);
     originEyebrow.classList.add("origin__eyebrow--visible");
 
-    await Promise.all([
-      scrollToElement(origin, "--duration-origin-centering"),
-      wait(
-        prefersReducedMotion
-          ? 0
-          : getMotionDuration("--duration-origin-eyebrow"),
-      ),
-    ]);
+    const centering = scrollToElement(origin, "--duration-origin-centering");
+
+    await wait(
+      prefersReducedMotion
+        ? 0
+        : getMotionDuration("--duration-origin-eyebrow"),
+    );
+
+    await writeHeading();
+    await centering;
 
     if (originFitsViewport()) {
       page.dataset.originScrollLocked = "true";
@@ -78,7 +80,6 @@ export const createOriginEntry = ({
       delete page.dataset.originScrollLocked;
     }
 
-    await writeHeading();
     origin.dataset.originState = ORIGIN_STATES.ready;
     jarTrigger.disabled = false;
   };

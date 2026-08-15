@@ -28,11 +28,24 @@ export const createEnvelopeDrag = ({
   let binarySequenceIndex = 0;
   let binaryCharacterIndex = 0;
   let binaryTimer;
+  let visibilityObserver;
+  let pageStateObserver;
+
+  const isEnvelopeInViewport = () => {
+    const bounds = envelope.getBoundingClientRect();
+
+    return bounds.bottom > 0 && bounds.top < window.innerHeight;
+  };
 
   const isBinaryAnimationActive = () =>
-    [PAGE_STATES.dragging, PAGE_STATES.sealReady].includes(
-      document.body.dataset.pageState,
-    );
+    isEnvelopeInViewport() &&
+    !document.hidden &&
+    [
+      PAGE_STATES.dragging,
+      PAGE_STATES.sealReady,
+      PAGE_STATES.writing,
+      PAGE_STATES.open,
+    ].includes(document.body.dataset.pageState);
 
   const stopBinaryAnimation = () => {
     window.clearTimeout(binaryTimer);
@@ -70,11 +83,18 @@ export const createEnvelopeDrag = ({
   };
 
   const startBinaryAnimation = () => {
-    if (!binaryPostcode || binaryTimer) return;
+    if (!binaryPostcode || binaryTimer || !isBinaryAnimationActive()) return;
 
-    binaryPostcode.textContent = "[]";
-    binaryCharacterIndex = 0;
     writeNextBinaryCharacter();
+  };
+
+  const syncBinaryAnimation = () => {
+    if (isBinaryAnimationActive()) {
+      startBinaryAnimation();
+      return;
+    }
+
+    stopBinaryAnimation();
   };
 
   const getVisibleEdge = () => {
@@ -156,12 +176,20 @@ export const createEnvelopeDrag = ({
   const initialize = () => {
     if (binaryPostcode) binaryPostcode.textContent = "[]";
     syncInitialPosition();
+    visibilityObserver = new IntersectionObserver(syncBinaryAnimation);
+    visibilityObserver.observe(envelope);
+    pageStateObserver = new MutationObserver(syncBinaryAnimation);
+    pageStateObserver.observe(document.body, {
+      attributeFilter: ["data-page-state"],
+    });
     envelope.addEventListener("pointerdown", beginDrag);
     window.addEventListener("pointermove", continueDrag);
     window.addEventListener("pointerup", endDrag);
     window.addEventListener("pointercancel", endDrag);
     envelope.addEventListener("keydown", deployFromKeyboard);
     window.addEventListener("resize", syncInitialPosition);
+    window.addEventListener("scroll", syncBinaryAnimation, { passive: true });
+    document.addEventListener("visibilitychange", syncBinaryAnimation);
   };
 
   return { initialize };

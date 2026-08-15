@@ -178,4 +178,26 @@ test.describe("Arrastre del sobre", () => {
     );
     await expect(page.locator("[data-seal]")).toBeEnabled();
   });
+
+  test("B10 — el código postal se reanuda al volver a Cover", async ({ page }) => {
+    const envelope = page.locator(envelopeSelector);
+    const binaryPostcode = page.locator("[data-binary-postcode]");
+
+    await envelope.focus();
+    await envelope.press("Enter");
+    await page.evaluate(() => {
+      document.body.dataset.pageState = "open";
+      document.querySelector("#response").scrollIntoView();
+    });
+    await page.waitForTimeout(300);
+
+    const pausedValue = await binaryPostcode.textContent();
+    await page.waitForTimeout(500);
+    await expect(binaryPostcode).toHaveText(pausedValue);
+
+    await page.evaluate(() => window.scrollTo({ top: 0 }));
+    await expect
+      .poll(() => binaryPostcode.textContent(), { timeout: 2_000 })
+      .not.toBe(pausedValue);
+  });
 });

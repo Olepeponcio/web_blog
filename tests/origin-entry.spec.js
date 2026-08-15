@@ -25,6 +25,9 @@ test.describe("HITO 2 — entrada en Origen", () => {
     await expect(page.locator(selectors.originEyebrow)).toHaveClass(
       /origin__eyebrow--visible/,
     );
+    await expect(page.locator(selectors.originHeading)).toBeEmpty();
+    await page.waitForTimeout(700);
+    await expect(page.locator(selectors.originHeading)).toBeEmpty();
     await expect(page.locator(selectors.originHeading)).toHaveText(
       "Por qué escribo",
       { timeout: 8_000 },

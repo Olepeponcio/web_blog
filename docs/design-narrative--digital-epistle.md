@@ -36,6 +36,29 @@ del sistema para conservar legibilidad si la fuente principal no carga.
 | Cabin Sketch             | —                      | —                                      | Disponible, no aplicada   |
 | Stack Sans Notch         | —                      | —                                      | Disponible, no aplicada   |
 
+### Escala y unidades tipográficas
+
+- `rem` define tamaños estáticos y los límites mínimo y máximo de `clamp()`.
+- El valor preferente de una escala fluida combina `rem` con `vw`, `svh` o
+  `cqi`, según dependa del viewport o del contenedor.
+- El límite máximo relativo de un `clamp()` tipográfico será al menos el doble
+  de su límite mínimo.
+- `line-height` utiliza números sin unidad y `letter-spacing` puede utilizar
+  `em` cuando deba depender de la fuente local.
+- El proyecto no redefine el tamaño raíz del navegador y no utiliza `px` para
+  `font-size`.
+- Los tamaños compartidos se declaran en
+  [`tokens-font.css`](../src/styles/settings/tokens/tokens-font.css); las escalas
+  expresivas exclusivas permanecen junto a su componente.
+- Los cambios tipográficos se revisan con tamaño raíz ampliado al 200 % y sin
+  pérdida de contenido ni desbordamiento horizontal.
+
+Referencias: [W3C — Resize Text](https://www.w3.org/WAI/WCAG22/Understanding/resize-text),
+[W3C — Styling](https://www.w3.org/WAI/tutorials/page-structure/styling/),
+[W3C — técnica C28](https://www.w3.org/WAI/WCAG21/Techniques/css/C28),
+[MDN — `clamp()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp)
+y [MDN — `line-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-height).
+
 ## Recorrido narrativo
 
 ```text
@@ -61,7 +84,9 @@ Camino
 ```
 
 La secuencia binaria escribe cíclicamente, de izquierda a derecha y entre
-corchetes, los bloques que codifican «Maktub».
+corchetes, los bloques que codifican «Maktub». Después de abrir la carta, la
+animación se pausa cuando Cover queda fuera del viewport y se reanuda cuando el
+usuario regresa, sin mantener temporizadores activos fuera de la vista.
 
 ### Secuencia interactiva
 
@@ -87,8 +112,9 @@ recorrido parcial y no rebasa sus límites. `Enter` o espacio ofrecen una ruta
 equivalente mediante teclado.
 
 Después de activar el sello, el sobre desplegado y el sello roto permanecen en
-el flujo documental. El remitente y el sello parten de proporciones móviles y
-aumentan mediante reglas `min-width` en resoluciones amplias.
+el flujo documental. El sobre utiliza una anchura fluida limitada en todos los
+viewports; el remitente y el sello escalan respecto al propio componente mediante
+unidades de contenedor y límites en `rem`.
 
 ### Estados
 
@@ -125,7 +151,9 @@ La validación está documentada en
 
 `origin` explica por qué se escribe la carta. Cuando la sección alcanza la
 presencia requerida, se centra y bloquea temporalmente el scroll. «ORIGEN» surge
-suavemente y «Por qué escribo» se escribe después de izquierda a derecha.
+suavemente durante `1000ms`; al concluir, «Por qué escribo» se escribe de
+izquierda a derecha. El bloque narrativo conserva una separación fluida y
+moderada respecto del título.
 
 Bubblegum Sans se carga localmente y queda limitada a esta sección.
 
@@ -133,7 +161,8 @@ Bubblegum Sans se carga localmente y queda limitada a esta sección.
 
 ```text
 CENTRAR origin
-    → mostrar encabezado
+    → mostrar «ORIGEN» suavemente durante 1000ms
+    → escribir «Por qué escribo» al finalizar su aparición
     → bloquear scroll si la sección cabe en el viewport
     → habilitar bote cerrado
 
@@ -205,9 +234,10 @@ centrarse, escalar y girar.
 ```text
 RECIBIR origin:complete y detectar memory visible
     → iniciar la escena sin alterar el scroll
-    → mostrar tablero y chispas
+    → mostrar tablero y una secuencia de ondas y chispas sobre el interruptor
 
 ACTIVAR interruptor
+    → detener inmediatamente la llamada visual del interruptor
     → centrar memory y bloquear scroll
     → cambiar a board_2
     → hacer parpadear el instrumento
@@ -226,7 +256,9 @@ ACTIVAR postal
 
 CSS define el tamaño final fluido de la postal. JavaScript mide el inicio y el
 destino únicamente para interpolar la animación; no persiste dimensiones finales
-en píxeles. Al redimensionar, la postal se adapta de nuevo a la escena.
+en píxeles. Al redimensionar, la postal se adapta de nuevo a la escena. La llamada
+del interruptor se limita al estado `board-ready`; con movimiento reducido se
+convierte en un halo estático visible.
 
 ### Estados
 

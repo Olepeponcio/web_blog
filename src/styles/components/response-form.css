@@ -15,7 +15,7 @@
 }
 
 .response-form__field span {
-  font-size: 0.875rem;
+  font-size: var(--font-size-caption);
 }
 
 .response-form__field input,

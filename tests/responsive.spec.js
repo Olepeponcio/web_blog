@@ -74,4 +74,18 @@ test.describe("Responsive estructural", () => {
 
     expect(desktopSize).toBeGreaterThan(mobileSize);
   });
+
+  test("F05 — el sobre conserva una escala reducida y fluida", async ({ page }) => {
+    const envelope = page.locator("[data-envelope]");
+    const box = await envelope.boundingBox();
+    const viewport = page.viewportSize();
+    const rootFontSize = await page.evaluate(() =>
+      Number.parseFloat(getComputedStyle(document.documentElement).fontSize),
+    );
+    const expectedMaximum = Math.min(viewport.width * 0.92, rootFontSize * 60);
+
+    expect(box).not.toBeNull();
+    expect(box.width).toBeLessThanOrEqual(expectedMaximum + 1);
+    expect(box.width).toBeLessThan(viewport.width);
+  });
 });

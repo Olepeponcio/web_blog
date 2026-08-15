@@ -112,14 +112,26 @@
   pointer-events: none;
 }
 
+.memory__sparks::before,
+.memory__sparks::after {
+  position: absolute;
+  inset: 8%;
+  border: 0.1rem solid var(--color-spark);
+  border-radius: 50%;
+  box-shadow: var(--memory-switch-cue-shadow);
+  content: "";
+  opacity: 0;
+  transform: scale(0.55);
+}
+
 .memory__sparks span {
   position: absolute;
   inset: 50%;
-  inline-size: 0.22rem;
+  inline-size: clamp(0.28rem, 0.65cqi, 0.44rem);
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--color-spark);
-  box-shadow: 0 0 0.45rem var(--color-spark-glow);
+  box-shadow: var(--memory-switch-cue-shadow);
   opacity: 0;
 }
 
@@ -170,7 +182,7 @@
   box-shadow: var(--memory-note-shadow);
   color: var(--color-note-ink);
   font-family: var(--font-family-handwriting);
-  font-size: clamp(0.5rem, 1.7cqi, 1.2rem);
+  font-size: clamp(0.5rem, calc(0.35rem + 1cqi), 1.2rem);
   font-weight: 700;
   line-height: 1;
   text-align: center;
@@ -210,6 +222,16 @@
 
 [data-memory-state="board-ready"] .memory__sparks span {
   animation: memory-spark var(--duration-memory-sparks) ease-out infinite;
+}
+
+[data-memory-state="board-ready"] .memory__sparks::before,
+[data-memory-state="board-ready"] .memory__sparks::after {
+  animation: memory-switch-wave var(--duration-memory-switch-cue) ease-out
+    infinite;
+}
+
+[data-memory-state="board-ready"] .memory__sparks::after {
+  animation-delay: calc(var(--duration-memory-switch-cue) / 2);
 }
 
 .memory__instrument-halo {
@@ -316,19 +338,38 @@
 
 @keyframes memory-spark {
   0%,
-  72%,
+  62%,
   100% {
     opacity: 0;
     transform: translate(0, 0) scale(0.4);
   }
 
-  78% {
+  70% {
     opacity: 1;
+    transform: translate(0, 0) scale(1.5);
   }
 
-  88% {
+  86% {
     opacity: 0;
-    transform: translate(var(--spark-x), var(--spark-y)) scale(1.2);
+    transform: translate(var(--spark-x), var(--spark-y)) scale(1.8);
+  }
+}
+
+@keyframes memory-switch-wave {
+  0%,
+  15% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  28% {
+    opacity: 0.95;
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
   }
 }
 
@@ -352,8 +393,20 @@
   }
 
   [data-memory-state="board-ready"] .memory__sparks span,
+  [data-memory-state="board-ready"] .memory__sparks::before,
+  [data-memory-state="board-ready"] .memory__sparks::after,
   [data-memory-state="signal"] .memory__instrument-halo {
     animation: none;
+  }
+
+  [data-memory-state="board-ready"] .memory__sparks::before {
+    opacity: 0.9;
+    transform: scale(0.9);
+  }
+
+  [data-memory-state="board-ready"] .memory__sparks::after {
+    opacity: 0.45;
+    transform: scale(1.2);
   }
 
   [data-memory-state="signal"] .memory__instrument-halo {

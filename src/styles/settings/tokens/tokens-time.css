@@ -2,7 +2,7 @@
   --duration-seal-break: 700ms;
   --duration-opening-scroll: 1400ms;
   --duration-word-reveal-step: 90ms;
-  --duration-origin-eyebrow: 700ms;
+  --duration-origin-eyebrow: 1000ms;
   --duration-origin-heading-character: 90ms;
   --duration-origin-cork: 1500ms;
   --duration-origin-word: 240ms;
@@ -13,6 +13,7 @@
   --duration-memory-entry: 700ms;
   --duration-memory-centering: 1200ms;
   --duration-memory-sparks: 3200ms;
+  --duration-memory-switch-cue: 2200ms;
   --duration-memory-signal: 1200ms;
   --duration-memory-postcard-move: 1800ms;
   --duration-memory-postcard-flip: 900ms;

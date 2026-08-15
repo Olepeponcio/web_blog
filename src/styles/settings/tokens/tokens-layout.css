@@ -1,6 +1,7 @@
 :root {
   --page-inline-size: 72rem;
   --page-gutter: clamp(1rem, 4vw, 3rem);
+  --cover-envelope-inline-size: min(92vw, 60rem);
   --ink-reveal-radius: 2.75rem;
   --origin-jar-size: clamp(5.25rem, 14svh, 8rem);
   --memory-scene-max-width: 90rem;

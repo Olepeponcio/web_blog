@@ -1,5 +1,8 @@
 :root {
   --memory-frame-shadow: 0 0 1.75rem 0.2rem rgb(190 105 28 / 60%);
+  --memory-switch-cue-shadow:
+    0 0 0.45rem var(--color-spark),
+    0 0 1rem 0.2rem var(--color-spark-glow);
   --cover-envelope-shadow: 0 0.2rem 0.2rem rgb(25 23 20 / 35%);
   --cover-seal-glow: 0 0 1.25rem rgb(128 0 0 / 35%);
   --memory-note-shadow:
