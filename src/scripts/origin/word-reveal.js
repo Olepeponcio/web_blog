@@ -1,5 +1,6 @@
 import { clamp } from "../shared/math.js";
 import { getMotionDuration, wait } from "../shared/motion.js";
+import { ORIGIN_STATES } from "./states.js";
 
 const intersectsCircle = (wordBounds, circleBounds) => {
   const centerX = circleBounds.left + circleBounds.width / 2;
@@ -90,7 +91,7 @@ export const createOriginWordReveal = ({
   };
 
   const checkCollisions = () => {
-    if (origin.dataset.originState !== "active") return;
+    if (origin.dataset.originState !== ORIGIN_STATES.active) return;
 
     const circleBounds = hotspot.getBoundingClientRect();
 
@@ -103,10 +104,14 @@ export const createOriginWordReveal = ({
     });
   };
 
+  const revealAll = () => {
+    words.forEach(revealWord);
+  };
+
   const initialize = () => {
     words = createWordElements(originText);
     originText.setAttribute("aria-busy", "true");
   };
 
-  return { checkCollisions, initialize };
+  return { checkCollisions, initialize, revealAll };
 };

@@ -3,9 +3,9 @@
   z-index: 10;
   inset-block-end: 1.5rem;
   inset-inline-start: 50%;
-  inline-size: 1.25rem;
-  block-size: 2.5rem;
-  border: 0.125rem solid var(--color-ink);
+  inline-size: clamp(1.6rem, 2.2vw, 2rem);
+  block-size: clamp(3.2rem, 4.4vw, 4rem);
+  border: 0.16rem solid var(--color-scroll-cue);
   border-radius: 999px;
   transform: translateX(-50%);
   pointer-events: none;
@@ -15,10 +15,10 @@
   position: absolute;
   inset-block-start: 0.4rem;
   inset-inline-start: 50%;
-  inline-size: 0.2rem;
-  block-size: 0.45rem;
+  inline-size: 0.26rem;
+  block-size: 0.6rem;
   border-radius: 999px;
-  background-color: var(--color-ink);
+  background-color: var(--color-scroll-cue);
   content: "";
   transform: translateX(-50%);
   animation: scroll-cue-wheel 1.4s ease-in-out infinite;
@@ -41,5 +41,12 @@
   100% {
     opacity: 0;
     transform: translate(-50%, 0.85rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue::before {
+    animation: none;
+    opacity: 1;
   }
 }

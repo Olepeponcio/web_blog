@@ -23,11 +23,11 @@ test.describe("Recorrido y contenido", () => {
     await expect(page.locator(selectors.scrollCue)).toBeVisible();
   });
 
-  test("E03 — oculta el indicador al iniciar el desplazamiento", async ({ page }) => {
+  test("E03 — mantiene el indicador en las secciones narrativas", async ({ page }) => {
     await openEpistle(page);
     await page.mouse.wheel(0, 100);
 
-    await expect(page.locator(selectors.scrollCue)).toBeHidden();
+    await expect(page.locator(selectors.scrollCue)).toBeVisible();
   });
 
   test("E04 — conserva el orden narrativo de las secciones", async ({ page }) => {

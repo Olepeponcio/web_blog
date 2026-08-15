@@ -16,7 +16,6 @@ export const selectors = {
   originCork: "[data-origin-cork]",
   originFloatingJar: "[data-origin-floating-jar]",
   originHotspot: "[data-origin-ink-hotspot]",
-  originContinue: "[data-origin-continue]",
   memory: "#memory",
   memoryScene: "[data-memory-scene]",
   memoryBoard: "[data-memory-board]",
@@ -121,7 +120,7 @@ export const revealOriginText = async (page) => {
 
   await expect(page.locator(selectors.origin)).toHaveAttribute(
     "data-origin-state",
-    "complete",
+    "completed",
     { timeout: 8_000 },
   );
 };
@@ -129,7 +128,9 @@ export const revealOriginText = async (page) => {
 export const reachMemory = async (page) => {
   await page.evaluate(() => {
     document.body.dataset.pageState = "open";
-    document.querySelector("[data-origin]").dataset.originState = "completed";
+    const origin = document.querySelector("[data-origin]");
+    origin.dataset.originState = "completed";
+    origin.dispatchEvent(new CustomEvent("origin:complete"));
     document.querySelector("[data-memory]").scrollIntoView();
   });
 

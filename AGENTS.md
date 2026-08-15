@@ -133,7 +133,9 @@ RECIBIR consulta
 
 ANALIZAR el proyecto para casar la consulta con la arquitectura y estado actual e identificar posibles conflicos.
 
-ANALIZAR únicamente el alcance solicitado
+ANALIZAR únicamente el alcance solicitado siempre comprobando los contratos o fuente de verdad que hemos establecido en los diversos documentos formato markdown en el proyecto.
+
+CUANDO una solicitud del usuario contradiga o pueda generar una salida del flujo de los contratos codex debe indicarlo y preguntarme si quiero seguir con la instrucción en la proposicion antes de realizar algún cambio.
 
 RESPONDER de forma breve y orientativa
 

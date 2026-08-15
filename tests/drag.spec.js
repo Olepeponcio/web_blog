@@ -165,4 +165,17 @@ test.describe("Arrastre del sobre", () => {
       "seal-ready",
     );
   });
+
+  test("B09 — el teclado despliega el sobre", async ({ page }) => {
+    const envelope = page.locator(envelopeSelector);
+
+    await envelope.focus();
+    await envelope.press("Enter");
+
+    await expect(page.locator("body")).toHaveAttribute(
+      "data-page-state",
+      "seal-ready",
+    );
+    await expect(page.locator("[data-seal]")).toBeEnabled();
+  });
 });

@@ -16,11 +16,14 @@ test.describe("HITO 3 — interacción de Memoria", () => {
     await expect(page.locator(selectors.memoryPostcard)).toBeDisabled();
   });
 
-  test("L02 — centra la sección antes de bloquear el scroll", async ({ page }) => {
+  test("L02 — activa la escena sin bloquear el scroll", async ({ page }) => {
     await reachMemory(page);
-    await expect(page.locator(selectors.body)).toHaveAttribute("data-memory-scroll-locked", "true");
+    const memoryPosition = await page.evaluate(() => window.scrollY);
     await expect(page.locator(selectors.memorySwitch)).toBeEnabled();
-    await expect.poll(() => page.locator(selectors.memory).evaluate((element) => Math.abs(element.getBoundingClientRect().top))).toBeLessThan(2);
+    await page.mouse.wheel(0, -400);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(
+      memoryPosition,
+    );
   });
 
   test("M01 — el interruptor cambia el tablero y habilita el instrumento", async ({ page }) => {
@@ -28,7 +31,18 @@ test.describe("HITO 3 — interacción de Memoria", () => {
     await page.locator(selectors.memorySwitch).click();
 
     await expect(page.locator(selectors.memory)).toHaveAttribute("data-memory-state", "signal");
-    await expect(page.locator(selectors.memoryBoard)).toHaveAttribute("src", /img__board_2\.png$/);
+    await expect(page.locator(selectors.body)).toHaveAttribute(
+      "data-memory-scroll-locked",
+      "true",
+    );
+    await expect
+      .poll(() =>
+        page
+          .locator(selectors.memory)
+          .evaluate((element) => Math.abs(element.getBoundingClientRect().top)),
+      )
+      .toBeLessThan(2);
+    await expect(page.locator(selectors.memoryBoard)).toHaveAttribute("src", /img__board_2\.webp$/);
     await expect(page.locator(selectors.memorySwitch)).toBeDisabled();
     await expect(page.locator(selectors.memoryInstrument)).toBeEnabled();
   });
@@ -52,12 +66,16 @@ test.describe("HITO 3 — interacción de Memoria", () => {
     await expect(page.locator(selectors.memoryPostcard)).toHaveClass(/memory__postcard--centered/);
   });
 
-  test("P01 — la postal muestra el reverso y desbloquea la página", async ({ page }) => {
+  test("P01 — la postal muestra el reverso y completa la escena", async ({ page }) => {
     await completeMemory(page);
 
     await expect(page.locator(selectors.memoryPostcardCard)).toHaveClass(/memory__postcard-card--flipped/);
     await expect(page.locator(selectors.memoryPostcard)).toHaveAttribute("aria-label", "Reverso de la postal");
-    await expect(page.locator(selectors.body)).not.toHaveAttribute("data-memory-scroll-locked", "true");
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
+      "data-memory-scroll-locked",
+      "true",
+    );
+    await expect(page.locator(selectors.scrollCue)).toBeVisible();
   });
 
   test("Q01 — conserva el estado final al salir y regresar", async ({ page }) => {

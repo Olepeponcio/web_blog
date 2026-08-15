@@ -62,6 +62,7 @@ dispositivo.
 | `C03` | Esperar la transición                | El recurso final corresponde al sello roto |
 | `C04` | Pulsar de nuevo                      | La secuencia no se reinicia                |
 | `C05` | Observar el estado de escritura      | Cambia a `writing`                         |
+| `C06` | Completar la apertura                | Sobre, solapa y sello roto siguen visibles |
 
 ### Texto de apertura
 
@@ -91,6 +92,7 @@ Playwright ejecutará el flujo en cada viewport y comprobará:
 - ausencia de scroll horizontal;
 - porción inicial del sobre dentro del viewport;
 - sello contenido y accionable;
+- sello proporcionado y remitente escalable por viewport;
 - texto sin recortes;
 - secciones dentro del ancho disponible;
 - campos del formulario sin desbordamiento;

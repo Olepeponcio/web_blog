@@ -1,6 +1,5 @@
 import { getMotionDuration } from "../shared/motion.js";
-
-const SCENE_COVERAGE_RATIO = 0.86;
+import { MEMORY_STATES } from "./states.js";
 
 const getDuration = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -9,29 +8,23 @@ const getDuration = () =>
 
 export const movePostcard = async ({ memory, scene, postcard }) => {
   const start = postcard.getBoundingClientRect();
-  const sceneBounds = scene.getBoundingClientRect();
-  const postcardAspectRatio = start.width / start.height;
-  const maximumWidth = sceneBounds.width * SCENE_COVERAGE_RATIO;
-  const maximumHeight = sceneBounds.height * SCENE_COVERAGE_RATIO;
-  const finalWidth = Math.max(
-    start.width,
-    Math.min(maximumWidth, maximumHeight * postcardAspectRatio),
-  );
-  const scale = finalWidth / start.width;
+  postcard.classList.add("memory__postcard--centered");
+  const target = postcard.getBoundingClientRect();
+  postcard.classList.remove("memory__postcard--centered");
+  const scale = target.width / start.width;
   const startCenterX = start.left + start.width / 2;
   const startCenterY = start.top + start.height / 2;
-  const targetCenterX = sceneBounds.left + sceneBounds.width / 2;
-  const targetCenterY = sceneBounds.top + sceneBounds.height / 2;
+  const targetCenterX = target.left + target.width / 2;
+  const targetCenterY = target.top + target.height / 2;
   const movementX = targetCenterX - startCenterX;
   const movementY = targetCenterY - startCenterY;
 
-  memory.dataset.memoryState = "postal-moving";
+  memory.dataset.memoryState = MEMORY_STATES.postalMoving;
   postcard.disabled = true;
   postcard.classList.add("memory__postcard--moving");
   postcard.style.setProperty("inset-inline-start", `${start.left}px`);
   postcard.style.setProperty("inset-block-start", `${start.top}px`);
   postcard.style.setProperty("inline-size", `${start.width}px`);
-  postcard.style.setProperty("--postcard-centered-width", `${finalWidth}px`);
 
   const movement = postcard.animate(
     [
@@ -56,5 +49,5 @@ export const movePostcard = async ({ memory, scene, postcard }) => {
   postcard.style.removeProperty("inline-size");
   postcard.disabled = false;
   postcard.setAttribute("aria-label", "Girar la postal para leer el reverso");
-  memory.dataset.memoryState = "postal-ready";
+  memory.dataset.memoryState = MEMORY_STATES.postalReady;
 };

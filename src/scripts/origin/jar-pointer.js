@@ -1,4 +1,5 @@
 import { clamp } from "../shared/math.js";
+import { ORIGIN_STATES } from "./states.js";
 
 export const createJarPointer = ({
   origin,
@@ -39,16 +40,16 @@ export const createJarPointer = ({
     isActive = true;
     jarTrigger.hidden = true;
     floatingJar.hidden = false;
-    origin.dataset.originState = "active";
+    origin.dataset.originState = ORIGIN_STATES.active;
     updatePosition(event);
-    window.addEventListener("mousemove", updatePosition);
+    window.addEventListener("pointermove", updatePosition);
   };
 
   const deactivate = () => {
     if (!isActive) return;
 
     isActive = false;
-    window.removeEventListener("mousemove", updatePosition);
+    window.removeEventListener("pointermove", updatePosition);
     floatingJar.hidden = true;
     floatingJar.style.removeProperty("--origin-pointer-x");
     floatingJar.style.removeProperty("--origin-pointer-y");

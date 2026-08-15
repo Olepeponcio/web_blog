@@ -1,9 +1,12 @@
-import { scrollToElement, wait } from "../shared/motion.js";
+import {
+  getMotionDuration,
+  scrollToElement,
+  wait,
+} from "../shared/motion.js";
+import { PAGE_STATES } from "../cover/states.js";
+import { ORIGIN_STATES } from "./states.js";
 
 const REQUIRED_VISIBILITY = 0.6;
-const EYEBROW_REVEAL_DURATION = 700;
-const HEADING_CHARACTER_DELAY = 90;
-
 export const createOriginEntry = ({
   page,
   origin,
@@ -27,7 +30,7 @@ export const createOriginEntry = ({
 
     for (const character of heading) {
       originHeading.textContent += character;
-      await wait(HEADING_CHARACTER_DELAY);
+      await wait(getMotionDuration("--duration-origin-heading-character"));
     }
   };
 
@@ -37,7 +40,11 @@ export const createOriginEntry = ({
   };
 
   const syncOriginAfterResize = () => {
-    if (["idle", "leaving", "completed"].includes(origin.dataset.originState)) {
+    if (
+      [ORIGIN_STATES.idle, ORIGIN_STATES.completed].includes(
+        origin.dataset.originState,
+      )
+    ) {
       return;
     }
 
@@ -52,13 +59,17 @@ export const createOriginEntry = ({
   };
 
   const centerAndLockOrigin = async () => {
-    origin.dataset.originState = "centering";
+    origin.dataset.originState = ORIGIN_STATES.centering;
     observer.unobserve(origin);
     originEyebrow.classList.add("origin__eyebrow--visible");
 
     await Promise.all([
       scrollToElement(origin, "--duration-origin-centering"),
-      wait(prefersReducedMotion ? 0 : EYEBROW_REVEAL_DURATION),
+      wait(
+        prefersReducedMotion
+          ? 0
+          : getMotionDuration("--duration-origin-eyebrow"),
+      ),
     ]);
 
     if (originFitsViewport()) {
@@ -68,7 +79,7 @@ export const createOriginEntry = ({
     }
 
     await writeHeading();
-    origin.dataset.originState = "ready";
+    origin.dataset.originState = ORIGIN_STATES.ready;
     jarTrigger.disabled = false;
   };
 
@@ -76,8 +87,8 @@ export const createOriginEntry = ({
     const entry = entries[0];
 
     if (
-      page.dataset.pageState !== "open" ||
-      origin.dataset.originState !== "idle" ||
+      page.dataset.pageState !== PAGE_STATES.open ||
+      origin.dataset.originState !== ORIGIN_STATES.idle ||
       entry.intersectionRatio < REQUIRED_VISIBILITY
     ) {
       return;

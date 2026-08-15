@@ -1,32 +1,14 @@
-import { scrollToElement } from "../shared/motion.js";
+import { NARRATIVE_EVENTS } from "../shared/narrative-events.js";
+import { ORIGIN_STATES } from "./states.js";
 
-export const createOriginExit = ({
-  page,
-  origin,
-  continueButton,
-  memory,
-}) => {
-  const enable = () => {
-    continueButton.hidden = false;
-    continueButton.disabled = false;
-  };
-
-  const continueToMemory = async () => {
-    if (origin.dataset.originState !== "complete") return;
-
-    origin.dataset.originState = "leaving";
-    continueButton.disabled = true;
-
-    await scrollToElement(memory, "--duration-origin-exit-scroll");
+export const createOriginExit = ({ page, origin }) => {
+  const complete = () => {
+    if (origin.dataset.originState !== ORIGIN_STATES.complete) return;
 
     delete page.dataset.originScrollLocked;
-    origin.dataset.originState = "completed";
-    continueButton.hidden = true;
+    origin.dataset.originState = ORIGIN_STATES.completed;
+    origin.dispatchEvent(new CustomEvent(NARRATIVE_EVENTS.originComplete));
   };
 
-  const initialize = () => {
-    continueButton.addEventListener("click", continueToMemory);
-  };
-
-  return { enable, initialize };
+  return { complete };
 };

@@ -2,6 +2,7 @@ import { createEnvelopeDrag } from "./envelope-drag.js";
 import { breakSeal, preloadOpenedSeal } from "./seal-opening.js";
 import { prepareOpeningText, revealOpeningWords } from "./text-reveal.js";
 import { scrollToElement, waitForNextFrame } from "../shared/motion.js";
+import { PAGE_STATES } from "./states.js";
 
 const getCoverElements = () => {
   const envelope = document.querySelector("[data-envelope]");
@@ -13,7 +14,6 @@ const getCoverElements = () => {
     seal: document.querySelector("[data-seal]"),
     sealImage: document.querySelector("[data-seal-image]"),
     openingText: document.querySelector("[data-opening-text]"),
-    scrollCue: document.querySelector("[data-scroll-cue]"),
   };
 };
 
@@ -32,30 +32,24 @@ export const initializeCover = () => {
     seal,
     sealImage,
     openingText,
-    scrollCue,
   } = elements;
 
   const setPageState = (state) => {
     page.dataset.pageState = state;
   };
 
-  const dismissScrollCue = () => {
-    scrollCue.hidden = true;
-  };
-
   const openSeal = async () => {
-    if (page.dataset.pageState !== "seal-ready") return;
+    if (page.dataset.pageState !== PAGE_STATES.sealReady) return;
 
     await breakSeal(seal, sealImage);
-    setPageState("writing");
+    setPageState(PAGE_STATES.writing);
 
     const words = prepareOpeningText(openingText);
     await waitForNextFrame();
     await scrollToElement(openingText, "--duration-opening-scroll");
     await revealOpeningWords(openingText, words);
 
-    setPageState("open");
-    scrollCue.hidden = false;
+    setPageState(PAGE_STATES.open);
   };
 
   const envelopeDrag = createEnvelopeDrag({
@@ -63,7 +57,7 @@ export const initializeCover = () => {
     envelopeFlap,
     onStateChange: setPageState,
     onComplete: () => {
-      setPageState("seal-ready");
+      setPageState(PAGE_STATES.sealReady);
       seal.disabled = false;
     },
   });
@@ -71,6 +65,4 @@ export const initializeCover = () => {
   preloadOpenedSeal(sealImage);
   envelopeDrag.initialize();
   seal.addEventListener("click", openSeal);
-  window.addEventListener("wheel", dismissScrollCue, { passive: true });
-  window.addEventListener("scroll", dismissScrollCue, { passive: true });
 };

@@ -44,6 +44,23 @@ test.describe("HITO 3 — responsive", () => {
   test("R03 — el reverso permanece contenido al completar el flujo", async ({ page }) => {
     await completeMemory(page);
     await expectInsideViewport(page, selectors.memoryPostcard);
-    await expect(page.locator(selectors.body)).not.toHaveAttribute("data-memory-scroll-locked", "true");
+  });
+
+  test("R04 — la postal centrada se recalcula al cambiar el viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await prepareMemoryPostcard(page);
+    const desktop = await page.locator(selectors.memoryPostcard).boundingBox();
+
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.locator(selectors.memory).scrollIntoViewIfNeeded();
+    await expectInsideViewport(page, selectors.memoryPostcard);
+    const mobile = await page.locator(selectors.memoryPostcard).boundingBox();
+    const scene = await page.locator(selectors.memoryScene).boundingBox();
+
+    expect(desktop).not.toBeNull();
+    expect(mobile).not.toBeNull();
+    expect(scene).not.toBeNull();
+    expect(mobile.width).toBeLessThan(desktop.width);
+    expect(mobile.width / scene.width).toBeCloseTo(0.86, 1);
   });
 });

@@ -2,632 +2,367 @@
 
 ## Marco del documento
 
-Este documento define la intención narrativa, el lenguaje visual y el
-comportamiento técnico de la epístola digital. Es la fuente de verdad para diseñar
-e implementar la experiencia, aunque la composición concreta pueda evolucionar.
+Este documento es la fuente de verdad conceptual y técnica de la experiencia.
+Describe el recorrido real, diferencia lo implementado de lo pendiente y enlaza
+cada interacción con los módulos que la gobiernan. Las tareas y criterios de
+cierre se registran en [Hitos del proyecto](project-milestones.md).
 
-Las tareas, entregables y criterios de cierre se organizan en
-`docs/project-milestones.md`.
+## Concepto y lenguaje visual
 
-## Concepto
+La web se concibe como una correspondencia que se despliega. El usuario avanza
+por una pieza editorial continua cuya estética evoluciona con la cronología:
+origen, memoria, presente y futuro.
 
-Una web concebida como una **correspondencia que se despliega**.
+- Fondo blanco con textura fibrosa de papel.
+- Negro carbón como tinta y color estructural.
+- Imágenes tratadas como documentos superpuestos.
+- Tipografía expresiva por sección y fuentes locales cuando están disponibles.
+- CSS controla la composición final; JavaScript coordina estados y movimiento.
 
-El usuario no navega entre bloques tradicionales, sino que avanza por una pieza editorial continua mediante el scroll, como si estuviera leyendo una carta extensa o una sucesión de pliegos.
-
----
-
-## Lenguaje visual
-
-### Fondo
-
-- Blanco dominante.
-- Textura rugosa y fibrosa.
-- Referencia visual: papel de carta, sobres artesanales o papel de algodón.
-
-### Color
-
-- Negro como color principal.
-- Uso mínimo de otros tonos.
-- El negro actúa como tinta: estructura, jerarquiza y delimita.
-
-### Tipografía
-
-- Tipografía estilográfica o caligráfica para elementos expresivos.
-- Inspiración en correspondencia de los siglos XVI-XVII.
-- Combinar con una tipografía más legible para textos extensos si fuera necesario.
-
----
-
-## Narrativa del scroll
-
-### 1. Apertura
-
-La sección `cover` funciona como umbral narrativo. Inicialmente solo muestra su
-fondo y mantiene bloqueado el scroll.
-
-El elemento `header` representa el anverso de un sobre cerrado. Aparece casi por
-completo oculto sobre el límite superior, dejando una pequeña parte dentro del
-viewport para sugerir que puede extraerse.
-
-Cuando el sobre queda totalmente desplegado, el sello de cera funciona como
-control de acceso a la narrativa.
-
-La portada se organiza en dos planos consecutivos:
-
-- un plano superior, formado por la solapa del sobre y el sello de cera;
-- un plano inferior, formado por el cuerpo de la carta y su texto de apertura.
-
-El plano inferior contiene:
-
-- lugar y fecha;
-- destinatario;
-- texto introductorio;
-- gran cantidad de espacio vacío.
-
-El texto permanece oculto hasta que el usuario activa el sello. Después se
-desvela progresivamente, palabra por palabra, para simular que la carta se está
-escribiendo en ese momento:
-
-> Madrid, 2026
->
-> A quien encuentre estas palabras:
->
-> No sé cuándo llegará esta carta a tus manos.
->
-> Quizá mañana.<br>
-> Quizá dentro de muchos años.
->
-> Solo sé que fue escrita en un momento en el que todo parecía avanzar demasiado
-> deprisa y, aun así, seguíamos buscando algo que permaneciera.
->
-> Por eso decidí escribir.
-
-#### Recursos de apertura
-
-Los recursos oficiales de esta fase se agrupan por tipo y sección narrativa:
+## Recorrido narrativo
 
 ```text
-src/assets/
-├── images/01-cover/
-│   ├── img__envelop.png
-│   ├── img__wax_seal.png
-│   └── img__wax_seal_broken.png
-└── icons/01-cover/
-    └── hand-click.svg
+COVER → ORIGIN → MEMORY → PRESENT → FUTURE
+      → DESTINATARIO + FORMULARIO → CIERRE POST SCRIPTUM
 ```
 
-- `images/01-cover/` contiene el sobre y los estados visuales del sello.
-- `icons/01-cover/` contiene los indicadores gráficos asociados a la interacción.
+## 1. COVER
 
-### 2. Despliegue
+### Propósito
 
-El usuario arrastra verticalmente el sobre hasta hacerlo completamente visible.
-Después activa el sello para abrir el acceso al contenido y habilitar el scroll.
+`cover` es el umbral de la carta. La página comienza con el scroll bloqueado y
+una parte del sobre visible. El usuario lo despliega, rompe el sello y presencia
+la escritura progresiva del texto inicial.
 
-La página transmite la sensación de que el documento se está desplegando progresivamente.
-
-### 3. Desarrollo
-
-Cada sección puede adoptar el lenguaje de:
-
-- párrafos;
-- anotaciones;
-- márgenes;
-- fragmentos documentales;
-- numeraciones;
-- iniciales;
-- pequeñas marcas editoriales.
-
-El scroll sustituye visualmente al acto de pasar páginas.
-
-Cada punto clave de la narrativa constituye un contenedor o una `section`
-independiente. Su diseño interno permanece mutable, pero su presencia garantiza
-un recorrido completo y una evolución localizada del responsive.
-
-#### Interacción de Origen
-
-Cuando la sección `origin` queda centrada en el viewport, el scroll se bloquea
-y comienza una interacción basada en un bote de tinta.
-
-La secuencia narrativa es:
+La solapa muestra los datos del remitente:
 
 ```text
-CENTRAR origin
-    → bloquear scroll
-    → mostrar bote cerrado
-
-ACTIVAR bote
-    → sustituir por bote abierto
-    → expulsar el corcho fuera del viewport
-
-ACTIVAR bote abierto
-    → unir bote al puntero
-    → habilitar revelado por radio de acción
-
-REVELAR todo el texto
-    → desactivar bote-puntero
-    → mostrar flecha de continuación
-
-ACTIVAR flecha
-    → autoscroll hasta memory
+José Lobato
+Calle de la escueta epístola
+CP [secuencia binaria] (Hado)
+Camino
 ```
 
-##### Recursos de Origen
+La secuencia binaria escribe cíclicamente, de izquierda a derecha y entre
+corchetes, los bloques que codifican «Maktub».
 
-```text
-src/assets/images/02-origin/
-├── img__ink-jar--closed.png
-├── img__ink-jar--open.png
-└── img__ink-jar--cork.png
-```
-
-- `img__ink-jar--closed.png` representa el bote cerrado.
-- `img__ink-jar--open.png` representa el bote abierto.
-- `img__ink-jar--cork.png` se utiliza durante la animación de expulsión.
-
-La continuación se representa mediante un botón con flecha tipográfica minimalista.
-
-##### Estados de Origen
-
-| Estado | Comportamiento |
-| :-- | :-- |
-| `idle` | La sección todavía forma parte del scroll libre. |
-| `centering` | Se ejecuta el autoscroll de alineación. |
-| `ready` | `origin` está centrada, el scroll bloqueado y el bote disponible. |
-| `opening` | El bote se abre y el corcho ejecuta su trayectoria. |
-| `opened-ready` | El bote abierto espera la segunda activación. |
-| `active` | El bote sigue al puntero y permite aplicar tinta. |
-| `complete` | Todo el texto es visible y la flecha está habilitada. |
-| `leaving` | Se ejecuta el autoscroll hacia `memory`. |
-| `completed` | La transición terminó y el scroll narrativo está restaurado. |
-
-##### Entrada y bloqueo
-
-La sección se detecta mediante `IntersectionObserver`. Cuando alcanza suficiente
-presencia, se completa su alineación con un autoscroll corto. El bloqueo se aplica
-solo después de que `origin` quede centrada, evitando detener el recorrido con la
-sección parcialmente visible.
-
-##### Apertura del bote
-
-El primer clic sobre el bote cerrado:
-
-1. impide activaciones repetidas;
-2. muestra el bote abierto;
-3. sitúa el corcho sobre la boca del bote;
-4. impulsa el corcho hacia arriba;
-5. describe un arco lateral descendente;
-6. termina por debajo del límite inferior del viewport;
-7. habilita el segundo clic sobre el bote.
-
-El corcho utiliza posicionamiento absoluto dentro de la sección. Su trayectoria
-se calcula en cada frame con gravedad, deriva lateral y rotación para mantener un
-arco responsive sin alterar el flujo documental.
-
-##### Bote unido al puntero
-
-Después del segundo clic, una representación del bote abierto utiliza
-`position: fixed` y sigue las coordenadas del puntero. Debe tener
-`pointer-events: none` para no impedir la detección del texto.
-
-El punto de aplicación o *hotspot* se sitúa cerca de la boca del bote. Este punto,
-y no necesariamente el centro de la imagen, determina el centro del radio de
-acción.
-
-##### Revelado por radio de acción
-
-Cada palabra del texto se representa mediante un elemento identificable. Las
-palabras permanecen en el flujo documental aunque todavía no sean visibles, para
-conservar espacios, saltos de línea y zonas de interacción.
-
-El movimiento del puntero desplaza continuamente un área circular alrededor del
-*hotspot*. En cada actualización se comparan las palabras ocultas con ese círculo:
-
-```text
-PARA cada palabra oculta:
-    OBTENER su rectángulo visible
-    CALCULAR el punto del rectángulo más próximo al centro del círculo
-
-    SI la distancia hasta ese punto es menor o igual al radio:
-        REVELAR la palabra completa
-```
-
-Un desplazamiento puede revelar varias palabras. Si el radio toca una palabra de forma
-parcial, se revela la palabra completa. No se divide el texto por letras, porque
-eso complicaría innecesariamente el DOM, los signos, los espacios y la
-accesibilidad.
-
-El radio debe poder ajustarse mediante un token como `--ink-reveal-radius` sin
-modificar la lógica JavaScript.
-
-##### Condición de finalización
-
-Las palabras reveladas se registran una sola vez mediante un `Set`. Una palabra
-solo cuenta como visible cuando termina su animación.
-
-```text
-texto completo =
-    existen palabras
-    Y revealedWords.size === totalWords
-    Y no quedan animaciones de revelado activas
-```
-
-Solo cuando se cumplen las tres condiciones:
-
-- el bote deja de seguir al puntero;
-- se restaura el cursor normal;
-- el estado cambia a `complete`;
-- aparece y se habilita la flecha de continuación.
-
-##### Salida de Origen
-
-La flecha reutiliza el autoscroll de la apertura para desplazar la vista hasta
-`#memory`. Durante esa transición el estado es `leaving`; al finalizar, el scroll
-general de la narrativa vuelve a quedar disponible.
-
-#### Interacción de Memoria
-
-La sección `memory` representa un escritorio con un corkboard en la pared. La
-escena se carga mediante `img__board_1.png`; la postal aparece sujeta al tablero,
-a la derecha de la nota «THINGS TO DO», ligeramente rotada y escalada en
-proporción al resto de elementos.
-
-La postal es un elemento independiente de la imagen del tablero para permitir su
-desprendimiento, movimiento y giro.
-
-##### Secuencia
-
-```text
-CENTRAR memory
-    → bloquear scroll y barra lateral
-    → mostrar img__board_1.png
-    → mostrar postal fijada al corkboard
-    → iniciar chispas intermitentes en el interruptor
-
-ACTIVAR interruptor
-    → detener chispas
-    → cambiar a img__board_2.png
-    → iniciar parpadeo verde del instrumento
-
-ACTIVAR instrumento
-    → detener parpadeo
-    → mantener luz verde fija
-    → desprender postal
-    → ejecutar caída, giro parcial y ascenso
-    → centrar postal sobre la escena
-
-ACTIVAR postal
-    → girar 180°
-    → mostrar img__postal_back_02.png
-    → anclar postal dentro de memory
-    → conservar estado final
-    → habilitar scroll y barra lateral
-```
-
-##### Recursos de Memoria
-
-```text
-src/assets/images/03-memory/
-├── img__board_1.png
-├── img__board_2.png
-├── img__postal_front.png
-└── img__postal_back_02.png
-```
-
-Los demás recursos presentes en `03-memory` quedan fuera de esta interacción
-hasta que exista una decisión expresa sobre su uso.
-
-##### Estados de Memoria
-
-| Estado | Comportamiento |
-| :-- | :-- |
-| `idle` | La sección todavía pertenece al scroll general. |
-| `centering` | Se ejecuta el autoscroll de alineación. |
-| `entering` | La escena completa su entrada visual. |
-| `locked` | Escena centrada con scroll y barra lateral bloqueados. |
-| `board-ready` | Tablero iluminado, postal fijada y chispas activas. |
-| `signal` | Escena oscura y luz del instrumento parpadeando. |
-| `triggered` | Luz fija y postal liberada. |
-| `postal-moving` | Caída, giro parcial y ascenso de la postal. |
-| `postal-ready` | Postal centrada y accionable. |
-| `flipping` | Giro entre el anverso y el reverso. |
-| `complete` | Reverso visible y navegación desbloqueada. |
-
-##### Posicionamiento interactivo
-
-Los controles del interruptor y del instrumento son botones transparentes
-superpuestos a la escena. Sus posiciones se expresan mediante porcentajes
-relativos a la imagen para conservar la correspondencia al cambiar su tamaño.
-
-La postal también se posiciona inicialmente mediante porcentajes sobre el
-corkboard. El control visual debe conservar un área de interacción suficiente,
-cursor indicativo y una adaptación de foco posterior.
-
-##### Chispas del interruptor
-
-Una secuencia intermitente de chispas invita a descubrir el interruptor:
-
-- comienza cuando la escena alcanza `board-ready`;
-- aparece alrededor del hotspot durante `600ms–900ms`;
-- se repite cada `2.5s–4s` mediante una secuencia determinista;
-- utiliza pequeñas variaciones de opacidad, escala y desplazamiento;
-- tiene `pointer-events: none`;
-- aumenta sutilmente su intensidad durante `hover`;
-- se detiene definitivamente al activar el interruptor.
-
-##### Señal del instrumento
-
-Al activar el interruptor, la escena cambia de `img__board_1.png` a
-`img__board_2.png`. La segunda imagen debe precargarse para evitar cortes.
-
-El parpadeo se genera mediante un halo verde superpuesto a la posición de la luz,
-sin alternar repetidamente las dos imágenes del tablero. Al activar el
-instrumento, el halo deja de parpadear y permanece encendido.
-
-##### Movimiento de la postal
-
-La postal ejecuta dos fases:
-
-1. **Desprendimiento:** pierde la sujeción y se inclina ligeramente.
-2. **Centrado:** se desplaza hacia el centro y elimina progresivamente su rotación.
-
-El centrado conserva la escala inicial de la postal. No existe contracción ni
-expansión posterior, para mantener estable la jerarquía visual.
-
-Durante el movimiento puede utilizar `position: fixed`. La posición inicial se
-obtiene mediante `getBoundingClientRect()` para evitar saltos entre resoluciones.
-Los clics permanecen deshabilitados hasta terminar la animación.
-
-##### Giro y persistencia
-
-La postal dispone de dos caras superpuestas con `backface-visibility: hidden`:
-
-```text
-front → img__postal_front.png
-back  → img__postal_back_02.png
-```
-
-Al activarla, gira `180deg` sobre el eje Y. La sección solo se completa cuando la
-animación ha terminado, el reverso es la cara activa y se ha alcanzado el ángulo
-final.
-
-Después del giro, la postal queda anclada dentro de `memory`, conserva su escala
-y muestra el reverso. Al regresar a la sección permanece visible, deshabilitada
-y sin nuevas interacciones; sale del viewport junto con la sección y no invade
-las posteriores.
-
-##### Persistencia de estado
-
-Una sección descubierta o completada no se reinicia al salir del viewport ni al
-regresar mediante scroll. El estado solo vuelve a su valor inicial cuando se
-recarga la página.
-
-##### Arquitectura implementada
-
-| Módulo | Responsabilidad |
-| :-- | :-- |
-| `src/scripts/memory/memory.js` | Localiza elementos y coordina los módulos. |
-| `src/scripts/memory/memory-entry.js` | Detecta, centra, anima y bloquea la sección. |
-| `src/scripts/memory/memory-controls.js` | Gestiona interruptor, tablero e instrumento. |
-| `src/scripts/memory/postcard.js` | Coordina los eventos propios de la postal. |
-| `src/scripts/memory/postcard-motion.js` | Mide y anima el movimiento hasta el centro. |
-| `src/scripts/memory/postcard-flip.js` | Gira la postal y completa la sección. |
-
-Las duraciones se centralizan mediante tokens CSS. El movimiento y el giro se
-reducen a duración cero cuando `prefers-reduced-motion: reduce` está activo; las
-chispas y el parpadeo dejan de animarse.
-
----
-
-## Comportamiento técnico de la apertura
-
-### Secuencia
+### Secuencia interactiva
 
 ```text
 CARGAR página
-MOSTRAR únicamente el fondo de cover
-BLOQUEAR scroll
-MOSTRAR parcialmente el sobre
+    → mostrar parcialmente el sobre
+    → bloquear scroll
 
-AL mantener pulsado y arrastrar hacia abajo:
-    DESPLAZAR el sobre suavemente
-    LIMITAR el movimiento al recorrido permitido
-    CONSERVAR la posición alcanzada al soltar
+ARRASTRAR o activar con teclado
+    → desplegar el sobre
+    → animar la secuencia binaria
+    → habilitar el sello
 
-SI el sobre no está completamente desplegado:
-    PERMITIR reanudar el arrastre desde esa posición
-
-SI alcanza su posición final:
-    INMOVILIZAR el sobre completamente visible
-    HABILITAR la interacción con el sello
-
-AL activar el sello:
-    ANIMAR la transición del sello intacto al sello roto
-    MANTENER visible el resultado de la rotura
-    ABRIR el acceso a la narrativa
-    DESPLAZAR de forma pausada la vista hasta el texto de apertura
-    INICIAR el desvelado del texto de apertura palabra por palabra
-
-AL completar el desvelado del texto:
-    MOSTRAR «Por eso decidí escribir.»
-    HABILITAR el scroll narrativo
-    MOSTRAR temporalmente una indicación gráfica de desplazamiento
-
-AL iniciar el usuario el scroll:
-    OCULTAR la indicación gráfica de desplazamiento
+ACTIVAR sello
+    → sustituir sello intacto por sello roto
+    → desplazar la vista hacia el texto
+    → revelar el texto palabra por palabra
+    → habilitar scroll y mostrar su indicador
 ```
+
+El arrastre utiliza Pointer Events, admite ratón y entrada táctil, conserva un
+recorrido parcial y no rebasa sus límites. `Enter` o espacio ofrecen una ruta
+equivalente mediante teclado.
+
+Después de activar el sello, el sobre desplegado y el sello roto permanecen en
+el flujo documental. El remitente y el sello parten de proporciones móviles y
+aumentan mediante reglas `min-width` en resoluciones amplias.
 
 ### Estados
 
-Los estados funcionales se registran en `data-page-state`:
+| Estado | Comportamiento |
+| :-- | :-- |
+| `sealed` | Sobre parcialmente oculto y scroll bloqueado. |
+| `dragging` | Desplazamiento vertical activo. |
+| `seal-ready` | Sobre desplegado y sello habilitado. |
+| `writing` | Sello roto, autoscroll y escritura progresiva. |
+| `open` | Carta abierta y recorrido general habilitado. |
+
+### Recursos
+
+- [`img__envelop.webp`](../src/assets/images/01-cover/img__envelop.webp)
+- [`img__wax_seal.webp`](../src/assets/images/01-cover/img__wax_seal.webp)
+- [`img__wax_seal_broken.webp`](../src/assets/images/01-cover/img__wax_seal_broken.webp)
+
+### Módulos responsables
+
+| Interacción | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Coordinación y estados | [`cover.js`](../src/scripts/cover/cover.js), [`states.js`](../src/scripts/cover/states.js) | [`cover.css`](../src/styles/components/cover.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Despliegue y binario | [`envelope-drag.js`](../src/scripts/cover/envelope-drag.js) | [`cover.css`](../src/styles/components/cover.css) |
+| Rotura del sello | [`seal-opening.js`](../src/scripts/cover/seal-opening.js) | [`cover.css`](../src/styles/components/cover.css) |
+| Escritura inicial | [`text-reveal.js`](../src/scripts/cover/text-reveal.js) | [`reveal-text.css`](../src/styles/components/reveal-text.css) |
+| Indicador de scroll | [`cover.js`](../src/scripts/cover/cover.js) | [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
+
+La validación está documentada en
+[Pruebas del HITO 1](testing--milestone-1.md).
+
+## 2. ORIGIN
+
+### Propósito
+
+`origin` explica por qué se escribe la carta. Cuando la sección alcanza la
+presencia requerida, se centra y bloquea temporalmente el scroll. «ORIGEN» surge
+suavemente y «Por qué escribo» se escribe después de izquierda a derecha.
+
+Bubblegum Sans se carga localmente y queda limitada a esta sección.
+
+### Secuencia interactiva
+
+```text
+CENTRAR origin
+    → mostrar encabezado
+    → bloquear scroll si la sección cabe en el viewport
+    → habilitar bote cerrado
+
+ACTIVAR bote
+    → mostrar bote abierto
+    → expulsar el corcho
+
+ACTIVAR bote abierto
+    → unir bote al puntero
+    → revelar palabras dentro del radio de tinta
+
+REVELAR todo el texto
+    → detener bote-puntero
+    → restaurar el scroll
+    → emitir origin:complete
+    → mostrar el indicador reutilizable
+```
+
+La ruta de teclado revela el texto completo sin depender del movimiento del
+puntero. En viewports bajos, el bloqueo se retira si la sección no cabe para
+evitar encerrar al usuario.
+
+### Estados
 
 | Estado | Comportamiento |
 | :-- | :-- |
-| `sealed` | Sobre parcialmente oculto, agarrable y con scroll bloqueado. |
-| `dragging` | Arrastre vertical activo mediante `grabbing`. |
-| `seal-ready` | Sobre desplegado e inmóvil; sello habilitado. |
-| `writing` | Sello roto, autoscroll y texto en revelado progresivo. |
-| `open` | Escritura finalizada, scroll habilitado e indicador visible. |
+| `idle` | Sección dentro del scroll general. |
+| `centering` | Alineación mediante autoscroll. |
+| `ready` | Sección preparada y bote habilitado. |
+| `opening` | Apertura del bote y vuelo del corcho. |
+| `opened-ready` | Espera de la segunda activación. |
+| `active` | Bote-puntero y revelado por tinta. |
+| `complete` | Estado transitorio al terminar el revelado. |
+| `completed` | Scroll restaurado, indicador visible y evento emitido. |
 
-### Recorrido y límites
+### Recursos
 
-El sobre se desplaza de forma suave y progresiva:
+- [`img__ink-jar--closed.webp`](../src/assets/images/02-origin/img__ink-jar--closed.webp)
+- [`img__ink-jar--open.webp`](../src/assets/images/02-origin/img__ink-jar--open.webp)
+- [`img__ink-jar--cork.webp`](../src/assets/images/02-origin/img__ink-jar--cork.webp)
+- [`BubblegumSans-Regular.ttf`](../src/assets/fonts/font__BubblegumSans_Regular/BubblegumSans-Regular.ttf)
 
-- sin saltos ni resistencia simulada;
-- sin retroceder cuando se suelta;
-- sin completar automáticamente el recorrido;
-- sin superar sus posiciones inicial y final.
+### Módulos responsables
 
-La distancia máxima no equivale necesariamente a la altura de la imagen:
+| Interacción | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Coordinación y estados | [`origin.js`](../src/scripts/origin/origin.js), [`states.js`](../src/scripts/origin/states.js) | [`origin.css`](../src/styles/components/origin.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Entrada y título | [`origin-entry.js`](../src/scripts/origin/origin-entry.js) | [`origin.css`](../src/styles/components/origin.css) |
+| Apertura del bote | [`jar-opening.js`](../src/scripts/origin/jar-opening.js) | [`origin.css`](../src/styles/components/origin.css) |
+| Trayectoria del corcho | [`cork-flight.js`](../src/scripts/origin/cork-flight.js) | [`origin.css`](../src/styles/components/origin.css) |
+| Bote-puntero | [`jar-pointer.js`](../src/scripts/origin/jar-pointer.js) | [`origin.css`](../src/styles/components/origin.css) |
+| Revelado de palabras | [`word-reveal.js`](../src/scripts/origin/word-reveal.js) | [`origin.css`](../src/styles/components/origin.css) |
+| Finalización sin autoscroll | [`origin-exit.js`](../src/scripts/origin/origin-exit.js) | [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
+
+La validación está documentada en
+[Pruebas del HITO 2](testing--milestone-2.md).
+
+## 3. MEMORY
+
+### Propósito
+
+`memory` representa un escritorio con un corkboard. La escena contiene un
+interruptor, un instrumento luminoso, una postal interactiva y un pósit con la
+palabra «Memory». La postal es independiente del tablero para poder desprenderse,
+centrarse, escalar y girar.
+
+### Secuencia interactiva
 
 ```text
-distancia máxima = posición final − posición inicial
+RECIBIR origin:complete y detectar memory visible
+    → iniciar la escena sin alterar el scroll
+    → mostrar tablero y chispas
+
+ACTIVAR interruptor
+    → centrar memory y bloquear scroll
+    → cambiar a board_2
+    → hacer parpadear el instrumento
+
+ACTIVAR instrumento
+    → fijar luz verde
+    → mover y escalar la postal hasta el centro
+
+ACTIVAR postal
+    → girar 180 grados
+    → mostrar reverso
+    → conservar estado final
+    → restaurar scroll
+    → mostrar el indicador reutilizable
 ```
 
-La posición final coincide con el punto en el que el sobre queda completamente
-visible dentro del viewport.
+CSS define el tamaño final fluido de la postal. JavaScript mide el inicio y el
+destino únicamente para interpolar la animación; no persiste dimensiones finales
+en píxeles. Al redimensionar, la postal se adapta de nuevo a la escena.
 
-### Alcance inicial
+### Estados
 
-La primera implementación del arrastre se limita al ratón. La adaptación para
-teclado, entrada táctil y `prefers-reduced-motion` permanece como requisito
-posterior de accesibilidad y calidad.
-
-En resoluciones estrechas, la porción inicialmente visible del sobre aumenta
-para que la portada continúe siendo reconocible y accionable. Este ajuste de
-composición no implica todavía compatibilidad con entrada táctil.
-
-### Arquitectura implementada
-
-| Módulo | Responsabilidad |
+| Estado | Comportamiento |
 | :-- | :-- |
-| `src/scripts/cover/cover.js` | Coordina estados y secuencia completa. |
-| `src/scripts/cover/envelope-drag.js` | Controla arrastre, límites y despliegue. |
-| `src/scripts/cover/seal-opening.js` | Precarga y transición del sello roto. |
-| `src/scripts/cover/text-reveal.js` | Prepara y revela el texto palabra por palabra. |
-| `src/scripts/shared/math.js` | Limita valores numéricos mediante `clamp`. |
-| `src/scripts/shared/motion.js` | Centraliza tiempos, esperas y autoscroll. |
+| `idle` | Espera de Origen y visibilidad suficiente. |
+| `entering` | Entrada visual de la escena. |
+| `board-ready` | Tablero inicial, postal y chispas. |
+| `centering` | Interruptor activado, centrado y bloqueo del scroll. |
+| `signal` | Segundo tablero e instrumento parpadeando. |
+| `triggered` | Instrumento activo y postal liberada. |
+| `postal-moving` | Movimiento y escalado transitorios. |
+| `postal-ready` | Postal centrada y accionable. |
+| `flipping` | Giro entre anverso y reverso. |
+| `complete` | Reverso persistente y scroll restaurado. |
 
-Las duraciones se definen como tokens CSS en
-`src/styles/settings/tokens.css`:
+### Recursos
 
-- `--duration-seal-break`;
-- `--duration-opening-scroll`;
-- `--duration-word-reveal-step`.
+- [`img__board_1.webp`](../src/assets/images/03-memory/img__board_1.webp)
+- [`img__board_2.webp`](../src/assets/images/03-memory/img__board_2.webp)
+- [`img__postal_front.webp`](../src/assets/images/03-memory/img__postal_front.webp)
+- [`img__postal_back_02.webp`](../src/assets/images/03-memory/img__postal_back_02.webp)
 
-El texto de apertura utiliza un ancho máximo y centrado horizontal para mantener
-una composición estable en resoluciones amplias.
+El texto de la postal forma parte de la imagen y no recibe una fuente CSS. El
+pósit conserva su tratamiento visual independiente.
 
-### Validación
+### Módulos responsables
 
-La implementación se valida mediante Playwright y revisión manual. La matriz,
-los viewports y el último resultado están registrados en
-[`testing--milestone-1.md`](testing--milestone-1.md).
+| Interacción | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Coordinación y estados | [`memory.js`](../src/scripts/memory/memory.js), [`states.js`](../src/scripts/memory/states.js) | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Entrada no bloqueante | [`memory-entry.js`](../src/scripts/memory/memory-entry.js) | [`memory.css`](../src/styles/components/memory.css) |
+| Interruptor, centrado e instrumento | [`memory-controls.js`](../src/scripts/memory/memory-controls.js) | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Coordinación de postal | [`postcard.js`](../src/scripts/memory/postcard.js) | [`memory.css`](../src/styles/components/memory.css) |
+| Movimiento y escalado | [`postcard-motion.js`](../src/scripts/memory/postcard-motion.js) | [`memory.css`](../src/styles/components/memory.css) |
+| Giro y finalización | [`postcard-flip.js`](../src/scripts/memory/postcard-flip.js) | [`memory.css`](../src/styles/components/memory.css) |
 
-### 4. Interacción
+La validación está documentada en
+[Pruebas del HITO 3](testing--milestone-3.md).
 
-La animación debe ser discreta y formar parte de la narrativa:
+## 4. PRESENT
 
-- texto que aparece progresivamente;
-- palabras o frases que se subrayan;
-- elementos que emergen desde los márgenes;
-- imágenes que aparecen como documentos adjuntos;
-- líneas o marcas que acompañan el desplazamiento.
+### Estado actual
 
-### 5. Cierre
+La sección `present` existe en el HTML y mantiene contenido editorial dentro del
+flujo normal. Sus recursos visuales están preparados, pero todavía no existe una
+interacción aprobada ni un módulo JavaScript propio.
 
-La página termina como una carta:
+### Recursos disponibles
 
-- firma;
-- lugar;
-- fecha;
-- sello;
-- posdata;
-- llamada a la acción integrada en ese lenguaje.
+- [`img__road_sing_01.png`](../src/assets/images/04-present/img__road_sing_01.png)
+- [`img__road_sing_02.png`](../src/assets/images/04-present/img__road_sing_02.png)
+- [`img__road_sing_03.png`](../src/assets/images/04-present/img__road_sing_03.png)
 
----
+### Módulos responsables
 
-## Estructura narrativa
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Estructura actual | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
 
-La estructura conceptual del documento es:
+No se documentará una interacción hasta que sea diseñada y autorizada.
 
-```html
-<header>Portada y apertura</header>
+## 5. FUTURE
 
-<main>
-  <section>Origen</section>
-  <section>Memoria</section>
-  <section>Presente</section>
-  <section>Futuro</section>
-  <section>Destinatario</section>
-  <section>Respuesta</section>
-</main>
-```
+### Estado actual
 
-Esta representación define unidades narrativas, no una implementación HTML
-cerrada. El contenido y la composición de cada sección pueden evolucionar sin
-fracturar el recorrido esencial.
+La sección `future` existe como bloque editorial. Sus imágenes están disponibles,
+pero no están integradas en una interacción ni existe un módulo JavaScript
+específico.
 
----
+### Recursos disponibles
 
-## Responsive progresivo
+- [`img__block_01.png`](../src/assets/images/05-future/img__block_01.png)
+- [`img__block_02.png`](../src/assets/images/05-future/img__block_02.png)
+- [`img__block_03.png`](../src/assets/images/05-future/img__block_03.png)
+- [`img__block_04.png`](../src/assets/images/05-future/img__block_04.png)
 
-La adaptación responsive comienza al diseñar cada sección. No se pospone hasta
-que el recorrido completo esté terminado, porque las decisiones locales podrían
-generar conflictos estructurales posteriores.
+### Módulos responsables
 
-| Criterio    | Aplicación                                     |
-| :---------- | :--------------------------------------------- |
-| Base        | `mobile-first`                                 |
-| Layout      | Medidas y composición fluidas                  |
-| Breakpoints | Determinados por las necesidades del contenido |
-| Secciones   | Cada `section` se valida individualmente       |
-| Componentes | Container queries cuando aporten reutilización |
-| Nombres     | `sm`, `md`, `lg`, `xl`                         |
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Estructura actual | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
 
-Los nombres de breakpoint funcionan como identificadores compartidos, no como
-categorías de dispositivos. Sus valores se decidirán cuando el contenido necesite
-reorganizarse.
+## 6. DESTINATARIO + FORMULARIO
 
-Principio:
+### Propósito y estado actual
 
-> Cada sección debe adaptarse mientras se diseña para evitar conflictos
-> estructurales posteriores.
+`recipient` dirige la carta a quien la encuentra. `response` ofrece una respuesta
+mediante campos semánticos de nombre, correo, asunto y mensaje.
+
+El formulario utiliza validación HTML nativa y todavía no tiene envío, conexión
+externa ni controlador JavaScript. Añadir cualquiera de esas capacidades exige
+una decisión funcional y de privacidad independiente.
+
+### Módulos responsables
+
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Destinatario | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
+| Formulario | Sin módulo específico; validación HTML nativa | [`response-form.css`](../src/styles/components/response-form.css) |
+
+## 7. CIERRE — POST SCRIPTUM
+
+### Propósito y estado actual
+
+El cierre funciona como final de carta: firma, información complementaria,
+posdata y enlaces sociales. Actualmente se implementa mediante el `footer` y no
+posee lógica JavaScript propia.
+
+### Módulos responsables
+
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Cierre y enlaces sociales | Sin módulo específico | [`site-footer.css`](../src/styles/components/site-footer.css) |
+
+## Arquitectura transversal
+
+| Responsabilidad | Módulo |
+| :-- | :-- |
+| Punto de entrada | [`main.js`](../src/scripts/main.js) |
+| Eventos entre secciones | [`narrative-events.js`](../src/scripts/shared/narrative-events.js) |
+| Indicador reutilizable | [`scroll-cue.js`](../src/scripts/shared/scroll-cue.js), [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
+| Autoscroll, esperas y tiempos | [`motion.js`](../src/scripts/shared/motion.js) |
+| Operaciones matemáticas | [`math.js`](../src/scripts/shared/math.js) |
+| Tokens de diseño y movimiento | [`tokens.css`](../src/styles/settings/tokens.css) |
+| Fuentes locales | [`fonts.css`](../src/styles/settings/fonts.css) |
+| Base documental | [`base.css`](../src/styles/elements/base.css) |
+
+## Responsive y accesibilidad
+
+El proyecto adopta un modelo híbrido:
+
+- base mobile-first;
+- medidas fluidas y relativas;
+- media queries de anchura cuando cambia la composición;
+- consultas de altura para proteger escenas que deben caber en el viewport;
+- container queries cuando un componente depende de su escena;
+- CSS como autoridad de geometría final;
+- JavaScript limitado a estados, eventos y valores transitorios.
+
+Las interacciones implementadas contemplan teclado, Pointer Events y
+`prefers-reduced-motion`. Si una sección no cabe verticalmente, no debe mantener
+un bloqueo que impida continuar la navegación.
 
 ## Principio de diseño
 
 > La interfaz debe desaparecer para que el contenido se comporte como un objeto editorial.
 
-Evitar, cuando no sean necesarios:
-
-- tarjetas convencionales;
-- botones volumétricos;
-- bloques visuales propios de una landing page genérica;
-- exceso de componentes independientes.
-
----
-
-## Dirección estética
-
-No se pretende recrear literalmente una página del siglo XVI-XVII.
-
-Se toman algunos de sus códigos:
-
-**papel → tinta → caligrafía → márgenes → correspondencia → firma**
-
-y se reinterpretan mediante:
-
-- retícula contemporánea;
-- composición minimalista;
-- scroll narrativo;
-- microinteracciones;
-- diseño responsive.
-
----
+La estética toma códigos de papel, tinta, caligrafía, márgenes y correspondencia,
+pero los reinterpreta mediante composición contemporánea, scroll narrativo,
+microinteracciones y diseño responsive.
 
 ## Concepto síntesis
 
-**Epístola digital**
-
-Una página continua concebida como una carta que se despliega mediante el scroll, combinando materialidad histórica y composición digital contemporánea.
+**Epístola digital:** una carta continua que se despliega mediante el scroll y
+combina materialidad histórica con interacción digital contemporánea.

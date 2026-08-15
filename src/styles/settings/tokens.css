@@ -1,20 +1,35 @@
 :root {
   --color-paper: #d4cdbd;
   --color-ink: #191714;
-  --font-family-handwriting: "Snell Roundhand", "Segoe Script", cursive;
+  --color-copper-gold: #b77a3d;
+  --color-spark: #f1b85b;
+  --color-spark-glow: #e79432;
+  --color-note-paper-start: rgb(255 236 139 / 96%);
+  --color-note-paper-end: rgb(213 178 73 / 96%);
+  --color-note-ink: #21180d;
+  --color-note-fold-dark: #b99538;
+  --color-note-fold-light: #f7df82;
+  --color-memory-signal: rgb(115 255 75 / 22%);
+  --color-memory-signal-glow: rgb(102 255 64 / 55%);
+  --color-scroll-cue: #8f1d24;
+  --font-family-handwriting: 'Snell Roundhand', 'Segoe Script', cursive;
   --page-inline-size: 72rem;
   --page-gutter: clamp(1rem, 4vw, 3rem);
   --duration-seal-break: 700ms;
   --duration-opening-scroll: 1400ms;
   --duration-word-reveal-step: 90ms;
+  --duration-origin-eyebrow: 700ms;
+  --duration-origin-heading-character: 90ms;
   --duration-origin-cork: 1500ms;
   --duration-origin-word: 240ms;
   --duration-origin-centering: 1200ms;
-  --duration-origin-exit-scroll: 1200ms;
   --ink-reveal-radius: 2.75rem;
-  --origin-jar-size: clamp(6rem, 22vw, 10rem);
-  --duration-memory-centering: 1200ms;
+  --origin-jar-size: clamp(5.25rem, 14svh, 8rem);
+  --duration-binary-character: 140ms;
+  --duration-binary-complete: 650ms;
+  --duration-binary-empty: 180ms;
   --duration-memory-entry: 700ms;
+  --duration-memory-centering: 1200ms;
   --duration-memory-sparks: 3200ms;
   --duration-memory-signal: 1200ms;
   --duration-memory-postcard-move: 1800ms;
@@ -22,5 +37,14 @@
   --duration-memory-postcard-expand: 500ms;
   --memory-scene-max-width: 90rem;
   --memory-viewport-gap: clamp(1rem, 3vw, 2.5rem);
-  --memory-frame-shadow: 0 0 1.75rem 0.2rem rgb(166 111 54 / 45%);
+  /*--memory-frame-shadow: 0 0 1.75rem 0.2rem rgb(166 111 54 / 45%);*/
+  --memory-frame-shadow: 0 0 1.75rem 0.2rem rgb(190 105 28 / 60%);
+  --cover-envelope-shadow: 0 0.2rem 0.2rem rgb(25 23 20 / 35%);
+  --cover-seal-glow: 0 0 1.25rem rgb(128 0 0 / 35%);
+  --memory-note-shadow:
+    0.12rem 0.22rem 0.35rem rgb(30 18 7 / 42%),
+    inset 0.05rem 0.05rem 0.15rem rgb(255 255 220 / 55%);
+  --memory-note-curl-shadow: rgb(38 22 8 / 38%);
+  --memory-note-fold-shadow: -0.08rem -0.08rem 0.08rem rgb(64 39 10 / 28%);
+  --memory-postcard-centered-width: 86%;
 }

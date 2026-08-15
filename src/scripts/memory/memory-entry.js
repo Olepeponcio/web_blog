@@ -1,44 +1,23 @@
-import { scrollToElement, waitForNextFrame } from "../shared/motion.js";
+import { waitForNextFrame } from "../shared/motion.js";
+import { NARRATIVE_EVENTS } from "../shared/narrative-events.js";
+import { PAGE_STATES } from "../cover/states.js";
+import { ORIGIN_STATES } from "../origin/states.js";
+import { MEMORY_STATES } from "./states.js";
 
 const REQUIRED_VISIBILITY = 0.6;
-const WAIT_FOR_ORIGIN_MS = 50;
-const LOCKED_MEMORY_STATES = new Set([
-  "locked",
-  "board-ready",
-  "signal",
-  "triggered",
-  "postal-moving",
-  "postal-ready",
-  "flipping",
-]);
 
 export const createMemoryEntry = ({ page, memory, origin, scene, board }) => {
   let observer;
   let entryStarted = false;
-  let resizeFrame;
-
-  const keepMemoryInFrame = () => {
-    const state = memory.dataset.memoryState;
-
-    if (!LOCKED_MEMORY_STATES.has(state)) return;
-
-    window.cancelAnimationFrame(resizeFrame);
-    resizeFrame = window.requestAnimationFrame(() => {
-      const targetPosition = memory.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo(0, targetPosition);
-    });
-  };
-
-  const centerAndLockMemory = async () => {
+  let memoryVisible = false;
+  let originComplete = false;
+  const enterMemory = async () => {
     if (entryStarted) return;
     entryStarted = true;
-    memory.dataset.memoryState = "centering";
+    memory.dataset.memoryState = MEMORY_STATES.entering;
     observer.unobserve(memory);
 
     await board.decode().catch(() => undefined);
-    await scrollToElement(memory, "--duration-memory-centering");
-
-    memory.dataset.memoryState = "entering";
     await waitForNextFrame();
 
     const entryAnimations = scene.getAnimations();
@@ -46,39 +25,41 @@ export const createMemoryEntry = ({ page, memory, origin, scene, board }) => {
       entryAnimations.map((animation) => animation.finished),
     );
 
-    page.dataset.memoryScrollLocked = "true";
-    memory.dataset.memoryState = "locked";
-    await waitForNextFrame();
-    memory.dataset.memoryState = "board-ready";
+    memory.dataset.memoryState = MEMORY_STATES.boardReady;
   };
 
-  const waitForOriginCompletion = () => {
-    if (origin.dataset.originState === "completed") {
-      centerAndLockMemory();
-      return;
-    }
+  const tryEnterMemory = () => {
+    if (memoryVisible && originComplete) enterMemory();
+  };
 
-    window.setTimeout(waitForOriginCompletion, WAIT_FOR_ORIGIN_MS);
+  const handleOriginComplete = () => {
+    originComplete = true;
+    tryEnterMemory();
   };
 
   const handleIntersection = ([entry]) => {
     if (
       entryStarted ||
-      page.dataset.pageState !== "open" ||
+      page.dataset.pageState !== PAGE_STATES.open ||
       entry.intersectionRatio < REQUIRED_VISIBILITY
     ) {
       return;
     }
 
-    waitForOriginCompletion();
+    memoryVisible = true;
+    tryEnterMemory();
   };
 
   const initialize = () => {
+    originComplete = origin.dataset.originState === ORIGIN_STATES.completed;
     observer = new IntersectionObserver(handleIntersection, {
       threshold: [REQUIRED_VISIBILITY],
     });
     observer.observe(memory);
-    window.addEventListener("resize", keepMemoryInFrame);
+    origin.addEventListener(
+      NARRATIVE_EVENTS.originComplete,
+      handleOriginComplete,
+    );
   };
 
   return { initialize };

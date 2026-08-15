@@ -25,11 +25,17 @@
 
   <body class="page" data-page-state="sealed">
     <header class="cover" id="cover">
-      <div class="cover__envelope" data-envelope>
+      <div
+        class="cover__envelope"
+        data-envelope
+        role="button"
+        tabindex="0"
+        aria-label="Desplegar el sobre"
+      >
         <div class="cover__flap">
           <img
             class="cover__envelope-image"
-            src="/src/assets/images/01-cover/img__envelop.png"
+            src="/src/assets/images/01-cover/img__envelop.webp"
             alt=""
           />
 
@@ -53,10 +59,10 @@
           >
             <img
               class="cover__seal-image"
-              src="/src/assets/images/01-cover/img__wax_seal.png"
+              src="/src/assets/images/01-cover/img__wax_seal.webp"
               data-seal-image
-              data-sealed-src="/src/assets/images/01-cover/img__wax_seal.png"
-              data-opened-src="/src/assets/images/01-cover/img__wax_seal_broken.png"
+              data-sealed-src="/src/assets/images/01-cover/img__wax_seal.webp"
+              data-opened-src="/src/assets/images/01-cover/img__wax_seal_broken.webp"
               alt=""
             />
           </button>
@@ -97,7 +103,7 @@
 
     <main class="narrative" id="narrative">
       <section
-        class="narrative-section origin bubblegum-sans-regular"
+        class="narrative-section origin"
         id="origin"
         data-origin
         data-origin-state="idle"
@@ -134,8 +140,8 @@
               disabled
             >
               <img
-                src="/src/assets/images/02-origin/img__ink-jar--closed.png"
-                data-opened-src="/src/assets/images/02-origin/img__ink-jar--open.png"
+                src="/src/assets/images/02-origin/img__ink-jar--closed.webp"
+                data-opened-src="/src/assets/images/02-origin/img__ink-jar--open.webp"
                 alt=""
                 data-origin-jar-closed
               />
@@ -143,7 +149,7 @@
 
             <img
               class="origin__cork"
-              src="/src/assets/images/02-origin/img__ink-jar--cork.png"
+              src="/src/assets/images/02-origin/img__ink-jar--cork.webp"
               alt=""
               data-origin-cork
               hidden
@@ -151,7 +157,7 @@
 
             <div class="origin__floating-jar" data-origin-floating-jar hidden>
               <img
-                src="/src/assets/images/02-origin/img__ink-jar--open.png"
+                src="/src/assets/images/02-origin/img__ink-jar--open.webp"
                 alt=""
                 data-origin-jar-open
               />
@@ -163,16 +169,6 @@
             </div>
           </div>
 
-          <button
-            class="origin__continue"
-            type="button"
-            data-origin-continue
-            aria-label="Continuar hacia Memoria"
-            disabled
-            hidden
-          >
-            <span aria-hidden="true">↓</span>
-          </button>
         </div>
       </section>
 
@@ -191,7 +187,7 @@
           <div class="memory__scene" data-memory-scene>
             <img
               class="memory__board"
-              src="/src/assets/images/03-memory/img__board_1.png"
+              src="/src/assets/images/03-memory/img__board_1.webp"
               data-memory-board
               alt="Escritorio con un tablero de corcho cubierto de recuerdos"
             />
@@ -238,12 +234,12 @@
               <span class="memory__postcard-card" data-memory-postcard-card>
                 <img
                   class="memory__postcard-face memory__postcard-face--front"
-                  src="/src/assets/images/03-memory/img__postal_front.png"
+                  src="/src/assets/images/03-memory/img__postal_front.webp"
                   alt="Anverso de una postal sobre la evolución de la comunicación"
                 />
                 <img
                   class="memory__postcard-face memory__postcard-face--back"
-                  src="/src/assets/images/03-memory/img__postal_back_02.png"
+                  src="/src/assets/images/03-memory/img__postal_back_02.webp"
                   alt="Reverso de la postal"
                 />
               </span>

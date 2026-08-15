@@ -58,5 +58,20 @@ test.describe("Responsive estructural", () => {
     expect(box.x + box.width).toBeLessThanOrEqual(viewport.width);
     expect(box.y).toBeGreaterThanOrEqual(0);
     expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+    expect(box.width).toBeLessThanOrEqual(viewport.width * 0.18);
+  });
+
+  test("F04 — el remitente aumenta en resoluciones amplias", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    const mobileSize = await page
+      .locator(".cover__sender")
+      .evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize));
+
+    await page.setViewportSize({ width: 1440, height: 900 });
+    const desktopSize = await page
+      .locator(".cover__sender")
+      .evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize));
+
+    expect(desktopSize).toBeGreaterThan(mobileSize);
   });
 });

@@ -1,4 +1,6 @@
 import { clamp } from "../shared/math.js";
+import { getMotionDuration } from "../shared/motion.js";
+import { PAGE_STATES } from "./states.js";
 
 export const createEnvelopeDrag = ({
   envelope,
@@ -15,9 +17,9 @@ export const createEnvelopeDrag = ({
     "01110101",
     "01100010",
   ];
-  const BINARY_CHARACTER_DELAY = 140;
-  const BINARY_COMPLETE_DELAY = 650;
-  const BINARY_EMPTY_DELAY = 180;
+  const binaryCharacterDelay = getMotionDuration("--duration-binary-character");
+  const binaryCompleteDelay = getMotionDuration("--duration-binary-complete");
+  const binaryEmptyDelay = getMotionDuration("--duration-binary-empty");
   let currentOffset = 0;
   let dragStartY = 0;
   let dragStartOffset = 0;
@@ -28,7 +30,7 @@ export const createEnvelopeDrag = ({
   let binaryTimer;
 
   const isBinaryAnimationActive = () =>
-    ["dragging", "deployed", "seal-ready"].includes(
+    [PAGE_STATES.dragging, PAGE_STATES.sealReady].includes(
       document.body.dataset.pageState,
     );
 
@@ -50,7 +52,7 @@ export const createEnvelopeDrag = ({
     if (binaryCharacterIndex < binaryBlock.length) {
       binaryTimer = window.setTimeout(
         writeNextBinaryCharacter,
-        BINARY_CHARACTER_DELAY,
+        binaryCharacterDelay,
       );
       return;
     }
@@ -62,9 +64,9 @@ export const createEnvelopeDrag = ({
         (binarySequenceIndex + 1) % binarySequence.length;
       binaryTimer = window.setTimeout(
         writeNextBinaryCharacter,
-        BINARY_EMPTY_DELAY,
+        binaryEmptyDelay,
       );
-    }, BINARY_COMPLETE_DELAY);
+    }, binaryCompleteDelay);
   };
 
   const startBinaryAnimation = () => {
@@ -103,6 +105,8 @@ export const createEnvelopeDrag = ({
     isDeployed = true;
     isDragging = false;
     setOffset(0);
+    envelope.dataset.deployed = "true";
+    envelope.removeAttribute("tabindex");
     onComplete();
   };
 
@@ -113,7 +117,8 @@ export const createEnvelopeDrag = ({
     isDragging = true;
     dragStartY = event.clientY;
     dragStartOffset = currentOffset;
-    onStateChange("dragging");
+    envelope.setPointerCapture?.(event.pointerId);
+    onStateChange(PAGE_STATES.dragging);
     startBinaryAnimation();
   };
 
@@ -130,8 +135,16 @@ export const createEnvelopeDrag = ({
     if (!isDragging) return;
 
     isDragging = false;
-    onStateChange("sealed");
+    onStateChange(PAGE_STATES.sealed);
     stopBinaryAnimation();
+  };
+
+  const deployFromKeyboard = (event) => {
+    if (isDeployed || !["Enter", " "].includes(event.key)) return;
+
+    event.preventDefault();
+    startBinaryAnimation();
+    completeDeployment();
   };
 
   const syncInitialPosition = () => {
@@ -143,9 +156,11 @@ export const createEnvelopeDrag = ({
   const initialize = () => {
     if (binaryPostcode) binaryPostcode.textContent = "[]";
     syncInitialPosition();
-    envelope.addEventListener("mousedown", beginDrag);
-    window.addEventListener("mousemove", continueDrag);
-    window.addEventListener("mouseup", endDrag);
+    envelope.addEventListener("pointerdown", beginDrag);
+    window.addEventListener("pointermove", continueDrag);
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+    envelope.addEventListener("keydown", deployFromKeyboard);
     window.addEventListener("resize", syncInitialPosition);
   };
 

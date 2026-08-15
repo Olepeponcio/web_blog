@@ -7,10 +7,10 @@ const execAsync = promisify(exec);
 test.describe("Recursos, enlaces y compilación", () => {
   test("G01 — los recursos locales de portada responden", async ({ request }) => {
     const resources = [
-      "/src/assets/images/01-cover/img__envelop.png",
-      "/src/assets/images/01-cover/img__wax_seal.png",
-      "/src/assets/images/01-cover/img__wax_seal_broken.png",
-      "/src/assets/images/global/img__texture_background.png",
+      "/src/assets/images/01-cover/img__envelop.webp",
+      "/src/assets/images/01-cover/img__wax_seal.webp",
+      "/src/assets/images/01-cover/img__wax_seal_broken.webp",
+      "/src/assets/images/global/img__texture_background.webp",
     ];
 
     for (const resource of resources) {
@@ -68,10 +68,10 @@ test.describe("Recursos, enlaces y compilación", () => {
 
   test("T01 — los recursos locales de Memoria responden", async ({ request }) => {
     const resources = [
-      "/src/assets/images/03-memory/img__board_1.png",
-      "/src/assets/images/03-memory/img__board_2.png",
-      "/src/assets/images/03-memory/img__postal_front.png",
-      "/src/assets/images/03-memory/img__postal_back_02.png",
+      "/src/assets/images/03-memory/img__board_1.webp",
+      "/src/assets/images/03-memory/img__board_2.webp",
+      "/src/assets/images/03-memory/img__postal_front.webp",
+      "/src/assets/images/03-memory/img__postal_back_02.webp",
     ];
 
     for (const resource of resources) {

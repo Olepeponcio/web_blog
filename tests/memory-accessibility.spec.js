@@ -13,7 +13,11 @@ test.describe("HITO 3 — accesibilidad y movimiento", () => {
     await page.locator(selectors.memoryPostcard).click();
 
     await expect(page.locator(selectors.memory)).toHaveAttribute("data-memory-state", "complete");
-    await expect(page.locator(selectors.body)).not.toHaveAttribute("data-memory-scroll-locked", "true");
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
+      "data-memory-scroll-locked",
+      "true",
+    );
+    await expect(page.locator(selectors.scrollCue)).toBeVisible();
   });
 
   test("S02 — los controles exponen nombres accesibles", async ({ page }) => {

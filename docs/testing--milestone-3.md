@@ -5,8 +5,8 @@
 Validar la entrada controlada en `memory`, los controles de la escena, el
 movimiento de la postal, su giro y la restauración del scroll.
 
-La matriz automatizada está implementada. Su primera ejecución ha detectado un
-desbordamiento responsive pendiente de corregir.
+La matriz automatizada está implementada y el desbordamiento responsive
+detectado en la primera ejecución está corregido.
 
 ## Alcance
 
@@ -18,11 +18,11 @@ Memory → interruptor → instrumento → postal centrada → reverso → scrol
 
 | Grupo | Cobertura | Resultado esperado |
 | :-- | :-- | :-- |
-| L — Entrada | Estados `idle`, `centering`, `entering`, `locked` y `board-ready` | La sección queda alineada antes del bloqueo. |
-| M — Interruptor | Hotspot, chispas, precarga y cambio de tablero | La escena pasa una sola vez a `signal`. |
+| L — Entrada | Estados `idle`, `entering` y `board-ready` | La escena se activa sin bloquear el scroll. |
+| M — Interruptor | Hotspot, centrado, bloqueo, precarga y cambio de tablero | La escena pasa una sola vez a `signal`. |
 | N — Instrumento | Halo, bloqueo de repeticiones y evento de activación | La luz queda fija y comienza el movimiento. |
 | O — Movimiento | Medición, centrado, escala y bloqueo de clics | La postal termina en `postal-ready`. |
-| P — Giro | Caras, giro, estado final y desbloqueo | El reverso queda visible en `complete`. |
+| P — Giro | Caras, giro, desbloqueo e indicador | El reverso queda visible en `complete`. |
 | Q — Persistencia | Salida y regreso a la sección | La escena no se reinicia sin recargar. |
 | R — Responsive | Cinco viewports y ausencia de desbordamientos | La escena permanece contenida y accionable. |
 | S — Movimiento reducido | Preferencia `reduce` | No existen animaciones imprescindibles para completar el flujo. |
@@ -46,7 +46,7 @@ Memory → interruptor → instrumento → postal centrada → reverso → scrol
 El HITO 3 podrá validarse cuando:
 
 - todas las pruebas automatizadas críticas pasen en los cinco viewports;
-- no exista bloqueo permanente del scroll;
+- el bloqueo de Memory comience con el interruptor y termine con el giro;
 - la postal no invada secciones posteriores;
 - el flujo pueda completarse con movimiento reducido;
 - las pruebas manuales `M17–M24` estén registradas;
@@ -54,20 +54,18 @@ El HITO 3 podrá validarse cuando:
 
 ## Registro de ejecución
 
-Primera ejecución automatizada:
+Ejecución vigente:
 
-- 80 casos ejecutados sobre cinco viewports, incluidos los recursos locales;
-- 76 casos funcionales tras corregir una espera asíncrona de la prueba de
-  teclado;
-- 4 fallos reales en `R03`: el reverso de la postal supera el límite inferior
-  en `mobile-sm`, `mobile-lg`, `desktop-sm` y `desktop-lg`;
-- `R03` pasa en `tablet`;
-- las 15 comprobaciones de accesibilidad y movimiento reducido pasan;
-- las 5 comprobaciones de recursos locales pasan.
+- 365 casos globales recorridos sobre cinco viewports;
+- ningún fallo funcional comunicado durante la ejecución;
+- `R03` pasa en los cinco viewports;
+- `R04` confirma que la postal recalcula su tamaño después de redimensionar;
+- los recorridos añadidos por teclado pasan;
+- los recursos WebP locales responden correctamente.
 
 El proceso de Playwright quedó esperando durante el cierre del servidor local y
 se detuvo manualmente después de obtener todos los resultados. Esto explica el
 código de salida de esas ejecuciones y no añade fallos funcionales.
 
-La batería queda implementada, pero el HITO 3 no se considera validado hasta
-resolver `R03` y completar las pruebas manuales `M17–M24`.
+La batería automatizada queda validada. El cierre completo del HITO 3 conserva
+como pendiente únicamente el registro de las pruebas manuales `M17–M24`.

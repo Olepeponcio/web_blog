@@ -1,7 +1,7 @@
 html {
   min-block-size: 100%;
   background-color: var(--color-paper);
-  background-image: url("../../assets/images/global/img__texture_background.png");
+  background-image: url("../../assets/images/global/img__texture_background.webp");
   background-repeat: repeat;
   color: var(--color-ink);
 }

@@ -19,6 +19,37 @@ test.describe("HITO 2 — revelado con tinta", () => {
     await expect(page.locator(".origin-word--revealed")).toHaveCount(await page.locator(".origin-word").count());
     await expect(page.locator(".origin-word--revealing")).toHaveCount(0);
     await expect(page.locator(selectors.originFloatingJar)).toBeHidden();
-    await expect(page.locator(selectors.originContinue)).toBeEnabled();
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      "completed",
+    );
+    await expect(page.locator(selectors.scrollCue)).toBeVisible();
+  });
+
+  test("I03 — el teclado revela el texto completo", async ({ page }) => {
+    await page.evaluate(() => {
+      document.body.dataset.pageState = "open";
+      document.querySelector("[data-origin]").scrollIntoView();
+    });
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      "ready",
+      { timeout: 8_000 },
+    );
+
+    await page.locator(selectors.originJar).focus();
+    await page.locator(selectors.originJar).press("Enter");
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      "opened-ready",
+      { timeout: 8_000 },
+    );
+    await page.locator(selectors.originJar).press("Enter");
+
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      "completed",
+      { timeout: 8_000 },
+    );
   });
 });

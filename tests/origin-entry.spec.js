@@ -7,7 +7,6 @@ test.describe("HITO 2 — entrada en Origen", () => {
   test("G01 — comienza inactivo y con el bote deshabilitado", async ({ page }) => {
     await expect(page.locator(selectors.origin)).toHaveAttribute("data-origin-state", "idle");
     await expect(page.locator(selectors.originJar)).toBeDisabled();
-    await expect(page.locator(selectors.originContinue)).toBeHidden();
   });
 
   test("G02 — centra Origen antes de bloquear y habilitar el bote", async ({ page }) => {

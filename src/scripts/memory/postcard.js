@@ -1,5 +1,6 @@
 import { flipPostcard } from "./postcard-flip.js";
 import { movePostcard } from "./postcard-motion.js";
+import { NARRATIVE_EVENTS } from "../shared/narrative-events.js";
 
 export const createMemoryPostcard = (elements) => {
   let movementStarted = false;
@@ -12,7 +13,7 @@ export const createMemoryPostcard = (elements) => {
 
   const initialize = () => {
     elements.memory.addEventListener(
-      "memory:instrument-triggered",
+      NARRATIVE_EVENTS.memoryInstrumentTriggered,
       handleInstrumentTriggered,
     );
     elements.postcard.addEventListener("click", () => flipPostcard(elements));

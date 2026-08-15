@@ -3,6 +3,7 @@ import { openJar, preloadOpenedJar } from "./jar-opening.js";
 import { createJarPointer } from "./jar-pointer.js";
 import { createOriginWordReveal } from "./word-reveal.js";
 import { createOriginExit } from "./origin-exit.js";
+import { ORIGIN_STATES } from "./states.js";
 
 const getOriginElements = () => ({
   page: document.body,
@@ -15,8 +16,6 @@ const getOriginElements = () => ({
   floatingJar: document.querySelector("[data-origin-floating-jar]"),
   originText: document.querySelector("[data-origin-text]"),
   hotspot: document.querySelector("[data-origin-ink-hotspot]"),
-  continueButton: document.querySelector("[data-origin-continue]"),
-  memory: document.querySelector("#memory"),
 });
 
 export const initializeOrigin = () => {
@@ -31,8 +30,8 @@ export const initializeOrigin = () => {
     ...elements,
     onComplete: () => {
       jarPointer.deactivate();
-      elements.origin.dataset.originState = "complete";
-      originExit.enable();
+      elements.origin.dataset.originState = ORIGIN_STATES.complete;
+      originExit.complete();
     },
   });
   jarPointer = createJarPointer({
@@ -43,17 +42,24 @@ export const initializeOrigin = () => {
   const handleJarClick = async (event) => {
     const state = elements.origin.dataset.originState;
 
-    if (state === "ready") {
+    if (state === ORIGIN_STATES.ready) {
       await openJar(elements);
       return;
     }
 
-    if (state === "opened-ready") jarPointer.activate(event);
+    if (state !== ORIGIN_STATES.openedReady) return;
+
+    if (event.detail === 0) {
+      elements.origin.dataset.originState = ORIGIN_STATES.active;
+      wordReveal.revealAll();
+      return;
+    }
+
+    jarPointer.activate(event);
   };
 
   preloadOpenedJar(elements.jarImage);
   wordReveal.initialize();
   originEntry.initialize();
-  originExit.initialize();
   elements.jarTrigger.addEventListener("click", handleJarClick);
 };

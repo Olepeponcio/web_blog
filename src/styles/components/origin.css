@@ -1,19 +1,7 @@
-@font-face {
-  font-family: "Bubblegum Sans";
-  src: url("../../assets/fonts/BubblegumSans-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-.bubblegum-sans-regular {
+.origin {
   font-family: "Bubblegum Sans", sans-serif;
   font-weight: 400;
   font-style: normal;
-}
-
-.origin {
-  --origin-jar-size: clamp(5.25rem, 14svh, 8rem);
 
   position: relative;
   padding-block: clamp(1rem, 3svh, 2.5rem);
@@ -28,8 +16,8 @@
   opacity: 0;
   transform: translateY(0.5rem);
   transition:
-    opacity 700ms ease-out,
-    transform 700ms ease-out;
+    opacity var(--duration-origin-eyebrow) ease-out,
+    transform var(--duration-origin-eyebrow) ease-out;
 }
 
 [data-origin-eyebrow].origin__eyebrow--visible {
@@ -43,7 +31,7 @@
 }
 
 .origin__text {
-  margin-block-start: clamp(0.65rem, 1.8svh, 1.35rem);
+  margin-block-start: clamp(1.25rem, 3svh, 2.25rem);
   color: transparent;
 }
 
@@ -87,8 +75,7 @@
   cursor: default;
 }
 
-.origin__jar-trigger:focus-visible,
-.origin__continue:focus-visible {
+.origin__jar-trigger:focus-visible {
   outline: 0.125rem solid var(--color-ink);
   outline-offset: 0.35rem;
 }
@@ -152,35 +139,6 @@
   color: var(--color-ink);
 }
 
-.origin__continue {
-  display: grid;
-  inline-size: 3rem;
-  aspect-ratio: 1;
-  margin: clamp(2rem, 6vw, 4rem) auto 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  place-items: center;
-  color: inherit;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.origin__continue:disabled {
-  cursor: default;
-  opacity: 0;
-}
-
-[data-origin-state="complete"] .origin__continue:not(:disabled) {
-  position: fixed;
-  z-index: 10;
-  inset-block-end: 1.5rem;
-  inset-inline-start: 50%;
-  margin: 0;
-  translate: -50% 0;
-  animation: origin-continue-cue 1.4s ease-in-out infinite;
-}
-
 @media (width <= 30rem) {
   .origin {
     --origin-jar-size: clamp(4.75rem, 13svh, 6.5rem);
@@ -197,6 +155,16 @@
   }
 }
 
+@media (width >= 48rem) {
+  .origin__text {
+    margin-block-start: clamp(1.75rem, 4svh, 3.25rem);
+  }
+
+  .origin .origin__text p {
+    font-size: clamp(1.05rem, min(1.8vw, 2.4svh), 1.4rem);
+  }
+}
+
 @media (height <= 50rem) {
   .origin {
     --origin-jar-size: clamp(4.75rem, 12svh, 6.25rem);
@@ -206,6 +174,10 @@
 
   .origin .narrative-section__content > * + * {
     margin-block-start: clamp(0.35rem, 1svh, 0.65rem);
+  }
+
+  .origin .origin__text {
+    margin-block-start: clamp(0.85rem, 2svh, 1.25rem);
   }
 
   .origin .origin__text p {
@@ -248,16 +220,5 @@
   [data-origin-eyebrow] {
     transform: none;
     transition-duration: 1ms;
-  }
-}
-
-@keyframes origin-continue-cue {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(0.5rem);
   }
 }

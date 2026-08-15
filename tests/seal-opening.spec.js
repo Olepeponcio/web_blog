@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import {
   beginOpening,
   deployEnvelope,
+  openEpistle,
   selectors,
 } from "./helpers/epistle.js";
 
@@ -69,5 +70,13 @@ test.describe("Sello y apertura", () => {
       "writing",
       { timeout: 3_000 },
     );
+  });
+
+  test("C06 — el sobre y el sello roto permanecen visibles", async ({ page }) => {
+    await openEpistle(page);
+
+    await expect(page.locator(selectors.envelope)).toBeVisible();
+    await expect(page.locator(".cover__flap")).toBeVisible();
+    await expect(page.locator(selectors.seal)).toBeVisible();
   });
 });

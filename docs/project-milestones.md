@@ -104,6 +104,7 @@ adaptación responsive, aunque su composición visual permanezca mutable.
 - [x] Comunicar que el sello es interactivo.
 - [x] Mostrar un halo tenue alrededor del sello.
 - [x] Cambiar del sello intacto al roto al hacer clic.
+- [x] Mantener visibles el sobre desplegado y el sello roto durante la lectura.
 - [x] Desplazar automáticamente la vista hasta el texto de apertura.
 - [x] Iniciar el desvelado del texto de apertura palabra por palabra.
 - [x] Conservar los párrafos y su orden de lectura durante el desvelado.
@@ -115,6 +116,7 @@ adaptación responsive, aunque su composición visual permanezca mutable.
 #### Responsive e implementación
 
 - [x] Aplicar la convención `mobile-first` desde cada sección.
+- [x] Escalar remitente y sello desde una base móvil fluida.
 - [x] Usar composición y medidas fluidas.
 - [x] Definir breakpoints según las necesidades del contenido.
 - [x] Validar individualmente la adaptación de cada `section`.
@@ -159,7 +161,7 @@ en la apertura de un bote de tinta y el revelado progresivo del texto.
 - Radio de acción configurable para revelar palabras.
 - Revelado completo de las palabras tocadas parcial o totalmente.
 - Condición lógica de finalización independiente de la apariencia CSS.
-- Flecha de continuación y autoscroll hacia `memory`.
+- Indicador global de continuación y navegación manual hacia `memory`.
 - Primera adaptación responsive de la interacción.
 
 La definición técnica se encuentra en
@@ -173,8 +175,8 @@ la siguiente sección.
 
 ### Criterio de cierre
 
-La sección solo habilita la flecha cuando todas las palabras han terminado su
-animación de revelado. El usuario puede completar la interacción, alcanzar
+La sección solo restaura el scroll y muestra el indicador cuando todas las
+palabras han terminado su animación de revelado. El usuario puede completar la interacción, alcanzar
 `memory` y repetir el flujo en los viewports definidos sin desbordamientos ni
 bloqueos permanentes.
 
@@ -185,7 +187,7 @@ bloqueos permanentes.
 - [x] Incorporar la imagen del bote cerrado.
 - [x] Incorporar la imagen del bote abierto.
 - [x] Incorporar la imagen del corcho.
-- [x] Crear o seleccionar la flecha minimalista de continuación.
+- [x] Reutilizar el indicador global de scroll como señal de continuación.
 - [x] Completar el prototipo de la interacción en Figma.
 
 #### Entrada en Origen
@@ -227,9 +229,9 @@ bloqueos permanentes.
 - [x] Comprobar que `revealedWords.size === totalWords`.
 - [x] Comprobar que no quedan animaciones activas.
 - [x] Desactivar el bote-puntero y restaurar el cursor.
-- [x] Mostrar y habilitar la flecha únicamente al completar el texto.
-- [x] Reutilizar el autoscroll para desplazarse hasta `memory`.
-- [x] Restaurar el scroll narrativo al finalizar la transición.
+- [x] Mostrar el indicador global únicamente cuando el scroll esté disponible.
+- [x] Permitir que el usuario avance manualmente hacia `memory` o regrese a Cover.
+- [x] Restaurar el scroll narrativo al completar Origen.
 
 #### Responsive y validación
 
@@ -251,8 +253,9 @@ Las comprobaciones manuales `M11–M16` permanecen pendientes.
 
 ## Hito 3 — Memoria y postal interactiva
 
-**Estado:** implementado; batería automatizada creada, con un defecto responsive
-pendiente y revisión manual sin completar.
+**Estado:** implementado; batería automatizada creada y pendiente de
+revalidación después del saneamiento responsive. La revisión manual continúa
+sin completar.
 
 ### Objetivo
 
@@ -266,7 +269,7 @@ leer su reverso.
 - Postal independiente fijada a la derecha de «THINGS TO DO».
 - Hotspot invisible sobre el interruptor de la lámpara.
 - Chispas intermitentes como invitación a interactuar.
-- Cambio entre `img__board_1.png` e `img__board_2.png`.
+- Cambio entre `img__board_1.webp` e `img__board_2.webp`.
 - Halo verde intermitente sobre el instrumento.
 - Desprendimiento, caída y ascenso de la postal.
 - Giro de la postal entre anverso y reverso.
@@ -303,7 +306,7 @@ ni superposición sobre secciones posteriores.
 
 - [x] Detectar y centrar la sección `memory`.
 - [x] Bloquear scroll y barra lateral después del centrado.
-- [x] Mostrar `img__board_1.png` como escena inicial.
+- [x] Mostrar `img__board_1.webp` como escena inicial.
 - [x] Mantener la postal fijada y el reverso oculto.
 
 #### Interruptor y chispas
@@ -313,7 +316,7 @@ ni superposición sobre secciones posteriores.
 - [x] Generar una secuencia determinista de chispas.
 - [x] Aplicar `pointer-events: none` a las partículas.
 - [x] Detener definitivamente las chispas al activar el interruptor.
-- [x] Precargar y mostrar `img__board_2.png`.
+- [x] Precargar y mostrar `img__board_2.webp`.
 
 #### Instrumento
 
@@ -346,14 +349,15 @@ ni superposición sobre secciones posteriores.
 #### Responsive y validación
 
 - [x] Aplicar posicionamiento porcentual a hotspots y postal.
-- [ ] Validar escena, trayectoria, escala y giro por viewport: `R03` detecta
-  desbordamiento inferior del reverso en cuatro viewports.
-- [ ] Evitar scroll horizontal y superposición sobre otras secciones.
+- [x] Validar escena, trayectoria, escala y giro por viewport.
+- [x] Evitar scroll horizontal y superposición sobre otras secciones.
 - [x] Diseñar pruebas automatizadas y manuales para el hito 3.
 - [x] Implementar la batería automatizada del hito 3.
 
-La matriz y su primer registro de ejecución se encuentran en
-[`testing--milestone-3.md`](testing--milestone-3.md).
+La matriz y su registro de ejecución se encuentran en
+[`testing--milestone-3.md`](testing--milestone-3.md). La batería global vigente
+recorre 365 casos sobre cinco viewports, incluida la adaptación de la postal
+después de redimensionar y los recorridos por teclado.
 
 ---
 

@@ -35,7 +35,7 @@ test.describe("Texto de apertura", () => {
     );
     await expect(page.locator("html")).toHaveCSS(
       "background-image",
-      /img__texture_background\.png/,
+      /img__texture_background\.webp/,
     );
     await expect(page.locator(selectors.body)).toHaveCSS(
       "background-color",

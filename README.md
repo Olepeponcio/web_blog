@@ -4,9 +4,9 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 ## Estado del proyecto
 
-La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. El hito 1 está validado, el hito 2 ha completado su validación automatizada y el hito 3 está implementado pendiente de una batería específica.
+La base utiliza HTML semántico, CSS por capas, JavaScript mediante módulos ES y Vite. Los hitos 1, 2 y 3 están implementados y cuentan con validación automatizada. Las revisiones manuales de los hitos 2 y 3 permanecen pendientes de registro.
 
-La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada del HITO 3 está implementada y ha detectado un desbordamiento responsive pendiente.
+La versión publicada es `v3.0.0`. El manifiesto mantiene temporalmente `2.0.0` y debe sincronizarse antes de la siguiente publicación. La batería automatizada vigente ejecuta 365 casos sobre cinco viewports; debe repetirse después de cada cambio funcional.
 
 ## Registro técnico
 
@@ -20,9 +20,11 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Gestor        | pnpm                  | `11.21.0`                           | Configurado  |
 | Herramienta   | Figma                 | Diseño y prototipado                |  Utilizado   |
 | Herramienta   | Playwright            | Pruebas E2E en cinco viewports      | Implementado |
-| API web       | Intersection Observer | Entrada controlada en `origin`       | Implementado |
+| API web       | Intersection Observer | Entrada controlada en `origin` y `memory` | Implementado |
+| API web       | Pointer Events        | Arrastre compatible con ratón y entrada táctil | Implementado |
 | API web       | Constraint Validation | Validación semántica del formulario | Planificado  |
 | Accesibilidad | Reduced Motion        | Aplicado en Origin y Memory         | Implementado |
+| Accesibilidad | Teclado               | Despliegue, bote y controles narrativos | Implementado |
 | Convención    | Directorios           | Organización por responsabilidad    |   Aplicado   |
 | Convención    | HTML                  | Marcado semántico                   |   Aplicado   |
 | Convención    | CSS                   | BEM pragmático + `kebab-case`       |   Aplicado   |
@@ -37,6 +39,8 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 - El flujo funcional del hito 1 está implementado mediante HTML, CSS y JavaScript modular.
 - El hito 2 implementa la apertura del bote, el revelado con tinta y la salida hacia `memory`.
 - El hito 3 implementa la escena de Memoria, sus controles y la postal interactiva.
+- Los estados de cada sección están centralizados y las transiciones entre secciones utilizan eventos narrativos.
+- CSS conserva la autoridad sobre la geometría final; JavaScript calcula únicamente estados y animaciones transitorias.
 - La arquitectura por responsabilidad y las convenciones del proyecto ya están aplicadas.
 - Vite se utiliza para desarrollo, compilación y previsualización.
 - Playwright valida carga, arrastre, apertura, escritura, recorrido, responsive y recursos.
@@ -61,12 +65,15 @@ front-end--web-blog/
 │   ├── testing--milestone-2.md
 │   └── testing--milestone-3.md
 ├── src/
-│   ├── assets/
+│   ├── assets/fonts/
+│   ├── assets/images/
 │   ├── scripts/cover/
-│   ├── scripts/memory/
 │   ├── scripts/origin/
+│   ├── scripts/memory/
 │   ├── scripts/shared/
-│   └── styles/
+│   └── styles/{settings,generic,elements,components,pages}/
+├── scripts/
+│   └── optimize-images.mjs
 ├── tests/
 ├── index.html
 ├── package.json
@@ -93,6 +100,12 @@ El proyecto combina varias técnicas compatibles para mantener una interfaz adap
 
 Los nombres de breakpoint sirven como identificadores compartidos, no como categorías de dispositivos. Sus valores se decidirán según el comportamiento real del contenido.
 
+El modelo es deliberadamente híbrido: parte de estilos móviles, amplía la
+composición mediante consultas de anchura y permite consultas de altura o de
+contenedor cuando el contenido lo exige. CSS es la autoridad sobre geometría y
+tamaños finales; JavaScript se limita a estados, eventos y valores transitorios
+de animación.
+
 ### Idioma técnico
 
 El código, los nombres de archivos y directorios, los comentarios, la documentación técnica, las ramas y los commits utilizarán inglés. La conversación de trabajo puede mantenerse en español.
@@ -109,7 +122,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | [Hitos del proyecto](docs/project-milestones.md)                                    | Planificación, tareas y criterios de cierre.               |
 | [Pruebas del HITO 1](docs/testing--milestone-1.md)                                  | Matriz manual y automatizable para validar el primer hito. |
 | [Pruebas del HITO 2](docs/testing--milestone-2.md)                                  | Matriz manual y automatizada de la interacción de Origen.  |
-| [Pruebas del HITO 3](docs/testing--milestone-3.md)                                  | Matriz pendiente de validación para la sección Memoria.    |
+| [Pruebas del HITO 3](docs/testing--milestone-3.md)                                  | Matriz automatizada y revisión manual pendiente de Memoria. |
 | [Estándar de seguridad](docs/security-standard.md)                                  | Controles OWASP, inventario y riesgos pendientes.          |
 
 ## Comandos disponibles
@@ -120,6 +133,7 @@ El diseño se entiende como un marco mutable. Los documentos recogen el concepto
 | `pnpm build`    | Generar una compilación de producción   |
 | `pnpm preview`  | Previsualizar localmente la compilación |
 | `pnpm test:e2e` | Ejecutar la batería E2E con Playwright  |
+| `pnpm images:optimize -- <rutas PNG>` | Generar variantes WebP con las herramientas ya instaladas |
 
 ## Control de versiones
 
@@ -141,7 +155,7 @@ El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` c
 12. Implementación del recorrido narrativo completo y del formulario de respuesta.
 13. Modularización de la apertura, el arrastre, el sello y la escritura progresiva.
 14. Aplicación de estilos por capas, componentes y diseño responsive.
-15. Automatización E2E con Playwright: 181 pruebas aprobadas y 4 omitidas intencionadamente.
+15. Automatización E2E con Playwright sobre cinco viewports configurados.
 16. Cierre del hito 1 dentro de su alcance inicial para ratón.
 17. Implementación modular del hito 2: entrada en Origen, apertura del bote, tinta interactiva y continuación hacia `memory`.
 18. Validación automatizada del hito 2 en los cinco viewports; corregida la tolerancia subpíxel de K03.
@@ -149,3 +163,6 @@ El proyecto sigue versionado semántico `MAYOR.MINOR.PATCH`. La rama `develop` c
 20. Implementación modular del hito 3: entrada en Memoria, controles, efectos y postal interactiva.
 21. Aplicación de `prefers-reduced-motion` en Origin y Memory.
 22. Preparación de recursos visuales para la futura sección `present`, todavía sin lógica aprobada.
+23. Conversión de los once recursos activos a WebP: reducción aproximada de 23 MB a 3,5 MB.
+24. Centralización de estados y eventos narrativos; adopción de Pointer Events y recorridos por teclado.
+25. Validación automatizada vigente: 365 casos recorridos sobre cinco viewports.

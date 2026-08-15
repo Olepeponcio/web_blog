@@ -1,4 +1,6 @@
 import { getMotionDuration } from "../shared/motion.js";
+import { NARRATIVE_EVENTS } from "../shared/narrative-events.js";
+import { MEMORY_STATES } from "./states.js";
 
 const getDuration = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -11,9 +13,9 @@ export const flipPostcard = async ({
   postcard,
   postcardCard,
 }) => {
-  if (memory.dataset.memoryState !== "postal-ready") return;
+  if (memory.dataset.memoryState !== MEMORY_STATES.postalReady) return;
 
-  memory.dataset.memoryState = "flipping";
+  memory.dataset.memoryState = MEMORY_STATES.flipping;
   postcard.disabled = true;
 
   const flip = postcardCard.animate(
@@ -34,6 +36,6 @@ export const flipPostcard = async ({
   postcard.setAttribute("aria-label", "Reverso de la postal");
   postcard.setAttribute("aria-disabled", "true");
   delete page.dataset.memoryScrollLocked;
-  memory.dataset.memoryState = "complete";
-  memory.dispatchEvent(new CustomEvent("memory:complete"));
+  memory.dataset.memoryState = MEMORY_STATES.complete;
+  memory.dispatchEvent(new CustomEvent(NARRATIVE_EVENTS.memoryComplete));
 };

@@ -16,6 +16,7 @@
   inline-size: min(calc(100% - (2 * var(--page-gutter))), var(--page-inline-size));
   transform: translate(-50%, var(--envelope-offset-y));
   cursor: grab;
+  touch-action: none;
   user-select: none;
   will-change: transform;
 }
@@ -41,11 +42,6 @@
   background-color: transparent;
 }
 
-[data-page-state="writing"] .cover__flap,
-[data-page-state="open"] .cover__flap {
-  visibility: hidden;
-}
-
 .cover__envelope-image {
   inline-size: 100%;
   block-size: auto;
@@ -54,16 +50,16 @@
 .cover__sender {
   position: absolute;
   z-index: 1;
-  inset-block-start: 25%;
+  inset-block-start: 23%;
   inset-inline: 0;
   display: flex;
-  inline-size: min(72%, 30rem);
+  inline-size: min(90%, 30rem);
   margin-inline: auto;
   flex-direction: column;
   align-items: center;
   color: var(--color-ink);
   font-family: var(--font-family-handwriting);
-  font-size: clamp(0.72rem, 1.8vw, 1.2rem);
+  font-size: clamp(0.64rem, 2.8vw, 0.9rem);
   font-style: normal;
   line-height: 1.18;
   text-align: center;
@@ -93,7 +89,7 @@
   position: absolute;
   inset-block-start: 54%;
   inset-inline-start: 50%;
-  inline-size: clamp(3rem, 12%, 7.5rem);
+  inline-size: clamp(2.5rem, 13vw, 4rem);
   padding: 0;
   border: 0;
   background: transparent;
@@ -102,7 +98,7 @@
 
 .cover__seal-image {
   inline-size: 100%;
-  filter: drop-shadow(0 0.2rem 0.2rem rgb(25 23 20 / 35%));
+  filter: drop-shadow(var(--cover-envelope-shadow));
 }
 
 .cover__seal--breaking .cover__seal-image {
@@ -121,7 +117,7 @@
   position: absolute;
   inset: -12%;
   border-radius: 50%;
-  box-shadow: 0 0 1.25rem rgb(128 0 0 / 35%);
+  box-shadow: var(--cover-seal-glow);
   content: "";
 }
 
@@ -241,25 +237,28 @@
     inline-size: 100%;
   }
 
-  .cover__seal {
-    inline-size: clamp(3.5rem, 16%, 5rem);
-  }
+}
 
+@media (width >= 30rem) {
   .cover__sender {
     inset-block-start: 24%;
     inline-size: min(84%, 24rem);
-    font-size: clamp(0.64rem, 3vw, 1rem);
+    font-size: clamp(0.78rem, 2.2vw, 1rem);
   }
 }
 
-@media (width <= 30rem) {
+@media (width >= 48rem) {
+  .cover__seal {
+    inline-size: clamp(4rem, 8vw, 7.5rem);
+  }
+
   .cover__sender {
-    inset-block-start: 23%;
-    inline-size: 90%;
-    font-size: clamp(0.58rem, 2.9vw, 0.82rem);
+    inset-block-start: 25%;
+    inline-size: min(72%, 30rem);
+    font-size: clamp(1rem, 1.45vw, 1.35rem);
   }
 
   .cover__sender-location {
-    gap: 0.25em;
+    gap: 0.35em;
   }
 }
