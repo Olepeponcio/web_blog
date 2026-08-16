@@ -17,19 +17,19 @@
   inline-size: var(--cover-envelope-inline-size);
   transform: translate(-50%, var(--envelope-offset-y));
   cursor: grab;
-  touch-action: none;
+  /* touch-action: none; */
   user-select: none;
   will-change: transform;
 }
 
 .cover__envelope:active,
-[data-page-state="dragging"] .cover__envelope {
+[data-page-state='dragging'] .cover__envelope {
   cursor: grabbing;
 }
 
-[data-page-state="seal-ready"] .cover__envelope,
-[data-page-state="writing"] .cover__envelope,
-[data-page-state="open"] .cover__envelope {
+[data-page-state='seal-ready'] .cover__envelope,
+[data-page-state='writing'] .cover__envelope,
+[data-page-state='open'] .cover__envelope {
   --envelope-offset-y: 0px;
 
   cursor: default;
@@ -117,7 +117,7 @@
   inset: -12%;
   border-radius: 50%;
   box-shadow: var(--cover-seal-glow);
-  content: "";
+  content: '';
 }
 
 .cover__letter {
@@ -170,7 +170,7 @@
   block-size: 1.65rem;
   border-radius: 999px;
   background-color: var(--color-ink);
-  content: "";
+  content: '';
   transform: translateX(-50%);
 }
 
@@ -182,25 +182,25 @@
   block-size: 0.75rem;
   border-inline-end: 0.125rem solid var(--color-ink);
   border-block-end: 0.125rem solid var(--color-ink);
-  content: "";
+  content: '';
   transform: translateX(-50%) rotate(45deg);
 }
 
-[data-page-state="seal-ready"] .cover__drag-indicator,
-[data-page-state="writing"] .cover__drag-indicator,
-[data-page-state="open"] .cover__drag-indicator {
+[data-page-state='seal-ready'] .cover__drag-indicator,
+[data-page-state='writing'] .cover__drag-indicator,
+[data-page-state='open'] .cover__drag-indicator {
   opacity: 0;
 }
 
-[data-page-state="sealed"] .cover__seal,
-[data-page-state="dragging"] .cover__seal,
-[data-page-state="writing"] .cover__seal,
-[data-page-state="open"] .cover__seal {
+[data-page-state='sealed'] .cover__seal,
+[data-page-state='dragging'] .cover__seal,
+[data-page-state='writing'] .cover__seal,
+[data-page-state='open'] .cover__seal {
   pointer-events: none;
 }
 
-[data-page-state="writing"] .cover__letter,
-[data-page-state="open"] .cover__letter {
+[data-page-state='writing'] .cover__letter,
+[data-page-state='open'] .cover__letter {
   user-select: text;
 }
 
