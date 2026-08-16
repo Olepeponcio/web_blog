@@ -407,26 +407,113 @@ La validación se documenta en
 
 ## 5. FUTURE
 
-### Estado actual
+### Definición técnica del HITO 5
 
-La sección `future` existe como bloque editorial. Sus imágenes están disponibles,
-pero no están integradas en una interacción ni existe un módulo JavaScript
-específico.
+La escena se presenta ya compuesta al entrar mediante scroll en `future`. El
+marco ocupa una escala dominante dentro del viewport y contiene el texto
+narrativo como HTML centrado. La imagen no incorpora el texto: esta separación
+preserva su semántica, legibilidad y adaptación responsive.
 
-desarrollo narrativo
+`img__card.png` representa el estado base del marco. Mientras la sección está
+activa alterna con `img__card_01.png` para simular la intermitencia de sus luces.
+Cuando aparece la iluminación azul, una sombra degradada del mismo color rodea
+el marco y refuerza el cambio visual.
+
+El conjunto del cañón se sitúa próximo al marco, parcialmente superpuesto y a
+una escala inferior. Sus imágenes incluyen una remesa visible de suministros:
+esta remesa forma parte de la representación del dispositivo, no es el conjunto
+de nodos físicos que se genera durante la interacción. El estado normal utiliza
+`img__canion_02.png`; al disparar cambia temporalmente a
+`img__canion_01.png`, cuya iluminación roja comunica la activación.
+
+Un botón semántico se superpone al hueco circular previsto en el cañón. Cada
+activación genera desde la boca un único objeto independiente, seleccionado del
+catálogo de suministros. El objeto recibe velocidad horizontal y vertical,
+rotación y gravedad para describir primero un arco ascendente y después otro
+descendente.
+
+El límite inferior visible de la escena funciona como suelo. Los objetos no
+pueden atravesarlo: colisionan entre sí y con el suelo, pierden energía y quedan
+apilados. El botón admite activaciones sucesivas sin un máximo narrativo, por lo
+que el usuario puede llenar el viewport mientras permanezca en la sección. La
+remesa dibujada en el cañón no se consume ni cambia por el número de disparos.
+
+Al abandonar `future` mediante scroll se detienen la intermitencia y la
+simulación, se eliminan todos los objetos generados y marco, cañón y botón
+regresan a su estado inicial. Una nueva entrada comienza siempre con la escena
+vacía.
+
+### Flujo funcional
+
+```text
+ENTRAR EN FUTURE
+    -> cargar marco, texto y cañón
+    -> iniciar intermitencia azul del marco
+    -> habilitar botón
+
+ACTIVAR BOTÓN
+    -> mostrar estado rojo del cañón
+    -> seleccionar un suministro
+    -> generar el objeto en la boca
+    -> aplicar impulso ascendente y horizontal
+    -> aplicar gravedad, colisiones y apilamiento
+    -> restaurar estado normal del cañón
+
+ABANDONAR FUTURE
+    -> cancelar animaciones y simulación
+    -> retirar objetos generados
+    -> restaurar estado inicial
+```
+
+### Estados previstos
+
+| Estado      | Responsabilidad                                                   |
+| :---------- | :---------------------------------------------------------------- |
+| `idle`      | Escena fuera del tramo activo y sin objetos generados.             |
+| `active`    | Escena visible, marco intermitente y botón disponible.             |
+| `firing`    | Cañón iluminado en rojo y creación de un suministro.               |
+| `simulating` | Objetos en vuelo, colisión o asentamiento; admite nuevos disparos. |
+| `resetting` | Cancelación y limpieza al abandonar la sección.                    |
+
+`firing` y `simulating` pueden coexistir: cada pulsación añade un objeto sin
+detener los que ya están en movimiento o apilados.
+
+### Responsive, accesibilidad y movimiento
+
+- Marco, cañón, botón y origen de disparo se posicionan de forma proporcional a
+  la escena, sin coordenadas finales rígidas.
+- El suelo físico se recalcula con las dimensiones útiles de la sección y del
+  viewport.
+- El botón conserva nombre accesible, foco visible y equivalencia para teclado,
+  puntero y entrada táctil.
+- Con `prefers-reduced-motion: reduce` se detiene la intermitencia automática y
+  el disparo utiliza un desplazamiento breve sin rebotes prolongados.
+- Los objetos generados son decorativos y no alteran el orden de lectura ni se
+  anuncian repetidamente a tecnologías de asistencia.
 
 ### Recursos disponibles
 
-- [`img__block_01.png`](../src/assets/images/05-future/img__block_01.png)
-- [`img__block_02.png`](../src/assets/images/05-future/img__block_02.png)
-- [`img__block_03.png`](../src/assets/images/05-future/img__block_03.png)
-- [`img__block_04.png`](../src/assets/images/05-future/img__block_04.png)
+- [`img__card.png`](../src/assets/images/05-future/img__card.png)
+- [`img__card_01.png`](../src/assets/images/05-future/img__card_01.png)
+- [`img__canion_01.png`](../src/assets/images/05-future/img__canion_01.png)
+- [`img__canion_02.png`](../src/assets/images/05-future/img__canion_02.png)
+- [`img__book.png`](../src/assets/images/05-future/img__book.png)
+- [`img__compass.png`](../src/assets/images/05-future/img__compass.png)
+- [`img__dice.png`](../src/assets/images/05-future/img__dice.png)
+- [`img__gamepad.png`](../src/assets/images/05-future/img__gamepad.png)
+- [`img__gears.png`](../src/assets/images/05-future/img__gears.png)
+- [`img__hammer.png`](../src/assets/images/05-future/img__hammer.png)
+- [`img__joycon.png`](../src/assets/images/05-future/img__joycon.png)
+- [`img__light_bulbs.png`](../src/assets/images/05-future/img__light_bulbs.png)
+- [`img__magnifying_glass.png`](../src/assets/images/05-future/img__magnifying_glass.png)
+- [`img__puzzle.png`](../src/assets/images/05-future/img__puzzle.png)
 
-### Módulos responsables
+### Módulos previstos
 
-| Ámbito            | JavaScript            | CSS                                                                       |
-| :---------------- | :-------------------- | :------------------------------------------------------------------------ |
-| Estructura actual | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
+La división definitiva se establecerá durante la implementación. Como contrato,
+la coordinación de la escena, la generación de suministros y la simulación
+física deben permanecer separadas para que el reinicio no dependa de nodos o
+temporizadores residuales.
 
 ## 6. DESTINATARIO + FORMULARIO
 

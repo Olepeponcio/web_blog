@@ -520,29 +520,104 @@
         </div>
       </section>
 
-      <section class="narrative-section" id="future">
-        <div class="narrative-section__content">
-          <p class="narrative-section__eyebrow">Futuro</p>
-          <h2>Lo que todavía no existe</h2>
+      <section class="future" id="future" data-future>
+        <div class="future__scene" data-future-scene>
+          <h2 class="future__title" data-future-title>FUTURO</h2>
 
-          <p>El futuro nunca llega completamente terminado.</p>
-          <p>Se construye con pequeñas decisiones tomadas en el presente.</p>
-          <p>
-            Una línea de código.<br />Una idea descartada.<br />Una
-            conversación.<br />Una pregunta que todavía no tiene respuesta.
-          </p>
-          <p>Quizá dentro de algunos años esta página parezca antigua.</p>
-          <p>Eso significará que seguimos avanzando.</p>
-          <p>Pero hay algo que debería permanecer:</p>
-          <p>
-            la voluntad de construir tecnología que no compita con las personas,
-            sino que trabaje con ellas.
-          </p>
-          <p>
-            Herramientas más claras.<br />Interfaces más humanas.<br />Sistemas
-            que sepan desaparecer cuando ya no son necesarios.
-          </p>
-          <p>Ese es el futuro al que enviamos esta carta.</p>
+          <svg
+            class="future__light-route"
+            data-future-light-route
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              class="future__light-line"
+              data-future-light-line
+              d="M 910 105 H 790 V 235 H 680 V 155 H 565 V 315 H 455"
+            />
+            <circle
+              class="future__light-point"
+              data-future-light-point
+              cx="910"
+              cy="105"
+              r="8"
+            />
+          </svg>
+
+          <article
+            class="future__card future__card--primary"
+            data-future-card="primary"
+          >
+            <img
+              class="future__card-image future__card-image--base"
+              src="./src/assets/images/05-future/img__card.png"
+              alt=""
+            />
+            <img
+              class="future__card-image future__card-image--lit"
+              src="./src/assets/images/05-future/img__card_01.png"
+              alt=""
+            />
+
+            <div class="future__copy">
+              <p>El futuro nunca llega completamente terminado.</p>
+              <p>Se construye con pequeñas decisiones tomadas en el presente.</p>
+              <p>
+                Una línea de código.<br />Una idea descartada.<br />Una
+                conversación.<br />Una pregunta que todavía no tiene respuesta.
+              </p>
+            </div>
+          </article>
+
+          <article
+            class="future__card future__card--secondary"
+            data-future-card="secondary"
+          >
+            <img
+              class="future__card-image future__card-image--base"
+              src="./src/assets/images/05-future/img__card.png"
+              alt=""
+            />
+            <img
+              class="future__card-image future__card-image--lit"
+              src="./src/assets/images/05-future/img__card_01.png"
+              alt=""
+            />
+
+            <div class="future__copy">
+              <p>Quizá dentro de algunos años esta página parezca antigua.</p>
+              <p>Eso significará que seguimos avanzando.</p>
+              <p>Pero hay algo que debería permanecer:</p>
+              <p>
+                la voluntad de construir tecnología que no compita con las
+                personas, sino que trabaje con ellas.
+              </p>
+              <p>
+                Herramientas más claras.<br />Interfaces más humanas.<br />Sistemas
+                que sepan desaparecer cuando ya no son necesarios.
+              </p>
+              <p>Ese es el futuro al que enviamos esta carta.</p>
+            </div>
+          </article>
+
+          <div class="future__cannon" data-future-cannon>
+            <img
+              class="future__cannon-image"
+              data-future-cannon-image
+              src="./src/assets/images/05-future/img__canion_02.png"
+              alt="Cañón de suministros"
+            />
+            <button
+              class="future__cannon-trigger"
+              data-future-cannon-trigger
+              type="button"
+              aria-label="Disparar un suministro"
+            ></button>
+            <span class="future__cannon-muzzle" data-future-cannon-muzzle></span>
+          </div>
+
+          <div class="future__supplies" data-future-supplies aria-hidden="true"></div>
         </div>
       </section>
 
@@ -668,6 +743,7 @@
             <li>
               <span
                 class="site-footer__social-link site-footer__social-link--disabled"
+                role="img"
                 aria-label="Instagram, enlace pendiente"
                 data-contextual-help="Enlace de Instagram todavía no disponible."
                 aria-disabled="true"

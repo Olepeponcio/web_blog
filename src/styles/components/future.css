@@ -1,0 +1,341 @@
+.future {
+  position: relative;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  overflow: clip;
+  color: #17130b;
+}
+
+.future__scene {
+  position: relative;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  inline-size: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.future__title {
+  position: absolute;
+  z-index: 8;
+  inset-block-start: clamp(1.5rem, 6svh, 4.5rem);
+  inset-inline-end: clamp(1.25rem, 6vw, 6rem);
+  margin: 0;
+  color: #111827;
+  font-family: 'Cabin Sketch', sans-serif;
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  background: linear-gradient(
+    100deg,
+    #111827 0%,
+    #111827 42%,
+    #bdfaff 48%,
+    #11dff5 51%,
+    #1677ff 54%,
+    #111827 60%,
+    #111827 100%
+  );
+  background-position: 130% 0;
+  background-size: 240% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.future--entering .future__title {
+  animation: future-title-glow 2.8s cubic-bezier(0.45, 0, 0.3, 1) both;
+}
+
+.future__light-route {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.future__light-line {
+  fill: none;
+  stroke: rgba(18, 219, 255, 0.5);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 7px #20dff8);
+  opacity: 0;
+}
+
+.future__light-point {
+  fill: #e9feff;
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 14px #16dfff)
+    drop-shadow(0 0 24px #1677ff);
+  opacity: 0;
+}
+
+.future__card {
+  position: absolute;
+  z-index: 3;
+  aspect-ratio: 1190 / 1324;
+}
+
+.future__card--primary {
+  inset-block-start: 7%;
+  inset-inline-start: 7%;
+  inline-size: clamp(13rem, 20vw, 22rem);
+}
+
+.future__card--secondary {
+  inset-block-start: 48%;
+  inset-inline-start: 30%;
+  inline-size: clamp(17rem, 28vw, 30rem);
+}
+
+.future__card-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.future__card-image--lit {
+  opacity: 0;
+}
+
+.future__card--active .future__card-image--lit {
+  animation: future-card-pulse 2.4s ease-in-out infinite;
+}
+
+.future__copy {
+  position: absolute;
+  z-index: 2;
+  inset: 13% 13% 14%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: clamp(0.68rem, 1.08vw, 1rem);
+  line-height: 1.28;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.future__copy p {
+  margin: 0;
+}
+
+.future__copy p + p {
+  margin-block-start: clamp(0.25rem, 0.8svh, 0.6rem);
+}
+
+.future__cannon {
+  position: absolute;
+  z-index: 5;
+  inset-block-start: 70%;
+  inset-inline-start: 53%;
+  inline-size: clamp(12rem, 20vw, 21rem);
+  aspect-ratio: 1420 / 1024;
+}
+
+.future__cannon-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.future__cannon-trigger {
+  position: absolute;
+  z-index: 3;
+  inset-block-start: 61%;
+  inset-inline-start: 73%;
+  inline-size: 14%;
+  aspect-ratio: 1;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.future__cannon-trigger::after {
+  position: absolute;
+  inset: 8%;
+  border: 2px solid rgba(255, 246, 176, 0.7);
+  border-radius: inherit;
+  box-shadow:
+    0 0 0.5rem #ffd95a,
+    0 0 1.2rem rgba(255, 186, 23, 0.75);
+  content: '';
+  animation: future-trigger-pulse 1.5s ease-in-out infinite;
+}
+
+.future__cannon-trigger:focus-visible {
+  outline: 3px solid #eafeff;
+  outline-offset: 4px;
+}
+
+.future__cannon-trigger:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.future__cannon-trigger:disabled::after {
+  animation: none;
+  opacity: 0;
+}
+
+.future__cannon-muzzle {
+  position: absolute;
+  inset-block-start: 7%;
+  inset-inline-start: 89%;
+  inline-size: 1px;
+  block-size: 1px;
+  pointer-events: none;
+}
+
+.future__supplies {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.future__supply {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: block;
+  object-fit: contain;
+  transform-origin: center;
+  will-change: transform;
+  user-select: none;
+}
+
+@keyframes future-title-glow {
+  from {
+    background-position: 130% 0;
+  }
+
+  to {
+    background-position: -35% 0;
+  }
+}
+
+@keyframes future-card-pulse {
+  0%,
+  42%,
+  100% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(15, 220, 255, 0));
+  }
+
+  50%,
+  72% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0.75rem rgba(93, 240, 255, 0.9))
+      drop-shadow(0 0 2rem rgba(22, 119, 255, 0.68));
+  }
+}
+
+@keyframes future-trigger-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.88);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 56rem) {
+  .future__title {
+    inset-block-start: 2rem;
+    inset-inline-end: var(--page-gutter);
+  }
+
+  .future__card {
+    transform: none;
+  }
+
+  .future__card--primary {
+    inset-block-start: 14%;
+    inset-inline-start: 5%;
+    inline-size: min(32vw, 18rem);
+  }
+
+  .future__card--secondary {
+    inset-block-start: 49%;
+    inset-inline-start: 27%;
+    inline-size: min(42vw, 23rem);
+  }
+
+  .future__cannon {
+    inset-block-start: 72%;
+    inset-inline-start: 57%;
+    inline-size: min(31vw, 17rem);
+  }
+
+  .future__copy {
+    font-size: clamp(0.56rem, 1.5vw, 0.8rem);
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 38rem) {
+  .future__title {
+    font-size: clamp(2.6rem, 15vw, 5rem);
+  }
+
+  .future__card--primary {
+    inset-block-start: 16%;
+    inset-inline-start: 4%;
+    inline-size: 39vw;
+  }
+
+  .future__card--secondary {
+    inset-block-start: 51%;
+    inset-inline-start: 27%;
+    inline-size: 54vw;
+  }
+
+  .future__cannon {
+    inset-block-start: 75%;
+    inset-inline-start: 55%;
+    inline-size: 41vw;
+  }
+
+  .future__copy {
+    inset: 13% 14% 15%;
+    font-size: clamp(0.48rem, 2.05vw, 0.7rem);
+  }
+
+  .future__copy p + p {
+    margin-block-start: 0.18rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .future--entering .future__title,
+  .future__card--active .future__card-image--lit,
+  .future__cannon-trigger::after {
+    animation: none;
+  }
+
+  .future__card--active .future__card-image--lit {
+    opacity: 1;
+    filter: drop-shadow(0 0 0.75rem rgba(93, 240, 255, 0.8));
+  }
+}

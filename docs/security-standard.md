@@ -37,25 +37,25 @@ controles aplicados en cada hito.
 
 Inventario realizado sobre el estado del proyecto del 14 de agosto de 2026.
 
-| Superficie                   | Estado observado                                                                     | Control o decisión pendiente                                               |
-| ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| Formulario de respuesta      | Presente sin `action`, envío ni tratamiento JavaScript                               | Definir destino, tratamiento de datos y controles antes de habilitarlo     |
-| Campos del formulario        | `name`, `email`, `subject` y `message`; solo el correo dispone de validación de tipo | Definir obligatoriedad, longitudes y formatos permitidos                   |
-| Validación                   | Constraint Validation API planificada                                                | Validar también en el servidor cuando exista backend                       |
-| Escritura en el DOM          | Se utilizan `textContent`, nodos de texto y atributos controlados                    | Mantener APIs seguras y evitar HTML generado desde datos no confiables     |
-| Recursos externos            | Dos hojas de estilo de Font Awesome desde cdnjs                                      | Valorar alojamiento local o fijar integridad y una política CSP compatible |
-| Enlaces externos             | LinkedIn utiliza `target="_blank"` con `noopener noreferrer`                         | Mantener este patrón                                                       |
-| Código dinámico              | No se observan `eval`, `new Function` ni inserciones mediante `innerHTML`            | Conservar esta restricción                                                 |
-| Persistencia cliente         | No se observan cookies, `localStorage` ni `sessionStorage`                           | Evaluar finalidad, caducidad y exposición antes de incorporarlos           |
-| Comunicaciones               | No se observan llamadas `fetch`, API ni WebSocket                                    | Definir orígenes autorizados y manejo de errores al incorporarlos          |
-| Autenticación y autorización | No implementadas                                                                     | Revisar el nivel ASVS si pasan a formar parte del alcance                  |
-| Secretos                     | No se observan credenciales en el código revisado                                    | No introducir secretos en el front-end ni en variables expuestas por Vite  |
-| Encabezados HTTP             | No definidos en el repositorio                                                       | Configurarlos y comprobarlos en el alojamiento de producción               |
-| Dependencias                 | Vite y Playwright como dependencias de desarrollo                                    | Revisar vulnerabilidades y mantener el archivo de bloqueo                  |
-| Pruebas                      | Pruebas E2E funcionales; no hay matriz específica de seguridad                       | Añadir casos negativos junto con cada superficie nueva                     |
-| Interacciones narrativas     | Origin y Memory usan eventos, atributos `data-*` y Web Animations API con datos locales | Mantener estados cerrados y evitar interpretar contenido no confiable    |
-| Recursos de secciones        | Imágenes de Cover, Origin y Memory servidas desde rutas locales                       | Optimizar formatos y eliminar recursos sin uso durante la auditoría final   |
-| Movimiento reducido          | Implementado en Origin y Memory                                                        | Extender el mismo criterio a cada sección futura                            |
+| Superficie                   | Estado observado                                                                        | Control o decisión pendiente                                               |
+| ---------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Formulario de respuesta      | Presente sin `action`, envío ni tratamiento JavaScript                                  | Definir destino, tratamiento de datos y controles antes de habilitarlo     |
+| Campos del formulario        | `name`, `email`, `subject` y `message`; solo el correo dispone de validación de tipo    | Definir obligatoriedad, longitudes y formatos permitidos                   |
+| Validación                   | Constraint Validation API planificada                                                   | Validar también en el servidor cuando exista backend                       |
+| Escritura en el DOM          | Se utilizan `textContent`, nodos de texto y atributos controlados                       | Mantener APIs seguras y evitar HTML generado desde datos no confiables     |
+| Recursos externos            | Dos hojas de estilo de Font Awesome desde cdnjs                                         | Valorar alojamiento local o fijar integridad y una política CSP compatible |
+| Enlaces externos             | LinkedIn utiliza `target="_blank"` con `noopener noreferrer`                            | Mantener este patrón                                                       |
+| Código dinámico              | No se observan `eval`, `new Function` ni inserciones mediante `innerHTML`               | Conservar esta restricción                                                 |
+| Persistencia cliente         | No se observan cookies, `localStorage` ni `sessionStorage`                              | Evaluar finalidad, caducidad y exposición antes de incorporarlos           |
+| Comunicaciones               | No se observan llamadas `fetch`, API ni WebSocket                                       | Definir orígenes autorizados y manejo de errores al incorporarlos          |
+| Autenticación y autorización | No implementadas                                                                        | Revisar el nivel ASVS si pasan a formar parte del alcance                  |
+| Secretos                     | No se observan credenciales en el código revisado                                       | No introducir secretos en el front-end ni en variables expuestas por Vite  |
+| Encabezados HTTP             | No definidos en el repositorio                                                          | Configurarlos y comprobarlos en el alojamiento de producción               |
+| Dependencias                 | Vite y Playwright como dependencias de desarrollo                                       | Revisar vulnerabilidades y mantener el archivo de bloqueo                  |
+| Pruebas                      | Pruebas E2E funcionales; no hay matriz específica de seguridad                          | Añadir casos negativos junto con cada superficie nueva                     |
+| Interacciones narrativas     | Origin y Memory usan eventos, atributos `data-*` y Web Animations API con datos locales | Mantener estados cerrados y evitar interpretar contenido no confiable      |
+| Recursos de secciones        | Imágenes de Cover, Origin y Memory servidas desde rutas locales                         | Optimizar formatos y eliminar recursos sin uso durante la auditoría final  |
+| Movimiento reducido          | Implementado en Origin y Memory                                                         | Extender el mismo criterio a cada sección futura                           |
 
 Este inventario describe el código visible y no acredita por sí solo la seguridad
 del futuro alojamiento, CDN o backend.

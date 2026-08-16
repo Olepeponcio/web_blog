@@ -15,7 +15,7 @@
   inline-size: 3rem;
   block-size: 3rem;
   padding: 0.55rem;
-  border: 0.125rem solid var(--color-ink);
+  border: 0.125rem solid var(--color-white);
   border-radius: 50%;
   background-color: var(--color-ink);
   cursor: pointer;
@@ -30,7 +30,7 @@
 .accessibility-toolbar__control:hover:not(:disabled):not(
     .accessibility-toolbar__control--pending
   ) {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .accessibility-toolbar__control:focus-visible {
@@ -42,6 +42,8 @@
 .accessibility-toolbar__control--pending {
   opacity: 0.42;
   cursor: not-allowed;
+  border-color: var(--color-scroll-cue);
+  background-color: var(--color-scroll-cue);
 }
 
 .accessibility-toolbar__sound-active[hidden] {
@@ -59,8 +61,8 @@
   .accessibility-toolbar {
     inset-block-start: auto;
     inset-block-end: calc(
-      max(1.5rem, env(safe-area-inset-bottom)) +
-        clamp(3.2rem, 4.4vw, 4rem) + 0.75rem
+      max(1.5rem, env(safe-area-inset-bottom)) + clamp(3.2rem, 4.4vw, 4rem) +
+        0.75rem
     );
     inset-inline-start: 50%;
     flex-direction: row;

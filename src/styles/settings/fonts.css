@@ -17,6 +17,15 @@
 }
 
 @font-face {
+  font-family: "Cabin Sketch";
+  src: url("../../assets/fonts/font__Cabin_Sketch/CabinSketch-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Atkinson Hyperlegible";
   src: url("../../assets/fonts/Atkinson_Hyperlegiblejetbrains_mono/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf")
     format("truetype");

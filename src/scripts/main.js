@@ -2,6 +2,7 @@ import { initializeCover } from "./cover/cover.js";
 import { initializeOrigin } from "./origin/origin.js";
 import { initializeMemory } from "./memory/memory.js";
 import { initializePresent } from "./present/present.js";
+import { initializeFuture } from "./future/future.js";
 import { initializeContextualHelp } from "./shared/contextual-help.js";
 import { initializeHelpGuide } from "./shared/help-guide.js";
 import { initializeScrollCue } from "./shared/scroll-cue.js";
@@ -11,6 +12,7 @@ const sectionInitializers = {
   origin: initializeOrigin,
   memory: initializeMemory,
   present: initializePresent,
+  future: initializeFuture,
 };
 
 const initializeApp = async () => {

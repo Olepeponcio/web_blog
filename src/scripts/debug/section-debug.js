@@ -1,7 +1,13 @@
 import { PAGE_STATES } from "../cover/states.js";
 import { ORIGIN_STATES } from "../origin/states.js";
 
-const DEBUG_SECTIONS = new Set(["cover", "origin", "memory", "present"]);
+const DEBUG_SECTIONS = new Set([
+  "cover",
+  "origin",
+  "memory",
+  "present",
+  "future",
+]);
 
 export const createSectionDebug = () => {
   const sectionName = new URLSearchParams(window.location.search).get(
