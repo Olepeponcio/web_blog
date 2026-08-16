@@ -19,7 +19,7 @@
   border: 0.125rem solid var(--color-help-border);
   border-radius: 0.75rem;
   overflow: auto;
-  background: var(--textura-papel-grueso);
+  background: var(--texture-paper-thick);
   box-shadow: 0 3rem 4rem rgb(0 0 0 / 35%);
   font-family: 'Atkinson Hyperlegible', sans-serif;
   line-height: 1.5;

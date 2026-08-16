@@ -29,7 +29,7 @@
   --color-contextual-help-surface: #fff8dc;
   --color-contextual-help-border: #191714;
   --color-contextual-help-text: #191714;
-  --textura-papel-grueso:
+  --texture-paper-thick:
     radial-gradient(
       circle at 20% 30%,
       rgb(255 255 255 / 35%) 0 1px,
@@ -46,4 +46,14 @@
       rgb(244 238 210) 20%,
       rgb(252 248 226)
     );
+  --color-title-future: linear-gradient(
+    100deg,
+    #111827 0%,
+    #111827 42%,
+    #bdfaff 48%,
+    #11dff5 51%,
+    #1677ff 54%,
+    #111827 60%,
+    #111827 100%
+  );
 }
