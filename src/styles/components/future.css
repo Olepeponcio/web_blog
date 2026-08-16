@@ -13,15 +13,15 @@
   inline-size: 100%;
   overflow: hidden;
   isolation: isolate;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 /*mobile-first*/
 .future__scene {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.1fr 0.8fr 1fr;
-  gap: 0.5rem;
+  grid-template-rows: 0.1fr 0.8fr 0.8fr;
+  /* gap: 0.5rem; */
 
   grid-template-areas:
     'title title'
@@ -35,10 +35,10 @@
   grid-area: title;
   color: white;
   align-self: center;
-  justify-self: end;
+  justify-self: center;
   color: #111827;
   font-family: 'Cabin Sketch', sans-serif;
-  font-size: clamp(5rem, 15vw, 8rem);
+  font-size: clamp(5rem, 10vw, 5rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 0.9;
@@ -47,7 +47,7 @@
 .future__motherbase {
   grid-area: mother_base;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
 }
@@ -55,7 +55,7 @@
 .future__motherbase-image {
   display: block;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .future__panel {
@@ -63,41 +63,30 @@
 }
 
 .future__panel-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-@media (width >=48rem) {
+/*>=600px*/
+@media (width >=37rem) {
   .future__scene {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 0.2fr 0.6fr;
-    gap: 0.5rem;
+    grid-template-rows: 0.1fr 1fr;
+    gap: 1rem;
 
     grid-template-areas:
       'title title'
       'mother_base panel';
-
-    background-color: transparent;
   }
 
   .future__title {
     grid-area: title;
-    color: white;
-    align-self: center;
-    justify-self: end;
-    color: #111827;
-    font-family: 'Cabin Sketch', sans-serif;
     font-size: clamp(3rem, 12vw, 8rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 0.9;
   }
 
   .future__motherbase {
     grid-area: mother_base;
+    align-items: start;
   }
 
   .future__motherbase-image {
@@ -108,94 +97,25 @@
 
   .future__panel {
     grid-area: panel;
-    background: transparent;
+    align-items: start;
+    margin-top: 2rem;
   }
 
   .future__panel-image {
+    display: block;
     scale: 1.2;
     object-fit: contain;
   }
 }
 
-@media (width >= 64rem) {
+/*>=1300px*/
+@media (width >=81rem) {
   .future__scene {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 0.5fr 1fr;
-    gap: 0.5rem;
-
-    grid-template-areas:
-      'title title'
-      'mother_base panel';
-
-    background-color: transparent;
+    max-width: 80vw;
+    margin-left: 10rem;
   }
-
-  .future__title {
-    grid-area: title;
-    color: white;
-    align-self: center;
-    justify-self: end;
-    color: #111827;
-    font-family: 'Cabin Sketch', sans-serif;
-    font-size: clamp(3rem, 8vw, 8rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 0.9;
-  }
-
-  .future__motherbase {
-    grid-area: mother_base;
-  }
-
-  .future__motherbase-image {
-    scale: 1;
-    object-fit: contain;
-  }
-
-  .future__panel {
-    grid-area: panel;
-  }
-
   .future__panel-image {
     scale: 1;
-    display: block;
-
-    object-fit: contain;
-  }
-}
-
-@media (width >=75rem) {
-  .future__scene {
-    padding: 15%;
-  }
-
-  .future__title {
-    grid-area: title;
-    color: white;
-    align-self: center;
-    justify-self: end;
-    color: #111827;
-    font-family: 'Cabin Sketch', sans-serif;
-    font-size: clamp(3rem, 8vw, 8rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 0.9;
-
-    margin-top: 5rem;
-  }
-
-  .future__motherbase {
-    grid-area: mother_base;
-  }
-
-  .future__motherbase-image {
-    scale: 1;
-    object-fit: contain;
-  }
-
-  .future__panel {
-    grid-area: panel;
   }
 }
 
