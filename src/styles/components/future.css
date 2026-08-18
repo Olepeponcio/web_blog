@@ -37,7 +37,7 @@
   align-self: center;
   justify-self: center;
   color: #111827;
-  font-family: 'Cabin Sketch', sans-serif;
+  font-family: var(--font-family-future);
   font-size: clamp(5rem, 10vw, 5rem);
   font-weight: 700;
   letter-spacing: 0.08em;

@@ -37,7 +37,7 @@
     ),
     radial-gradient(
       circle at 70% 65%,
-      rgb(120 100 60 / 1%) 0 1px,
+      rgb(120 100 60 / 50%) 0 1px,
       transparent 2px
     ),
     linear-gradient(
@@ -56,4 +56,32 @@
     #111827 60%,
     #111827 100%
   );
+
+  --texture-paper-a4:
+    radial-gradient(
+      circle at 20% 30%,
+      rgb(255 255 255 / 20%) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 70% 65%,
+      rgb(180 175 160 / 2%) 0 1px,
+      transparent 2px
+    ),
+    linear-gradient(
+      115deg,
+      rgb(250 250 247),
+      rgb(246 246 242) 45%,
+      rgb(249 249 246)
+    );
+
+  --shadow-border-carbon:
+    0 2px 3px rgb(10 10 10 / 80%), 0 5px 10px rgb(8 8 8 / 65%),
+    0 12px 24px rgb(5 5 5 / 52%), 0 24px 48px rgb(0 0 0 / 40%),
+    0 40px 80px rgb(0 0 0 / 28%), 0 64px 110px rgb(0 0 0 / 18%);
+
+  --shadow-paper-depth:
+    0 2px 2px rgb(0 0 0 / 55%), 0 5px 7px rgb(20 20 20 / 40%),
+    0 12px 18px rgb(0 0 0 / 32%), 0 24px 38px rgb(0 0 0 / 22%),
+    0 40px 70px rgb(0 0 0 / 14%);
 }

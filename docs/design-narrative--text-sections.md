@@ -101,7 +101,7 @@ Una idea descartada.
 Una conversación.  
 Una pregunta que todavía no tiene respuesta.
 
-Quizá dentro de algunos años esta página parezca antigua.
+Quizá dentro de algunos años, incluso ya, esta página parezca antigua.
 
 Eso significará que seguimos avanzando.
 
@@ -120,16 +120,6 @@ Ese es el futuro al que enviamos esta carta.
 ## 6. Destinatario — Ahora te corresponde a ti
 
 Si has llegado hasta aquí, esta carta ya tiene destinatario.
-
-Hasta este momento solo has recorrido palabras escritas por otra persona.
-
-Ahora puedes responder.
-
-No necesitas escribir una carta completa.
-Puede ser una idea.
-Una pregunta.
-Una propuesta.
-O simplemente unas pocas líneas.
 
 ### Tu respuesta
 
@@ -159,18 +149,3 @@ y alguien dispuesto a recibirla.
 ## 7. Cierre — Post scriptum
 
 Gracias por haber llegado hasta el final.
-
-Las cartas antiguas terminaban con una firma.
-
-Esta no.
-
-Prefiere dejar un espacio en blanco.
-
-Para la siguiente idea.
-
-Para la siguiente conversación.
-
-Para quien quiera continuarla.
-
-**P. D.**  
-Toda historia comienza con alguien dispuesto a responder.

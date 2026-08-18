@@ -3,7 +3,8 @@
   min-block-size: 100vh;
   min-block-size: 100svh;
   padding: clamp(3rem, 10vw, 7rem) var(--page-gutter);
-  align-items: center;
+  align-items: end;
+  font-family: var(--font-family-addressee);
 }
 
 .narrative-section__content {

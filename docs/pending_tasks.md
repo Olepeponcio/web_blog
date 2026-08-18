@@ -12,3 +12,5 @@
 -fallos con el touch al desplegar el sobre (si se desactiva en css se puede desplegar el sobre, pero no funciona el scroll)
 
 - hay que implementar logica de tocuch an press para el frasco de tinta.
+
+- el signo de scroll debe desaparecer si se está dentro de seccion footer
