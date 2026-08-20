@@ -130,4 +130,14 @@ test.describe("Responsive estructural", () => {
     await expect(toolbar).toHaveCSS("position", "fixed");
     await expect(toolbar).toHaveCSS("flex-direction", "column");
   });
+
+  test("F08 — Recipient no reserva un viewport completo", async ({ page }) => {
+    await page.setViewportSize({ width: 440, height: 956 });
+    const recipient = await page.locator("#recipient").boundingBox();
+    const viewport = page.viewportSize();
+
+    expect(recipient).not.toBeNull();
+    expect(viewport).not.toBeNull();
+    expect(recipient.height).toBeLessThan(viewport.height);
+  });
 });

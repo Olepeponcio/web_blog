@@ -1,8 +1,4 @@
-import {
-  getMotionDuration,
-  scrollToElement,
-  wait,
-} from "../shared/motion.js";
+import { getMotionDuration, wait } from "../shared/motion.js";
 import { PAGE_STATES } from "../cover/states.js";
 import { ORIGIN_STATES } from "./states.js";
 
@@ -34,36 +30,10 @@ export const createOriginEntry = ({
     }
   };
 
-  const originFitsViewport = () => {
-    const bounds = origin.getBoundingClientRect();
-    return bounds.height <= window.innerHeight + 1;
-  };
-
-  const syncOriginAfterResize = () => {
-    if (
-      [ORIGIN_STATES.idle, ORIGIN_STATES.completed].includes(
-        origin.dataset.originState,
-      )
-    ) {
-      return;
-    }
-
-    window.requestAnimationFrame(() => {
-      if (originFitsViewport()) {
-        page.dataset.originScrollLocked = "true";
-        origin.scrollIntoView({ block: "start" });
-      } else {
-        delete page.dataset.originScrollLocked;
-      }
-    });
-  };
-
-  const centerAndLockOrigin = async () => {
+  const prepareOrigin = async () => {
     origin.dataset.originState = ORIGIN_STATES.centering;
     observer.unobserve(origin);
     originEyebrow.classList.add("origin__eyebrow--visible");
-
-    const centering = scrollToElement(origin, "--duration-origin-centering");
 
     await wait(
       prefersReducedMotion
@@ -72,13 +42,6 @@ export const createOriginEntry = ({
     );
 
     await writeHeading();
-    await centering;
-
-    if (originFitsViewport()) {
-      page.dataset.originScrollLocked = "true";
-    } else {
-      delete page.dataset.originScrollLocked;
-    }
 
     origin.dataset.originState = ORIGIN_STATES.ready;
     jarTrigger.disabled = false;
@@ -95,7 +58,7 @@ export const createOriginEntry = ({
       return;
     }
 
-    centerAndLockOrigin();
+    prepareOrigin();
   };
 
   const initialize = () => {
@@ -108,7 +71,6 @@ export const createOriginEntry = ({
       threshold: [REQUIRED_VISIBILITY],
     });
     observer.observe(origin);
-    window.addEventListener("resize", syncOriginAfterResize);
   };
 
   return { initialize };

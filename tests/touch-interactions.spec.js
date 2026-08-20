@@ -52,36 +52,58 @@ test.describe("Interacciones táctiles", () => {
       .toBeGreaterThan(0);
   });
 
-  test("TC02 — una pulsación mantenida mueve el bote abierto", async ({ page }) => {
+  test("TC02 — un toque sobre el bote revela el texto en móvil", async ({ page }) => {
     await page.goto("/");
+    await page.setViewportSize({ width: 440, height: 956 });
     await openOriginJar(page);
 
     const touch = await createTouchDriver(page);
     const jar = page.locator(selectors.originJar);
-    const word = page.locator(".origin-word").first();
     const jarBox = await jar.boundingBox();
-    const wordBox = await word.boundingBox();
 
     expect(jarBox).not.toBeNull();
-    expect(wordBox).not.toBeNull();
-
-    await touch.drag({
-      from: {
-        x: jarBox.x + jarBox.width / 2,
-        y: jarBox.y + jarBox.height / 2,
-      },
-      to: {
-        x: wordBox.x + wordBox.width / 2,
-        y: wordBox.y + wordBox.height / 2,
-      },
+    await touch.tap({
+      x: jarBox.x + jarBox.width / 2,
+      y: jarBox.y + jarBox.height / 2,
     });
 
     await expect(page.locator(selectors.origin)).toHaveAttribute(
       "data-origin-state",
-      "active",
+      "completed",
+      { timeout: 8_000 },
     );
-    await expect(word).toHaveClass(/origin-word--revealed/, {
-      timeout: 3_000,
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
+      "data-origin-scroll-locked",
+      "true",
+    );
+  });
+
+  test("TC03 — un click táctil tardío no intenta recapturar el puntero", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await openOriginJar(page);
+
+    const errors = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.locator(selectors.originJar).evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      element.dispatchEvent(
+        new PointerEvent("click", {
+          bubbles: true,
+          clientX: bounds.left + bounds.width / 2,
+          clientY: bounds.top + bounds.height / 2,
+          detail: 1,
+          pointerId: 1,
+          pointerType: "touch",
+        }),
+      );
     });
+
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      /active|completed/,
+    );
+    expect(errors).toEqual([]);
   });
 });

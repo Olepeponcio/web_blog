@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { beginOpening } from "./helpers/epistle.js";
 
 test.describe("Carga inicial", () => {
   test.beforeEach(async ({ page }) => {
@@ -53,6 +54,27 @@ test.describe("Carga inicial", () => {
     await expect(sealImage).toHaveAttribute(
       "src",
       /img__wax_seal(?:-[\w-]+)?\.webp(?:\?.*)?$/,
+    );
+  });
+
+  test("A06 — una recarga desde la narración vuelve al inicio", async ({ page }) => {
+    await beginOpening(page);
+    await page.evaluate(() => {
+      window.scrollTo(0, document.documentElement.scrollHeight * 0.65);
+    });
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+
+    await page.reload();
+    await page.waitForLoadState("load");
+
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+    await expect(page.locator("body")).toHaveAttribute(
+      "data-page-state",
+      "sealed",
+    );
+    await expect(page.locator("[data-present]")).toHaveAttribute(
+      "data-present-state",
+      "idle",
     );
   });
 });

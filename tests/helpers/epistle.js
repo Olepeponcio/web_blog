@@ -138,9 +138,6 @@ export const revealOriginText = async (page) => {
 export const reachMemory = async (page) => {
   await page.evaluate(() => {
     document.body.dataset.pageState = "open";
-    const origin = document.querySelector("[data-origin]");
-    origin.dataset.originState = "completed";
-    origin.dispatchEvent(new CustomEvent("origin:complete"));
     document.querySelector("[data-memory]").scrollIntoView();
   });
 

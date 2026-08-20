@@ -9,6 +9,17 @@ import { initializeContextualHelp } from './shared/contextual-help.js';
 import { initializeHelpGuide } from './shared/help-guide.js';
 import { initializeScrollCue } from './shared/scroll-cue.js';
 
+const resetInitialNavigation = () => {
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+
+  window.scrollTo(0, 0);
+};
+
+resetInitialNavigation();
+window.addEventListener('pageshow', resetInitialNavigation);
+
 const sectionInitializers = {
   cover: initializeCover,
   origin: initializeOrigin,

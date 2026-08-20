@@ -50,23 +50,35 @@ test.describe("HITO 3 — interacción de Memoria", () => {
 
   test("M01 — el interruptor cambia el tablero y habilita el instrumento", async ({ page }) => {
     await reachMemory(page);
+    const initialScrollY = await page.evaluate(() => window.scrollY);
     await page.locator(selectors.memorySwitch).click();
 
     await expect(page.locator(selectors.memory)).toHaveAttribute("data-memory-state", "signal");
-    await expect(page.locator(selectors.body)).toHaveAttribute(
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
       "data-memory-scroll-locked",
       "true",
     );
-    await expect
-      .poll(() =>
-        page
-          .locator(selectors.memory)
-          .evaluate((element) => Math.abs(element.getBoundingClientRect().top)),
-      )
-      .toBeLessThan(2);
+    expect(await page.evaluate(() => window.scrollY)).toBeCloseTo(
+      initialScrollY,
+      0,
+    );
+
     await expect(page.locator(selectors.memoryBoard)).toHaveAttribute("src", /img__board_2\.webp$/);
     await expect(page.locator(selectors.memorySwitch)).toBeDisabled();
     await expect(page.locator(selectors.memoryInstrument)).toBeEnabled();
+  });
+
+  test("M03 — Memory entra al ser visible sin completar Origin", async ({ page }) => {
+    await reachMemory(page);
+
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      "idle",
+    );
+    await expect(page.locator(selectors.memory)).toHaveAttribute(
+      "data-memory-state",
+      "board-ready",
+    );
   });
 
   test("M02 — no permite activar el instrumento antes del interruptor", async ({ page }) => {

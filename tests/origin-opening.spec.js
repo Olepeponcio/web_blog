@@ -21,11 +21,25 @@ test.describe("HITO 2 — apertura del bote", () => {
     await expect(page.locator(selectors.originJar)).toBeEnabled();
   });
 
-  test("H02 — el segundo clic activa el bote-puntero", async ({ page }) => {
+  test("H02 — el segundo clic adapta la interacción al viewport", async ({ page }) => {
     await openOriginJar(page);
     await page.locator(selectors.originJar).click();
-    await expect(page.locator(selectors.origin)).toHaveAttribute("data-origin-state", "active");
-    await expect(page.locator(selectors.originJar)).toBeHidden();
-    await expect(page.locator(selectors.originFloatingJar)).toBeVisible();
+
+    if (page.viewportSize().width <= 768) {
+      await expect(page.locator(selectors.origin)).toHaveAttribute(
+        "data-origin-state",
+        "completed",
+        { timeout: 8_000 },
+      );
+      await expect(page.locator(selectors.originFloatingJar)).toBeHidden();
+      await expect(page.locator(selectors.body)).not.toHaveAttribute(
+        "data-origin-scroll-locked",
+        "true",
+      );
+    } else {
+      await expect(page.locator(selectors.origin)).toHaveAttribute("data-origin-state", "active");
+      await expect(page.locator(selectors.originJar)).toBeHidden();
+      await expect(page.locator(selectors.originFloatingJar)).toBeVisible();
+    }
   });
 });

@@ -161,6 +161,17 @@
   }
 }
 
+@media (width <= 48rem) {
+  .origin[data-origin-state="opened-ready"] .origin__jar-trigger,
+  .origin[data-origin-state="active"] {
+    touch-action: pan-y;
+  }
+
+  .origin[data-origin-state="active"] {
+    cursor: auto;
+  }
+}
+
 @media (width >= 48rem) {
   .origin__text {
     margin-block-start: clamp(1.75rem, 4svh, 3.25rem);

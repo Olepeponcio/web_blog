@@ -152,7 +152,7 @@ La validación está documentada en
 ### Propósito
 
 `origin` explica por qué se escribe la carta. Cuando la sección alcanza la
-presencia requerida, se centra y bloquea temporalmente el scroll. «ORIGEN» surge
+presencia requerida, prepara la interacción sin alterar ni bloquear el scroll. «ORIGEN» surge
 suavemente durante `1000ms`; al concluir, «Por qué escribo» se escribe de
 izquierda a derecha. El bloque narrativo conserva una separación fluida y
 moderada respecto del título.
@@ -162,10 +162,9 @@ Bubblegum Sans se carga localmente y queda limitada a esta sección.
 ### Secuencia interactiva
 
 ```text
-CENTRAR origin
+DETECTAR origin visible
     → mostrar «ORIGEN» suavemente durante 1000ms
     → escribir «Por qué escribo» al finalizar su aparición
-    → bloquear scroll si la sección cabe en el viewport
     → habilitar bote cerrado
 
 ACTIVAR bote
@@ -173,35 +172,31 @@ ACTIVAR bote
     → expulsar el corcho
 
 ACTIVAR bote abierto
-    → capturar la pulsación táctil desde pointerdown
-    → unir bote al puntero o al dedo
-    → revelar palabras dentro del radio de tinta
+    → en escritorio, unir el bote al puntero y revelar por radio de tinta
+    → en móvil, revelar el texto completo mediante el segundo toque
 
 REVELAR todo el texto
     → detener bote-puntero
-    → restaurar el scroll
     → emitir origin:complete
     → mostrar el indicador reutilizable
 ```
 
-La ruta táctil captura el puntero durante la segunda pulsación para que el bote
-acompañe el mismo gesto, sin esperar al `click` posterior. La ruta de teclado
-revela el texto completo sin depender del movimiento del puntero. En viewports
-bajos, el bloqueo se retira si la sección no cabe para evitar encerrar al
-usuario.
+La ruta táctil evita capturar el puntero y revela el texto completo con el segundo
+toque. La ruta de teclado utiliza la misma finalización directa. El scroll se
+mantiene disponible en todas las resoluciones.
 
 ### Estados
 
 | Estado         | Comportamiento                                         |
 | :------------- | :----------------------------------------------------- |
 | `idle`         | Sección dentro del scroll general.                     |
-| `centering`    | Alineación mediante autoscroll.                        |
+| `centering`    | Preparación visual sin desplazar la página.             |
 | `ready`        | Sección preparada y bote habilitado.                   |
 | `opening`      | Apertura del bote y vuelo del corcho.                  |
 | `opened-ready` | Espera de la segunda activación.                       |
 | `active`       | Bote-puntero y revelado por tinta.                     |
 | `complete`     | Estado transitorio al terminar el revelado.            |
-| `completed`    | Scroll restaurado, indicador visible y evento emitido. |
+| `completed`    | Indicador visible y evento de finalización emitido.     |
 
 ### Recursos
 
@@ -237,13 +232,12 @@ centrarse, escalar y girar.
 ### Secuencia interactiva
 
 ```text
-RECIBIR origin:complete y detectar memory visible
+DETECTAR memory visible
     → iniciar la escena sin alterar el scroll
     → mostrar tablero y una secuencia de ondas y chispas sobre el interruptor
 
 ACTIVAR interruptor
     → detener inmediatamente la llamada visual del interruptor
-    → centrar memory y bloquear scroll
     → cambiar a board_2
     → hacer parpadear el instrumento
 
@@ -255,7 +249,6 @@ ACTIVAR postal
     → girar 180 grados
     → mostrar reverso
     → conservar estado final
-    → restaurar scroll
     → mostrar el indicador reutilizable
 ```
 
@@ -269,16 +262,16 @@ convierte en un halo estático visible.
 
 | Estado          | Comportamiento                                       |
 | :-------------- | :--------------------------------------------------- |
-| `idle`          | Espera de Origen y visibilidad suficiente.           |
+| `idle`          | Espera de visibilidad suficiente.                     |
 | `entering`      | Entrada visual de la escena.                         |
 | `board-ready`   | Tablero inicial, postal y chispas.                   |
-| `centering`     | Interruptor activado, centrado y bloqueo del scroll. |
+| `centering`     | Estado histórico conservado por compatibilidad.       |
 | `signal`        | Segundo tablero e instrumento parpadeando.           |
 | `triggered`     | Instrumento activo y postal liberada.                |
 | `postal-moving` | Movimiento y escalado transitorios.                  |
 | `postal-ready`  | Postal centrada y accionable.                        |
 | `flipping`      | Giro entre anverso y reverso.                        |
-| `complete`      | Reverso persistente y scroll restaurado.             |
+| `complete`      | Reverso persistente y scroll disponible.              |
 
 ### Recursos
 
@@ -296,7 +289,7 @@ pósit conserva su tratamiento visual independiente.
 | :---------------------------------- | :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | Coordinación y estados              | [`memory.js`](../src/scripts/memory/memory.js), [`states.js`](../src/scripts/memory/states.js) | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
 | Entrada no bloqueante               | [`memory-entry.js`](../src/scripts/memory/memory-entry.js)                                     | [`memory.css`](../src/styles/components/memory.css)                                                       |
-| Interruptor, centrado e instrumento | [`memory-controls.js`](../src/scripts/memory/memory-controls.js)                               | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
+| Interruptor e instrumento           | [`memory-controls.js`](../src/scripts/memory/memory-controls.js)                               | [`memory.css`](../src/styles/components/memory.css), [`narrative.css`](../src/styles/pages/narrative.css) |
 | Coordinación de postal              | [`postcard.js`](../src/scripts/memory/postcard.js)                                             | [`memory.css`](../src/styles/components/memory.css)                                                       |
 | Movimiento y escalado               | [`postcard-motion.js`](../src/scripts/memory/postcard-motion.js)                               | [`memory.css`](../src/styles/components/memory.css)                                                       |
 | Giro y finalización                 | [`postcard-flip.js`](../src/scripts/memory/postcard-flip.js)                                   | [`memory.css`](../src/styles/components/memory.css)                                                       |
@@ -308,10 +301,9 @@ La validación está documentada en
 
 ### Estado implementado del HITO 4
 
-La implementación vigente se encuentra en `develop`. La versión `v3.0.2` de
-`main` registra el refactor responsive de esta sección y una prueba local fallida
-en smartphone; la comprobación manual posterior en dispositivo real permanece
-pendiente.
+La implementación vigente forma parte de `v5.0.1` en `main`. El recorrido
+responsive se comprobó posteriormente en un smartphone físico sin detectar el
+recorte que mostraba la emulación de Chrome DevTools al 100 %.
 
 La transición desde `memory` hacia `present` se controla mediante el scroll y es
 reversible. La etiqueta `Presente` precede al encabezado en negrita «Hoy ya no

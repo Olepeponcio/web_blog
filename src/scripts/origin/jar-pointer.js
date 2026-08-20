@@ -14,7 +14,7 @@ export const createJarPointer = ({
     ["touch", "pen"].includes(event.pointerType);
 
   const capturePointer = (event) => {
-    if (!isDirectPointer(event)) return;
+    if (event.type !== "pointerdown" || !isDirectPointer(event)) return;
 
     activePointerId = event.pointerId;
     origin.setPointerCapture?.(activePointerId);

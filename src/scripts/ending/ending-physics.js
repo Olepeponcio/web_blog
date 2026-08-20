@@ -113,7 +113,7 @@ export const createEndingPhysics = ({ scene, supplies, muzzle }) => {
   const render = (time) => {
     if (!running) return;
 
-    const delta = lastTime ? clamp(time - lastTime, 8, 32) : 16.67;
+    const delta = lastTime ? clamp(time - lastTime, 8, 1000 / 60) : 1000 / 60;
     lastTime = time;
     Engine.update(engine, delta);
 

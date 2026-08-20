@@ -144,7 +144,7 @@ El cierre se apoya en [`testing--milestone-1.md`](testing--milestone-1.md):
 
 ## Hito 2 — Origen e interacción con tinta
 
-**Estado:** implementación y validación automatizada completadas; revisión manual pendiente.
+**Estado:** implementación completada; interacción móvil no bloqueante validada en dispositivo físico.
 
 ### Objetivo
 
@@ -153,7 +153,7 @@ en la apertura de un bote de tinta y el revelado progresivo del texto.
 
 ### Contenido
 
-- Centrado y bloqueo controlado de la sección `origin`.
+- Entrada no bloqueante y sin autocentrado de la sección `origin`.
 - Bote cerrado como primer control interactivo.
 - Sustitución por el bote abierto.
 - Expulsión del corcho mediante una trayectoria en arco.
@@ -193,8 +193,7 @@ bloqueos permanentes.
 #### Entrada en Origen
 
 - [x] Detectar la presencia suficiente de `origin`.
-- [x] Completar el centrado mediante autoscroll.
-- [x] Bloquear el scroll únicamente después del centrado.
+- [x] Preparar la sección sin autocentrado ni bloqueo del scroll.
 - [x] Mostrar el bote cerrado como control disponible.
 
 #### Apertura del bote
@@ -205,6 +204,7 @@ bloqueos permanentes.
 - [x] Generar un arco descendente hasta salir del viewport.
 - [x] Evitar activaciones repetidas durante la animación.
 - [x] Habilitar el segundo clic cuando termine la trayectoria.
+- [x] Revelar directamente el texto mediante el segundo toque en móvil.
 
 #### Bote-puntero
 
@@ -253,9 +253,8 @@ Las comprobaciones manuales `M11–M16` permanecen pendientes.
 
 ## Hito 3 — Memoria y postal interactiva
 
-**Estado:** implementado; batería automatizada creada y pendiente de
-revalidación después del saneamiento responsive. La revisión manual continúa
-sin completar.
+**Estado:** implementado; entrada y activación sin autocentrado ni bloqueo,
+comprobadas en smartphone físico.
 
 ### Objetivo
 
@@ -441,9 +440,9 @@ Retroceso
 La matriz se encuentra en
 [`testing--milestone-4.md`](testing--milestone-4.md).
 
-La etiqueta publicada `v3.0.2` registra una prueba local fallida en smartphone.
-Los refactors posteriores pertenecen a `develop`; el hito no se cerrará hasta
-repetir y documentar esa comprobación sobre un dispositivo real.
+La versión `v5.0.1` está publicada desde `main`. El recorrido responsive se ha
+comprobado en un smartphone físico; las revisiones manuales formales de la matriz
+continúan abiertas.
 
 ---
 
@@ -491,7 +490,7 @@ La definición técnica completa se encuentra en
 
 ## Hito 6 — Cañón de suministros y cierre
 
-**Estado:** primera implementación funcional.
+**Estado:** implementación funcional publicada en `v5.0.1`; validación manual responsive básica completada.
 
 ### Alcance implementado
 
@@ -505,7 +504,8 @@ La definición técnica completa se encuentra en
 - [x] Limpiar la simulación al abandonar la escena.
 - [x] Mantener la barra independiente: inferior central bajo `600px` y lateral desde `600px`.
 - [x] Ocultar el indicador de scroll al entrar el footer.
-- [ ] Completar la validación visual en todos los viewports.
+- [x] Comprobar el cierre y el footer en smartphone físico.
+- [ ] Completar la matriz visual formal en todos los viewports.
 
 La definición técnica se encuentra en
 [`design-narrative--digital-epistle.md`](design-narrative--digital-epistle.md#7-ending--cañón-de-suministros).

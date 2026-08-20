@@ -1,4 +1,5 @@
 import { clamp } from "../shared/math.js";
+import { PAGE_STATES } from "../cover/states.js";
 
 const WRITING_END = 0.3;
 const ROAD_START = 0.35;
@@ -72,7 +73,10 @@ export const createPresentProgress = ({
 
   const render = () => {
     frame = undefined;
-    const sequenceState = getRunwayProgress(sequenceRunway);
+    const pageIsOpen = document.body.dataset.pageState === PAGE_STATES.open;
+    const sequenceState = pageIsOpen
+      ? getRunwayProgress(sequenceRunway)
+      : { progress: 0, visible: false };
     const writingProgress = getPhaseProgress(
       sequenceState.progress,
       0,
@@ -116,6 +120,11 @@ export const createPresentProgress = ({
     window.addEventListener("scroll", requestRender, { passive: true });
     window.addEventListener("resize", requestRender);
     reducedMotion.addEventListener("change", requestRender);
+    const pageStateObserver = new MutationObserver(requestRender);
+    pageStateObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-page-state"],
+    });
     requestRender();
   };
 

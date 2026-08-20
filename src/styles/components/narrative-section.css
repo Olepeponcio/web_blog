@@ -36,6 +36,12 @@
   text-transform: uppercase;
 }
 
+#recipient {
+  min-block-size: auto;
+  padding-block: clamp(3rem, 12svh, 7rem);
+  align-items: center;
+}
+
 @media (width >= 48rem) {
   .narrative-section__content > * + * {
     margin-block-start: 1.5rem;

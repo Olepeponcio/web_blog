@@ -5,7 +5,6 @@ import { createMemoryPostcard } from "./postcard.js";
 const getMemoryElements = () => ({
   page: document.body,
   memory: document.querySelector("[data-memory]"),
-  origin: document.querySelector("[data-origin]"),
   scene: document.querySelector("[data-memory-scene]"),
   board: document.querySelector("[data-memory-board]"),
   switchTrigger: document.querySelector("[data-memory-switch]"),

@@ -53,7 +53,10 @@ export const initializeOrigin = () => {
 
     if (state !== ORIGIN_STATES.openedReady) return;
 
-    if (event.detail === 0) {
+    if (
+      event.detail === 0 ||
+      window.matchMedia("(max-width: 48rem)").matches
+    ) {
       elements.origin.dataset.originState = ORIGIN_STATES.active;
       wordReveal.revealAll();
       return;
@@ -64,6 +67,7 @@ export const initializeOrigin = () => {
 
   const handleJarPointerDown = (event) => {
     if (
+      window.matchMedia("(max-width: 48rem)").matches ||
       elements.origin.dataset.originState !== ORIGIN_STATES.openedReady ||
       !["touch", "pen"].includes(event.pointerType)
     ) {

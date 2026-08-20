@@ -77,7 +77,7 @@ del HITO 4.
 
 ## Contexto de versión
 
-La versión `v3.0.2` publicada en `main` registra en su anotación un fallo durante
-la prueba local en smartphone. Los cambios responsive posteriores están en
-`develop`. Los cinco proyectos de Playwright validan viewports simulados, pero
-no sustituyen la comprobación manual pendiente en un dispositivo físico.
+La versión `v5.0.1` está publicada desde `main`. Los cinco proyectos de
+Playwright validan viewports simulados y el recorrido responsive básico se ha
+comprobado además en un smartphone físico. Las pruebas manuales `M25–M32`
+continúan pendientes de registro formal.

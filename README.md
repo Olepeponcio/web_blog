@@ -6,10 +6,11 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 
 | Materia | Estado actual |
 | :-- | :-- |
-| Versión consolidada | `v3.0.2` en `main`; manifiesto `3.0.2`. |
-| Desarrollo | Los hitos 1–4 están implementados; Future y Ending disponen de una primera implementación funcional. |
+| Versión consolidada | `v5.0.1` en `main`; manifiesto `5.0.1`. |
+| Publicación | GitHub Pages despliega `main` mediante GitHub Actions en `https://olepeponcio.github.io/web_blog/`. |
+| Desarrollo | Los hitos 1–4 están implementados; Future y Ending disponen de una implementación funcional. |
 | Automatización | Playwright recorre cinco viewports; los dos móviles emulan touch y Axe audita WCAG A. |
-| Revisión manual | Hito 1 cerrado; hitos 2–4 y dispositivo físico pendientes de registro. |
+| Revisión manual | Recorrido responsive comprobado en smartphone físico; las matrices manuales formales siguen abiertas. |
 
 ## Registro técnico
 
@@ -34,7 +35,8 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Convención    | JavaScript            | Nombres semánticos + ES Modules                |   Aplicado   |
 | Convención    | Responsive            | Enfoque híbrido                                |   Adoptado   |
 | Convención    | Nomenclatura          | Inglés técnico                                 |   Adoptado   |
-| Versionado    | Proyecto              | manifiesto `3.0.2` / etiqueta `v3.0.2`         | Sincronizado |
+| Versionado    | Proyecto              | manifiesto `5.0.1` / etiqueta `v5.0.1`         | Sincronizado |
+| Despliegue    | GitHub Pages           | GitHub Actions desde `main`                     | Publicado    |
 | Git           | Ramas principales     | `main` + `develop`                             |  constante   |
 
 ## Estructura actual
@@ -175,5 +177,5 @@ parámetro.
 
 El proyecto utiliza versionado semántico `MAYOR.MINOR.PATCH`. `develop`
 concentra el trabajo en curso y `main` las versiones consolidadas. La versión
-canónica publicada es `v3.0.2`; el historial de implementación se mantiene en
+canónica publicada es `v5.0.1`; el historial de implementación se mantiene en
 [Hitos del proyecto](docs/project-milestones.md) y en las matrices de testing.

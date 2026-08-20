@@ -40,7 +40,7 @@ Inventario realizado sobre el estado del proyecto del 14 de agosto de 2026.
 | Superficie                   | Estado observado                                                                        | Control o decisión pendiente                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | Escritura en el DOM          | Se utilizan `textContent`, nodos de texto y atributos controlados                       | Mantener APIs seguras y evitar HTML generado desde datos no confiables     |
-| Recursos externos            | Dos hojas de estilo de Font Awesome desde cdnjs                                         | Valorar alojamiento local o fijar integridad y una política CSP compatible |
+| Recursos externos            | Iconos, fuentes e imágenes servidos localmente                                           | Mantener el inventario y eliminar recursos sin uso                          |
 | Enlaces externos             | LinkedIn utiliza `target="_blank"` con `noopener noreferrer`                            | Mantener este patrón                                                       |
 | Código dinámico              | No se observan `eval`, `new Function` ni inserciones mediante `innerHTML`               | Conservar esta restricción                                                 |
 | Persistencia cliente         | No se observan cookies, `localStorage` ni `sessionStorage`                              | Evaluar finalidad, caducidad y exposición antes de incorporarlos           |
@@ -52,14 +52,14 @@ Inventario realizado sobre el estado del proyecto del 14 de agosto de 2026.
 | Pruebas                      | Pruebas E2E funcionales; no hay matriz específica de seguridad                          | Añadir casos negativos junto con cada superficie nueva                     |
 | Interacciones narrativas     | Los módulos usan eventos, atributos `data-*`, animaciones y física con datos locales    | Mantener estados cerrados y evitar interpretar contenido no confiable      |
 | Recursos de secciones        | Los recursos narrativos y suministros de Ending se sirven desde rutas locales           | Optimizar formatos y eliminar recursos sin uso durante la auditoría final  |
-| Movimiento reducido          | Implementado en Origin y Memory                                                         | Extender el mismo criterio a cada sección futura                           |
+| Movimiento reducido          | Implementado en Origin, Memory y Present                                                | Extender el mismo criterio a cada sección futura                           |
 
 Este inventario describe el código visible y no acredita por sí solo la seguridad
 del futuro alojamiento, CDN o backend.
 
 ## Revisión de exposición local
 
-Revisión actualizada para la versión publicada `v3.0.2`:
+Revisión actualizada para la versión publicada `v5.0.1`:
 
 - no se detectan rutas absolutas en README ni en `docs/`;
 - no existen archivos `.env`, claves privadas o certificados versionados;
@@ -71,11 +71,10 @@ Revisión actualizada para la versión publicada `v3.0.2`:
   JavaScript;
 - los recursos narrativos se cargan desde rutas relativas del proyecto.
 
-Permanece como superficie externa Font Awesome mediante cdnjs. Continúa pendiente
-incorporar SRI o alojar el recurso localmente y definir una CSP compatible antes
-de publicar.
+Font Awesome ya no se carga desde CDN; los iconos necesarios se sirven como SVG
+locales. GitHub Pages publica el sitio estático mediante GitHub Actions y HTTPS.
 
-La etiqueta Git canónica `v3.0.2` y el valor `3.0.2` de `package.json` están
+La etiqueta Git canónica `v5.0.1` y el valor `5.0.1` de `package.json` están
 sincronizados. La etiqueta histórica `v.3.1.0` no sigue la convención acordada y
 no se utiliza como referencia de publicación ni de trazabilidad.
 

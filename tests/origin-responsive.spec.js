@@ -43,6 +43,20 @@ test.describe("HITO 2 — responsive", () => {
     const viewport = page.viewportSize();
     expect(viewport).not.toBeNull();
 
+    if (viewport.width <= 768) {
+      await expect(page.locator(selectors.origin)).toHaveAttribute(
+        "data-origin-state",
+        "completed",
+        { timeout: 8_000 },
+      );
+      await expect(page.locator(selectors.originFloatingJar)).toBeHidden();
+      await expect(page.locator(selectors.body)).not.toHaveAttribute(
+        "data-origin-scroll-locked",
+        "true",
+      );
+      return;
+    }
+
     for (const [x, y] of [
       [0, 0],
       [viewport.width - 1, 0],
@@ -68,21 +82,10 @@ test.describe("HITO 2 — responsive", () => {
     await page.setViewportSize({ width: 320, height: 480 });
     await reachOrigin(page);
 
-    const originHeight = await page
-      .locator(selectors.origin)
-      .evaluate((origin) => origin.getBoundingClientRect().height);
-
-    if (originHeight > 481) {
-      await expect(page.locator(selectors.body)).not.toHaveAttribute(
-        "data-origin-scroll-locked",
-        "true",
-      );
-    } else {
-      await expect(page.locator(selectors.body)).toHaveAttribute(
-        "data-origin-scroll-locked",
-        "true",
-      );
-    }
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
+      "data-origin-scroll-locked",
+      "true",
+    );
   });
 
   test("K05 — conserva la composición al redimensionar el inspector", async ({
@@ -104,5 +107,28 @@ test.describe("HITO 2 — responsive", () => {
     expect(jar.y).toBeGreaterThanOrEqual(0);
     expect(jar.x + jar.width).toBeLessThanOrEqual(viewport.width);
     expect(jar.y + jar.height).toBeLessThanOrEqual(viewport.height);
+  });
+
+  test("K06 — no desplaza ni bloquea Origin en smartphone", async ({ page }) => {
+    await page.setViewportSize({ width: 440, height: 956 });
+    const initialScrollY = await page.evaluate(() => {
+      document.body.dataset.pageState = "open";
+      const origin = document.querySelector("[data-origin]");
+      window.scrollTo(0, origin.offsetTop - window.innerHeight * 0.3);
+      return window.scrollY;
+    });
+
+    await expect(page.locator(selectors.origin)).toHaveAttribute(
+      "data-origin-state",
+      "ready",
+      { timeout: 8_000 },
+    );
+
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    expect(finalScrollY).toBeCloseTo(initialScrollY, 0);
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
+      "data-origin-scroll-locked",
+      "true",
+    );
   });
 });

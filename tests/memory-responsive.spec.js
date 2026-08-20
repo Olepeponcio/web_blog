@@ -63,4 +63,24 @@ test.describe("HITO 3 — responsive", () => {
     expect(mobile.width).toBeLessThan(desktop.width);
     expect(mobile.width / scene.width).toBeCloseTo(0.86, 1);
   });
+
+  test("R05 — activa Memory sin desplazar ni bloquear en smartphone", async ({ page }) => {
+    await page.setViewportSize({ width: 440, height: 956 });
+    await reachMemory(page);
+    const initialScrollY = await page.evaluate(() => window.scrollY);
+
+    await page.locator(selectors.memorySwitch).click();
+    await expect(page.locator(selectors.memory)).toHaveAttribute(
+      "data-memory-state",
+      "signal",
+    );
+
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    expect(finalScrollY).toBeCloseTo(initialScrollY, 0);
+    await expectInsideViewport(page, selectors.memoryScene);
+    await expect(page.locator(selectors.body)).not.toHaveAttribute(
+      "data-memory-scroll-locked",
+      "true",
+    );
+  });
 });
