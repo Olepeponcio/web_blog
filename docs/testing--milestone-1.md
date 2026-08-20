@@ -83,7 +83,8 @@ dispositivo.
 | `E02` | Comprobar el indicador de scroll  | Aparece al finalizar el texto          |
 | `E03` | Iniciar el desplazamiento         | El indicador desaparece                |
 | `E04` | Consultar las secciones           | Existen en el orden narrativo definido |
-| `E05` | Alcanzar el final                 | Formulario y footer son accesibles     |
+| `E05` | Alcanzar el final                 | Destinatario y footer son accesibles   |
+| `TC01` | Arrastrar mediante gesto táctil  | Despliega el sobre y devuelve `pan-y`  |
 
 ### Responsive estructural
 
@@ -95,7 +96,6 @@ Playwright ejecutará el flujo en cada viewport y comprobará:
 - sello proporcionado y remitente escalable por viewport;
 - texto sin recortes;
 - secciones dentro del ancho disponible;
-- campos del formulario sin desbordamiento;
 - footer contenido dentro del viewport.
 
 ### Recursos y enlaces

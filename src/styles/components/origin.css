@@ -67,6 +67,12 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  touch-action: manipulation;
+}
+
+.origin[data-origin-state="opened-ready"] .origin__jar-trigger,
+.origin[data-origin-state="active"] {
+  touch-action: none;
 }
 
 .origin__jar-trigger img,

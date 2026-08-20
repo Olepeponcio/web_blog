@@ -4,8 +4,6 @@ const structuralSelectors = [
   "[data-envelope]",
   "[data-seal]",
   ".narrative-section__content",
-  ".response-form input",
-  ".response-form textarea",
   ".site-footer__content",
 ];
 
@@ -93,21 +91,34 @@ test.describe("Responsive estructural", () => {
     page,
   }) => {
     const toolbar = page.locator(".accessibility-toolbar");
-    const box = await toolbar.boundingBox();
     const viewport = page.viewportSize();
     const direction = await toolbar.evaluate(
       (element) => getComputedStyle(element).flexDirection,
     );
+    const position = await toolbar.evaluate(
+      (element) => getComputedStyle(element).position,
+    );
 
-    expect(box).not.toBeNull();
+    if (viewport.width < 600) {
+      await expect(page.locator("footer > .accessibility-toolbar")).toHaveCount(1);
+      expect(position).toBe("static");
+      expect(direction).toBe("row");
+
+      await page.locator("footer").scrollIntoViewIfNeeded();
+      await expect(toolbar).toBeVisible();
+      return;
+    }
 
     if (viewport.width <= 768) {
       const scrollCue = page.locator("[data-scroll-cue]");
+      const box = await toolbar.boundingBox();
 
       await expect(scrollCue).toBeVisible();
       const scrollCueBox = await scrollCue.boundingBox();
 
+      expect(box).not.toBeNull();
       expect(scrollCueBox).not.toBeNull();
+      expect(position).toBe("fixed");
       expect(direction).toBe("row");
       expect(Math.abs(box.x + box.width / 2 - viewport.width / 2)).toBeLessThanOrEqual(1);
       expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
@@ -115,6 +126,19 @@ test.describe("Responsive estructural", () => {
       return;
     }
 
+    expect(position).toBe("fixed");
     expect(direction).toBe("column");
+  });
+
+  test("F07 — la barra cambia de footer a flotante en 600 píxeles", async ({
+    page,
+  }) => {
+    const toolbar = page.locator(".accessibility-toolbar");
+
+    await page.setViewportSize({ width: 599, height: 800 });
+    await expect(toolbar).toHaveCSS("position", "static");
+
+    await page.setViewportSize({ width: 600, height: 800 });
+    await expect(toolbar).toHaveCSS("position", "fixed");
   });
 });

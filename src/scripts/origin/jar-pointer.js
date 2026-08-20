@@ -8,9 +8,27 @@ export const createJarPointer = ({
   onMove,
 }) => {
   let isActive = false;
+  let activePointerId = null;
+
+  const isDirectPointer = (event) =>
+    ["touch", "pen"].includes(event.pointerType);
+
+  const capturePointer = (event) => {
+    if (!isDirectPointer(event)) return;
+
+    activePointerId = event.pointerId;
+    origin.setPointerCapture?.(activePointerId);
+  };
 
   const updatePosition = (event) => {
-    if (!isActive) return;
+    if (
+      !isActive ||
+      (activePointerId !== null && event.pointerId !== activePointerId)
+    ) {
+      return;
+    }
+
+    if (event.cancelable) event.preventDefault();
 
     const originBounds = origin.getBoundingClientRect();
     const jarBounds = floatingJar.getBoundingClientRect();
@@ -38,18 +56,43 @@ export const createJarPointer = ({
     if (isActive) return;
 
     isActive = true;
+    capturePointer(event);
     jarTrigger.hidden = true;
     floatingJar.hidden = false;
     origin.dataset.originState = ORIGIN_STATES.active;
     updatePosition(event);
     window.addEventListener("pointermove", updatePosition);
+    window.addEventListener("pointerup", releasePointer);
+    window.addEventListener("pointercancel", releasePointer);
+    origin.addEventListener("pointerdown", resumeDirectPointer);
   };
+
+  function resumeDirectPointer(event) {
+    if (!isActive || !isDirectPointer(event)) return;
+
+    event.preventDefault();
+    capturePointer(event);
+    updatePosition(event);
+  }
+
+  function releasePointer(event) {
+    if (event.pointerId !== activePointerId) return;
+
+    if (origin.hasPointerCapture?.(activePointerId)) {
+      origin.releasePointerCapture(activePointerId);
+    }
+    activePointerId = null;
+  }
 
   const deactivate = () => {
     if (!isActive) return;
 
     isActive = false;
     window.removeEventListener("pointermove", updatePosition);
+    window.removeEventListener("pointerup", releasePointer);
+    window.removeEventListener("pointercancel", releasePointer);
+    origin.removeEventListener("pointerdown", resumeDirectPointer);
+    activePointerId = null;
     floatingJar.hidden = true;
     floatingJar.style.removeProperty("--origin-pointer-x");
     floatingJar.style.removeProperty("--origin-pointer-y");

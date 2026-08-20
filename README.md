@@ -7,8 +7,8 @@ Proyecto front-end orientado a construir una experiencia web narrativa con HTML,
 | Materia | Estado actual |
 | :-- | :-- |
 | Versión consolidada | `v3.0.2` en `main`; manifiesto `3.0.2`. |
-| Desarrollo | Los hitos 1–4 están implementados en `develop`. |
-| Automatización | Playwright recorre cinco viewports; Axe audita WCAG A. |
+| Desarrollo | Los hitos 1–4 están implementados; Future y Ending disponen de una primera implementación funcional. |
+| Automatización | Playwright recorre cinco viewports; los dos móviles emulan touch y Axe audita WCAG A. |
 | Revisión manual | Hito 1 cerrado; hitos 2–4 y dispositivo físico pendientes de registro. |
 
 ## Registro técnico
@@ -25,7 +25,7 @@ Esta tabla funciona como registro mutable. Se ampliará con nuevas filas cuando 
 | Herramienta   | Playwright            | Pruebas E2E en cinco viewports                 | Implementado |
 | API web       | Intersection Observer | Entrada controlada en `origin` y `memory`      | Implementado |
 | API web       | Pointer Events        | Arrastre compatible con ratón y entrada táctil | Implementado |
-| API web       | Constraint Validation | Validación semántica del formulario            | Planificado  |
+| Biblioteca    | Matter.js             | Física del cañón de suministros                 | Implementado |
 | Accesibilidad | Reduced Motion        | Aplicado en Origin, Memory y Present           | Implementado |
 | Accesibilidad | Teclado               | Despliegue, bote y controles narrativos        | Implementado |
 | Convención    | Directorios           | Organización por responsabilidad               |   Aplicado   |
@@ -61,6 +61,8 @@ front-end--web-blog/
 │   ├── assets/images/
 │   ├── scripts/cover/
 │   ├── scripts/debug/
+│   ├── scripts/ending/
+│   ├── scripts/future/
 │   ├── scripts/origin/
 │   ├── scripts/memory/
 │   ├── scripts/present/
@@ -163,7 +165,8 @@ Para aislar el HITO 5:
 pnpm dev -- --open "/?debugSection=future"
 ```
 
-Valores disponibles: `cover`, `origin`, `memory`, `present` y `future`. Sin
+Valores disponibles: `cover`, `origin`, `memory`, `present`, `future` y
+`ending`. Sin
 parámetro se mantiene el recorrido completo. El acceso directo depende de
 `import.meta.env.DEV`, por lo que la compilación de producción ignora el
 parámetro.

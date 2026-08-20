@@ -41,15 +41,24 @@ test.describe("Recorrido y contenido", () => {
       "present",
       "future",
       "recipient",
-      "response",
+      "ending",
     ]);
   });
 
-  test("E05 — permite alcanzar el formulario y el footer", async ({ page }) => {
+  test("E05 — permite alcanzar el destinatario y el footer", async ({ page }) => {
     await openEpistle(page);
 
     await page.locator("footer").scrollIntoViewIfNeeded();
-    await expect(page.locator("form.response-form")).toBeVisible();
+    await expect(page.locator("#recipient")).toBeVisible();
     await expect(page.locator("footer.site-footer")).toBeVisible();
+  });
+
+  test("E06 — oculta el indicador cuando aparece el footer", async ({ page }) => {
+    await page.evaluate(() => {
+      document.body.dataset.pageState = "open";
+      document.querySelector("footer").scrollIntoView();
+    });
+
+    await expect(page.locator(selectors.scrollCue)).toBeHidden();
   });
 });

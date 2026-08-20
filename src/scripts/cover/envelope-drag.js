@@ -25,6 +25,7 @@ export const createEnvelopeDrag = ({
   let dragStartOffset = 0;
   let isDragging = false;
   let isDeployed = false;
+  let activePointerId = null;
   let binarySequenceIndex = 0;
   let binaryCharacterIndex = 0;
   let binaryTimer;
@@ -131,10 +132,11 @@ export const createEnvelopeDrag = ({
   };
 
   const beginDrag = (event) => {
-    if (event.button !== 0 || isDeployed) return;
+    if (!event.isPrimary || event.button !== 0 || isDeployed) return;
 
     event.preventDefault();
     isDragging = true;
+    activePointerId = event.pointerId;
     dragStartY = event.clientY;
     dragStartOffset = currentOffset;
     envelope.setPointerCapture?.(event.pointerId);
@@ -143,7 +145,9 @@ export const createEnvelopeDrag = ({
   };
 
   const continueDrag = (event) => {
-    if (!isDragging) return;
+    if (!isDragging || event.pointerId !== activePointerId) return;
+
+    if (event.cancelable) event.preventDefault();
 
     const nextOffset = dragStartOffset + (event.clientY - dragStartY);
     setOffset(clamp(nextOffset, getInitialOffset(), 0));
@@ -151,7 +155,14 @@ export const createEnvelopeDrag = ({
     if (currentOffset === 0) completeDeployment();
   };
 
-  const endDrag = () => {
+  const endDrag = (event) => {
+    if (event.pointerId !== activePointerId) return;
+
+    if (envelope.hasPointerCapture?.(activePointerId)) {
+      envelope.releasePointerCapture(activePointerId);
+    }
+
+    activePointerId = null;
     if (!isDragging) return;
 
     isDragging = false;

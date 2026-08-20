@@ -8,7 +8,7 @@ Una voz del presente escribe a un destinatario desconocido. El visitante descubr
 
 La narrativa sigue este recorrido:
 
-**Origen → Memoria → Presente → Futuro → Destinatario → Respuesta**
+**Origen → Memoria → Presente → Futuro → Destinatario → Envío → Cierre**
 
 ---
 
@@ -121,31 +121,12 @@ Ese es el futuro al que enviamos esta carta.
 
 Si has llegado hasta aquí, esta carta ya tiene destinatario.
 
-### Tu respuesta
+## 7. Envío — Equipaje para el futuro
 
-El formulario se integra como si fuera el espacio reservado para contestar una correspondencia.
+El cañón permite enviar objetos simbólicos hacia el futuro. Cada suministro
+describe un arco, cae dentro de la escena y permanece limitado por su suelo y
+laterales.
 
-**Nombre**
-_¿Quién escribe?_
-
-**Correo electrónico**
-_¿Dónde puedo responderte?_
-
-**Asunto**
-_¿Qué quieres contarme?_
-
-**Mensaje**
-_Escribe aquí tu respuesta._
-
-El área de texto puede ocupar una parte importante de la sección, reforzando visualmente la sensación de estar escribiendo directamente sobre el papel.
-
-Porque toda carta necesita dos cosas:
-
-alguien dispuesto a escribirla
-y alguien dispuesto a recibirla.
-
----
-
-## 7. Cierre — Post scriptum
+## 8. Cierre — Post scriptum
 
 Gracias por haber llegado hasta el final.

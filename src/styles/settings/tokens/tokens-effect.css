@@ -15,4 +15,11 @@
   --present-sun-halo-shadow:
     0 0 0.8rem var(--color-present-sun-glow),
     inset 0 0 0.7rem var(--color-present-sun-inner-glow);
+  --ending-trigger-shadow:
+    0 0 0.5rem var(--color-ending-trigger-glow),
+    0 0 1.2rem var(--color-ending-trigger-glow-soft);
+  --ending-button-shadow:
+    inset 0 0.2rem 0.28rem var(--color-ending-button-highlight),
+    inset 0 -0.35rem 0.5rem rgb(35 2 5 / 62%),
+    0 0.2rem 0.35rem rgb(25 10 2 / 48%);
 }

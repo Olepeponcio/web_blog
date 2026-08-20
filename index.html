@@ -24,59 +24,6 @@
   </head>
 
   <body class="page" data-page-state="sealed">
-    <aside class="accessibility-toolbar" aria-label="Recursos de accesibilidad">
-      <button
-        class="accessibility-toolbar__control"
-        type="button"
-        data-help-guide-open
-        aria-label="Abrir guía de navegación"
-        aria-controls="help-guide"
-        aria-expanded="false"
-        disabled
-      >
-        <img
-          src="/src/assets/icons/icon__keyboard_onscreen.svg"
-          alt=""
-          aria-hidden="true"
-        />
-      </button>
-
-      <span
-        class="accessibility-toolbar__control accessibility-toolbar__control--pending"
-        role="img"
-        aria-label="Narración guiada, próximamente"
-        aria-disabled="true"
-      >
-        <img
-          src="/src/assets/icons/icon__ear_sound_disable.svg"
-          alt=""
-          aria-hidden="true"
-        />
-        <img
-          class="accessibility-toolbar__sound-active"
-          src="/src/assets/icons/icon__ear_sound.svg"
-          alt=""
-          aria-hidden="true"
-          hidden
-        />
-      </span>
-
-      <button
-        class="accessibility-toolbar__control"
-        type="button"
-        data-contextual-help-toggle
-        aria-label="Mostrar ayudas contextuales"
-        aria-pressed="false"
-        disabled
-      >
-        <img
-          src="/src/assets/icons/icon__text_tools.svg"
-          alt=""
-          aria-hidden="true"
-        />
-      </button>
-    </aside>
-
     <dialog
       class="help-guide"
       id="help-guide"
@@ -529,6 +476,18 @@
               src="./src/assets/images/05-future/img__mother_base.png"
               alt=""
             />
+            <img
+              class="future__motherbase-image future__motherbase-image--active"
+              src="./src/assets/images/05-future/img__mother_base_02.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <button
+              class="future__cpu-trigger"
+              type="button"
+              data-future-cpu-trigger
+              aria-label="Activar mensaje del futuro"
+            ></button>
           </div>
           <div class="future__panel" data-future-panel>
             <img
@@ -536,6 +495,16 @@
               src="./src/assets/images/05-future/img__panel.png"
               alt=""
             />
+            <div
+              class="future__terminal"
+              data-future-terminal
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <p class="future__terminal-line" data-future-terminal-line>
+                Sistema preparado.<br />Pulsa la CPU para abrir el mensaje.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -546,70 +515,43 @@
           <h2>Ahora te corresponde a ti</h2>
 
           <p>Si has llegado hasta aquí, esta carta ya tiene destinatario.</p>
-        </div>
-      </section>
-
-      <section class="narrative-section" id="response">
-        <div class="narrative-section__content">
-          <p class="narrative-section__eyebrow">Respuesta</p>
-          <h2>Tu respuesta</h2>
-
-          <form class="response-form">
-            <div class="response-form__field">
-              <label for="name">Nombre</label>
-              <span id="name-hint">¿Quién escribe?</span>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                autocomplete="name"
-                aria-describedby="name-hint"
-              />
-            </div>
-
-            <div class="response-form__field">
-              <label for="email">Correo electrónico</label>
-              <span id="email-hint">¿Dónde puedo responderte?</span>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                aria-describedby="email-hint"
-              />
-            </div>
-
-            <div class="response-form__field">
-              <label for="subject">Asunto</label>
-              <span id="subject-hint">¿Qué quieres contarme?</span>
-              <input
-                id="subject"
-                name="subject"
-                type="text"
-                aria-describedby="subject-hint"
-              />
-            </div>
-
-            <div class="response-form__field">
-              <label for="message">Mensaje</label>
-              <span id="message-hint">Escribe aquí tu respuesta.</span>
-              <textarea
-                id="message"
-                name="message"
-                rows="10"
-                aria-describedby="message-hint"
-              ></textarea>
-            </div>
-
-            <button class="response-form__submit" type="submit">
-              Enviar respuesta
-            </button>
-          </form>
-
           <p>
             Porque toda carta necesita dos cosas: alguien dispuesto a escribirla
             y alguien dispuesto a recibirla.
           </p>
+        </div>
+      </section>
+
+      <section
+        class="ending"
+        id="ending"
+        data-ending
+        aria-label="Cañón de suministros"
+      >
+        <div class="ending__scene" data-ending-scene>
+          <div class="ending__supplies" data-ending-supplies aria-hidden="true"></div>
+
+          <div class="ending__cannon" data-ending-cannon>
+            <img
+              class="ending__cannon-image ending__cannon-image--idle"
+              src="/src/assets/images/06-ending/img__canion_02.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              class="ending__cannon-image ending__cannon-image--firing"
+              src="/src/assets/images/06-ending/img__canion_01.png"
+              alt=""
+              aria-hidden="true"
+            />
+            <button
+              class="ending__cannon-trigger"
+              type="button"
+              data-ending-cannon-trigger
+              aria-label="Disparar un suministro"
+            ></button>
+            <span class="ending__cannon-muzzle" data-ending-cannon-muzzle></span>
+          </div>
         </div>
       </section>
     </main>
@@ -650,6 +592,62 @@
           </ul>
         </div>
       </div>
+
+      <aside
+        class="accessibility-toolbar"
+        aria-label="Recursos de accesibilidad"
+      >
+        <button
+          class="accessibility-toolbar__control"
+          type="button"
+          data-help-guide-open
+          aria-label="Abrir guía de navegación"
+          aria-controls="help-guide"
+          aria-expanded="false"
+          disabled
+        >
+          <img
+            src="/src/assets/icons/icon__keyboard_onscreen.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+
+        <span
+          class="accessibility-toolbar__control accessibility-toolbar__control--pending"
+          role="img"
+          aria-label="Narración guiada, próximamente"
+          aria-disabled="true"
+        >
+          <img
+            src="/src/assets/icons/icon__ear_sound_disable.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            class="accessibility-toolbar__sound-active"
+            src="/src/assets/icons/icon__ear_sound.svg"
+            alt=""
+            aria-hidden="true"
+            hidden
+          />
+        </span>
+
+        <button
+          class="accessibility-toolbar__control"
+          type="button"
+          data-contextual-help-toggle
+          aria-label="Mostrar ayudas contextuales"
+          aria-pressed="false"
+          disabled
+        >
+          <img
+            src="/src/assets/icons/icon__text_tools.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </aside>
     </footer>
 
     <span class="scroll-cue" data-scroll-cue aria-hidden="true" hidden></span>

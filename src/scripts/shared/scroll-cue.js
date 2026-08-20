@@ -3,6 +3,7 @@ import { PAGE_STATES } from "../cover/states.js";
 export const initializeScrollCue = () => {
   const page = document.body;
   const cue = document.querySelector("[data-scroll-cue]");
+  const footer = document.querySelector(".site-footer");
   const regions = [...document.querySelectorAll(".cover, .narrative > section")];
   let frame;
 
@@ -20,8 +21,14 @@ export const initializeScrollCue = () => {
         page.dataset.pageState === PAGE_STATES.open &&
         page.dataset.originScrollLocked !== "true" &&
         page.dataset.memoryScrollLocked !== "true";
+      const footerVisible = footer
+        ? (() => {
+            const bounds = footer.getBoundingClientRect();
+            return bounds.top < window.innerHeight && bounds.bottom > 0;
+          })()
+        : false;
 
-      cue.hidden = !centeredRegion || !scrollAvailable;
+      cue.hidden = footerVisible || !centeredRegion || !scrollAvailable;
     });
   };
 

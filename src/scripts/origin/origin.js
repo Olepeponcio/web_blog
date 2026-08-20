@@ -25,6 +25,8 @@ export const initializeOrigin = () => {
 
   const originEntry = createOriginEntry(elements);
   const originExit = createOriginExit(elements);
+  let suppressTouchClick = false;
+  let suppressTouchClickTimer = 0;
   let jarPointer;
   const wordReveal = createOriginWordReveal({
     ...elements,
@@ -40,6 +42,8 @@ export const initializeOrigin = () => {
   });
 
   const handleJarClick = async (event) => {
+    if (suppressTouchClick) return;
+
     const state = elements.origin.dataset.originState;
 
     if (state === ORIGIN_STATES.ready) {
@@ -58,8 +62,26 @@ export const initializeOrigin = () => {
     jarPointer.activate(event);
   };
 
+  const handleJarPointerDown = (event) => {
+    if (
+      elements.origin.dataset.originState !== ORIGIN_STATES.openedReady ||
+      !["touch", "pen"].includes(event.pointerType)
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    suppressTouchClick = true;
+    window.clearTimeout(suppressTouchClickTimer);
+    suppressTouchClickTimer = window.setTimeout(() => {
+      suppressTouchClick = false;
+    }, 800);
+    jarPointer.activate(event);
+  };
+
   preloadOpenedJar();
   wordReveal.initialize();
   originEntry.initialize();
+  elements.jarTrigger.addEventListener("pointerdown", handleJarPointerDown);
   elements.jarTrigger.addEventListener("click", handleJarClick);
 };

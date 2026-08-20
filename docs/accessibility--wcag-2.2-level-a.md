@@ -24,18 +24,17 @@ Estados utilizados:
 | 2.5.1 Gestos del puntero | Aprobado | El arrastre del sobre dispone de una alternativa simple mediante `Intro` o `Espacio`. |
 | 3.1.1 Idioma de la página | Aprobado | El documento declara `lang="es"`. |
 | 3.2.6 Ayuda coherente | Aprobado | La guía de teclado y las ayudas textuales funcionan y conservan posición, nombre y comportamiento comunes durante el recorrido. |
-| 3.3.2 Etiquetas o instrucciones | Aprobado | Los campos del formulario tienen etiquetas visibles y descripciones asociadas mediante `aria-describedby`. |
 
 ## Criterios pendientes
 
 | Criterio | Estado | Comprobación o corrección necesaria |
 | :-- | :--: | :-- |
 | 1.1.1 Contenido no textual | Prueba manual | Revisar sistemáticamente imágenes, iconos, controles gráficos y elementos decorativos. |
-| 1.3.1 Información y relaciones | Prueba manual | Confirmar encabezados, regiones, formulario y relaciones semánticas con lector de pantalla. |
+| 1.3.1 Información y relaciones | Prueba manual | Confirmar encabezados, regiones y relaciones semánticas con lector de pantalla. |
 | 1.3.2 Secuencia significativa | Prueba manual | Comparar el orden del DOM, la lectura asistida y el recorrido visual de las cuatro secciones. |
 | 1.3.3 Características sensoriales | Prueba manual | Revisar todas las instrucciones narrativas y evitar referencias exclusivamente visuales o espaciales. |
 | 1.4.1 Uso del color | Prueba manual | Comprobar que estados, activaciones y mensajes disponen de una señal adicional al color. |
-| 2.1.1 Teclado | Prueba manual | Ejecutar el recorrido completo sin ratón, incluidos sobre, bote, postal, controles y formulario. |
+| 2.1.1 Teclado | Prueba manual | Ejecutar el recorrido completo sin ratón, incluidos sobre, bote, postal y controles narrativos. |
 | 2.2.2 Pausar, detener, ocultar | Pendiente | Determinar qué animaciones automáticas cumplen las condiciones del criterio y proporcionar control cuando corresponda. |
 | 2.3.1 Tres destellos o por debajo del umbral | Prueba manual | Revisar los efectos visuales y confirmar que no superan el umbral de destellos. |
 | 2.4.1 Evitar bloques | Pendiente | No se ha localizado un mecanismo para saltar directamente al contenido principal. |
@@ -44,8 +43,6 @@ Estados utilizados:
 | 2.5.2 Cancelación del puntero | Prueba manual | Validar cancelación, abandono y activación en `pointerup` para las interacciones aplicables. |
 | 2.5.3 Etiqueta en el nombre | Prueba manual | Comparar las etiquetas visibles de los controles con sus nombres accesibles. |
 | 3.2.1 Al recibir foco | Prueba manual | Confirmar que ningún componente cambia el contexto únicamente al recibir foco. |
-| 3.2.2 Al introducir datos | Prueba manual | Comprobar que editar campos o activar opciones no cambia inesperadamente el contexto. |
-| 3.3.1 Identificación de errores | Pendiente | Implementar o verificar mensajes textuales accesibles para los errores del formulario. |
 | 4.1.2 Nombre, función y valor | Prueba manual | Corregido el rol ausente del marcador de Instagram detectado por Axe; falta confirmar la corrección y revisar los controles personalizados con tecnologías de asistencia. |
 
 ## Criterios no aplicables actualmente
@@ -93,8 +90,8 @@ general de las pruebas funcionales propias de cada sección.
 | AX04 | Sección Origin preparada. |
 | AX05 | Sección Memory preparada. |
 | AX06 | Sección Present interactiva. |
-| AX07 | Formulario y pie de página. |
-| AX08 | Regiones, secciones, encabezados, diálogo y etiquetas del formulario. |
+| AX07 | Destinatario y pie de página. |
+| AX08 | Regiones, secciones, encabezados y diálogo. |
 
 ### Ejecución
 

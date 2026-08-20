@@ -4,6 +4,11 @@
   box-shadow: var(--shadow-border-carbon);
 }
 
+.site-footer > .accessibility-toolbar {
+  inline-size: max-content;
+  margin-inline: auto;
+}
+
 .site-footer__content {
   inline-size: min(100%, 48rem);
   margin-inline: auto;

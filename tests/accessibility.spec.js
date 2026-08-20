@@ -60,13 +60,13 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
     await expectNoWcagLevelAViolations(page);
   });
 
-  test('AX07 — analiza el formulario y el pie de página', async ({ page }) => {
+  test('AX07 — analiza el destinatario y el pie de página', async ({ page }) => {
     await page.evaluate(() => {
       document.body.dataset.pageState = 'open';
-      document.querySelector('#response').scrollIntoView();
+      document.querySelector('#recipient').scrollIntoView();
     });
 
-    await expect(page.locator('.response-form')).toBeVisible();
+    await expect(page.locator('#recipient')).toBeVisible();
     await expect(page.getByRole('contentinfo')).toBeVisible();
     await expectNoWcagLevelAViolations(page);
   });
@@ -76,7 +76,9 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
     await expect(page.locator('body > main')).toHaveCount(1);
     await expect(page.locator('body > footer')).toHaveCount(1);
     await expect(
-      page.locator('body > aside[aria-label="Recursos de accesibilidad"]'),
+      page.locator(
+        'body > footer > aside[aria-label="Recursos de accesibilidad"]',
+      ),
     ).toHaveCount(1);
 
     const unlabelledSections = await page
@@ -91,17 +93,6 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
       );
 
     expect(unlabelledSections).toBe(0);
-
-    const formControls = page.locator('.response-form input, .response-form textarea');
-
-    for (let index = 0; index < (await formControls.count()); index += 1) {
-      const controlId = await formControls.nth(index).getAttribute('id');
-
-      expect(controlId).toBeTruthy();
-      await expect(
-        page.locator(`.response-form label[for="${controlId}"]`),
-      ).toHaveCount(1);
-    }
 
     await expect(page.locator('#help-guide')).toHaveAttribute(
       'aria-labelledby',

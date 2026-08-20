@@ -6,4 +6,6 @@
   --memory-scene-max-width: 90rem;
   --memory-viewport-gap: clamp(1rem, 3vw, 2.5rem);
   --memory-postcard-centered-width: 86%;
+  --ending-cannon-inline-size-small: clamp(12.5rem, 55vw, 18rem);
+  --ending-cannon-inline-size: clamp(15rem, 58vw, 40rem);
 }

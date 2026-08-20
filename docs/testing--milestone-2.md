@@ -33,6 +33,7 @@ pnpm test:e2e
 | M13 | Respuesta del bote-puntero | El bote sigue al ratón sin retrasos perceptibles. |
 | M14 | Lectura del revelado | La tinta descubre palabras con ritmo y legibilidad. |
 | M15 | Señal de continuación | El indicador reutilizable aparece al completar el texto. |
+| TC02 | Pulsación táctil mantenida | El bote acompaña el dedo y revela palabras durante el gesto. |
 | M16 | Recorrido completo | No existe bloqueo permanente entre `origin` y `memory`. |
 
 ## Registro de ejecución

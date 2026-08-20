@@ -19,7 +19,10 @@ export default defineConfig({
   },
   projects: viewports.map(([name, viewport]) => ({
     name,
-    use: { viewport },
+    use: {
+      viewport,
+      hasTouch: name.startsWith('mobile'),
+    },
   })),
   webServer: {
     command: 'pnpm exec vite --host 127.0.0.1 --port 4173',

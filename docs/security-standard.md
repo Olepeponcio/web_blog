@@ -39,9 +39,6 @@ Inventario realizado sobre el estado del proyecto del 14 de agosto de 2026.
 
 | Superficie                   | Estado observado                                                                        | Control o decisión pendiente                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Formulario de respuesta      | Presente sin `action`, envío ni tratamiento JavaScript                                  | Definir destino, tratamiento de datos y controles antes de habilitarlo     |
-| Campos del formulario        | `name`, `email`, `subject` y `message`; solo el correo dispone de validación de tipo    | Definir obligatoriedad, longitudes y formatos permitidos                   |
-| Validación                   | Constraint Validation API planificada                                                   | Validar también en el servidor cuando exista backend                       |
 | Escritura en el DOM          | Se utilizan `textContent`, nodos de texto y atributos controlados                       | Mantener APIs seguras y evitar HTML generado desde datos no confiables     |
 | Recursos externos            | Dos hojas de estilo de Font Awesome desde cdnjs                                         | Valorar alojamiento local o fijar integridad y una política CSP compatible |
 | Enlaces externos             | LinkedIn utiliza `target="_blank"` con `noopener noreferrer`                            | Mantener este patrón                                                       |
@@ -51,10 +48,10 @@ Inventario realizado sobre el estado del proyecto del 14 de agosto de 2026.
 | Autenticación y autorización | No implementadas                                                                        | Revisar el nivel ASVS si pasan a formar parte del alcance                  |
 | Secretos                     | No se observan credenciales en el código revisado                                       | No introducir secretos en el front-end ni en variables expuestas por Vite  |
 | Encabezados HTTP             | No definidos en el repositorio                                                          | Configurarlos y comprobarlos en el alojamiento de producción               |
-| Dependencias                 | Vite y Playwright como dependencias de desarrollo                                       | Revisar vulnerabilidades y mantener el archivo de bloqueo                  |
+| Dependencias                 | Vite y Playwright en desarrollo; Matter.js gobierna la física local de Ending            | Revisar vulnerabilidades y mantener el archivo de bloqueo                  |
 | Pruebas                      | Pruebas E2E funcionales; no hay matriz específica de seguridad                          | Añadir casos negativos junto con cada superficie nueva                     |
-| Interacciones narrativas     | Origin y Memory usan eventos, atributos `data-*` y Web Animations API con datos locales | Mantener estados cerrados y evitar interpretar contenido no confiable      |
-| Recursos de secciones        | Imágenes de Cover, Origin y Memory servidas desde rutas locales                         | Optimizar formatos y eliminar recursos sin uso durante la auditoría final  |
+| Interacciones narrativas     | Los módulos usan eventos, atributos `data-*`, animaciones y física con datos locales    | Mantener estados cerrados y evitar interpretar contenido no confiable      |
+| Recursos de secciones        | Los recursos narrativos y suministros de Ending se sirven desde rutas locales           | Optimizar formatos y eliminar recursos sin uso durante la auditoría final  |
 | Movimiento reducido          | Implementado en Origin y Memory                                                         | Extender el mismo criterio a cada sección futura                           |
 
 Este inventario describe el código visible y no acredita por sí solo la seguridad
@@ -86,7 +83,7 @@ no se utiliza como referencia de publicación ni de trazabilidad.
 
 ### Entradas y salidas
 
-- Considerar no confiables los formularios, parámetros URL, datos remotos y
+- Considerar no confiables los parámetros URL, datos remotos y
   contenido de terceros.
 - Validar formato, longitud, tipo y reglas de negocio mediante listas de valores
   permitidos cuando sea posible.
@@ -96,23 +93,6 @@ no se utiliza como referencia de publicación ni de trazabilidad.
 - Evitar `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `eval` y código generado
   dinámicamente. Si una función futura exige HTML enriquecido, utilizar una
   biblioteca mantenida y una política de saneamiento explícita.
-
-### Formulario de respuesta
-
-Antes de habilitar su envío se deberá definir:
-
-- finalidad y destino de cada dato;
-- campos obligatorios y límites de longitud;
-- validación sintáctica y semántica en cliente y servidor;
-- codificación segura al mostrar respuestas;
-- protección frente a automatización y abuso según el riesgo;
-- limitación de frecuencia en el servidor;
-- mensajes de error que no revelen detalles internos;
-- conservación, eliminación y comunicación de privacidad;
-- protección CSRF si se utilizan cookies para autenticar solicitudes.
-
-La interfaz no debe afirmar que un mensaje fue enviado hasta recibir una respuesta
-válida del servicio responsable.
 
 ### Dependencias y recursos externos
 
@@ -177,7 +157,7 @@ Antes de publicar una versión:
 - [ ] Ejecutar pruebas funcionales y casos negativos de seguridad.
 - [ ] Verificar HTTPS, CSP y demás encabezados sobre producción.
 - [ ] Confirmar que solo se permiten los orígenes externos necesarios.
-- [ ] Revisar formularios, privacidad, registros y tratamiento de errores.
+- [ ] Revisar privacidad, registros y tratamiento de errores.
 - [ ] Documentar riesgos pendientes con responsable y criterio de resolución.
 
 ## Revisión del estándar

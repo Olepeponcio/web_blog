@@ -63,7 +63,7 @@ y [MDN — `line-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/Refer
 
 ```text
 COVER → ORIGIN → MEMORY → PRESENT → FUTURE
-      → DESTINATARIO + FORMULARIO → CIERRE POST SCRIPTUM
+      → DESTINATARIO → ENDING → CIERRE POST SCRIPTUM
 ```
 
 ## 1. COVER
@@ -108,8 +108,10 @@ ACTIVAR sello
 ```
 
 El arrastre utiliza Pointer Events, admite ratón y entrada táctil, conserva un
-recorrido parcial y no rebasa sus límites. `Enter` o espacio ofrecen una ruta
-equivalente mediante teclado.
+recorrido parcial y no rebasa sus límites. Mientras el sobre está cerrado aplica
+`touch-action: none`; después del despliegue cambia a `pan-y` para devolver el
+gesto vertical al navegador. `Enter` o espacio ofrecen una ruta equivalente
+mediante teclado.
 
 Después de activar el sello, el sobre desplegado y el sello roto permanecen en
 el flujo documental. El sobre utiliza una anchura fluida limitada en todos los
@@ -171,7 +173,8 @@ ACTIVAR bote
     → expulsar el corcho
 
 ACTIVAR bote abierto
-    → unir bote al puntero
+    → capturar la pulsación táctil desde pointerdown
+    → unir bote al puntero o al dedo
     → revelar palabras dentro del radio de tinta
 
 REVELAR todo el texto
@@ -181,9 +184,11 @@ REVELAR todo el texto
     → mostrar el indicador reutilizable
 ```
 
-La ruta de teclado revela el texto completo sin depender del movimiento del
-puntero. En viewports bajos, el bloqueo se retira si la sección no cabe para
-evitar encerrar al usuario.
+La ruta táctil captura el puntero durante la segunda pulsación para que el bote
+acompañe el mismo gesto, sin esperar al `click` posterior. La ruta de teclado
+revela el texto completo sin depender del movimiento del puntero. En viewports
+bajos, el bloqueo se retira si la sección no cabe para evitar encerrar al
+usuario.
 
 ### Estados
 
@@ -407,145 +412,131 @@ La validación se documenta en
 
 ## 5. FUTURE
 
-### Definición técnica del HITO 5
+### Propósito y estado actual
 
-La escena se presenta ya compuesta al entrar mediante scroll en `future`. El
-marco ocupa una escala dominante dentro del viewport y contiene el texto
-narrativo como HTML centrado. La imagen no incorpora el texto: esta separación
-preserva su semántica, legibilidad y adaptación responsive.
+La sección presenta una placa base junto a un panel de terminal. La CPU contiene
+un botón semántico superpuesto que inicia la única interacción implementada.
 
-`img__card.png` representa el estado base del marco. Mientras la sección está
-activa alterna con `img__card_01.png` para simular la intermitencia de sus luces.
-Cuando aparece la iluminación azul, una sombra degradada del mismo color rodea
-el marco y refuerza el cambio visual.
+Al activarlo, `future.js` deshabilita el botón, añade el estado
+`.future--activated` y sustituye visualmente `img__mother_base.png` por
+`img__mother_base_02.png`. Después escribe en el terminal seis bloques del texto
+narrativo, carácter a carácter y con pausas entre mensajes. La salida se anuncia
+mediante una región `aria-live="polite"`.
 
-El conjunto del cañón se sitúa próximo al marco, parcialmente superpuesto y a
-una escala inferior. Sus imágenes incluyen una remesa visible de suministros:
-esta remesa forma parte de la representación del dispositivo, no es el conjunto
-de nodos físicos que se genera durante la interacción. El estado normal utiliza
-`img__canion_02.png`; al disparar cambia temporalmente a
-`img__canion_01.png`, cuya iluminación roja comunica la activación.
-
-Un botón semántico se superpone al hueco circular previsto en el cañón. Cada
-activación genera desde la boca un único objeto independiente, seleccionado del
-catálogo de suministros. El objeto recibe velocidad horizontal y vertical,
-rotación y gravedad para describir primero un arco ascendente y después otro
-descendente.
-
-El límite inferior visible de la escena funciona como suelo. Los objetos no
-pueden atravesarlo: colisionan entre sí y con el suelo, pierden energía y quedan
-apilados. El botón admite activaciones sucesivas sin un máximo narrativo, por lo
-que el usuario puede llenar el viewport mientras permanezca en la sección. La
-remesa dibujada en el cañón no se consume ni cambia por el número de disparos.
-
-Al abandonar `future` mediante scroll se detienen la intermitencia y la
-simulación, se eliminan todos los objetos generados y marco, cañón y botón
-regresan a su estado inicial. Una nueva entrada comienza siempre con la escena
-vacía.
+Con `prefers-reduced-motion: reduce`, cada mensaje aparece completo y las pausas
+se reducen. La interacción solo puede iniciarse una vez durante la carga actual.
 
 ### Flujo funcional
 
 ```text
 ENTRAR EN FUTURE
-    -> cargar marco, texto y cañón
-    -> iniciar intermitencia azul del marco
-    -> habilitar botón
+    -> mostrar placa base, CPU y panel
+    -> mantener el mensaje inicial del terminal
 
-ACTIVAR BOTÓN
-    -> mostrar estado rojo del cañón
-    -> seleccionar un suministro
-    -> generar el objeto en la boca
-    -> aplicar impulso ascendente y horizontal
-    -> aplicar gravedad, colisiones y apilamiento
-    -> restaurar estado normal del cañón
-
-ABANDONAR FUTURE
-    -> cancelar animaciones y simulación
-    -> retirar objetos generados
-    -> restaurar estado inicial
+PULSAR CPU
+    -> deshabilitar el botón
+    -> ocultar la placa base
+    -> mostrar la placa activa
+    -> escribir los seis mensajes en secuencia
 ```
 
-### Estados previstos
+### Estados implementados
 
-| Estado      | Responsabilidad                                                   |
-| :---------- | :---------------------------------------------------------------- |
-| `idle`      | Escena fuera del tramo activo y sin objetos generados.             |
-| `active`    | Escena visible, marco intermitente y botón disponible.             |
-| `firing`    | Cañón iluminado en rojo y creación de un suministro.               |
-| `simulating` | Objetos en vuelo, colisión o asentamiento; admite nuevos disparos. |
-| `resetting` | Cancelación y limpieza al abandonar la sección.                    |
-
-`firing` y `simulating` pueden coexistir: cada pulsación añade un objeto sin
-detener los que ya están en movimiento o apilados.
+| Estado      | Responsabilidad                                                |
+| :---------- | :------------------------------------------------------------- |
+| Inicial     | Placa base visible, placa activa oculta y CPU disponible.      |
+| Activado    | CPU deshabilitada, placa activa visible y mensajes en curso.   |
+| Finalizado  | Último mensaje conservado en el terminal.                      |
 
 ### Responsive, accesibilidad y movimiento
 
-- Marco, cañón, botón y origen de disparo se posicionan de forma proporcional a
-  la escena, sin coordenadas finales rígidas.
-- El suelo físico se recalcula con las dimensiones útiles de la sección y del
-  viewport.
-- El botón conserva nombre accesible, foco visible y equivalencia para teclado,
-  puntero y entrada táctil.
-- Con `prefers-reduced-motion: reduce` se detiene la intermitencia automática y
-  el disparo utiliza un desplazamiento breve sin rebotes prolongados.
-- Los objetos generados son decorativos y no alteran el orden de lectura ni se
-  anuncian repetidamente a tecnologías de asistencia.
+- La composición parte de una cuadrícula mobile-first y reorganiza placa y panel
+  desde `37rem`.
+- El botón conserva nombre accesible, foco visible y activación por teclado,
+  puntero o entrada táctil.
+- El terminal usa una región viva moderada y texto insertado con `textContent`.
+- El movimiento reducido elimina la escritura carácter a carácter.
 
 ### Recursos disponibles
 
-- [`img__card.png`](../src/assets/images/05-future/img__card.png)
-- [`img__card_01.png`](../src/assets/images/05-future/img__card_01.png)
-- [`img__canion_01.png`](../src/assets/images/05-future/img__canion_01.png)
-- [`img__canion_02.png`](../src/assets/images/05-future/img__canion_02.png)
-- [`img__book.png`](../src/assets/images/05-future/img__book.png)
-- [`img__compass.png`](../src/assets/images/05-future/img__compass.png)
-- [`img__dice.png`](../src/assets/images/05-future/img__dice.png)
-- [`img__gamepad.png`](../src/assets/images/05-future/img__gamepad.png)
-- [`img__gears.png`](../src/assets/images/05-future/img__gears.png)
-- [`img__hammer.png`](../src/assets/images/05-future/img__hammer.png)
-- [`img__joycon.png`](../src/assets/images/05-future/img__joycon.png)
-- [`img__light_bulbs.png`](../src/assets/images/05-future/img__light_bulbs.png)
-- [`img__magnifying_glass.png`](../src/assets/images/05-future/img__magnifying_glass.png)
-- [`img__puzzle.png`](../src/assets/images/05-future/img__puzzle.png)
-
-### Módulos previstos
-
-La división definitiva se establecerá durante la implementación. Como contrato,
-la coordinación de la escena, la generación de suministros y la simulación
-física deben permanecer separadas para que el reinicio no dependa de nodos o
-temporizadores residuales.
-
-## 6. DESTINATARIO + FORMULARIO
-
-### Propósito y estado actual
-
-`recipient` dirige la carta a quien la encuentra. `response` ofrece una respuesta
-mediante campos semánticos de nombre, correo, asunto y mensaje.
-
-El formulario utiliza validación HTML nativa y todavía no tiene envío, conexión
-externa ni controlador JavaScript. Añadir cualquiera de esas capacidades exige
-una decisión funcional y de privacidad independiente.
+- [`img__mother_base.png`](../src/assets/images/05-future/img__mother_base.png)
+- [`img__mother_base_02.png`](../src/assets/images/05-future/img__mother_base_02.png)
+- [`img__panel.png`](../src/assets/images/05-future/img__panel.png)
 
 ### Módulos responsables
 
-| Ámbito       | JavaScript                                    | CSS                                                                       |
-| :----------- | :-------------------------------------------- | :------------------------------------------------------------------------ |
-| Destinatario | Sin módulo específico                         | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
-| Formulario   | Sin módulo específico; validación HTML nativa | [`response-form.css`](../src/styles/components/response-form.css)         |
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| CPU y terminal | [`future.js`](../src/scripts/future/future.js) | [`future.css`](../src/styles/components/future.css) |
 
-## 7. CIERRE — POST SCRIPTUM
+## 6. DESTINATARIO
+
+### Propósito y estado actual
+
+`recipient` dirige la carta a quien la encuentra y cierra la relación entre
+quien escribe y quien recibe. No solicita ni transmite datos del visitante.
+
+### Módulos responsables
+
+| Ámbito       | JavaScript            | CSS                                                                       |
+| :----------- | :-------------------- | :------------------------------------------------------------------------ |
+| Destinatario | Sin módulo específico | [`narrative-section.css`](../src/styles/components/narrative-section.css) |
+
+## 7. ENDING — CAÑÓN DE SUMINISTROS
+
+### Propósito y estado actual
+
+`ending` ocupa el espacio previo al footer. El cañón dorado se sitúa en la
+esquina inferior izquierda y contiene un botón semántico sobre su control
+inferior izquierdo.
+
+Cada pulsación muestra brevemente `img__canion_01.png`, genera un suministro
+seleccionado desde `06-ending` y lo impulsa desde la boca del cañón. Matter.js
+aplica avance horizontal, impulso ascendente, gravedad, rotación y colisiones.
+Los laterales y el límite inferior de la propia sección constituyen las paredes
+y el suelo de la simulación. Al abandonar la sección se detiene y limpia la
+escena.
+
+### Flujo funcional
+
+```text
+PULSAR CONTROL
+    -> mostrar cañón rojo
+    -> crear un suministro en la boca
+    -> aplicar impulso ascendente y horizontal
+    -> aplicar gravedad, rotación y colisiones
+    -> restaurar el cañón dorado
+
+ABANDONAR ENDING
+    -> detener la simulación
+    -> eliminar los suministros generados
+```
+
+### Módulos responsables
+
+| Ámbito | JavaScript | CSS |
+| :-- | :-- | :-- |
+| Coordinación | [`ending.js`](../src/scripts/ending/ending.js) | [`ending.css`](../src/styles/components/ending.css) |
+| Estado del cañón | [`ending-cannon.js`](../src/scripts/ending/ending-cannon.js) | [`ending.css`](../src/styles/components/ending.css) |
+| Física y recursos | [`ending-physics.js`](../src/scripts/ending/ending-physics.js) | [`ending.css`](../src/styles/components/ending.css) |
+
+## 8. CIERRE — POST SCRIPTUM
 
 ### Propósito y estado actual
 
 El cierre funciona como final de carta: firma, información complementaria,
-posdata y enlaces sociales. Actualmente se implementa mediante el `footer` y no
-posee lógica JavaScript propia.
+posdata y enlaces sociales. La barra de accesibilidad pertenece al footer en el
+DOM. Por debajo de `600px` participa en su flujo; desde `600px` conserva su
+posición flotante. El indicador de scroll se oculta cuando el footer entra en el
+viewport.
 
 ### Módulos responsables
 
 | Ámbito                    | JavaScript            | CSS                                                           |
 | :------------------------ | :-------------------- | :------------------------------------------------------------ |
 | Cierre y enlaces sociales | Sin módulo específico | [`site-footer.css`](../src/styles/components/site-footer.css) |
+| Barra de accesibilidad | [`help-guide.js`](../src/scripts/shared/help-guide.js), [`contextual-help.js`](../src/scripts/shared/contextual-help.js) | [`accessibility-toolbar.css`](../src/styles/components/accessibility-toolbar.css) |
+| Ocultación del indicador | [`scroll-cue.js`](../src/scripts/shared/scroll-cue.js) | [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
 
 ## Arquitectura transversal
 

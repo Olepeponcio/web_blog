@@ -118,21 +118,19 @@ Prioridades:
 
 ### Recursos visuales
 
-- la escena entrada de scroll ya está cargada, unos paneles img**card con el texto cargado, parte del texto está posicionado dentro de img**card_canion. crear botón y posicionarlo en el hueco de canion, cuando el objeto boton es disparado, una secuencia de animacion se produce, un alo electríco plateado bordea el objeto img\*\*card_canion y éste dispara por su boca en dirección a la derecha, una rafaga de objetos: img\_\_ [objetos del directorio: img__compass, img__hammer, img__book, etc]. las imagenes lanzadas tienen físicas, hacen un arco ascendente y luego uno descendente para caer sin sobrepasar el límite inferior del viewport que emula a un wall.
-
-textos de img**cards, img**card_canion:
+- Placa base con dos estados visuales: reposo y activado.
+- Panel independiente que contiene un terminal HTML.
 
 ### Recursos interactivos
 
-- Movimiento lento de algunas palabras.
-- Aparición progresiva de conceptos.
-- Elementos que desaparecen mientras otros entran.
+- La CPU activa la placa y la escritura secuencial del mensaje.
+- Los bloques terminados dejan paso al siguiente texto.
 
 ### Ideas técnicas
 
-- `position: sticky` para una frase central.
-- `transform: translateY()`.
-- Animaciones vinculadas al scroll de forma ligera.
+- Botón semántico superpuesto sobre la CPU.
+- Escritura segura mediante `textContent`.
+- Región viva moderada para anunciar el terminal.
 
 ---
 
@@ -141,22 +139,15 @@ textos de img**cards, img**card_canion:
 ### Recursos visuales
 
 - Cambio de lector a participante.
-- Formulario integrado en la estética de correspondencia. Los entry deben tener poca sensación de profundidad
-- Campos tratados como líneas de escritura.
-- Área de mensaje amplia.
+- Cierre textual sin recogida de datos.
 
 ### Recursos interactivos
 
-- Focus visual muy claro.
-- Animación sutil al seleccionar cada campo.
-- Confirmación elegante tras el envío.
+- Transición serena hacia el post scriptum.
 
 ### Ideas técnicas
 
-- `<form>` semántico. etiqueta semántica par recoger y enviar datos
-- `label` correctamente asociado.
-- Estados `:focus` y `:focus-visible`. pseudo-clase css que aplica cuando el elemento interactivo tiene foco; ya sea por input por ejemplo.
-- JavaScript solo para validación y feedback.
+- Sección semántica con encabezado y texto final.
 
 ---
 
@@ -234,7 +225,6 @@ Trabajar con dos niveles:
 **Tipografía funcional**
 
 - párrafos;
-- formularios;
 - navegación;
 - contenido técnico.
 

@@ -39,8 +39,8 @@ test.describe("Convención tipográfica", () => {
       "[data-origin-heading]",
       ".origin__text p",
       ".memory__note",
-      "#present h2",
-      ".response-form__field span",
+      "#present h1",
+      "#recipient h2",
       ".site-footer__social-link .fa-brands",
     ];
 

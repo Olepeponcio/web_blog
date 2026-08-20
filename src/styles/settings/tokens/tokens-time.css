@@ -25,4 +25,7 @@
   --duration-present-sun-halo: 1800ms;
   --duration-present-message: 150ms;
   --duration-reduced-motion: 1ms;
+  --duration-ending-cannon-state: 180ms;
+  --duration-ending-cannon-active: 650ms;
+  --duration-ending-trigger-pulse: 1500ms;
 }

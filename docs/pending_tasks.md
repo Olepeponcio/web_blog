@@ -2,15 +2,15 @@
 
 ## future
 
-- Repasar con Codex grid y los media query. seguro hay que refactorizarlo todo.
-- faltan las animaciones
-- el texto debe escribirse desde javascript. simular fuente consola. el texto debe ir subiendo conforme crezcan los párrafos y abandonar el margen superior sin desbordar (hidden)
-- animar titulo de la seccion
+- Revisar manualmente la composición responsive de placa base y panel terminal.
+- Trasladar colores y tiempos todavía incrustados en `future.css` a sus tokens.
 
 ## Testing en smartphone
 
--fallos con el touch al desplegar el sobre (si se desactiva en css se puede desplegar el sobre, pero no funciona el scroll)
+- Repetir en un dispositivo físico la validación táctil automatizada de Cover y
+  Origin.
 
-- hay que implementar logica de tocuch an press para el frasco de tinta.
+## ending
 
-- el signo de scroll debe desaparecer si se está dentro de seccion footer
+- Revisar manualmente el tamaño y la posición del cañón en los cinco viewports.
+- Validar acumulación prolongada de suministros y rendimiento de la simulación.

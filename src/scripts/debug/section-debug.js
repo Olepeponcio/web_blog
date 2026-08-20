@@ -7,6 +7,7 @@ const DEBUG_SECTIONS = new Set([
   "memory",
   "present",
   "future",
+  "ending",
 ]);
 
 export const createSectionDebug = () => {

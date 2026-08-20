@@ -1,0 +1,142 @@
+.ending {
+  position: relative;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  overflow: hidden;
+  background: transparent;
+}
+
+.ending__scene {
+  position: relative;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  inline-size: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ending__cannon {
+  position: absolute;
+  z-index: 3;
+  inset-block-end: 0;
+  inset-inline-start: var(--page-gutter);
+  inline-size: var(--ending-cannon-inline-size-small);
+  aspect-ratio: 1420 / 1024;
+}
+
+.ending__cannon-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity var(--duration-ending-cannon-state) ease-out;
+}
+
+.ending__cannon-image--firing {
+  opacity: 0;
+}
+
+.ending__cannon--firing .ending__cannon-image--idle {
+  opacity: 0;
+}
+
+.ending__cannon--firing .ending__cannon-image--firing {
+  opacity: 1;
+}
+
+.ending__cannon-trigger {
+  position: absolute;
+  z-index: 5;
+  inset-block-start: 56%;
+  inset-inline-start: 72.5%;
+  inline-size: 18%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0.18rem solid var(--color-ending-button-border);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 30%,
+    var(--color-ending-button-start),
+    var(--color-ending-button-end) 72%
+  );
+  box-shadow: var(--ending-button-shadow);
+  cursor: pointer;
+}
+
+.ending__cannon-trigger::after {
+  position: absolute;
+  inset: 8%;
+  border: 0.125rem solid var(--color-ending-trigger-border);
+  border-radius: inherit;
+  box-shadow: var(--ending-trigger-shadow);
+  content: "";
+  animation: ending-trigger-pulse var(--duration-ending-trigger-pulse)
+    ease-in-out infinite;
+}
+
+.ending__cannon-trigger:focus-visible {
+  outline: 0.2rem solid var(--color-ending-trigger-focus);
+  outline-offset: 0.2rem;
+}
+
+.ending__cannon-muzzle {
+  position: absolute;
+  inset-block-start: 7%;
+  inset-inline-start: 96%;
+  inline-size: 1px;
+  block-size: 1px;
+  pointer-events: none;
+}
+
+.ending__supplies {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ending__supply {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: block;
+  object-fit: contain;
+  transform-origin: center;
+  will-change: transform;
+  user-select: none;
+}
+
+@media (width >= 37.5rem) {
+  .ending__cannon {
+    inline-size: var(--ending-cannon-inline-size);
+  }
+}
+
+@keyframes ending-trigger-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.88);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ending__cannon-image {
+    transition: none;
+  }
+
+  .ending__cannon-trigger::after {
+    animation: none;
+    opacity: 1;
+  }
+}

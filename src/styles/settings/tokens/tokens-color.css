@@ -29,6 +29,14 @@
   --color-contextual-help-surface: #fff8dc;
   --color-contextual-help-border: #191714;
   --color-contextual-help-text: #191714;
+  --color-ending-trigger-border: rgb(255 246 176 / 70%);
+  --color-ending-trigger-focus: #eafeff;
+  --color-ending-trigger-glow: #ffd95a;
+  --color-ending-trigger-glow-soft: rgb(255 186 23 / 75%);
+  --color-ending-button-start: #b72a30;
+  --color-ending-button-end: #52080d;
+  --color-ending-button-border: #d8a634;
+  --color-ending-button-highlight: rgb(255 241 175 / 72%);
   --texture-paper-thick:
     radial-gradient(
       circle at 20% 30%,

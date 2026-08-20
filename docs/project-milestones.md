@@ -56,7 +56,7 @@ Un prototipo interactivo en Figma y una implementación web funcional que
 representen la apertura de la carta y el recorrido:
 
 **Sobre → Sello → Texto de apertura → Origen → Memoria → Presente → Futuro →
-Destinatario → Respuesta**
+Destinatario → Cierre**
 
 ### Criterio de cierre
 
@@ -447,99 +447,68 @@ repetir y documentar esa comprobación sobre un dispositivo real.
 
 ---
 
-## Hito 5 — Futuro y cañón de suministros
+## Hito 5 — Futuro y terminal
 
-**Estado:** definición técnica documentada; diseño e implementación pendientes.
+**Estado:** primera interacción implementada; validación responsive manual
+pendiente.
 
-### Objetivo
+### Objetivo actual
 
-Convertir `future` en una escena interactiva donde el marco presenta el texto y
-un cañón permite generar suministros con movimiento físico. Los objetos pueden
-acumularse durante la visita y la escena se reinicia al abandonarla.
+Presentar el texto de Futuro mediante una placa base interactiva y un panel de
+terminal. La CPU inicia una secuencia de seis mensajes narrativos.
 
-### Flujo funcional
+### Flujo implementado
 
 ```text
 Entrada en Future
-  -> marco y cañón visibles
-  -> intermitencia azul del marco
-  -> botón disponible
+  -> placa base y panel visibles
+  -> CPU disponible
 
-Cada activación
-  -> estado rojo del cañón
-  -> aparición de un suministro en la boca
-  -> arco ascendente y descendente
-  -> colisión y apilamiento
-
-Salida de Future
-  -> detener simulación
-  -> eliminar suministros generados
-  -> restaurar la escena
+Pulsar CPU
+  -> deshabilitar el botón
+  -> sustituir la placa base por su estado activo
+  -> escribir seis mensajes de izquierda a derecha
+  -> conservar el último mensaje
 ```
 
-### Alcance aprobado
+### Implementación
 
-- Escena cargada dentro del viewport al entrar mediante scroll.
-- Marco principal a escala dominante con texto HTML centrado.
-- Intermitencia entre `img__card.png` e `img__card_01.png`.
-- Sombra degradada azul sincronizada con el estado iluminado.
-- Cañón a menor escala, próximo al marco y parcialmente superpuesto.
-- Remesa de suministros integrada visualmente en las imágenes del cañón.
-- Botón semántico superpuesto a su hueco circular.
-- Estado rojo temporal durante cada disparo.
-- Generación independiente de un suministro por pulsación.
-- Trayectoria con impulso ascendente, avance horizontal y gravedad.
-- Colisiones contra el suelo y entre objetos para permitir su apilamiento.
-- Número de disparos sin límite narrativo mientras la sección esté activa.
-- Reinicio completo al abandonar la sección mediante scroll.
-- Adaptación responsive y alternativa de movimiento reducido.
-
-### Tareas
-
-#### Estructura y presentación
-
-- [ ] Adaptar `section#future` al escenario del HITO 5.
-- [ ] Incorporar el marco y mantener el texto como HTML semántico centrado.
-- [ ] Posicionar y escalar el cañón respecto al marco.
-- [ ] Superponer un botón accesible sobre el hueco del cañón.
-- [ ] Aplicar la convención responsive desde la composición inicial.
-
-#### Estados visuales
-
-- [ ] Alternar los dos estados del marco mientras la escena esté activa.
-- [ ] Sincronizar la sombra degradada azul con la iluminación del marco.
-- [ ] Cambiar temporalmente el cañón a su estado rojo al disparar.
-- [ ] Evitar que activaciones sucesivas bloqueen disparos anteriores.
-
-#### Generación y física
-
-- [ ] Registrar el catálogo de imágenes individuales de suministros.
-- [ ] Seleccionar y generar un objeto por activación.
-- [ ] Situar el origen del objeto en la boca del cañón.
-- [ ] Aplicar velocidad horizontal, impulso vertical, gravedad y rotación.
-- [ ] Impedir que los objetos atraviesen el límite inferior de la escena.
-- [ ] Resolver colisiones y pérdida de energía hasta el asentamiento.
-- [ ] Permitir la acumulación de objetos sin eliminar la remesa dibujada.
-
-#### Ciclo de vida y accesibilidad
-
-- [ ] Detectar la entrada y la salida efectiva de `future`.
-- [ ] Cancelar animaciones y simulación al abandonar la sección.
-- [ ] Eliminar todos los objetos generados y restaurar el estado inicial.
-- [ ] Mantener equivalencia para puntero, teclado y entrada táctil.
-- [ ] Implementar una alternativa con `prefers-reduced-motion: reduce`.
-- [ ] Evitar anuncios repetitivos de objetos decorativos.
-
-#### Validación
-
-- [ ] Verificar escalas, superposición y origen del disparo por viewport.
-- [ ] Comprobar disparos rápidos y acumulación prolongada de objetos.
-- [ ] Confirmar que ningún cuerpo atraviesa el suelo de la escena.
-- [ ] Confirmar que salir y volver a entrar produce una escena limpia.
-- [ ] Diseñar e implementar la batería automatizada y manual del HITO 5.
+- [x] Estructura `section#future` con placa base y panel.
+- [x] Botón semántico superpuesto a la CPU.
+- [x] Sustitución visual de `img__mother_base.png` por
+  `img__mother_base_02.png`.
+- [x] Escritura secuencial mediante `textContent`.
+- [x] Terminal anunciada con `aria-live="polite"`.
+- [x] Alternativa para `prefers-reduced-motion: reduce`.
+- [x] Acceso directo de desarrollo mediante `?debugSection=future`.
+- [ ] Revisar la composición responsive en los viewports del proyecto.
+- [ ] Crear la matriz específica de pruebas del HITO 5.
 
 La definición técnica completa se encuentra en
 [`design-narrative--digital-epistle.md`](design-narrative--digital-epistle.md#5-future).
+
+---
+
+## Hito 6 — Cañón de suministros y cierre
+
+**Estado:** primera implementación funcional.
+
+### Alcance implementado
+
+- [x] Crear `section#ending` entre destinatario y footer.
+- [x] Situar el cañón dorado en la esquina inferior izquierda.
+- [x] Superponer un botón accesible en su control inferior izquierdo.
+- [x] Mostrar temporalmente el estado rojo durante cada disparo.
+- [x] Importar estáticamente los suministros desde `06-ending`.
+- [x] Aplicar impulso ascendente, avance horizontal, gravedad y rotación.
+- [x] Limitar los cuerpos con los laterales y el suelo de la sección.
+- [x] Limpiar la simulación al abandonar la escena.
+- [x] Integrar la barra de accesibilidad en el footer bajo `600px`.
+- [x] Ocultar el indicador de scroll al entrar el footer.
+- [ ] Completar la validación visual en todos los viewports.
+
+La definición técnica se encuentra en
+[`design-narrative--digital-epistle.md`](design-narrative--digital-epistle.md#7-ending--cañón-de-suministros).
 
 ---
 

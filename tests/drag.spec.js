@@ -187,7 +187,7 @@ test.describe("Arrastre del sobre", () => {
     await envelope.press("Enter");
     await page.evaluate(() => {
       document.body.dataset.pageState = "open";
-      document.querySelector("#response").scrollIntoView();
+      document.querySelector("#recipient").scrollIntoView();
     });
     await page.waitForTimeout(300);
 

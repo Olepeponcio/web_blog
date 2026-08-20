@@ -17,9 +17,13 @@
   inline-size: var(--cover-envelope-inline-size);
   transform: translate(-50%, var(--envelope-offset-y));
   cursor: grab;
-  /* touch-action: none; */
+  touch-action: none;
   user-select: none;
   will-change: transform;
+}
+
+.cover__envelope[data-deployed="true"] {
+  touch-action: pan-y;
 }
 
 .cover__envelope:active,
