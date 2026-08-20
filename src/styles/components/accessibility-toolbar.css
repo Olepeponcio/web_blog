@@ -4,10 +4,8 @@
   inset-block-end: max(1rem, env(safe-area-inset-bottom));
   inset-inline-start: max(0.5rem, env(safe-area-inset-left));
   display: flex;
-  visibility: visible;
   align-items: center;
   gap: 0.55rem;
-  transform: none;
 }
 
 .accessibility-toolbar__tools {
@@ -80,7 +78,6 @@
     inset-block-end: auto;
     inset-inline-start: max(1rem, env(safe-area-inset-left));
     flex-direction: column;
-    transform: none;
   }
 
   .accessibility-toolbar__tools {

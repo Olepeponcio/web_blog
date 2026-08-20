@@ -51,9 +51,9 @@
 .ending__cannon-trigger {
   position: absolute;
   z-index: 5;
-  inset-block-start: 56%;
-  inset-inline-start: 72.5%;
-  inline-size: 18%;
+  inset-block-start: 54.5%;
+  inset-inline-start: 70.5%;
+  inline-size: 15%;
   aspect-ratio: 1;
   padding: 0;
   border: 0.18rem solid var(--color-ending-button-border);

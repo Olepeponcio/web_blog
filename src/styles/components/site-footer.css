@@ -1,12 +1,9 @@
 .site-footer {
   padding: clamp(3rem, 10vw, 7rem) var(--page-gutter);
-  background: var(--texture-paper-a4);
+  background-color: var(--color-paper);
+  background-image: url("../../assets/images/global/img__texture_background.webp");
+  background-repeat: repeat;
   box-shadow: var(--shadow-border-carbon);
-}
-
-.site-footer > .accessibility-toolbar {
-  inline-size: max-content;
-  margin-inline: auto;
 }
 
 .site-footer__content {
@@ -43,9 +40,9 @@
   color: var(--color-ink);
 }
 
-.site-footer__social-link .fa-brands {
-  color: currentColor;
-  font-size: var(--font-size-icon);
+.site-footer__social-icon {
+  inline-size: var(--font-size-icon);
+  block-size: var(--font-size-icon);
 }
 
 .site-footer__social-link--disabled {

@@ -23,7 +23,6 @@
   --color-present-message-background: rgb(12 18 28 /55%);
   --color-present-message-text: #fff5df;
   --color-help-backdrop: rgb(15 23 42 / 82%);
-  --color-help-surface: #f7f3e8;
   --color-help-border: #191714;
   --color-help-focus: #ffd166;
   --color-contextual-help-surface: #fff8dc;
@@ -54,17 +53,6 @@
       rgb(244 238 210) 20%,
       rgb(252 248 226)
     );
-  --color-title-future: linear-gradient(
-    100deg,
-    #111827 0%,
-    #111827 42%,
-    #bdfaff 48%,
-    #11dff5 51%,
-    #1677ff 54%,
-    #111827 60%,
-    #111827 100%
-  );
-
   --texture-paper-a4:
     radial-gradient(
       circle at 20% 30%,
@@ -88,8 +76,4 @@
     0 12px 24px rgb(5 5 5 / 52%), 0 24px 48px rgb(0 0 0 / 40%),
     0 40px 80px rgb(0 0 0 / 28%), 0 64px 110px rgb(0 0 0 / 18%);
 
-  --shadow-paper-depth:
-    0 2px 2px rgb(0 0 0 / 55%), 0 5px 7px rgb(20 20 20 / 40%),
-    0 12px 18px rgb(0 0 0 / 32%), 0 24px 38px rgb(0 0 0 / 22%),
-    0 40px 70px rgb(0 0 0 / 14%);
 }
