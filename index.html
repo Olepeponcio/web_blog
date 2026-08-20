@@ -109,7 +109,11 @@
             alt=""
           />
 
-          <address class="cover__sender" aria-label="Datos del remitente">
+          <address
+            class="cover__sender"
+            data-contextual-help="Datos del remitente de esta epístola digital."
+            aria-label="Datos del remitente"
+          >
             <span>José Lobato</span>
             <span>Calle de la escueta epístola</span>
             <span class="cover__sender-location">
@@ -137,7 +141,13 @@
           </button>
         </div>
 
-        <div class="cover__letter" data-opening-text aria-live="polite" hidden>
+        <div
+          class="cover__letter"
+          data-opening-text
+          data-contextual-help="Texto de apertura de la carta, revelado palabra a palabra."
+          aria-live="polite"
+          hidden
+        >
           <p class="cover__place-date" data-reveal-text>Madrid, 2026</p>
           <h1 class="cover__recipient" data-reveal-text>
             A quien encuentre estas palabras:
@@ -470,7 +480,11 @@
       <section class="future" id="future" data-future>
         <div class="future__scene" data-future-scene>
           <h2 class="future__title" data-future-title>FUTURO</h2>
-          <div class="future__motherbase" data-future-motherbase>
+          <div
+            class="future__motherbase"
+            data-future-motherbase
+            data-contextual-help="Placa base desde la que se activa el mensaje enviado al futuro."
+          >
             <img
               class="future__motherbase-image future__motherbase-image--base"
               src="./src/assets/images/05-future/img__mother_base.png"
@@ -486,10 +500,15 @@
               class="future__cpu-trigger"
               type="button"
               data-future-cpu-trigger
+              data-contextual-help="Pulsa para activar la CPU y comenzar la transmisión."
               aria-label="Activar mensaje del futuro"
             ></button>
           </div>
-          <div class="future__panel" data-future-panel>
+          <div
+            class="future__panel"
+            data-future-panel
+            data-contextual-help="Terminal donde se muestran progresivamente los mensajes del futuro."
+          >
             <img
               class="future__panel-image future__panel-image--base"
               src="./src/assets/images/05-future/img__panel.png"
@@ -593,9 +612,28 @@
         </div>
       </div>
 
-      <aside
-        class="accessibility-toolbar"
-        aria-label="Recursos de accesibilidad"
+    </footer>
+
+    <aside
+      class="accessibility-toolbar"
+      aria-label="Recursos de accesibilidad"
+    >
+      <button
+        class="accessibility-toolbar__control accessibility-toolbar__master"
+        type="button"
+        data-accessibility-tools-toggle
+        aria-label="Mostrar herramientas de accesibilidad"
+        aria-controls="accessibility-tools"
+        aria-expanded="false"
+      >
+        <span class="accessibility-toolbar__power-icon" aria-hidden="true">⏻</span>
+      </button>
+
+      <div
+        class="accessibility-toolbar__tools"
+        id="accessibility-tools"
+        data-accessibility-tools
+        hidden
       >
         <button
           class="accessibility-toolbar__control"
@@ -613,26 +651,6 @@
           />
         </button>
 
-        <span
-          class="accessibility-toolbar__control accessibility-toolbar__control--pending"
-          role="img"
-          aria-label="Narración guiada, próximamente"
-          aria-disabled="true"
-        >
-          <img
-            src="/src/assets/icons/icon__ear_sound_disable.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <img
-            class="accessibility-toolbar__sound-active"
-            src="/src/assets/icons/icon__ear_sound.svg"
-            alt=""
-            aria-hidden="true"
-            hidden
-          />
-        </span>
-
         <button
           class="accessibility-toolbar__control"
           type="button"
@@ -647,8 +665,8 @@
             aria-hidden="true"
           />
         </button>
-      </aside>
-    </footer>
+      </div>
+    </aside>
 
     <span class="scroll-cue" data-scroll-cue aria-hidden="true" hidden></span>
 

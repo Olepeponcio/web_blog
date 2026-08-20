@@ -503,7 +503,7 @@ La definición técnica completa se encuentra en
 - [x] Aplicar impulso ascendente, avance horizontal, gravedad y rotación.
 - [x] Limitar los cuerpos con los laterales y el suelo de la sección.
 - [x] Limpiar la simulación al abandonar la escena.
-- [x] Integrar la barra de accesibilidad en el footer bajo `600px`.
+- [x] Mantener la barra independiente: inferior central bajo `600px` y lateral desde `600px`.
 - [x] Ocultar el indicador de scroll al entrar el footer.
 - [ ] Completar la validación visual en todos los viewports.
 

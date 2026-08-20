@@ -249,6 +249,9 @@ export const initializeContextualHelp = () => {
   }
 
   toggle.addEventListener("click", () => setActive(!active));
+  document.addEventListener("accessibility-tools:collapse", () => {
+    if (active) setActive(false);
+  });
   window.addEventListener("scroll", requestRender, { passive: true });
   window.addEventListener("resize", requestRender);
   document.addEventListener("keydown", (event) => {

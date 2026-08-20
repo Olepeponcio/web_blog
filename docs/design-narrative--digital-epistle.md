@@ -525,17 +525,17 @@ ABANDONAR ENDING
 ### Propósito y estado actual
 
 El cierre funciona como final de carta: firma, información complementaria,
-posdata y enlaces sociales. La barra de accesibilidad pertenece al footer en el
-DOM. Por debajo de `600px` participa en su flujo; desde `600px` conserva su
-posición flotante. El indicador de scroll se oculta cuando el footer entra en el
-viewport.
+posdata y enlaces sociales. La barra de accesibilidad es independiente del
+footer: por debajo de `600px` permanece fija en el centro inferior del viewport
+y desde `600px` ocupa el lateral izquierdo. El indicador de scroll se oculta
+cuando el footer entra en el viewport.
 
 ### Módulos responsables
 
 | Ámbito                    | JavaScript            | CSS                                                           |
 | :------------------------ | :-------------------- | :------------------------------------------------------------ |
 | Cierre y enlaces sociales | Sin módulo específico | [`site-footer.css`](../src/styles/components/site-footer.css) |
-| Barra de accesibilidad | [`help-guide.js`](../src/scripts/shared/help-guide.js), [`contextual-help.js`](../src/scripts/shared/contextual-help.js) | [`accessibility-toolbar.css`](../src/styles/components/accessibility-toolbar.css) |
+| Barra de accesibilidad | [`accessibility-tools.js`](../src/scripts/shared/accessibility-tools.js), [`help-guide.js`](../src/scripts/shared/help-guide.js), [`contextual-help.js`](../src/scripts/shared/contextual-help.js) | [`accessibility-toolbar.css`](../src/styles/components/accessibility-toolbar.css) |
 | Ocultación del indicador | [`scroll-cue.js`](../src/scripts/shared/scroll-cue.js) | [`scroll-cue.css`](../src/styles/components/scroll-cue.css) |
 
 ## Arquitectura transversal
@@ -626,14 +626,11 @@ El proyecto adopta WCAG 2.2 nivel AA como objetivo técnico de accesibilidad.
   Se incluye como imagen decorativa dentro de botones nativos cuyo nombre
   accesible describe la acción, por lo que no duplica información para lectores
   de pantalla.
-- **Barra de accesibilidad:** agrupa la guía de teclado, el estado pendiente de
-  narración y el activador de ayudas contextuales. Se mantiene fija en el lateral
-  izquierdo en resoluciones amplias. Hasta `48rem` adopta una distribución
-  horizontal, centrada en la parte inferior y separada mediante el área segura
-  del dispositivo para favorecer el alcance táctil.
-- **`icon__ear_sound_disable.svg` e `icon__ear_sound.svg`:** representan los
-  estados futuro desactivado y activo de la narración. Solo el primero es visible;
-  el espacio se expone como función pendiente y no ejecuta audio.
+- **Barra de accesibilidad:** un control maestro `on/off` revela u oculta la guía
+  de teclado y las ayudas contextuales. Se mantiene fija en el lateral izquierdo
+  desde `600px`; por debajo de ese umbral adopta una distribución horizontal,
+  centrada en la parte inferior y separada mediante el área segura del dispositivo.
+  Al cerrarla también se desactivan las ayudas contextuales visibles.
 - **`icon__text_tools.svg`:** activa o desactiva explicaciones persistentes para
   controles narrativos, imágenes informativas y recursos que cambian de estado.
   El botón comunica el estado mediante `aria-pressed` y admite ratón, entrada

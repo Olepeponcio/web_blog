@@ -4,6 +4,7 @@ import { initializeMemory } from './memory/memory.js';
 import { initializePresent } from './present/present.js';
 import { initializeFuture } from './future/future.js';
 import { initializeEnding } from './ending/ending.js';
+import { initializeAccessibilityTools } from './shared/accessibility-tools.js';
 import { initializeContextualHelp } from './shared/contextual-help.js';
 import { initializeHelpGuide } from './shared/help-guide.js';
 import { initializeScrollCue } from './shared/scroll-cue.js';
@@ -30,6 +31,7 @@ const initializeApp = async () => {
   });
 
   initializeScrollCue();
+  initializeAccessibilityTools();
   initializeContextualHelp();
   initializeHelpGuide();
   debugSession?.focus();

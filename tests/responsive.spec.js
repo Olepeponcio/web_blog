@@ -100,29 +100,16 @@ test.describe("Responsive estructural", () => {
     );
 
     if (viewport.width < 600) {
-      await expect(page.locator("footer > .accessibility-toolbar")).toHaveCount(1);
-      expect(position).toBe("static");
-      expect(direction).toBe("row");
-
-      await page.locator("footer").scrollIntoViewIfNeeded();
-      await expect(toolbar).toBeVisible();
-      return;
-    }
-
-    if (viewport.width <= 768) {
-      const scrollCue = page.locator("[data-scroll-cue]");
-      const box = await toolbar.boundingBox();
-
-      await expect(scrollCue).toBeVisible();
-      const scrollCueBox = await scrollCue.boundingBox();
-
-      expect(box).not.toBeNull();
-      expect(scrollCueBox).not.toBeNull();
+      await expect(page.locator("body > .accessibility-toolbar")).toHaveCount(1);
       expect(position).toBe("fixed");
       expect(direction).toBe("row");
-      expect(Math.abs(box.x + box.width / 2 - viewport.width / 2)).toBeLessThanOrEqual(1);
+
+      await expect(toolbar).toBeVisible();
+      const box = await toolbar.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box.x).toBeGreaterThanOrEqual(7);
+      expect(box.x).toBeLessThanOrEqual(17);
       expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
-      expect(scrollCueBox.y - (box.y + box.height)).toBeGreaterThanOrEqual(11);
       return;
     }
 
@@ -130,15 +117,17 @@ test.describe("Responsive estructural", () => {
     expect(direction).toBe("column");
   });
 
-  test("F07 — la barra cambia de footer a flotante en 600 píxeles", async ({
+  test("F07 — la barra cambia de inferior izquierda a lateral en 600 píxeles", async ({
     page,
   }) => {
     const toolbar = page.locator(".accessibility-toolbar");
 
     await page.setViewportSize({ width: 599, height: 800 });
-    await expect(toolbar).toHaveCSS("position", "static");
+    await expect(toolbar).toHaveCSS("position", "fixed");
+    await expect(toolbar).toHaveCSS("flex-direction", "row");
 
     await page.setViewportSize({ width: 600, height: 800 });
     await expect(toolbar).toHaveCSS("position", "fixed");
+    await expect(toolbar).toHaveCSS("flex-direction", "column");
   });
 });

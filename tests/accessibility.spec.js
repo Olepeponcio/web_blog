@@ -13,6 +13,12 @@ const expectNoWcagLevelAViolations = async (page) => {
   expect(results.violations).toEqual([]);
 };
 
+const openAccessibilityTools = async (page) => {
+  const toggle = page.locator('[data-accessibility-tools-toggle]');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+};
+
 test.describe('WCAG 2.2 — nivel A automatizable', () => {
   test.beforeEach(async ({ page }) => page.goto('/'));
 
@@ -21,6 +27,7 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
   });
 
   test('AX02 — analiza la guía de teclado abierta', async ({ page }) => {
+    await openAccessibilityTools(page);
     const openGuide = page.getByRole('button', {
       name: 'Abrir guía de navegación',
     });
@@ -32,12 +39,28 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
   });
 
   test('AX03 — analiza las ayudas contextuales activadas', async ({ page }) => {
+    await openAccessibilityTools(page);
     const contextualHelp = page.locator('[data-contextual-help-toggle]');
 
     await expect(contextualHelp).toBeEnabled();
     await contextualHelp.click();
     await expect(contextualHelp).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.locator('[role="tooltip"]')).toHaveCount(1);
+    await expect(page.locator('[role="tooltip"]')).toHaveCount(2);
+    await expectNoWcagLevelAViolations(page);
+  });
+
+  test('AX09 — muestra ayudas contextuales en Future', async ({ page }) => {
+    await page.evaluate(() => {
+      document.body.dataset.pageState = 'open';
+      document.querySelector('#future').scrollIntoView();
+    });
+
+    await openAccessibilityTools(page);
+    const contextualHelp = page.locator('[data-contextual-help-toggle]');
+    await contextualHelp.click();
+
+    await expect(contextualHelp).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('[role="tooltip"]')).toHaveCount(3);
     await expectNoWcagLevelAViolations(page);
   });
 
@@ -77,7 +100,7 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
     await expect(page.locator('body > footer')).toHaveCount(1);
     await expect(
       page.locator(
-        'body > footer > aside[aria-label="Recursos de accesibilidad"]',
+        'body > aside[aria-label="Recursos de accesibilidad"]',
       ),
     ).toHaveCount(1);
 
@@ -98,5 +121,22 @@ test.describe('WCAG 2.2 — nivel A automatizable', () => {
       'aria-labelledby',
       'help-guide-title',
     );
+  });
+
+  test('AX10 — el control maestro oculta herramientas y ayudas activas', async ({
+    page,
+  }) => {
+    const master = page.locator('[data-accessibility-tools-toggle]');
+    const tools = page.locator('[data-accessibility-tools]');
+
+    await expect(tools).toBeHidden();
+    await openAccessibilityTools(page);
+    await page.locator('[data-contextual-help-toggle]').click();
+    await expect(page.locator('[role="tooltip"]')).toHaveCount(2);
+
+    await master.click();
+    await expect(master).toHaveAttribute('aria-expanded', 'false');
+    await expect(tools).toBeHidden();
+    await expect(page.locator('[role="tooltip"]')).toHaveCount(0);
   });
 });
